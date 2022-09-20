@@ -5,7 +5,7 @@ An online E-store system built in Java 8=>11 and ___ _replace with other platfor
   
 ## Team
 
-- GiovanniCoppola084
+- gac6151
 - ac8927
 - Louan Flammanc
 - Norton Andres Perez

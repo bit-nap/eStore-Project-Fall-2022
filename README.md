@@ -2,14 +2,14 @@
 # Modify this document to expand any and all sections that are applicable for a better understanding from your users/testers/collaborators (remove this comment and other instructions areas for your FINAL release)
 
 An online E-store system built in Java 8=>11 and ___ _replace with other platform requirements_ ___
-  
+
 ## Team
 
 - gac6151
 - ac8927
 - Louan Flammanc
 - Norton Andres Perez
-- MEMBER5
+- Oscar Rojas Perez (or8655)
 
 
 ## Prerequisites
@@ -55,8 +55,8 @@ To run tests on all the tiers in isolation do this:
 4. To view the Persistence tier tests open in your browser the file at `PROJECT_API_HOME/target/site/jacoco/model/index.html`
 
 *(Consider using `mvn clean verify` to attest you have reached the target threshold for coverage)
-  
-  
+
+
 ## How to generate the Design documentation PDF
 
 1. Access the `PROJECT_DOCS_HOME/` directory
@@ -64,7 +64,7 @@ To run tests on all the tiers in isolation do this:
 3. The generated PDF will be in `PROJECT_DOCS_HOME/` directory
 
 
-## How to setup/run/test program 
+## How to setup/run/test program
 1. Tester, first obtain the Acceptance Test plan
 2. IP address of target machine running the app
 3. Execute ________

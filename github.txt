@@ -1,0 +1,58 @@
+commit 90d360454e752cf41d4d760b454f59f9d393373b
+Author: Oscar Rojas <or8655@rit.edu>
+Date:   Mon Sep 19 23:02:49 2022 -0400
+
+    Oscar adding name
+
+commit ccd66807c3f2295f1a9fb7e7014e883ba6cb3b61
+Author: GiovanniCoppola084 <gac6151@rit.edu>
+Date:   Mon Sep 19 21:03:05 2022 -0400
+
+    Update README.md
+    
+    Update on name (final)
+
+commit 183dbeadd4aeeffb816429811f1eef1e09831eda
+Author: GiovanniCoppola084 <gac6151@rit.edu>
+Date:   Mon Sep 19 20:56:20 2022 -0400
+
+    Update README.md
+    
+    Testing 9/19/2022
+
+commit 69e9e1a387a103add7bb93eccb2a4dfe0cc2a8da
+Author: Norton Andres Perez <nap1118@g.rit.edu>
+Date:   Mon Sep 19 19:42:05 2022 -0400
+
+    addinig my name to the README
+
+commit 1d5bdf45fe585a762f84bd44eb14b61cf857a381
+Merge: 8ad10fe b544ea8
+Author: Adrian <acliteur2001@gmail.com>
+Date:   Mon Sep 19 19:38:29 2022 -0400
+
+    added username to README.md
+
+commit 8ad10fea6678c66ff5733ba83bea64aa8bcd0042
+Author: Adrian <acliteur2001@gmail.com>
+Date:   Mon Sep 19 19:36:26 2022 -0400
+
+    Added username to README.md
+
+commit b544ea819df3b12865256afd5ed05f843120b9d6
+Author: Louan Flammanc <lsf3956@rit.edu>
+Date:   Mon Sep 19 19:34:55 2022 -0400
+
+    add name
+
+commit a85857722936387bb511dc8561e9d18f85e04768
+Author: GiovanniCoppola084 <90729977+GiovanniCoppola084@users.noreply.github.com>
+Date:   Mon Sep 19 19:30:51 2022 -0400
+
+    Update README.md
+
+commit d1641796b9bc49a29f02699814280be3a55c8972
+Author: github-classroom[bot] <66690702+github-classroom[bot]@users.noreply.github.com>
+Date:   Mon Sep 19 23:21:21 2022 +0000
+
+    Initial commit

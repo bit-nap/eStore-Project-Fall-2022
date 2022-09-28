@@ -12,9 +12,7 @@ public class Ticket {
 	private static final Logger LOG = Logger.getLogger(Ticket.class.getName());
 
 	// Package private for tests - Prof
-	// IntelliJ complaining about screeningId insertion in STRING_FORMAT - Oscar
-	// Illegal format string specifier: unknown conversion in '%i' - IntelliJ
-	static final String STRING_FORMAT = "Ticket [screeningId=%i, name=%s]";
+	static final String STRING_FORMAT = "Ticket [screeningId=%d, name=%s]";
 
 	/** The id of the screening this ticket belongs to. */
 	@JsonProperty("screeningId") private int screeningId;

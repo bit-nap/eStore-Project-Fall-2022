@@ -12,52 +12,57 @@ public class Ticket {
 	private static final Logger LOG = Logger.getLogger(Ticket.class.getName());
 
 	// Package private for tests - Prof
-	static final String STRING_FORMAT = "Ticket [screeningId=%d, name=%s]";
+	static final String STRING_FORMAT = "Ticket [id=%d, movie=%s]";
 
-	/** The id of the screening this ticket belongs to. */
-	@JsonProperty("screeningId") private int screeningId;
-	/** The name of the individual who purchased this ticket. */
-	@JsonProperty("name") private String ticketHolderName;
+	/** The id of this ticket. */
+	@JsonProperty("id") private int id;
+	/**
+	 * The name of the movie being shown at the screening this ticket belongs to.
+	 * Should be changed to some sort of Movie class. - Oscar
+	 */
+	@JsonProperty("movie") private String movie;
 
 	/**
-	 * Create a ticket with the given screening id and ticket holder's name.
+	 * Create a ticket with the given id and movie name.
 	 *
-	 * @param screeningId      The id of the screening this ticket belongs to.
-	 * @param ticketHolderName The name of the individual who purchased this ticket.
-	 *                         <p>
-	 *                         {@literal @}JsonProperty is used in serialization and deserialization
-	 *                         of the JSON object to the Java object in mapping the fields.  If a field
-	 *                         is not provided in the JSON object, the Java field gets the default Java
-	 *                         value, i.e. 0 for int
+	 * @param id    The id of this ticket.
+	 * @param movie The name of the movie being shown at the screening this ticket belongs to.
+	 *              <p>
+	 *              {@literal @}JsonProperty is used in serialization and deserialization
+	 *              of the JSON object to the Java object in mapping the fields.  If a field
+	 *              is not provided in the JSON object, the Java field gets the default Java
+	 *              value, i.e. 0 for int
 	 */
-	public Ticket (@JsonProperty("screeningId") int screeningId, @JsonProperty("name") String ticketHolderName) {
-		this.screeningId = screeningId;
-		this.ticketHolderName = ticketHolderName;
+	public Ticket (@JsonProperty("id") int id, @JsonProperty("movie") String movie) {
+		this.id = id;
+		this.movie = movie;
 	}
 
 	/**
-	 * @return The id of the screening this ticket belongs to.
+	 * @return The id of this ticket.
 	 */
-	public int getScreeningId () {
-		return screeningId;
+	public int getId () {
+		return id;
 	}
 
 	/**
+	 * Set the name of the movie being shown at the screening this ticket belongs to.
+	 * <p>
 	 * Necessary for JSON object to perform Java object deserialization.
 	 * <p>
 	 * I think this is what was originally meant. - Oscar
 	 *
-	 * @param ticketHolderName The name of the ticket holder this ticket will belong to.
+	 * @param movie The name of the movie being shown at the screening this ticket belongs to.
 	 */
-	public void setTicketHolderName (String ticketHolderName) {
-		this.ticketHolderName = ticketHolderName;
+	public void setMovie (String movie) {
+		this.movie = movie;
 	}
 
 	/**
-	 * @return The name of the ticket holder this ticket belongs to.
+	 * @return The name of the movie being shown at the screening this ticket belongs to.
 	 */
-	public String getTicketHolderName () {
-		return ticketHolderName;
+	public String getMovie () {
+		return movie;
 	}
 
 	/**
@@ -65,6 +70,6 @@ public class Ticket {
 	 */
 	@Override
 	public String toString () {
-		return String.format(STRING_FORMAT, screeningId, ticketHolderName);
+		return String.format(STRING_FORMAT, id, movie);
 	}
 }

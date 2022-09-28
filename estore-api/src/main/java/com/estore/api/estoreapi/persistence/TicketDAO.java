@@ -17,13 +17,13 @@ public interface TicketDAO {
 	Ticket[] getTickets () throws IOException;
 
 	/**
-	 * Finds all {@linkplain Ticket tickets} whose ticket holder name contains the given text.
+	 * Finds all {@linkplain Ticket tickets} whose movie title contains the given text.
 	 *
-	 * @param containsText The text to match against
-	 * @return An array of {@link Ticket tickets} whose ticket holder name contains the given text, may be empty
+	 * @param text The text to match against
+	 * @return An array of {@link Ticket tickets} whose movie title contains the given text, may be empty
 	 * @throws IOException if an issue with underlying storage
 	 */
-	Ticket[] findTickets (String containsText) throws IOException;
+	Ticket[] findTickets (String text) throws IOException;
 
 	/**
 	 * Retrieves a {@linkplain Ticket ticket} with the given id.

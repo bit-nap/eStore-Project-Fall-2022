@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class TicketController {
 	/** TODO: Add description of the purpose of Logger, once it's actually used. */
 	private static final Logger LOG = Logger.getLogger(TicketController.class.getName());
-	/** The Ticket object this Controller controls? */
+	/** The TicketDAO object this Controller interacts with to get Ticket objects. */
 	private TicketDAO ticketDao;
 
 	/**
@@ -61,10 +61,10 @@ public class TicketController {
 	}
 
 	/**
-	 * Responds to the GET request for all {@linkplain Ticket tickets} whose name contains
-	 * the text in name.
+	 * Responds to the GET request for all {@linkplain Ticket tickets} whose movie title
+	 * contains the given text.
 	 *
-	 * @param name The name parameter which contains the text used to find the {@link Ticket tickets}
+	 * @param text A String which contains the text used to find the {@link Ticket ticket} to a movie
 	 * @return ResponseEntity with array of {@link Ticket ticket} objects (may be empty) and
 	 * HTTP status of OK<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
@@ -73,7 +73,7 @@ public class TicketController {
 	 * GET http://localhost:8080/tickets/?name=ma
 	 */
 	@GetMapping("/")
-	public ResponseEntity<Ticket[]> searchTickets (@RequestParam String name) {
+	public ResponseEntity<Ticket[]> searchTickets (@RequestParam String text) {
 		// TODO
 		return null;
 	}
@@ -81,7 +81,7 @@ public class TicketController {
 	/**
 	 * Creates a {@linkplain Ticket ticket} with the provided ticket object.
 	 *
-	 * @param ticket - The {@link Ticket ticket} to create
+	 * @param ticket The {@link Ticket ticket} to create
 	 * @return ResponseEntity with created {@link Ticket ticket} object and HTTP status of CREATED<br>
 	 * ResponseEntity with HTTP status of CONFLICT if {@link Ticket ticket} object already exists<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise

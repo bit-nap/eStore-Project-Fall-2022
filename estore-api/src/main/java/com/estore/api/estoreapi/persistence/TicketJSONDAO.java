@@ -47,7 +47,7 @@ public class TicketJSONDAO implements TicketDAO {
 	/**
 	 * Generates the next id for a new {@linkplain Ticket ticket}.
 	 *
-	 * @return The next id
+	 * @return The next ticket id
 	 */
 	private synchronized static int nextId () {
 		int id = nextId;
@@ -66,17 +66,18 @@ public class TicketJSONDAO implements TicketDAO {
 
 	/**
 	 * Generates an array of {@linkplain Ticket tickets} from the tree map for any
-	 * {@linkplain Ticket tickets} that contains the movie title specified by movieTitle argument.
-	 * <br>
-	 * If movieTitle is null, the array contains all of the {@linkplain Ticket tickets} in the tree map.
+	 * {@linkplain Ticket tickets} that contains the movie title specified by text argument.
 	 *
+	 * @param text The text to find within a {@link Ticket ticket's} movie
+	 *             <p>
+	 *             If text is null, the array contains all of the {@linkplain Ticket tickets} in the tree map.
 	 * @return The array of {@link Ticket tickets}, may be empty
 	 */
-	private Ticket[] getTicketsArray (String movieTitle) { // if movieTitle == null, no filter
+	private Ticket[] getTicketsArray (String text) {
 		ArrayList<Ticket> ticketArrayList = new ArrayList<>();
 
 		for (Ticket ticket : tickets.values()) {
-			if (movieTitle == null || ticket.getMovie().contains(movieTitle)) {
+			if (text == null || ticket.getMovie().contains(text)) {
 				ticketArrayList.add(ticket);
 			}
 		}
@@ -145,9 +146,9 @@ public class TicketJSONDAO implements TicketDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public Ticket[] findTickets (String movieTitle) {
+	public Ticket[] findTickets (String text) {
 		synchronized (tickets) {
-			return getTicketsArray(movieTitle);
+			return getTicketsArray(text);
 		}
 	}
 

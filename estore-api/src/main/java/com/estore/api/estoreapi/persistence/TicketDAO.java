@@ -5,67 +5,65 @@ import com.estore.api.estoreapi.model.Ticket;
 import java.io.IOException;
 
 /**
- * Defines the interface for Hero object persistence
- *
- * @author SWEN Faculty
+ * Defines the interface for ticket object persistence.
  */
 public interface TicketDAO {
 	/**
-	 * Retrieves all {@linkplain Movie movies}
+	 * Retrieves all {@linkplain Ticket tickets}.
 	 *
-	 * @return An array of {@link Movie movies} objects, may be empty
+	 * @return An array of {@link Ticket ticket} objects, may be empty
 	 * @throws IOException if an issue with underlying storage
 	 */
 	Ticket[] getTickets () throws IOException;
 
 	/**
-	 * Finds all {@linkplain Movie heroes} whose name contains the given text
+	 * Finds all {@linkplain Ticket tickets} whose ticket holder name contains the given text.
 	 *
 	 * @param containsText The text to match against
-	 * @return An array of {@link Movie heroes} whose nemes contains the given text, may be empty
+	 * @return An array of {@link Ticket tickets} whose ticket holder name contains the given text, may be empty
 	 * @throws IOException if an issue with underlying storage
 	 */
 	Ticket[] findTickets (String containsText) throws IOException;
 
 	/**
-	 * Retrieves a {@linkplain Movie hero} with the given id
+	 * Retrieves a {@linkplain Ticket ticket} with the given id.
 	 *
-	 * @param id The id of the {@link Movie hero} to get
-	 * @return a {@link Movie hero} object with the matching id
+	 * @param id The id of the {@link Ticket ticket} to get.
+	 * @return a {@link Ticket ticket} object with the matching id.
 	 * <br>
-	 * null if no {@link Movie hero} with a matching id is found
+	 * null if no {@link Ticket ticket} with a matching id is found.
 	 * @throws IOException if an issue with underlying storage
 	 */
 	Ticket getTicket (int id) throws IOException;
 
 	/**
-	 * Creates and saves a {@linkplain Movie hero}
+	 * Creates and saves a {@linkplain Ticket ticket}.
 	 *
-	 * @param hero {@linkplain Movie hero} object to be created and saved
-	 *             <br>
-	 *             The id of the hero object is ignored and a new uniqe id is assigned
-	 * @return new {@link Movie hero} if successful, false otherwise
+	 * @param ticket {@linkplain Ticket ticket} object to be created and saved
+	 *               <br>
+	 *               The id of the ticket object is ignored and a new unique id is assigned
+	 * @return new {@link Ticket ticket} if successful, false otherwise
 	 * @throws IOException if an issue with underlying storage
 	 */
-	Ticket createTicket (Ticket hero) throws IOException;
+	Ticket createTicket (Ticket ticket) throws IOException;
 
 	/**
-	 * Updates and saves a {@linkplain Movie hero}
+	 * Updates and saves a {@linkplain Ticket ticket}.
 	 *
-	 * @param {@link Movie hero} object to be updated and saved
-	 * @return updated {@link Movie hero} if successful, null if
-	 * {@link Movie hero} could not be found
+	 * @param ticket {@link Ticket ticket} object to be updated and saved
+	 * @return updated {@link Ticket ticket} if successful, null if
+	 * {@link Ticket ticket} could not be found
 	 * @throws IOException if underlying storage cannot be accessed
 	 */
-	Ticket updateTicket (Ticket hero) throws IOException;
+	Ticket updateTicket (Ticket ticket) throws IOException;
 
 	/**
-	 * Deletes a {@linkplain Movie hero} with the given id
+	 * Deletes a {@linkplain Ticket ticket} with the given id.
 	 *
-	 * @param id The id of the {@link Movie hero}
-	 * @return true if the {@link Movie hero} was deleted
+	 * @param id The id of the {@link Ticket ticket}
+	 * @return true if the {@link Ticket ticket} was deleted
 	 * <br>
-	 * false if hero with the given id does not exist
+	 * false if ticket with the given id does not exist
 	 * @throws IOException if underlying storage cannot be accessed
 	 */
 	boolean deleteTicket (int id) throws IOException;

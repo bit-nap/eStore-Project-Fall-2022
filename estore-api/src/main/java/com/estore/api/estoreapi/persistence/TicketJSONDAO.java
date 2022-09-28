@@ -13,40 +13,39 @@ import java.util.TreeMap;
 import java.util.logging.Logger;
 
 /**
- * Implements the functionality for JSON file-based peristance for Heroes
+ * Implements the functionality for JSON file-based persistence for Tickets.
  * <p>
  * {@literal @}Component Spring annotation instantiates a single instance of this
  * class and injects the instance into other classes as needed
- *
- * @author SWEN Faculty
  */
 @Component
 public class TicketJSONDAO implements TicketDAO {
+	/** TODO: Add description of the purpose of Logger, once it's actually used. */
 	private static final Logger LOG = Logger.getLogger(TicketJSONDAO.class.getName());
-	Map<Integer, Ticket> tickets;   // Provides a local cache of the hero objects
-	// so that we don't need to read from the file
-	// each time
-	private ObjectMapper objectMapper;  // Provides conversion between Hero
-	// objects and JSON text format written
-	// to the file
-	private static int nextId;  // The next Id to assign to a new hero
-	private String filename;    // Filename to read from and write to
+	/** A local cache of ticket objects, to avoid reading from file each time. */
+	Map<Integer, Ticket> tickets;
+	/** Provides conversion between Java Ticket and JSON Ticket objects. */
+	private ObjectMapper objectMapper;
+	/** The next id to assign to a new ticket. */
+	private static int nextId;
+	/** Name of the file to read and write to. */
+	private String filename;
 
 	/**
-	 * Creates a Hero File Data Access Object
+	 * Creates a Data Access Object for JSON-based Tickets.
 	 *
 	 * @param filename     Filename to read from and write to
 	 * @param objectMapper Provides JSON Object to/from Java Object serialization and deserialization
 	 * @throws IOException when file cannot be accessed or read from
 	 */
-	public TicketJSONDAO (@Value("${heroes.file}") String filename, ObjectMapper objectMapper) throws IOException {
+	public TicketJSONDAO (@Value("${tickets.file}") String filename, ObjectMapper objectMapper) throws IOException {
 		this.filename = filename;
 		this.objectMapper = objectMapper;
-		load();  // load the heroes from the file
+		load();  // load the tickets from the file
 	}
 
 	/**
-	 * Generates the next id for a new {@linkplain Movie hero}
+	 * Generates the next id for a new {@linkplain Ticket ticket}.
 	 *
 	 * @return The next id
 	 */
@@ -57,24 +56,23 @@ public class TicketJSONDAO implements TicketDAO {
 	}
 
 	/**
-	 * Generates an array of {@linkplain Movie heroes} from the tree map
+	 * Generates an array of {@linkplain Ticket tickets} from the tree map
 	 *
-	 * @return The array of {@link Movie heroes}, may be empty
+	 * @return The array of {@link Ticket tickets}, may be empty
 	 */
-	private Ticket[] getHeroesArray () {
+	private Ticket[] getTicketsArray () {
 		return getTicketsArray(null);
 	}
 
 	/**
-	 * Generates an array of {@linkplain Movie heroes} from the tree map for any
-	 * {@linkplain Movie heroes} that contains the text specified by containsText
+	 * Generates an array of {@linkplain Ticket tickets} from the tree map for any
+	 * {@linkplain Ticket tickets} that contains the text specified by containsText argument.
 	 * <br>
-	 * If containsText is null, the array contains all of the {@linkplain Movie heroes}
-	 * in the tree map
+	 * If containsText is null, the array contains all of the {@linkplain Ticket tickets} in the tree map.
 	 *
-	 * @return The array of {@link Movie heroes}, may be empty
+	 * @return The array of {@link Ticket tickets}, may be empty
 	 */
-	private Ticket[] getHeroesArray (String containsText) { // if containsText == null, no filter
+	private Ticket[] getTicketsArray (String containsText) { // if containsText == null, no filter
 		ArrayList<Ticket> ticketArrayList = new ArrayList<>();
 
 		for (Ticket ticket : tickets.values()) {
@@ -83,31 +81,31 @@ public class TicketJSONDAO implements TicketDAO {
 			}
 		}
 
-		Ticket[] heroArray = new Ticket[ticketArrayList.size()];
-		ticketArrayList.toArray(heroArray);
-		return heroArray;
+		Ticket[] ticketArray = new Ticket[ticketArrayList.size()];
+		ticketArrayList.toArray(ticketArray);
+		return ticketArray;
 	}
 
 	/**
-	 * Saves the {@linkplain Movie heroes} from the map into the file as an array of JSON objects
+	 * Saves the {@linkplain Ticket tickets} from the map into the file as an array of JSON objects.
 	 *
-	 * @return true if the {@link Movie heroes} were written successfully
+	 * @return true if the {@link Ticket tickets} were written successfully
 	 * @throws IOException when file cannot be accessed or written to
 	 */
 	private boolean save () throws IOException {
-		Ticket[] heroArray = getHeroesArray();
+		Ticket[] ticketArray = getTicketsArray();
 
 		// Serializes the Java Objects to JSON objects into the file
-		// writeValue will thrown an IOException if there is an issue
+		// writeValue will throw an IOException if there is an issue
 		// with the file or reading from the file
-		objectMapper.writeValue(new File(filename), heroArray);
+		objectMapper.writeValue(new File(filename), ticketArray);
 		return true;
 	}
 
 	/**
-	 * Loads {@linkplain Movie heroes} from the JSON file into the map
+	 * Loads {@linkplain Ticket tickets} from the JSON file into the map.
 	 * <br>
-	 * Also sets next id to one more than the greatest id found in the file
+	 * Also sets this object's nextId to one more than the greatest id found in the file.
 	 *
 	 * @return true if the file was read successfully
 	 * @throws IOException when file cannot be accessed or read from
@@ -116,12 +114,12 @@ public class TicketJSONDAO implements TicketDAO {
 		tickets = new TreeMap<>();
 		nextId = 0;
 
-		// Deserializes the JSON objects from the file into an array of heroes
+		// Deserializes the JSON objects from the file into an array of tickets
 		// readValue will throw an IOException if there's an issue with the file
 		// or reading from the file
 		Ticket[] ticketArray = objectMapper.readValue(new File(filename), Ticket[].class);
 
-		// Add each hero to the tree map and keep track of the greatest id
+		// Add each ticket to the tree map and keep track of the greatest id
 		for (Ticket ticket : ticketArray) {
 			tickets.put(ticket.getId(), ticket);
 			if (ticket.getId() > nextId) {
@@ -139,7 +137,7 @@ public class TicketJSONDAO implements TicketDAO {
 	@Override
 	public Ticket[] getTickets () {
 		synchronized (tickets) {
-			return getHeroesArray();
+			return getTicketsArray();
 		}
 	}
 
@@ -149,7 +147,7 @@ public class TicketJSONDAO implements TicketDAO {
 	@Override
 	public Ticket[] findTickets (String containsText) {
 		synchronized (tickets) {
-			return getHeroesArray(containsText);
+			return getTickets(containsText);
 		}
 	}
 
@@ -171,9 +169,9 @@ public class TicketJSONDAO implements TicketDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public Ticket createHero (Ticket ticket) throws IOException {
+	public Ticket createTicket (Ticket ticket) throws IOException {
 		synchronized (tickets) {
-			// We create a new hero object because the id field is immutable
+			// We create a new ticket object because the id field is immutable,
 			// and we need to assign the next unique id
 			Ticket newTicket = new Ticket(nextId(), ticket.getName());
 			ticket.put(newTicket.getId(), newTicket);
@@ -186,15 +184,15 @@ public class TicketJSONDAO implements TicketDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public Ticket updateHero (Ticket hero) throws IOException {
+	public Ticket updateTicket (Ticket ticket) throws IOException {
 		synchronized (tickets) {
-			if (tickets.containsKey(hero.getId()) == false) {
-				return null;  // hero does not exist
+			if (!tickets.containsKey(ticket.getId())) {
+				return null;  // ticket does not exist
 			}
 
-			tickets.put(hero.getId(), hero);
+			tickets.put(ticket.getId(), ticket);
 			save(); // may throw an IOException
-			return hero;
+			return ticket;
 		}
 	}
 
@@ -202,7 +200,7 @@ public class TicketJSONDAO implements TicketDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public boolean deleteHero (int id) throws IOException {
+	public boolean deleteTicket (int id) throws IOException {
 		synchronized (tickets) {
 			if (tickets.containsKey(id)) {
 				tickets.remove(id);

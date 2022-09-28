@@ -5,67 +5,68 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.logging.Logger;
 
 /**
- * Represents a Ticket entity
- *
+ * Represents a ticket to the screening of a movie.
  */
 public class Ticket {
+	/** TODO: Add description of the purpose of Logger, once it's actually used. */
 	private static final Logger LOG = Logger.getLogger(Ticket.class.getName());
 
-	// Package private for tests
-	static final String STRING_FORMAT = "Ticket [movieId=%i, name=%s, time=%s]";
+	// Package private for tests - Prof
+	// IntelliJ complaining about screeningId insertion in STRING_FORMAT - Oscar
+	// Illegal format string specifier: unknown conversion in '%i' - IntelliJ
+	static final String STRING_FORMAT = "Ticket [screeningId=%i, name=%s]";
 
-    // Properties of the Ticket (Refine domain model)
-	@JsonProperty("movie") private int movieId;
-	@JsonProperty("name") private String name;
-    // Time could be a numeric value using util.getTime()
-    // Otherwise assume screening time string is defined for each movie
-    @JsonProperty("time") private String time;
-
+	/** The id of the screening this ticket belongs to. */
+	@JsonProperty("screeningId") private int screeningId;
+	/** The name of the individual who purchased this ticket. */
+	@JsonProperty("name") private String ticketHolderName;
 
 	/**
-	 * Create a ticket with the given movie, name, and time
+	 * Create a ticket with the given screening id and ticket holder's name.
 	 *
-	 * @param movieId The name of the movie
-	 * @param name The name of the person that owns the ticket
-     * @param time The time of the screening
-	 *             <p>
-	 *             {@literal @}JsonProperty is used in serialization and deserialization
-	 *             of the JSON object to the Java object in mapping the fields.  If a field
-	 *             is not provided in the JSON object, the Java field gets the default Java
-	 *             value, i.e. 0 for int
+	 * @param screeningId      The id of the screening this ticket belongs to.
+	 * @param ticketHolderName The name of the individual who purchased this ticket.
+	 *                         <p>
+	 *                         {@literal @}JsonProperty is used in serialization and deserialization
+	 *                         of the JSON object to the Java object in mapping the fields.  If a field
+	 *                         is not provided in the JSON object, the Java field gets the default Java
+	 *                         value, i.e. 0 for int
 	 */
-	public Ticket (@JsonProperty("movieId") int movieId, @JsonProperty("name") String name, @JsonProperty("time") String time) {
-		this.movieId = movieId;
-		this.name = name;
-        this.time = time;
+	public Ticket (@JsonProperty("screeningId") int screeningId, @JsonProperty("name") String ticketHolderName) {
+		this.screeningId = screeningId;
+		this.ticketHolderName = ticketHolderName;
 	}
 
 	/**
-	 * Retrieves the id of the Ticket
-	 *
-	 * @return The id of the Ticket
+	 * @return The id of the screening this ticket belongs to.
 	 */
-	public int getId () {return movieId;}
+	public int getScreeningId () {
+		return screeningId;
+	}
 
 	/**
-	 * Sets the name of the Ticket - necessary for JSON object to Java object deserialization
+	 * Necessary for JSON object to perform Java object deserialization.
+	 * <p>
+	 * I think this is what was originally meant. - Oscar
 	 *
-	 * @param name The name of the Ticket
+	 * @param ticketHolderName The name of the ticket holder this ticket will belong to.
 	 */
-	public void setName (String name) {this.name = name;}
+	public void setTicketHolderName (String ticketHolderName) {
+		this.ticketHolderName = ticketHolderName;
+	}
 
 	/**
-	 * Retrieves the name of the Ticket
-	 *
-	 * @return The name of the Ticket
+	 * @return The name of the ticket holder this ticket belongs to.
 	 */
-	public String getName () {return name;}
+	public String getTicketHolderName () {
+		return ticketHolderName;
+	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString () {
-		return String.format(STRING_FORMAT, movieId, name, time);
+		return String.format(STRING_FORMAT, screeningId, ticketHolderName);
 	}
 }

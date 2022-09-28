@@ -10,7 +10,7 @@ import java.util.logging.Logger;
  * @author SWEN Faculty
  */
 public class Hero {
-	private static final Logger LOG = Logger.getLogger(Hero.class.getName());
+	private static final Logger LOG = Logger.getLogger(Movie.class.getName());
 
 	// Package private for tests
 	static final String STRING_FORMAT = "Hero [id=%d, name=%s]";
@@ -29,7 +29,7 @@ public class Hero {
 	 *             is not provided in the JSON object, the Java field gets the default Java
 	 *             value, i.e. 0 for int
 	 */
-	public Hero (@JsonProperty("id") int id, @JsonProperty("name") String name) {
+	public Movie (@JsonProperty("id") int id, @JsonProperty("name") String name) {
 		this.id = id;
 		this.name = name;
 	}

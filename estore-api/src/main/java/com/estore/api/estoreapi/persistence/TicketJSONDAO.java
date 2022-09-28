@@ -1,6 +1,6 @@
 package com.estore.api.estoreapi.persistence;
 
-import com.estore.api.estoreapi.model.Hero;
+import com.estore.api.estoreapi.model.Ticket;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -21,9 +21,9 @@ import java.util.logging.Logger;
  * @author SWEN Faculty
  */
 @Component
-public class HeroFileDAO implements HeroDAO {
-	private static final Logger LOG = Logger.getLogger(HeroFileDAO.class.getName());
-	Map<Integer, Hero> heroes;   // Provides a local cache of the hero objects
+public class TicketJSONDAO implements TicketDAO {
+	private static final Logger LOG = Logger.getLogger(TicketJSONDAO.class.getName());
+	Map<Integer, Ticket> tickets;   // Provides a local cache of the hero objects
 	// so that we don't need to read from the file
 	// each time
 	private ObjectMapper objectMapper;  // Provides conversion between Hero
@@ -39,14 +39,14 @@ public class HeroFileDAO implements HeroDAO {
 	 * @param objectMapper Provides JSON Object to/from Java Object serialization and deserialization
 	 * @throws IOException when file cannot be accessed or read from
 	 */
-	public HeroFileDAO (@Value("${heroes.file}") String filename, ObjectMapper objectMapper) throws IOException {
+	public TicketJSONDAO (@Value("${heroes.file}") String filename, ObjectMapper objectMapper) throws IOException {
 		this.filename = filename;
 		this.objectMapper = objectMapper;
 		load();  // load the heroes from the file
 	}
 
 	/**
-	 * Generates the next id for a new {@linkplain Hero hero}
+	 * Generates the next id for a new {@linkplain Movie hero}
 	 *
 	 * @return The next id
 	 */
@@ -57,45 +57,45 @@ public class HeroFileDAO implements HeroDAO {
 	}
 
 	/**
-	 * Generates an array of {@linkplain Hero heroes} from the tree map
+	 * Generates an array of {@linkplain Movie heroes} from the tree map
 	 *
-	 * @return The array of {@link Hero heroes}, may be empty
+	 * @return The array of {@link Movie heroes}, may be empty
 	 */
-	private Hero[] getHeroesArray () {
-		return getHeroesArray(null);
+	private Ticket[] getHeroesArray () {
+		return getTicketsArray(null);
 	}
 
 	/**
-	 * Generates an array of {@linkplain Hero heroes} from the tree map for any
-	 * {@linkplain Hero heroes} that contains the text specified by containsText
+	 * Generates an array of {@linkplain Movie heroes} from the tree map for any
+	 * {@linkplain Movie heroes} that contains the text specified by containsText
 	 * <br>
-	 * If containsText is null, the array contains all of the {@linkplain Hero heroes}
+	 * If containsText is null, the array contains all of the {@linkplain Movie heroes}
 	 * in the tree map
 	 *
-	 * @return The array of {@link Hero heroes}, may be empty
+	 * @return The array of {@link Movie heroes}, may be empty
 	 */
-	private Hero[] getHeroesArray (String containsText) { // if containsText == null, no filter
-		ArrayList<Hero> heroArrayList = new ArrayList<>();
+	private Ticket[] getHeroesArray (String containsText) { // if containsText == null, no filter
+		ArrayList<Ticket> ticketArrayList = new ArrayList<>();
 
-		for (Hero hero : heroes.values()) {
-			if (containsText == null || hero.getName().contains(containsText)) {
-				heroArrayList.add(hero);
+		for (Ticket ticket : tickets.values()) {
+			if (containsText == null || ticket.getName().contains(containsText)) {
+				ticketArrayList.add(ticket);
 			}
 		}
 
-		Hero[] heroArray = new Hero[heroArrayList.size()];
-		heroArrayList.toArray(heroArray);
+		Ticket[] heroArray = new Ticket[ticketArrayList.size()];
+		ticketArrayList.toArray(heroArray);
 		return heroArray;
 	}
 
 	/**
-	 * Saves the {@linkplain Hero heroes} from the map into the file as an array of JSON objects
+	 * Saves the {@linkplain Movie heroes} from the map into the file as an array of JSON objects
 	 *
-	 * @return true if the {@link Hero heroes} were written successfully
+	 * @return true if the {@link Movie heroes} were written successfully
 	 * @throws IOException when file cannot be accessed or written to
 	 */
 	private boolean save () throws IOException {
-		Hero[] heroArray = getHeroesArray();
+		Ticket[] heroArray = getHeroesArray();
 
 		// Serializes the Java Objects to JSON objects into the file
 		// writeValue will thrown an IOException if there is an issue
@@ -105,7 +105,7 @@ public class HeroFileDAO implements HeroDAO {
 	}
 
 	/**
-	 * Loads {@linkplain Hero heroes} from the JSON file into the map
+	 * Loads {@linkplain Movie heroes} from the JSON file into the map
 	 * <br>
 	 * Also sets next id to one more than the greatest id found in the file
 	 *
@@ -113,19 +113,19 @@ public class HeroFileDAO implements HeroDAO {
 	 * @throws IOException when file cannot be accessed or read from
 	 */
 	private boolean load () throws IOException {
-		heroes = new TreeMap<>();
+		tickets = new TreeMap<>();
 		nextId = 0;
 
 		// Deserializes the JSON objects from the file into an array of heroes
 		// readValue will throw an IOException if there's an issue with the file
 		// or reading from the file
-		Hero[] heroArray = objectMapper.readValue(new File(filename), Hero[].class);
+		Ticket[] ticketArray = objectMapper.readValue(new File(filename), Ticket[].class);
 
 		// Add each hero to the tree map and keep track of the greatest id
-		for (Hero hero : heroArray) {
-			heroes.put(hero.getId(), hero);
-			if (hero.getId() > nextId) {
-				nextId = hero.getId();
+		for (Ticket ticket : ticketArray) {
+			tickets.put(ticket.getId(), ticket);
+			if (ticket.getId() > nextId) {
+				nextId = ticket.getId();
 			}
 		}
 		// Make the next id one greater than the maximum from the file
@@ -137,8 +137,8 @@ public class HeroFileDAO implements HeroDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public Hero[] getHeroes () {
-		synchronized (heroes) {
+	public Ticket[] getTickets () {
+		synchronized (tickets) {
 			return getHeroesArray();
 		}
 	}
@@ -147,8 +147,8 @@ public class HeroFileDAO implements HeroDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public Hero[] findHeroes (String containsText) {
-		synchronized (heroes) {
+	public Ticket[] findTickets (String containsText) {
+		synchronized (tickets) {
 			return getHeroesArray(containsText);
 		}
 	}
@@ -157,10 +157,10 @@ public class HeroFileDAO implements HeroDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public Hero getHero (int id) {
-		synchronized (heroes) {
-			if (heroes.containsKey(id)) {
-				return heroes.get(id);
+	public Ticket getTicket (int id) {
+		synchronized (tickets) {
+			if (tickets.containsKey(id)) {
+				return tickets.get(id);
 			} else {
 				return null;
 			}
@@ -171,14 +171,14 @@ public class HeroFileDAO implements HeroDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public Hero createHero (Hero hero) throws IOException {
-		synchronized (heroes) {
+	public Ticket createHero (Ticket ticket) throws IOException {
+		synchronized (tickets) {
 			// We create a new hero object because the id field is immutable
 			// and we need to assign the next unique id
-			Hero newHero = new Hero(nextId(), hero.getName());
-			heroes.put(newHero.getId(), newHero);
+			Ticket newTicket = new Ticket(nextId(), ticket.getName());
+			ticket.put(newTicket.getId(), newTicket);
 			save(); // may throw an IOException
-			return newHero;
+			return newTicket;
 		}
 	}
 
@@ -186,13 +186,13 @@ public class HeroFileDAO implements HeroDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public Hero updateHero (Hero hero) throws IOException {
-		synchronized (heroes) {
-			if (heroes.containsKey(hero.getId()) == false) {
+	public Ticket updateHero (Ticket hero) throws IOException {
+		synchronized (tickets) {
+			if (tickets.containsKey(hero.getId()) == false) {
 				return null;  // hero does not exist
 			}
 
-			heroes.put(hero.getId(), hero);
+			tickets.put(hero.getId(), hero);
 			save(); // may throw an IOException
 			return hero;
 		}
@@ -203,9 +203,9 @@ public class HeroFileDAO implements HeroDAO {
 	 */
 	@Override
 	public boolean deleteHero (int id) throws IOException {
-		synchronized (heroes) {
-			if (heroes.containsKey(id)) {
-				heroes.remove(id);
+		synchronized (tickets) {
+			if (tickets.containsKey(id)) {
+				tickets.remove(id);
 				return save();
 			} else {
 				return false;

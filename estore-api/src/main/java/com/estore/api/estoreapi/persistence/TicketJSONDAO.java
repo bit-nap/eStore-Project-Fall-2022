@@ -56,7 +56,7 @@ public class TicketJSONDAO implements TicketDAO {
 	}
 
 	/**
-	 * Generates an array of {@linkplain Ticket tickets} from the tree map
+	 * Generates an array of {@linkplain Ticket tickets} from the tree map.
 	 *
 	 * @return The array of {@link Ticket tickets}, may be empty
 	 */
@@ -66,17 +66,17 @@ public class TicketJSONDAO implements TicketDAO {
 
 	/**
 	 * Generates an array of {@linkplain Ticket tickets} from the tree map for any
-	 * {@linkplain Ticket tickets} that contains the text specified by containsText argument.
+	 * {@linkplain Ticket tickets} that contains the movie title specified by movieTitle argument.
 	 * <br>
-	 * If containsText is null, the array contains all of the {@linkplain Ticket tickets} in the tree map.
+	 * If movieTitle is null, the array contains all of the {@linkplain Ticket tickets} in the tree map.
 	 *
 	 * @return The array of {@link Ticket tickets}, may be empty
 	 */
-	private Ticket[] getTicketsArray (String containsText) { // if containsText == null, no filter
+	private Ticket[] getTicketsArray (String movieTitle) { // if movieTitle == null, no filter
 		ArrayList<Ticket> ticketArrayList = new ArrayList<>();
 
 		for (Ticket ticket : tickets.values()) {
-			if (containsText == null || ticket.getName().contains(containsText)) {
+			if (movieTitle == null || ticket.getMovie().contains(movieTitle)) {
 				ticketArrayList.add(ticket);
 			}
 		}
@@ -145,9 +145,9 @@ public class TicketJSONDAO implements TicketDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public Ticket[] findTickets (String containsText) {
+	public Ticket[] findTickets (String movieTitle) {
 		synchronized (tickets) {
-			return getTickets(containsText);
+			return getTicketsArray(movieTitle);
 		}
 	}
 
@@ -173,8 +173,8 @@ public class TicketJSONDAO implements TicketDAO {
 		synchronized (tickets) {
 			// We create a new ticket object because the id field is immutable,
 			// and we need to assign the next unique id
-			Ticket newTicket = new Ticket(nextId(), ticket.getName());
-			ticket.put(newTicket.getId(), newTicket);
+			Ticket newTicket = new Ticket(nextId(), ticket.getMovie());
+			tickets.put(newTicket.getId(), newTicket);
 			save(); // may throw an IOException
 			return newTicket;
 		}

@@ -2,9 +2,13 @@ package com.estore.api.estoreapi.controller;
 
 import com.estore.api.estoreapi.model.Ticket;
 import com.estore.api.estoreapi.persistence.TicketDAO;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -43,8 +47,18 @@ public class TicketController {
 	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<Ticket> getTicket (@PathVariable int id) {
-		// TODO
-		return null;
+		LOG.info("GET /tickets/" + id);
+		try {
+			Ticket ticket = ticketDao.getTicket(id);
+			if (ticket != null)
+				return new ResponseEntity<Ticket>(ticket, HttpStatus.OK);
+			else
+				return new ResponseEntity<Ticket>(HttpStatus.NOT_FOUND);
+		}
+		catch (IOException e) {
+			LOG.log(Level.SEVERE, e.getLocalizedMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	/**

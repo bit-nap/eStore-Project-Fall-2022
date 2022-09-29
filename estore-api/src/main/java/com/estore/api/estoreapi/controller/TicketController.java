@@ -12,6 +12,8 @@ import java.util.logging.Logger;
  * <p>
  * {@literal @}RestController Spring annotation identifies this class as a REST API
  * method handler to the Spring framework
+ *
+ * @author Group 3C, The Code Monkeys
  */
 
 @RestController

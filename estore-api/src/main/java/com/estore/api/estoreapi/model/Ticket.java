@@ -6,6 +6,8 @@ import java.util.logging.Logger;
 
 /**
  * Represents a ticket to the screening of a movie.
+ *
+ * @author Group 3C, The Code Monkeys
  */
 public class Ticket {
 	/** TODO: Add description of the purpose of Logger, once it's actually used. */

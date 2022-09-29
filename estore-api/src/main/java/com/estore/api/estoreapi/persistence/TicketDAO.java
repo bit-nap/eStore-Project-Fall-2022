@@ -6,6 +6,8 @@ import java.io.IOException;
 
 /**
  * Defines the interface for ticket object persistence.
+ *
+ * @author Group 3C, The Code Monkeys
  */
 public interface TicketDAO {
 	/**

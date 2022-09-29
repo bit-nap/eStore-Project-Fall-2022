@@ -29,7 +29,7 @@ public class TicketControllerTest {
 
 	/**
 	 * Test the getTicket method to get a ticket for a movie based on
-	 * the ticket id
+	 * the ticket Id
 	 * @throws IOException
 	 */
 	@Test

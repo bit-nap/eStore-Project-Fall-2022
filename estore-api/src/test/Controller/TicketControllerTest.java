@@ -27,13 +27,8 @@ public class TicketControllerTest {
 		ticketController = new TicketController(mockTicketDao);
 	}
 
-	/**
-	 * Test the getTicket method to get a ticket for a movie based on
-	 * the ticket id
-	 * @throws IOException
-	 */
 	@Test
-	public void testGetTicket() throws IOException {
+	public void testGetTicket() throws IOException { // createTicket may throw IOException
 		// Setup
 		Ticket ticket = new Ticket(99, "Star Wars");
 		// When the same id is passed in, our mock Ticket DAO will return the Ticket object
@@ -46,5 +41,33 @@ public class TicketControllerTest {
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(ticket, response.getBody());
 	}
-}
 
+	@Test
+    public void testGetTicketNotFound() throws Exception { // createTicket may throw IOException
+        // Setup
+        int ticketId = 99;
+        // When the same id is passed in, our mock Hero DAO will return null, simulating
+        // no hero found
+        when(mockTicketDAO.getTicket(ticketId)).thenReturn(null);
+
+        // Invoke
+        ResponseEntity<Ticket> response = ticketController.getTicket(ticketId);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
+
+    @Test
+    public void testGetTicketHandleException() throws Exception { // createHero may throw IOException
+        // Setup
+        int ticketId = 99;
+        // When getTicket is called on the Mock Ticket DAO, throw an IOException
+        doThrow(new IOException()).when(mockTicketDAO).getTicket(ticketId);
+
+        // Invoke
+        ResponseEntity<Hero> response = ticketController.getTicket(ticketId);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+}

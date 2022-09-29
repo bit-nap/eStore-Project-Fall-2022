@@ -49,6 +49,7 @@ public class TicketController {
 	public ResponseEntity<Ticket> getTicket (@PathVariable int id) {
 		LOG.info("GET /tickets/" + id);
 		try {
+			// Try to get the ticket based on the id entered by the user
 			Ticket ticket = ticketDao.getTicket(id);
 			if (ticket != null)
 				return new ResponseEntity<Ticket>(ticket, HttpStatus.OK);
@@ -70,8 +71,19 @@ public class TicketController {
 	 */
 	@GetMapping("")
 	public ResponseEntity<Ticket[]> getTickets () {
-		// TODO
-		return null;
+		LOG.info("GET /tickets");
+		try {
+			// Try and get a list of all the tickets from the system
+			Ticket[] tickets = ticketDao.getTickets();
+			if (tickets != null)
+				return new ResponseEntity<Ticket[]>(tickets, HttpStatus.OK);
+			else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		catch (IOException e) {
+			LOG.log(Level.SEVERE, e.getLocalizedMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	/**

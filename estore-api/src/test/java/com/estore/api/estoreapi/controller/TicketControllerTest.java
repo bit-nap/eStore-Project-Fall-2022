@@ -1,6 +1,5 @@
-package com.estore.api.estoreapi.Controller;
+package com.estore.api.estoreapi.controller;
 
-import com.estore.api.estoreapi.controller.TicketController;
 import com.estore.api.estoreapi.model.Ticket;
 import com.estore.api.estoreapi.persistence.TicketDAO;
 import org.junit.jupiter.api.BeforeEach;

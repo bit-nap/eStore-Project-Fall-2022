@@ -74,4 +74,37 @@ public class TicketControllerTest {
 		// analyze
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
 	}
+
+	@Test
+    public void testSearchTickets() throws IOException { // findTickets may throw IOException
+        // Setup
+        String searchString = "The";
+        Ticket[] foundTickets = new Ticket[2];
+        foundTickets[0] = new Ticket(99,"The Terminator");
+        foundTickets[1] = new Ticket(100,"The Godfather");
+        // When findTickets is called with the search string, return the two
+        /// tickets above
+        when(mockTicketDao.findTickets(searchString)).thenReturn(foundTickets);
+
+        // Invoke
+        ResponseEntity<Ticket[]> response = ticketController.searchTickets(searchString);
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(foundTickets,response.getBody());
+    }
+
+    @Test
+    public void testSearchTicketsHandleException() throws IOException { // findTickets may throw IOException
+        // Setup
+        String searchString = "an";
+        // When createTicket is called on the Mock Ticket DAO, throw an IOException
+        doThrow(new IOException()).when(mockTicketDao).findTickets(searchString);
+
+        // Invoke
+        ResponseEntity<Ticket[]> response = ticketController.searchTickets(searchString);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
 }

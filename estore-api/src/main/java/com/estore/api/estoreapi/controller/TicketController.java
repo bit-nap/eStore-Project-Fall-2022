@@ -2,9 +2,11 @@ package com.estore.api.estoreapi.controller;
 
 import com.estore.api.estoreapi.model.Ticket;
 import com.estore.api.estoreapi.persistence.TicketDAO;
+import org.springframework.http.HttpStatus; // HTTP status codes
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
@@ -76,8 +78,20 @@ public class TicketController {
 	 */
 	@GetMapping("/")
 	public ResponseEntity<Ticket[]> searchTickets (@RequestParam String text) {
-		// TODO
-		return null;
+		// TODO: add logger method info()
+		// TODO: make sure null list returned and message displayed saying no product found
+		try {
+			Ticket[] foundTickets = ticketDao.findTickets(text);
+			/*
+			 * If ticketDao.findTickets() fails, an IOException is thrown. Assume function
+			 * passed successfully and return the Ticket array even if it is empty. Which
+			 * returns a null list
+			 */
+			return new ResponseEntity<Ticket[]>(foundTickets, HttpStatus.OK);
+		}
+		catch(IOException e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	/**

@@ -2,7 +2,6 @@ package com.estore.api.estoreapi.controller;
 
 import com.estore.api.estoreapi.model.Ticket;
 import com.estore.api.estoreapi.persistence.TicketDAO;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,12 +52,12 @@ public class TicketController {
 		try {
 			// Try to get the ticket based on the id entered by the user
 			Ticket ticket = ticketDao.getTicket(id);
-			if (ticket != null)
+			if (ticket != null) {
 				return new ResponseEntity<Ticket>(ticket, HttpStatus.OK);
-			else
+			} else {
 				return new ResponseEntity<Ticket>(HttpStatus.NOT_FOUND);
-		}
-		catch (IOException e) {
+			}
+		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -77,12 +76,12 @@ public class TicketController {
 		try {
 			// Try and get a list of all the tickets from the system
 			Ticket[] tickets = ticketDao.getTickets();
-			if (tickets != null)
+			if (tickets != null) {
 				return new ResponseEntity<Ticket[]>(tickets, HttpStatus.OK);
-			else
+			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		catch (IOException e) {
+			}
+		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -102,7 +101,7 @@ public class TicketController {
 	 */
 	@GetMapping("/")
 	public ResponseEntity<Ticket[]> searchTickets (@RequestParam String text) {
-		// TODO: make sure null list returned and message displayed saying no product found
+		LOG.info("GET /heroes/?name=" + text);
 		try {
 			Ticket[] foundTickets = ticketDao.findTickets(text);
 			/*

@@ -151,4 +151,46 @@ public class TicketControllerTest {
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
+
+	@Test
+    public void testDeleteTicket() throws IOException { // deleteTicket may throw IOException
+        // Setup
+        int ticketId = 99;
+        // when deleteTicket is called return true, simulating successful deletion
+        when(mockTicketDao.deleteTicket(ticketId)).thenReturn(true);
+
+        // Invoke
+        ResponseEntity<Ticket> response = ticketController.deleteTicket(ticketId);
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+    }
+
+    @Test
+    public void testDeleteTicketNotFound() throws IOException { // deleteTicket may throw IOException
+        // Setup
+        int ticketId = 99;
+        // when deleteTicket is called return false, simulating failed deletion
+        when(mockTicketDao.deleteTicket(ticketId)).thenReturn(false);
+
+        // Invoke
+        ResponseEntity<Ticket> response = ticketController.deleteTicket(ticketId);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
+
+    @Test
+    public void testDeleteTicketHandleException() throws IOException { // deleteTicket may throw IOException
+        // Setup
+        int ticketId = 99;
+        // When deleteTicket is called on the Mock Ticket DAO, throw an IOException
+        doThrow(new IOException()).when(mockTicketDao).deleteTicket(ticketId);
+
+        // Invoke
+        ResponseEntity<Ticket> response = ticketController.deleteTicket(ticketId);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
 }

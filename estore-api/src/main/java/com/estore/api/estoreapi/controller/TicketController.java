@@ -165,7 +165,16 @@ public class TicketController {
 	 */
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Ticket> deleteTicket (@PathVariable int id) {
-		// TODO
-		return null;
+		LOG.info("DELETE /tickets/" + id);
+		try {
+			if (ticketDao.deleteTicket(id)) {
+				return new ResponseEntity<>(HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+		} catch (IOException e) {
+			LOG.log(Level.SEVERE, e.getLocalizedMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }

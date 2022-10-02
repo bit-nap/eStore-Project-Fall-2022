@@ -102,8 +102,19 @@ public class TicketController {
 	 */
 	@GetMapping("/")
 	public ResponseEntity<Ticket[]> searchTickets (@RequestParam String text) {
-		// TODO
-		return null;
+		// TODO: make sure null list returned and message displayed saying no product found
+		try {
+			Ticket[] foundTickets = ticketDao.findTickets(text);
+			/*
+			 * If ticketDao.findTickets() fails, an IOException is thrown. Assume function
+			 * passed successfully and return the Ticket array even if it is empty. Which
+			 * returns a null list
+			 */
+			return new ResponseEntity<Ticket[]>(foundTickets, HttpStatus.OK);
+		} catch (IOException e) {
+			LOG.log(Level.SEVERE, e.getLocalizedMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	/**

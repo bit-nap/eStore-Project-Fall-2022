@@ -2,6 +2,7 @@ package com.estore.api.estoreapi.controller;
 
 import com.estore.api.estoreapi.model.Ticket;
 import com.estore.api.estoreapi.persistence.TicketDAO;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,8 +49,19 @@ public class TicketController {
 	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<Ticket> getTicket (@PathVariable int id) {
-		// TODO
-		return null;
+		LOG.info("GET /tickets/" + id);
+		try {
+			// Try to get the ticket based on the id entered by the user
+			Ticket ticket = ticketDao.getTicket(id);
+			if (ticket != null)
+				return new ResponseEntity<Ticket>(ticket, HttpStatus.OK);
+			else
+				return new ResponseEntity<Ticket>(HttpStatus.NOT_FOUND);
+		}
+		catch (IOException e) {
+			LOG.log(Level.SEVERE, e.getLocalizedMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	/**
@@ -61,8 +73,19 @@ public class TicketController {
 	 */
 	@GetMapping("")
 	public ResponseEntity<Ticket[]> getTickets () {
-		// TODO
-		return null;
+		LOG.info("GET /tickets");
+		try {
+			// Try and get a list of all the tickets from the system
+			Ticket[] tickets = ticketDao.getTickets();
+			if (tickets != null)
+				return new ResponseEntity<Ticket[]>(tickets, HttpStatus.OK);
+			else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		catch (IOException e) {
+			LOG.log(Level.SEVERE, e.getLocalizedMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	/**
@@ -104,8 +127,19 @@ public class TicketController {
 	 */
 	@PostMapping("")
 	public ResponseEntity<Ticket> createTicket (@RequestBody Ticket ticket) {
-		// TODO
-		return null;
+		LOG.info("POST /tickets " + ticket);
+
+		try {
+			Ticket newTicket = ticketDao.createTicket(ticket);
+			if (newTicket != null) {
+				return new ResponseEntity<>(newTicket, HttpStatus.CREATED);
+			} else {
+				return new ResponseEntity<>(HttpStatus.CONFLICT);
+			}
+		} catch (IOException e) {
+			LOG.log(Level.SEVERE, e.getLocalizedMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	/**

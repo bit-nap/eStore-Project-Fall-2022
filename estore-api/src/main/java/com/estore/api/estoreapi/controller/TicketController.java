@@ -2,11 +2,12 @@ package com.estore.api.estoreapi.controller;
 
 import com.estore.api.estoreapi.model.Ticket;
 import com.estore.api.estoreapi.persistence.TicketDAO;
-import org.springframework.http.HttpStatus; // HTTP status codes
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -78,7 +79,6 @@ public class TicketController {
 	 */
 	@GetMapping("/")
 	public ResponseEntity<Ticket[]> searchTickets (@RequestParam String text) {
-		// TODO: add logger method info()
 		// TODO: make sure null list returned and message displayed saying no product found
 		try {
 			Ticket[] foundTickets = ticketDao.findTickets(text);
@@ -88,8 +88,8 @@ public class TicketController {
 			 * returns a null list
 			 */
 			return new ResponseEntity<Ticket[]>(foundTickets, HttpStatus.OK);
-		}
-		catch(IOException e) {
+		} catch (IOException e) {
+			LOG.log(Level.SEVERE, e.getLocalizedMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

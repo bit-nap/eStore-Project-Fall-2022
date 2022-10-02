@@ -74,4 +74,48 @@ public class TicketControllerTest {
 		// analyze
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
 	}
+
+	@Test
+	public void testCreateTicket () throws IOException {
+		// setup
+		Ticket ticket = new Ticket(72, "The Godfather");
+		// when createTicket is called, return true simulating successful creation and save
+		when(mockTicketDao.createTicket(ticket)).thenReturn(ticket);
+
+		// invoke
+		ResponseEntity<Ticket> response = ticketController.createTicket(ticket);
+
+		// analyze
+		assertEquals(HttpStatus.CREATED, response.getStatusCode());
+		assertEquals(ticket, response.getBody());
+	}
+
+	@Test
+	public void testCreateTicketFailed () throws IOException {
+		// setup
+		Ticket ticket = new Ticket(72, "The Godfather");
+		// when createTicket is called, return false simulating failed creation and save
+		when(mockTicketDao.createTicket(ticket)).thenReturn(null);
+
+		// invoke
+		ResponseEntity<Ticket> response = ticketController.createTicket(ticket);
+
+		// analyze
+		assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
+	}
+
+	@Test
+	public void testCreateTicketHandleException () throws IOException {
+		// setup
+		Ticket ticket = new Ticket(72, "The Godfather");
+
+		// when createTicket is called, throw an IOException
+		doThrow(new IOException()).when(mockTicketDao).createTicket(ticket);
+
+		// invoke
+		ResponseEntity<Ticket> response = ticketController.createTicket(ticket);
+
+		// analyze
+		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+	}
 }

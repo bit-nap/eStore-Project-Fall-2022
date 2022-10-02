@@ -116,8 +116,19 @@ public class TicketController {
 	 */
 	@PostMapping("")
 	public ResponseEntity<Ticket> createTicket (@RequestBody Ticket ticket) {
-		// TODO
-		return null;
+		LOG.info("POST /tickets " + ticket);
+
+		try {
+			Ticket newTicket = ticketDao.createTicket(ticket);
+			if (newTicket != null) {
+				return new ResponseEntity<>(newTicket, HttpStatus.CREATED);
+			} else {
+				return new ResponseEntity<>(HttpStatus.CONFLICT);
+			}
+		} catch (IOException e) {
+			LOG.log(Level.SEVERE, e.getLocalizedMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	/**

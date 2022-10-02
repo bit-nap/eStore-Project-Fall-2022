@@ -151,4 +151,30 @@ public class TicketControllerTest {
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
+
+	@Test
+	public void testUpdateTicket() throws IOException {
+		// Setup
+		String a_movie = "Star Wars IV: A New Hope";
+		Ticket ticket = new Ticket(1, "NOT Star Wars IV");
+		// Invoke
+		ResponseEntity<Ticket> response = ticketController.updateTicket(ticket, a_movie);
+
+		// Analyze
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+	}
+
+	@Test
+	public void testUpdateTicketExceptionNotFound() throws IOException {
+		// Setup
+		String a_movie = "Star Wars IV: A New Hope";
+		Ticket ticket = null;
+
+		// Invoke
+		ResponseEntity<Ticket> response = ticketController.updateTicket(ticket, a_movie);
+
+		// Analyze
+		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+	}
+
 }

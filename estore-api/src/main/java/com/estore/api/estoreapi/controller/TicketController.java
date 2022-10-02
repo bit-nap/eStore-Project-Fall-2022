@@ -101,7 +101,7 @@ public class TicketController {
 	 */
 	@GetMapping("/")
 	public ResponseEntity<Ticket[]> searchTickets (@RequestParam String text) {
-		LOG.info("GET /heroes/?name=" + text);
+		LOG.info("GET /tickets/?name=" + text);
 		try {
 			Ticket[] foundTickets = ticketDao.findTickets(text);
 			/*

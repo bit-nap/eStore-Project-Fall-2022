@@ -155,26 +155,34 @@ public class TicketControllerTest {
 	@Test
 	public void testUpdateTicket() throws IOException {
 		// Setup
-		String a_movie = "Star Wars IV: A New Hope";
-		Ticket ticket = new Ticket(1, "NOT Star Wars IV");
-		// Invoke
-		ResponseEntity<Ticket> response = ticketController.updateTicket(ticket, a_movie);
+        Ticket ticket = new Ticket(99,"Star Wars IV: A New Hope");
+        // when updateTicket is called, return true simulating successful
+        // update and save
+        when(mockTicketDao.updateTicket(ticket)).thenReturn(ticket);
+        ResponseEntity<Ticket> response = ticketController.updateTicket(ticket);
+        ticket.setMovie("Other movie name");
 
-		// Analyze
-		assertEquals(HttpStatus.OK, response.getStatusCode());
+        // Invoke
+        response = ticketController.updateTicket(ticket);
+
+        // Analyze
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(ticket, response.getBody());
 	}
 
 	@Test
 	public void testUpdateTicketExceptionNotFound() throws IOException {
 		// Setup
-		String a_movie = "Star Wars IV: A New Hope";
-		Ticket ticket = null;
+        Ticket ticket = new Ticket(99,"Galactic Agent");
+        // when updateTicket is called, return true simulating successful
+        // update and save
+        when(mockTicketDao.updateTicket(ticket)).thenReturn(null);
 
-		// Invoke
-		ResponseEntity<Ticket> response = ticketController.updateTicket(ticket, a_movie);
+        // Invoke
+        ResponseEntity<Ticket> response = ticketController.updateTicket(ticket);
 
-		// Analyze
-		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
 	}
 
 }

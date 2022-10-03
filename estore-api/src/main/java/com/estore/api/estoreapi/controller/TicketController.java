@@ -159,7 +159,7 @@ public class TicketController {
 			if (_ticket != null) {
 				ticket = ticketDao.updateTicket(ticket);
 
-				return new ResponseEntity<>(ticket, HttpStatus.OK);
+				return new ResponseEntity<Ticket>(ticket, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}

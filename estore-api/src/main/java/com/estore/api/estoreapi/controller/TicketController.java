@@ -151,8 +151,18 @@ public class TicketController {
 	 */
 	@PutMapping("")
 	public ResponseEntity<Ticket> updateTicket (@RequestBody Ticket ticket) {
-		// TODO
-		return null;
+		LOG.info("PUT /tickets/" + ticket);
+		try {
+			Ticket _ticket = ticketDao.updateTicket(ticket);
+			if (_ticket != null) {
+				return new ResponseEntity<Ticket>(_ticket, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getLocalizedMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	/**

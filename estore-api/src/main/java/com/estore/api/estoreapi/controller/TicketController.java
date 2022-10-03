@@ -91,7 +91,7 @@ public class TicketController {
 	 * Responds to the GET request for all {@linkplain Ticket tickets} whose movie title
 	 * contains the given text.
 	 *
-	 * @param text A String which contains the text used to find the {@link Ticket ticket} to a movie
+	 * @param movie A String which contains the text used to find the {@link Ticket ticket} to a movie
 	 * @return ResponseEntity with array of {@link Ticket ticket} objects (may be empty) and
 	 * HTTP status of OK<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
@@ -100,10 +100,10 @@ public class TicketController {
 	 * GET http://localhost:8080/tickets/?name=ma
 	 */
 	@GetMapping("/")
-	public ResponseEntity<Ticket[]> searchTickets (@RequestParam String text) {
-		LOG.info("GET /tickets/?name=" + text);
+	public ResponseEntity<Ticket[]> searchTickets (@RequestParam String movie) {
+		LOG.info("GET /tickets/?movie=" + movie);
 		try {
-			Ticket[] foundTickets = ticketDao.findTickets(text);
+			Ticket[] foundTickets = ticketDao.findTickets(movie);
 			/*
 			 * If ticketDao.findTickets() fails, an IOException is thrown. Assume function
 			 * passed successfully and return the Ticket array even if it is empty. Which

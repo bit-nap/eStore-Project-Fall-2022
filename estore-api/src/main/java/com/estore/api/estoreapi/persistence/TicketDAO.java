@@ -53,7 +53,6 @@ public interface TicketDAO {
 	 * Updates and saves a {@linkplain Ticket ticket}.
 	 *
 	 * @param ticket {@link Ticket ticket} object to be updated and saved
-	 * @param String {String title} new title of the movie 
 	 * @return updated {@link Ticket ticket} if successful, null if
 	 * {@link Ticket ticket} could not be found
 	 * @throws IOException if underlying storage cannot be accessed

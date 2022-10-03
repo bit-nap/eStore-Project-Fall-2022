@@ -58,7 +58,7 @@ public interface TicketDAO {
 	 * {@link Ticket ticket} could not be found
 	 * @throws IOException if underlying storage cannot be accessed
 	 */
-	Ticket updateTicket (Ticket ticket, String title) throws IOException;
+	Ticket updateTicket (Ticket ticket) throws IOException;
 
 	/**
 	 * Deletes a {@linkplain Ticket ticket} with the given id.

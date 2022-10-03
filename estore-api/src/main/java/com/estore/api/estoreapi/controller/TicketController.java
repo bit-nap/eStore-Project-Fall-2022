@@ -151,11 +151,14 @@ public class TicketController {
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
 	@PutMapping("")
-	public ResponseEntity<Ticket> updateTicket (@RequestBody Ticket ticket, String title) {
+	public ResponseEntity<Ticket> updateTicket (@RequestBody Ticket ticket) {
 		LOG.info("PUT /tickets/" + ticket);
 		try {
-			if (ticket != null) {
-				ticket.setMovie(title);
+			Ticket _ticket = ticketDao.getTicket(ticket.getId());
+
+			if (_ticket != null) {
+				ticket = ticketDao.updateTicket(ticket);
+
 				return new ResponseEntity<>(ticket, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);

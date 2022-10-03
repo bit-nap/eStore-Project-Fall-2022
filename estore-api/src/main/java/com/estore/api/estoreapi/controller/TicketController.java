@@ -154,12 +154,9 @@ public class TicketController {
 	public ResponseEntity<Ticket> updateTicket (@RequestBody Ticket ticket) {
 		LOG.info("PUT /tickets/" + ticket);
 		try {
-			Ticket _ticket = ticketDao.getTicket(ticket.getId());
-
+			Ticket _ticket = ticketDao.updateTicket(ticket);
 			if (_ticket != null) {
-				ticket = ticketDao.updateTicket(ticket);
-
-				return new ResponseEntity<Ticket>(ticket, HttpStatus.OK);
+				return new ResponseEntity<Ticket>(_ticket, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}

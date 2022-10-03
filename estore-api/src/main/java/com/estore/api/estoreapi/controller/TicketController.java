@@ -145,7 +145,6 @@ public class TicketController {
 	 * Updates the {@linkplain Ticket ticket} with the provided {@linkplain Ticket ticket} object, if it exists.
 	 *
 	 * @param ticket The {@link Ticket ticket} to update
-	 * @param String The title of the movie to update 
 	 * @return ResponseEntity with updated {@link Ticket ticket} object and HTTP status of OK if updated<br>
 	 * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise

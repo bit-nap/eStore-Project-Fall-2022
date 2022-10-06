@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * The unit test suite for the Screening class
  *
- * @author SWEN Faculty
+ * @author Group 3C, The Code Monkeys
  */
 @Tag("Model-tier")
 public class ScreeningTest {

@@ -16,7 +16,7 @@ import static org.mockito.Mockito.*;
 /**
  * Test the Screening File DAO class
  *
- * @author SWEN Faculty
+ * @author Group 3C, The Code Monkeys
  */
 @Tag("Persistence-tier")
 public class ScreeningJSONDAOTest {

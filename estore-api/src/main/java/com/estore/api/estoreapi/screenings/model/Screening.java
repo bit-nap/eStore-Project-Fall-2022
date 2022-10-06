@@ -1,4 +1,4 @@
-package com.estore.api.estoreapi.model;
+package com.estore.api.estoreapi.screenings.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -11,10 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Handles the REST API requests for a Movie object.
- * <p>
- * {@literal @}RestController Spring annotation identifies this class as a REST API
- * method handler to the Spring framework
+ * Handles the REST API requests for a Movie object.<p>
+ * {@literal @}RestController Spring annotation identifies this class as a REST API method handler to the Spring framework
  *
  * @author Group 3C, The Code Monkeys
  */
@@ -30,8 +28,7 @@ public class MovieController {
 	/**
 	 * Creates a REST API controller to respond to Movie requests.
 	 *
-	 * @param movieDao The {@link MovieDAO Movie Data Access Object} to perform CRUD operations
-	 *                 <br>
+	 * @param movieDao The {@link MovieDAO Movie Data Access Object} to perform CRUD operations<br>
 	 *                 This dependency is injected by the Spring Framework
 	 */
 	public MovieController (MovieDAO movieDao) {
@@ -64,8 +61,7 @@ public class MovieController {
 	}
 
 	/**
-	 * Updates the {@linkplain Movie movie} with the provided {@linkplain Movie movie} object, if it
-	 * exists.
+	 * Updates the {@linkplain Movie movie} with the provided {@linkplain Movie movie} object, if it exists.
 	 *
 	 * @param movie The {@link Movie movie} to update
 	 * @return ResponseEntity with updated {@link Movie movie} object and HTTP status of OK if updated<br>
@@ -139,8 +135,7 @@ public class MovieController {
 	/**
 	 * Responds to the GET request for all {@linkplain Movie movies}.
 	 *
-	 * @return ResponseEntity with array of {@link Movie movie} objects (may be empty) and
-	 * HTTP status of OK<br>
+	 * @return ResponseEntity with array of {@link Movie movie} objects (may be empty) and HTTP status of OK<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
 	@GetMapping("")
@@ -161,12 +156,10 @@ public class MovieController {
 	}
 
 	/**
-	 * Responds to the GET request for all {@linkplain Movie movies} whose movie title
-	 * contains the given text.
+	 * Responds to the GET request for all {@linkplain Movie movies} whose movie title contains the given text.
 	 *
 	 * @param title A String which contains the text used to find the {@link Movie movie} to a movie
-	 * @return ResponseEntity with array of {@link Movie movie} objects (may be empty) and
-	 * HTTP status of OK<br>
+	 * @return ResponseEntity with array of {@link Movie movie} objects (may be empty) and HTTP status of OK<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
 	@GetMapping("/")

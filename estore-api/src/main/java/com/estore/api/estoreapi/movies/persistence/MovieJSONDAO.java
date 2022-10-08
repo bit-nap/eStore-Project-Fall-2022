@@ -13,8 +13,7 @@ import java.util.TreeMap;
 import java.util.logging.Logger;
 
 /**
- * Implements the functionality for JSON file-based persistence for Movies.
- * <p>
+ * Implements the functionality for JSON file-based persistence for Movies.<p>
  * {@literal @}Component Spring annotation instantiates a single instance of this
  * class and injects the instance into other classes as needed
  *
@@ -71,8 +70,7 @@ public class MovieJSONDAO implements MovieDAO {
 	 * Generates an array of {@linkplain Movie movies} from the tree map for any
 	 * {@linkplain Movie movies} that contains the movie title specified by text argument.
 	 *
-	 * @param text The text to find within a {@link Movie movies} movie
-	 *             <p>
+	 * @param text The text to find within a {@link Movie movies} movie<p>
 	 *             If text is null, the array contains all of the {@linkplain Movie movies} in the tree map.
 	 * @return The array of {@link Movie movies}, may be empty
 	 */
@@ -107,8 +105,7 @@ public class MovieJSONDAO implements MovieDAO {
 	}
 
 	/**
-	 * Loads {@linkplain Movie movies} from the JSON file into the map.
-	 * <br>
+	 * Loads {@linkplain Movie movies} from the JSON file into the map.<br>
 	 * Also sets this object's nextId to one more than the greatest id found in the file.
 	 *
 	 * @return true if the file was read successfully

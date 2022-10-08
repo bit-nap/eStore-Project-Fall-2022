@@ -13,8 +13,7 @@ public interface MovieDAO {
 	/**
 	 * Creates and saves a {@linkplain Movie Movie}.
 	 *
-	 * @param Movie {@linkplain Movie Movie} object to be created and saved
-	 *              <br>
+	 * @param Movie {@linkplain Movie Movie} object to be created and saved<br>
 	 *              The id of the Movie object is ignored and a new unique id is assigned
 	 * @return new {@link Movie Movie} if successful, false otherwise
 	 * @throws IOException if an issue with underlying storage
@@ -35,8 +34,7 @@ public interface MovieDAO {
 	 * Deletes a {@linkplain Movie Movie} with the given id.
 	 *
 	 * @param id The id of the {@link Movie Movie}
-	 * @return true if the {@link Movie Movie} was deleted
-	 * <br>
+	 * @return true if the {@link Movie Movie} was deleted<br>
 	 * false if Movie with the given id does not exist
 	 * @throws IOException if underlying storage cannot be accessed
 	 */
@@ -46,8 +44,7 @@ public interface MovieDAO {
 	 * Retrieves a {@linkplain Movie Movie} with the given id.
 	 *
 	 * @param id The id of the {@link Movie Movie} to get.
-	 * @return a {@link Movie Movie} object with the matching id.
-	 * <br>
+	 * @return a {@link Movie Movie} object with the matching id.<br>
 	 * null if no {@link Movie Movie} with a matching id is found.
 	 * @throws IOException if an issue with underlying storage
 	 */

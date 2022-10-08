@@ -2,71 +2,71 @@
 	{
 		"id": 1,
 		"title": "The Terminator",
-		"mpaRating": "R",
 		"runtime": "1:47",
+		"mpaRating": "R",
 		"year": 1984
 	},
 	{
 		"id": 2,
 		"title": "Terminator 2: Judgment Day",
-		"mpaRating": "R",
 		"runtime": "2:32",
+		"mpaRating": "R",
 		"year": 1991
 	},
 	{
 		"id": 3,
 		"title": "Rambo: First Blood",
-		"mpaRating": "R",
 		"runtime": "1:33",
+		"mpaRating": "R",
 		"year": 1982
 	},
 	{
 		"id": 4,
 		"title": "Ghostbusters",
-		"mpaRating": "PG",
 		"runtime": "1:45",
+		"mpaRating": "PG",
 		"year": 1984
 	},
 	{
 		"id": 5,
 		"title": "Back to the Future",
-		"mpaRating": "PG",
 		"runtime": "1:56",
+		"mpaRating": "PG",
 		"year": 1985
 	},
 	{
 		"id": 6,
 		"title": "The Breakfast Club",
-		"mpaRating": "R",
 		"runtime": "1:37",
+		"mpaRating": "R",
 		"year": 1985
 	},
 	{
 		"id": 7,
 		"title": "Rocky",
-		"mpaRating": "PG",
 		"runtime": "1:59",
+		"mpaRating": "PG",
 		"year": 1976
 	},
 	{
 		"id": 8,
 		"title": "Rocky II",
-		"mpaRating": "PG",
 		"runtime": "1:59",
+		"mpaRating": "PG",
 		"year": 1979
 	},
 	{
 		"id": 9,
 		"title": "Rocky III",
-		"mpaRating": "PG",
 		"runtime": "1:39",
+		"mpaRating": "PG",
 		"year": 1982
 	},
 	{
 		"id": 10,
 		"title": "Rocky IV",
-		"mpaRating": "PG",
 		"runtime": "1:31",
+		"mpaRating": "PG",
 		"year": 1985
 	}
 ]

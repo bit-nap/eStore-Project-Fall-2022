@@ -97,9 +97,8 @@ public class MovieJSONDAO implements MovieDAO {
 	private boolean save () throws IOException {
 		Movie[] movieArray = getMoviesArray();
 
-		// Serializes the Java Objects to JSON objects into the file
-		// writeValue will throw an IOException if there is an issue
-		// with the file or reading from the file
+		// Serializes the Java Objects to JSON objects into the file,
+		// writeValue will throw an IOException if there is an issue with or reading from the file
 		objectMapper.writeValue(new File(filename), movieArray);
 		return true;
 	}
@@ -115,9 +114,8 @@ public class MovieJSONDAO implements MovieDAO {
 		movies = new TreeMap<>();
 		nextId = 0;
 
-		// Deserializes the JSON objects from the file into an array of movies
-		// readValue will throw an IOException if there's an issue with the file
-		// or reading from the file
+		// Deserializes the JSON objects from the file into an array of movies,
+		// readValue will throw an IOException if there's an issue with or reading from the file
 		Movie[] movieArray = objectMapper.readValue(new File(filename), Movie[].class);
 
 		// Add each movie to the tree map and keep track of the greatest id
@@ -138,8 +136,7 @@ public class MovieJSONDAO implements MovieDAO {
 	@Override
 	public Movie createMovie (Movie movie) throws IOException {
 		synchronized (movies) {
-			// We create a new movie object because the id field is immutable,
-			// and we need to assign the next unique id
+			// We create a new movie object because the id field is immutable, and we need to assign the next unique id
 			Movie newMovie = new Movie(nextId(), movie.getTitle(), movie.getRuntime(), movie.getMpaRating(), movie.getYear());
 			movies.put(newMovie.getId(), newMovie);
 			save(); // may throw an IOException

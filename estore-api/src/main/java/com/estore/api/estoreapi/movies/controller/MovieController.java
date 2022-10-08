@@ -72,9 +72,9 @@ public class MovieController {
 	public ResponseEntity<Movie> updateMovie (@RequestBody Movie movie) {
 		LOG.info("PUT /movies/" + movie);
 		try {
-			Movie _movie = movieDao.updateMovie(movie);
-			if (_movie != null) {
-				return new ResponseEntity<Movie>(_movie, HttpStatus.OK);
+			Movie updatedMovie = movieDao.updateMovie(movie);
+			if (updatedMovie != null) {
+				return new ResponseEntity<>(updatedMovie, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
@@ -122,9 +122,9 @@ public class MovieController {
 			// Try to get the movie based on the id entered by the user
 			Movie movie = movieDao.getMovie(id);
 			if (movie != null) {
-				return new ResponseEntity<Movie>(movie, HttpStatus.OK);
+				return new ResponseEntity<>(movie, HttpStatus.OK);
 			} else {
-				return new ResponseEntity<Movie>(HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());
@@ -145,7 +145,7 @@ public class MovieController {
 			// Try and get a list of all the movies from the system
 			Movie[] movies = movieDao.getMovies();
 			if (movies != null) {
-				return new ResponseEntity<Movie[]>(movies, HttpStatus.OK);
+				return new ResponseEntity<>(movies, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
@@ -172,7 +172,7 @@ public class MovieController {
 			 * passed successfully and return the Movie array even if it is empty. Which
 			 * returns a null list
 			 */
-			return new ResponseEntity<Movie[]>(foundMovies, HttpStatus.OK);
+			return new ResponseEntity<>(foundMovies, HttpStatus.OK);
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

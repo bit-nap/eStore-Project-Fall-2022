@@ -74,13 +74,13 @@ public class MovieJSONDAO implements MovieDAO {
 	 * @param text The text to find within a {@link Movie movies} movie
 	 *             <p>
 	 *             If text is null, the array contains all of the {@linkplain Movie movies} in the tree map.
-	 * @return The array of {@link Novie movies}, may be empty
+	 * @return The array of {@link Movie movies}, may be empty
 	 */
 	private Movie[] getMoviesArray (String text) {
 		ArrayList<Movie> movieArrayList = new ArrayList<>();
 
 		for (Movie movie : movies.values()) {
-			if (text == null || movie.getMovie().contains(text)) {
+			if (text == null || movie.getTitle().contains(text)) {
 				movieArrayList.add(movie);
 			}
 		}
@@ -177,7 +177,7 @@ public class MovieJSONDAO implements MovieDAO {
 		synchronized (movies) {
 			// We create a new movie object because the id field is immutable,
 			// and we need to assign the next unique id
-			Movie newMovie = new Movie(nextId(), movie.getMovie());
+			Movie newMovie = new Movie(nextId(), movie.getTitle());
 			movies.put(newMovie.getId(), newMovie);
 			save(); // may throw an IOException
 			return newMovie;

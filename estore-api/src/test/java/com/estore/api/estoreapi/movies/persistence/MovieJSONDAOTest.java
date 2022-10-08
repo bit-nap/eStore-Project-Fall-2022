@@ -103,7 +103,7 @@ public class MovieJSONDAOTest {
 		assertNotNull(result);
 		Movie actual = heroFileDAO.getMovie(hero.getId());
 		assertEquals(actual.getId(), hero.getId());
-		assertEquals(actual.getMovie(), hero.getMovie());
+		assertEquals(actual.getTitle(), hero.getTitle());
 	}
 
 	@Test

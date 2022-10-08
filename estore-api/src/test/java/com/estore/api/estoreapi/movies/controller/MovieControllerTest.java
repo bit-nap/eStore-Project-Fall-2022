@@ -159,7 +159,7 @@ public class MovieControllerTest {
 		// when updateMovie is called, return true simulating successful update and save
 		when(mockMovieDao.updateMovie(movie)).thenReturn(movie);
 		ResponseEntity<Movie> response = movieController.updateMovie(movie);
-		movie.setMovie("Star Wars V: The Empire Strikes Back");
+		movie.setTitle("Star Wars V: The Empire Strikes Back");
 
 		// Invoke
 		response = movieController.updateMovie(movie);

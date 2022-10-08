@@ -14,27 +14,27 @@ public class Movie {
 	private static final Logger LOG = Logger.getLogger(Movie.class.getName());
 
 	// Package private for tests - Prof
-	static final String STRING_FORMAT = "Movie [id=%d, movie=%s]";
+	static final String STRING_FORMAT = "Movie [id=%d, title=%s]";
 
 	/** The id of this movie. */
 	@JsonProperty("id") private int id;
-	/** The name of the movie. */
-	@JsonProperty("movie") private String movie;
+	/** The title of the movie. */
+	@JsonProperty("title") private String title;
 
 	/**
-	 * Create a Movie object with the given id and movie name.
+	 * Create a Movie object with the given id and movie title.
 	 *
 	 * @param id    The id of this movie.
-	 * @param movie The name of the movie.
+	 * @param title The title of the movie.
 	 *              <p>
 	 *              {@literal @}JsonProperty is used in serialization and deserialization
 	 *              of the JSON object to the Java object in mapping the fields.  If a field
 	 *              is not provided in the JSON object, the Java field gets the default Java
 	 *              value, i.e. 0 for int
 	 */
-	public Movie (@JsonProperty("id") int id, @JsonProperty("movie") String movie) {
+	public Movie (@JsonProperty("id") int id, @JsonProperty("title") String title) {
 		this.id = id;
-		this.movie = movie;
+		this.title = title;
 	}
 
 	/**
@@ -45,19 +45,19 @@ public class Movie {
 	}
 
 	/**
-	 * Set the name of the movie.
+	 * Set the title of the movie.
 	 *
-	 * @param movie The name of the movie.
+	 * @param title The title of the movie.
 	 */
-	public void setMovie (String movie) {
-		this.movie = movie;
+	public void setTitle (String title) {
+		this.title = title;
 	}
 
 	/**
-	 * @return The name of the movie.
+	 * @return The title of the movie.
 	 */
-	public String getMovie () {
-		return movie;
+	public String getTitle () {
+		return title;
 	}
 
 	/**
@@ -65,6 +65,6 @@ public class Movie {
 	 */
 	@Override
 	public String toString () {
-		return String.format(STRING_FORMAT, id, movie);
+		return String.format(STRING_FORMAT, id, title);
 	}
 }

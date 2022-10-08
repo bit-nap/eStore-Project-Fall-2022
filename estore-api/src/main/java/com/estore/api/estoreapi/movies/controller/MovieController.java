@@ -31,8 +31,8 @@ public class MovieController {
 	 * Creates a REST API controller to respond to Movie requests.
 	 *
 	 * @param movieDao The {@link MovieDAO Movie Data Access Object} to perform CRUD operations
-	 *                     <br>
-	 *                     This dependency is injected by the Spring Framework
+	 *                 <br>
+	 *                 This dependency is injected by the Spring Framework
 	 */
 	public MovieController (MovieDAO movieDao) {
 		this.movieDao = movieDao;
@@ -100,13 +100,13 @@ public class MovieController {
 	public ResponseEntity<Movie[]> searchMovies (@RequestParam String title) {
 		LOG.info("GET /movies/?title=" + title);
 		try {
-			Movie[] foundmovies = movieDao.findMovies(title);
+			Movie[] foundMovies = movieDao.findMovies(title);
 			/*
 			 * If movieDao.findMovies() fails, an IOException is thrown. Assume function
 			 * passed successfully and return the movie array even if it is empty. Which
 			 * returns a null list
 			 */
-			return new ResponseEntity<Movie[]>(foundmovies, HttpStatus.OK);
+			return new ResponseEntity<Movie[]>(foundMovies, HttpStatus.OK);
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -126,9 +126,9 @@ public class MovieController {
 		LOG.info("POST /movies/" + movie);
 
 		try {
-			Movie newmovie = movieDao.createMovie(movie);
-			if (newmovie != null) {
-				return new ResponseEntity<>(newmovie, HttpStatus.CREATED);
+			Movie newMovie = movieDao.createMovie(movie);
+			if (newMovie != null) {
+				return new ResponseEntity<>(newMovie, HttpStatus.CREATED);
 			} else {
 				return new ResponseEntity<>(HttpStatus.CONFLICT);
 			}

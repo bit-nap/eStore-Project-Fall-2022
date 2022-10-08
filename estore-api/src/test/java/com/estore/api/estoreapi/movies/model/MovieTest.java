@@ -23,7 +23,7 @@ public class MovieTest {
 
 		// Analyze
 		assertEquals(expected_id, movie.getId());
-		assertEquals(expected_name, movie.getMovie());
+		assertEquals(expected_name, movie.getTitle());
 	}
 
 	@Test
@@ -36,10 +36,10 @@ public class MovieTest {
 		String expected_name = "Star Wars V";
 
 		// Invoke
-		movie.setMovie(expected_name);
+		movie.setTitle(expected_name);
 
 		// Analyze
-		assertEquals(expected_name, movie.getMovie());
+		assertEquals(expected_name, movie.getTitle());
 	}
 
 	@Test

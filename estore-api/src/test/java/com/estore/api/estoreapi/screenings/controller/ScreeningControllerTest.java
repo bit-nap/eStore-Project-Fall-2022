@@ -156,8 +156,7 @@ public class ScreeningControllerTest {
 	public void testUpdateScreening () throws IOException {
 		// Setup
 		Screening screening = new Screening(99, "Star Wars IV: A New Hope");
-		// when updateScreening is called, return true simulating successful
-		// update and save
+		// when updateScreening is called, return true simulating successful update and save
 		when(mockScreeningDao.updateScreening(screening)).thenReturn(screening);
 		ResponseEntity<Screening> response = screeningController.updateScreening(screening);
 		screening.setMovie("Star Wars V: The Empire Strikes Back");

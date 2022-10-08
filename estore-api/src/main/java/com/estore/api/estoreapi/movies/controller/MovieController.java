@@ -1,7 +1,7 @@
-package com.estore.api.estoreapi.screenings.controller;
+package com.estore.api.estoreapi.movies.controller;
 
-import com.estore.api.estoreapi.screenings.model.Screening;
-import com.estore.api.estoreapi.screenings.persistence.ScreeningDAO;
+import com.estore.api.estoreapi.movies.model.Movie;
+import com.estore.api.estoreapi.movies.persistence.MovieDAO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Handles the REST API requests for a Screening object.
+ * Handles the REST API requests for a Movie object.
  * <p>
  * {@literal @}RestController Spring annotation identifies this class as a REST API
  * method handler to the Spring framework
@@ -21,41 +21,41 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("movies")
-public class ScreeningController {
+public class MovieController {
 	/** TODO: Add description of the purpose of Logger, once it's actually used. */
-	private static final Logger LOG = Logger.getLogger(ScreeningController.class.getName());
-	/** The ScreeningDAO object this Controller interacts with to get Screening objects. */
-	private ScreeningDAO screeningDao;
+	private static final Logger LOG = Logger.getLogger(MovieController.class.getName());
+	/** The MovieDAO object this Controller interacts with to get Movie objects. */
+	private MovieDAO movieDao;
 
 	/**
-	 * Creates a REST API controller to respond to Screening requests.
+	 * Creates a REST API controller to respond to Movie requests.
 	 *
-	 * @param screeningDAO The {@link ScreeningDAO Screening Data Access Object} to perform CRUD operations
+	 * @param movieDao The {@link MovieDAO Movie Data Access Object} to perform CRUD operations
 	 *                     <br>
 	 *                     This dependency is injected by the Spring Framework
 	 */
-	public ScreeningController (ScreeningDAO screeningDAO) {
-		this.screeningDao = screeningDAO;
+	public MovieController (MovieDAO movieDao) {
+		this.movieDao = movieDao;
 	}
 
 	/**
-	 * Responds to the GET request for a {@linkplain Screening screening} with the given id.
+	 * Responds to the GET request for a {@linkplain Movie movie} with the given id.
 	 *
-	 * @param id The id used to locate a {@link Screening screening}
-	 * @return ResponseEntity with {@link Screening screening} object and HTTP status of OK if found<br>
+	 * @param id The id used to locate a {@link Movie movie}
+	 * @return ResponseEntity with {@link Movie movie} object and HTTP status of OK if found<br>
 	 * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
 	@GetMapping("/{id}")
-	public ResponseEntity<Screening> getScreening (@PathVariable int id) {
+	public ResponseEntity<Movie> getMovie (@PathVariable int id) {
 		LOG.info("GET /movies/" + id);
 		try {
-			// Try to get the screening based on the id entered by the user
-			Screening screening = screeningDao.getScreening(id);
-			if (screening != null) {
-				return new ResponseEntity<Screening>(screening, HttpStatus.OK);
+			// Try to get the movie based on the id entered by the user
+			Movie movie = movieDao.getMovie(id);
+			if (movie != null) {
+				return new ResponseEntity<Movie>(movie, HttpStatus.OK);
 			} else {
-				return new ResponseEntity<Screening>(HttpStatus.NOT_FOUND);
+				return new ResponseEntity<Movie>(HttpStatus.NOT_FOUND);
 			}
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());
@@ -64,20 +64,20 @@ public class ScreeningController {
 	}
 
 	/**
-	 * Responds to the GET request for all {@linkplain Screening screenings}.
+	 * Responds to the GET request for all {@linkplain Movie movies}.
 	 *
-	 * @return ResponseEntity with array of {@link Screening screening} objects (may be empty) and
+	 * @return ResponseEntity with array of {@link Movie movie} objects (may be empty) and
 	 * HTTP status of OK<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
 	@GetMapping("")
-	public ResponseEntity<Screening[]> getScreening () {
+	public ResponseEntity<Movie[]> getMovie () {
 		LOG.info("GET /movies/");
 		try {
-			// Try and get a list of all the screenings from the system
-			Screening[] screenings = screeningDao.getScreenings();
-			if (screenings != null) {
-				return new ResponseEntity<Screening[]>(screenings, HttpStatus.OK);
+			// Try and get a list of all the movies from the system
+			Movie[] movies = movieDao.getMovies();
+			if (movies != null) {
+				return new ResponseEntity<Movie[]>(movies, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
@@ -88,25 +88,25 @@ public class ScreeningController {
 	}
 
 	/**
-	 * Responds to the GET request for all {@linkplain Screening screenings} whose movie title
+	 * Responds to the GET request for all {@linkplain Movie movies} whose movie title
 	 * contains the given text.
 	 *
-	 * @param title A String which contains the text used to find the {@link Screening screening} to a movie
-	 * @return ResponseEntity with array of {@link Screening screening} objects (may be empty) and
+	 * @param title A String which contains the text used to find the {@link Movie movie} to a movie
+	 * @return ResponseEntity with array of {@link Movie movie} objects (may be empty) and
 	 * HTTP status of OK<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
 	@GetMapping("/")
-	public ResponseEntity<Screening[]> searchScreenings (@RequestParam String title) {
+	public ResponseEntity<Movie[]> searchMovies (@RequestParam String title) {
 		LOG.info("GET /movies/?title=" + title);
 		try {
-			Screening[] foundScreenings = screeningDao.findScreenings(title);
+			Movie[] foundmovies = movieDao.findMovies(title);
 			/*
-			 * If screeningDao.findScreenings() fails, an IOException is thrown. Assume function
-			 * passed successfully and return the Screening array even if it is empty. Which
+			 * If movieDao.findMovies() fails, an IOException is thrown. Assume function
+			 * passed successfully and return the movie array even if it is empty. Which
 			 * returns a null list
 			 */
-			return new ResponseEntity<Screening[]>(foundScreenings, HttpStatus.OK);
+			return new ResponseEntity<Movie[]>(foundmovies, HttpStatus.OK);
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -114,21 +114,21 @@ public class ScreeningController {
 	}
 
 	/**
-	 * Creates a {@linkplain Screening screening} with the provided screening object.
+	 * Creates a {@linkplain Movie movie} with the provided movie object.
 	 *
-	 * @param screening The {@link Screening screening} to create
-	 * @return ResponseEntity with created {@link Screening screening} object and HTTP status of CREATED<br>
-	 * ResponseEntity with HTTP status of CONFLICT if {@link Screening screening} object already exists<br>
+	 * @param movie The {@link Movie movie} to create
+	 * @return ResponseEntity with created {@link Movie movie} object and HTTP status of CREATED<br>
+	 * ResponseEntity with HTTP status of CONFLICT if {@link Movie movie} object already exists<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
 	@PostMapping("")
-	public ResponseEntity<Screening> createScreening (@RequestBody Screening screening) {
-		LOG.info("POST /movies/" + screening);
+	public ResponseEntity<Movie> createMovie (@RequestBody Movie movie) {
+		LOG.info("POST /movies/" + movie);
 
 		try {
-			Screening newScreening = screeningDao.createScreening(screening);
-			if (newScreening != null) {
-				return new ResponseEntity<>(newScreening, HttpStatus.CREATED);
+			Movie newmovie = movieDao.createMovie(movie);
+			if (newmovie != null) {
+				return new ResponseEntity<>(newmovie, HttpStatus.CREATED);
 			} else {
 				return new ResponseEntity<>(HttpStatus.CONFLICT);
 			}
@@ -139,21 +139,21 @@ public class ScreeningController {
 	}
 
 	/**
-	 * Updates the {@linkplain Screening screening} with the provided {@linkplain Screening screening} object, if it
+	 * Updates the {@linkplain Movie movie} with the provided {@linkplain Movie movie} object, if it
 	 * exists.
 	 *
-	 * @param screening The {@link Screening screening} to update
-	 * @return ResponseEntity with updated {@link Screening screening} object and HTTP status of OK if updated<br>
+	 * @param movie The {@link Movie movie} to update
+	 * @return ResponseEntity with updated {@link Movie movie} object and HTTP status of OK if updated<br>
 	 * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
 	@PutMapping("")
-	public ResponseEntity<Screening> updateScreening (@RequestBody Screening screening) {
-		LOG.info("PUT /movies/" + screening);
+	public ResponseEntity<Movie> updateMovie (@RequestBody Movie movie) {
+		LOG.info("PUT /movies/" + movie);
 		try {
-			Screening _screening = screeningDao.updateScreening(screening);
-			if (_screening != null) {
-				return new ResponseEntity<Screening>(_screening, HttpStatus.OK);
+			Movie _movie = movieDao.updateMovie(movie);
+			if (_movie != null) {
+				return new ResponseEntity<Movie>(_movie, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
@@ -164,18 +164,18 @@ public class ScreeningController {
 	}
 
 	/**
-	 * Deletes a {@linkplain Screening screening} with the given id.
+	 * Deletes a {@linkplain Movie movie} with the given id.
 	 *
-	 * @param id The id of the {@link Screening screening} to deleted
+	 * @param id The id of the {@link Movie movie} to deleted
 	 * @return ResponseEntity HTTP status of OK if deleted<br>
 	 * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Screening> deleteScreening (@PathVariable int id) {
+	public ResponseEntity<Movie> deleteMovie (@PathVariable int id) {
 		LOG.info("DELETE /movies/" + id);
 		try {
-			if (screeningDao.deleteScreening(id)) {
+			if (movieDao.deleteMovie(id)) {
 				return new ResponseEntity<>(HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);

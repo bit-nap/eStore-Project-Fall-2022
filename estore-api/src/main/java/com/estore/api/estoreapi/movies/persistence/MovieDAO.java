@@ -1,72 +1,72 @@
-package com.estore.api.estoreapi.screenings.persistence;
+package com.estore.api.estoreapi.movies.persistence;
 
-import com.estore.api.estoreapi.screenings.model.Screening;
+import com.estore.api.estoreapi.movies.model.Movie;
 
 import java.io.IOException;
 
 /**
- * Defines the interface for screening object persistence.
+ * Defines the interface for movie object persistence.
  *
  * @author Group 3C, The Code Monkeys
  */
-public interface ScreeningDAO {
+public interface MovieDAO {
 	/**
-	 * Retrieves all {@linkplain Screening screenings}.
+	 * Retrieves all {@linkplain Movie movie}.
 	 *
-	 * @return An array of {@link Screening screening} objects, may be empty
+	 * @return An array of {@link Movie movie} objects, may be empty
 	 * @throws IOException if an issue with underlying storage
 	 */
-	Screening[] getScreenings () throws IOException;
+	Movie[] getMovies () throws IOException;
 
 	/**
-	 * Finds all {@linkplain Screening screenings} whose movie title contains the given text.
+	 * Finds all {@linkplain Movie movies} whose movie title contains the given text.
 	 *
 	 * @param text The text to match against
-	 * @return An array of {@link Screening screenings} whose movie title contains the given text, may be empty
+	 * @return An array of {@link Movie movies} whose movie title contains the given text, may be empty
 	 * @throws IOException if an issue with underlying storage
 	 */
-	Screening[] findScreenings (String text) throws IOException;
+	Movie[] findMovies (String text) throws IOException;
 
 	/**
-	 * Retrieves a {@linkplain Screening screening} with the given id.
+	 * Retrieves a {@linkplain Movie Movie} with the given id.
 	 *
-	 * @param id The id of the {@link Screening screening} to get.
-	 * @return a {@link Screening screening} object with the matching id.
+	 * @param id The id of the {@link Movie Movie} to get.
+	 * @return a {@link Movie Movie} object with the matching id.
 	 * <br>
-	 * null if no {@link Screening screening} with a matching id is found.
+	 * null if no {@link Movie Movie} with a matching id is found.
 	 * @throws IOException if an issue with underlying storage
 	 */
-	Screening getScreening (int id) throws IOException;
+	Movie getMovie (int id) throws IOException;
 
 	/**
-	 * Creates and saves a {@linkplain Screening screening}.
+	 * Creates and saves a {@linkplain Movie Movie}.
 	 *
-	 * @param screening {@linkplain Screening screening} object to be created and saved
+	 * @param Movie {@linkplain Movie Movie} object to be created and saved
 	 *                  <br>
-	 *                  The id of the screening object is ignored and a new unique id is assigned
-	 * @return new {@link Screening screening} if successful, false otherwise
+	 *                  The id of the Movie object is ignored and a new unique id is assigned
+	 * @return new {@link Movie Movie} if successful, false otherwise
 	 * @throws IOException if an issue with underlying storage
 	 */
-	Screening createScreening (Screening screening) throws IOException;
+	Movie createMovie (Movie Movie) throws IOException;
 
 	/**
-	 * Updates and saves a {@linkplain Screening screening}.
+	 * Updates and saves a {@linkplain Movie Movie}.
 	 *
-	 * @param screening {@link Screening screening} object to be updated and saved
-	 * @return updated {@link Screening screening} if successful, null if
-	 * {@link Screening screening} could not be found
+	 * @param Movie {@link Movie Movie} object to be updated and saved
+	 * @return updated {@link Movie Movie} if successful, null if
+	 * {@link Movie Movie} could not be found
 	 * @throws IOException if underlying storage cannot be accessed
 	 */
-	Screening updateScreening (Screening screening) throws IOException;
+	Movie updateMovie (Movie Movie) throws IOException;
 
 	/**
-	 * Deletes a {@linkplain Screening screening} with the given id.
+	 * Deletes a {@linkplain Movie Movie} with the given id.
 	 *
-	 * @param id The id of the {@link Screening screening}
-	 * @return true if the {@link Screening screening} was deleted
+	 * @param id The id of the {@link Movie Movie}
+	 * @return true if the {@link Movie Movie} was deleted
 	 * <br>
-	 * false if screening with the given id does not exist
+	 * false if Movie with the given id does not exist
 	 * @throws IOException if underlying storage cannot be accessed
 	 */
-	boolean deleteScreening (int id) throws IOException;
+	boolean deleteMovie (int id) throws IOException;
 }

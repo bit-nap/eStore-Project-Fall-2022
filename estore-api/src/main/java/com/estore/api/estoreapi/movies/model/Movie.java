@@ -1,64 +1,60 @@
-package com.estore.api.estoreapi.screenings.model;
+package com.estore.api.estoreapi.movies.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.logging.Logger;
 
 /**
- * Represents a screening of a movie.
+ * Represents a movie.
  *
  * @author Group 3C, The Code Monkeys
  */
-public class Screening {
+public class Movie {
 	/** TODO: Add description of the purpose of Logger, once it's actually used. */
-	private static final Logger LOG = Logger.getLogger(Screening.class.getName());
+	private static final Logger LOG = Logger.getLogger(Movie.class.getName());
 
 	// Package private for tests - Prof
-	static final String STRING_FORMAT = "Screening [id=%d, movie=%s]";
+	static final String STRING_FORMAT = "Movie [id=%d, movie=%s]";
 
-	/** The id of this screening. */
+	/** The id of this movie. */
 	@JsonProperty("id") private int id;
-	/** The name of the movie being shown at this screening. */
+	/** The name of the movie. */
 	@JsonProperty("movie") private String movie;
 
 	/**
-	 * Create a Screening object with the given id and movie name.
+	 * Create a Movie object with the given id and movie name.
 	 *
-	 * @param id    The id of this screening.
-	 * @param movie The name of the movie being shown at this screening.
+	 * @param id    The id of this movie.
+	 * @param movie The name of the movie.
 	 *              <p>
 	 *              {@literal @}JsonProperty is used in serialization and deserialization
 	 *              of the JSON object to the Java object in mapping the fields.  If a field
 	 *              is not provided in the JSON object, the Java field gets the default Java
 	 *              value, i.e. 0 for int
 	 */
-	public Screening (@JsonProperty("id") int id, @JsonProperty("movie") String movie) {
+	public Movie (@JsonProperty("id") int id, @JsonProperty("movie") String movie) {
 		this.id = id;
 		this.movie = movie;
 	}
 
 	/**
-	 * @return The id of this screening.
+	 * @return The id of this movie.
 	 */
 	public int getId () {
 		return id;
 	}
 
 	/**
-	 * Set the name of the movie being shown at this screening.
-	 * <p>
-	 * Necessary for JSON object to perform Java object deserialization.
-	 * <p>
-	 * I think this is what was originally meant. - Oscar
+	 * Set the name of the movie.
 	 *
-	 * @param movie The name of the movie being shown at this screening.
+	 * @param movie The name of the movie.
 	 */
 	public void setMovie (String movie) {
 		this.movie = movie;
 	}
 
 	/**
-	 * @return The name of the movie being shown at this screening.
+	 * @return The name of the movie.
 	 */
 	public String getMovie () {
 		return movie;

@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 
 @RestController
-@RequestMapping("movies")
+@RequestMapping("screenings")
 public class ScreeningController {
 	/** TODO: Add description of the purpose of Logger, once it's actually used. */
 	private static final Logger LOG = Logger.getLogger(ScreeningController.class.getName());
@@ -48,7 +48,7 @@ public class ScreeningController {
 	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<Screening> getScreening (@PathVariable int id) {
-		LOG.info("GET /movies/" + id);
+		LOG.info("GET /screenings/" + id);
 		try {
 			// Try to get the screening based on the id entered by the user
 			Screening screening = screeningDao.getScreening(id);
@@ -72,7 +72,7 @@ public class ScreeningController {
 	 */
 	@GetMapping("")
 	public ResponseEntity<Screening[]> getScreening () {
-		LOG.info("GET /movies/");
+		LOG.info("GET /screenings/");
 		try {
 			// Try and get a list of all the screenings from the system
 			Screening[] screenings = screeningDao.getScreenings();
@@ -98,7 +98,7 @@ public class ScreeningController {
 	 */
 	@GetMapping("/")
 	public ResponseEntity<Screening[]> searchScreenings (@RequestParam String title) {
-		LOG.info("GET /movies/?title=" + title);
+		LOG.info("GET /screenings/?title=" + title);
 		try {
 			Screening[] foundScreenings = screeningDao.findScreenings(title);
 			/*
@@ -123,7 +123,7 @@ public class ScreeningController {
 	 */
 	@PostMapping("")
 	public ResponseEntity<Screening> createScreening (@RequestBody Screening screening) {
-		LOG.info("POST /movies/" + screening);
+		LOG.info("POST /screenings/" + screening);
 
 		try {
 			Screening newScreening = screeningDao.createScreening(screening);
@@ -149,7 +149,7 @@ public class ScreeningController {
 	 */
 	@PutMapping("")
 	public ResponseEntity<Screening> updateScreening (@RequestBody Screening screening) {
-		LOG.info("PUT /movies/" + screening);
+		LOG.info("PUT /screenings/" + screening);
 		try {
 			Screening _screening = screeningDao.updateScreening(screening);
 			if (_screening != null) {
@@ -173,7 +173,7 @@ public class ScreeningController {
 	 */
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Screening> deleteScreening (@PathVariable int id) {
-		LOG.info("DELETE /movies/" + id);
+		LOG.info("DELETE /screenings/" + id);
 		try {
 			if (screeningDao.deleteScreening(id)) {
 				return new ResponseEntity<>(HttpStatus.OK);

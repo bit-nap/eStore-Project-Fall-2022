@@ -1,6 +1,6 @@
-package com.estore.api.estoreapi.persistence;
+package com.estore.api.estoreapi.screenings.persistence;
 
-import com.estore.api.estoreapi.model.Screening;
+import com.estore.api.estoreapi.screenings.model.Screening;
 
 import java.io.IOException;
 

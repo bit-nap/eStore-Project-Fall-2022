@@ -1,7 +1,7 @@
-package com.estore.api.estoreapi.controller;
+package com.estore.api.estoreapi.screenings.controller;
 
-import com.estore.api.estoreapi.model.Screening;
-import com.estore.api.estoreapi.persistence.ScreeningDAO;
+import com.estore.api.estoreapi.screenings.model.Screening;
+import com.estore.api.estoreapi.screenings.persistence.ScreeningDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;

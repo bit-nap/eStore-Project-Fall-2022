@@ -139,45 +139,11 @@ public class MovieJSONDAO implements MovieDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public Movie[] getMovies () {
-		synchronized (movies) {
-			return getMoviesArray();
-		}
-	}
-
-	/**
-	 * * {@inheritDoc}
-	 */
-	@Override
-	public Movie[] findMovies (String text) {
-		synchronized (movies) {
-			return getMoviesArray(text);
-		}
-	}
-
-	/**
-	 * * {@inheritDoc}
-	 */
-	@Override
-	public Movie getMovie (int id) {
-		synchronized (movies) {
-			if (movies.containsKey(id)) {
-				return movies.get(id);
-			} else {
-				return null;
-			}
-		}
-	}
-
-	/**
-	 * * {@inheritDoc}
-	 */
-	@Override
 	public Movie createMovie (Movie movie) throws IOException {
 		synchronized (movies) {
 			// We create a new movie object because the id field is immutable,
 			// and we need to assign the next unique id
-			Movie newMovie = new Movie(nextId(), movie.getTitle());
+			Movie newMovie = new Movie(nextId(), movie.getTitle(), movie.getRuntime(), movie.getMpaRating(), movie.getYear());
 			movies.put(newMovie.getId(), newMovie);
 			save(); // may throw an IOException
 			return newMovie;
@@ -212,6 +178,40 @@ public class MovieJSONDAO implements MovieDAO {
 			} else {
 				return false;
 			}
+		}
+	}
+
+	/**
+	 * * {@inheritDoc}
+	 */
+	@Override
+	public Movie getMovie (int id) {
+		synchronized (movies) {
+			if (movies.containsKey(id)) {
+				return movies.get(id);
+			} else {
+				return null;
+			}
+		}
+	}
+
+	/**
+	 * * {@inheritDoc}
+	 */
+	@Override
+	public Movie[] getMovies () {
+		synchronized (movies) {
+			return getMoviesArray();
+		}
+	}
+
+	/**
+	 * * {@inheritDoc}
+	 */
+	@Override
+	public Movie[] findMovies (String text) {
+		synchronized (movies) {
+			return getMoviesArray(text);
 		}
 	}
 }

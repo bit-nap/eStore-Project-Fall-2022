@@ -39,6 +39,79 @@ public class MovieController {
 	}
 
 	/**
+	 * Creates a {@linkplain Movie movie} with the provided movie object.
+	 *
+	 * @param movie The {@link Movie movie} to create
+	 * @return ResponseEntity with created {@link Movie movie} object and HTTP status of CREATED<br>
+	 * ResponseEntity with HTTP status of CONFLICT if {@link Movie movie} object already exists<br>
+	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+	 */
+	@PostMapping("")
+	public ResponseEntity<Movie> createMovie (@RequestBody Movie movie) {
+		LOG.info("POST /movies/" + movie);
+
+		try {
+			Movie newMovie = movieDao.createMovie(movie);
+			if (newMovie != null) {
+				return new ResponseEntity<>(newMovie, HttpStatus.CREATED);
+			} else {
+				return new ResponseEntity<>(HttpStatus.CONFLICT);
+			}
+		} catch (IOException e) {
+			LOG.log(Level.SEVERE, e.getLocalizedMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	/**
+	 * Updates the {@linkplain Movie movie} with the provided {@linkplain Movie movie} object, if it
+	 * exists.
+	 *
+	 * @param movie The {@link Movie movie} to update
+	 * @return ResponseEntity with updated {@link Movie movie} object and HTTP status of OK if updated<br>
+	 * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+	 */
+	@PutMapping("")
+	public ResponseEntity<Movie> updateMovie (@RequestBody Movie movie) {
+		LOG.info("PUT /movies/" + movie);
+		try {
+			Movie _movie = movieDao.updateMovie(movie);
+			if (_movie != null) {
+				return new ResponseEntity<Movie>(_movie, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
+			LOG.log(Level.SEVERE, e.getLocalizedMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	/**
+	 * Deletes a {@linkplain Movie movie} with the given id.
+	 *
+	 * @param id The id of the {@link Movie movie} to deleted
+	 * @return ResponseEntity HTTP status of OK if deleted<br>
+	 * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+	 */
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Movie> deleteMovie (@PathVariable int id) {
+		LOG.info("DELETE /movies/" + id);
+		try {
+			if (movieDao.deleteMovie(id)) {
+				return new ResponseEntity<>(HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+		} catch (IOException e) {
+			LOG.log(Level.SEVERE, e.getLocalizedMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	/**
 	 * Responds to the GET request for a {@linkplain Movie movie} with the given id.
 	 *
 	 * @param id The id used to locate a {@link Movie movie}
@@ -107,79 +180,6 @@ public class MovieController {
 			 * returns a null list
 			 */
 			return new ResponseEntity<Movie[]>(foundMovies, HttpStatus.OK);
-		} catch (IOException e) {
-			LOG.log(Level.SEVERE, e.getLocalizedMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
-	/**
-	 * Creates a {@linkplain Movie movie} with the provided movie object.
-	 *
-	 * @param movie The {@link Movie movie} to create
-	 * @return ResponseEntity with created {@link Movie movie} object and HTTP status of CREATED<br>
-	 * ResponseEntity with HTTP status of CONFLICT if {@link Movie movie} object already exists<br>
-	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
-	 */
-	@PostMapping("")
-	public ResponseEntity<Movie> createMovie (@RequestBody Movie movie) {
-		LOG.info("POST /movies/" + movie);
-
-		try {
-			Movie newMovie = movieDao.createMovie(movie);
-			if (newMovie != null) {
-				return new ResponseEntity<>(newMovie, HttpStatus.CREATED);
-			} else {
-				return new ResponseEntity<>(HttpStatus.CONFLICT);
-			}
-		} catch (IOException e) {
-			LOG.log(Level.SEVERE, e.getLocalizedMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
-	/**
-	 * Updates the {@linkplain Movie movie} with the provided {@linkplain Movie movie} object, if it
-	 * exists.
-	 *
-	 * @param movie The {@link Movie movie} to update
-	 * @return ResponseEntity with updated {@link Movie movie} object and HTTP status of OK if updated<br>
-	 * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
-	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
-	 */
-	@PutMapping("")
-	public ResponseEntity<Movie> updateMovie (@RequestBody Movie movie) {
-		LOG.info("PUT /movies/" + movie);
-		try {
-			Movie _movie = movieDao.updateMovie(movie);
-			if (_movie != null) {
-				return new ResponseEntity<Movie>(_movie, HttpStatus.OK);
-			} else {
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			}
-		} catch (Exception e) {
-			LOG.log(Level.SEVERE, e.getLocalizedMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
-	/**
-	 * Deletes a {@linkplain Movie movie} with the given id.
-	 *
-	 * @param id The id of the {@link Movie movie} to deleted
-	 * @return ResponseEntity HTTP status of OK if deleted<br>
-	 * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
-	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
-	 */
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Movie> deleteMovie (@PathVariable int id) {
-		LOG.info("DELETE /movies/" + id);
-		try {
-			if (movieDao.deleteMovie(id)) {
-				return new ResponseEntity<>(HttpStatus.OK);
-			} else {
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			}
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

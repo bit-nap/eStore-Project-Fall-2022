@@ -71,7 +71,7 @@ public class ScreeningController {
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
 	@GetMapping("")
-	public ResponseEntity<Screening[]> getScreening () {
+	public ResponseEntity<Screening[]> getScreenings () {
 		LOG.info("GET /screenings/");
 		try {
 			// Try and get a list of all the screenings from the system

@@ -71,7 +71,7 @@ public class MovieController {
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
 	@GetMapping("")
-	public ResponseEntity<Movie[]> getMovie () {
+	public ResponseEntity<Movie[]> getMovies () {
 		LOG.info("GET /movies/");
 		try {
 			// Try and get a list of all the movies from the system
@@ -103,7 +103,7 @@ public class MovieController {
 			Movie[] foundMovies = movieDao.findMovies(title);
 			/*
 			 * If movieDao.findMovies() fails, an IOException is thrown. Assume function
-			 * passed successfully and return the movie array even if it is empty. Which
+			 * passed successfully and return the Movie array even if it is empty. Which
 			 * returns a null list
 			 */
 			return new ResponseEntity<Movie[]>(foundMovies, HttpStatus.OK);

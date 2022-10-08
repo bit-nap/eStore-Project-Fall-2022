@@ -1,0 +1,44 @@
+[
+	{
+		"id": 101,
+		"title": "The Godfather",
+		"mpaRating": "R",
+		"runtime": "2:55",
+		"year": 1972
+	},
+	{
+		"id": 102,
+		"title": "The Godfather: Part II",
+		"mpaRating": "R",
+		"runtime": "3:22",
+		"year": 1974
+	},
+	{
+		"id": 103,
+		"title": "Ferris Bueller's Day Off",
+		"mpaRating": "PG-13",
+		"runtime": "1:38",
+		"year": 1986
+	},
+	{
+		"id": 104,
+		"title": "Star Wars: Episode IV – A New Hope",
+		"mpaRating": "PG",
+		"runtime": "1:45",
+		"year": 1977
+	},
+	{
+		"id": 105,
+		"title": "Star Wars: Episode V – The Empire Strikes Back",
+		"mpaRating": "PG",
+		"runtime": "2:04",
+		"year": 1980
+	},
+	{
+		"id": 106,
+		"title": "Star Wars: Episode VI - Return of the Jedi",
+		"mpaRating": "PG",
+		"runtime": "2:11",
+		"year": 1983
+	}
+]

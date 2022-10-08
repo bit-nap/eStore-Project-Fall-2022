@@ -13,8 +13,7 @@ import java.util.TreeMap;
 import java.util.logging.Logger;
 
 /**
- * Implements the functionality for JSON file-based persistence for Screenings.
- * <p>
+ * Implements the functionality for JSON file-based persistence for Screenings.<p>
  * {@literal @}Component Spring annotation instantiates a single instance of this
  * class and injects the instance into other classes as needed
  *
@@ -69,10 +68,9 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 
 	/**
 	 * Generates an array of {@linkplain Screening screenings} from the tree map for any
-	 * {@linkplain Screening screenings} that contains the movie title specified by text argument.
+	 * {@linkplain Screening screenings} that contains the screening title specified by text argument.
 	 *
-	 * @param text The text to find within a {@link Screening screening's} movie
-	 *             <p>
+	 * @param text The text to find within a {@link Screening screenings} screening<p>
 	 *             If text is null, the array contains all of the {@linkplain Screening screenings} in the tree map.
 	 * @return The array of {@link Screening screenings}, may be empty
 	 */
@@ -99,16 +97,14 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 	private boolean save () throws IOException {
 		Screening[] screeningArray = getScreeningsArray();
 
-		// Serializes the Java Objects to JSON objects into the file
-		// writeValue will throw an IOException if there is an issue
-		// with the file or reading from the file
+		// Serializes the Java Objects to JSON objects into the file,
+		// writeValue will throw an IOException if there is an issue with or reading from the file
 		objectMapper.writeValue(new File(filename), screeningArray);
 		return true;
 	}
 
 	/**
-	 * Loads {@linkplain Screening screenings} from the JSON file into the map.
-	 * <br>
+	 * Loads {@linkplain Screening screenings} from the JSON file into the map.<br>
 	 * Also sets this object's nextId to one more than the greatest id found in the file.
 	 *
 	 * @return true if the file was read successfully
@@ -118,9 +114,8 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 		screenings = new TreeMap<>();
 		nextId = 0;
 
-		// Deserializes the JSON objects from the file into an array of screenings
-		// readValue will throw an IOException if there's an issue with the file
-		// or reading from the file
+		// Deserializes the JSON objects from the file into an array of screenings,
+		// readValue will throw an IOException if there's an issue with or reading from the file
 		Screening[] screeningArray = objectMapper.readValue(new File(filename), Screening[].class);
 
 		// Add each screening to the tree map and keep track of the greatest id
@@ -139,44 +134,9 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public Screening[] getScreenings () {
-		synchronized (screenings) {
-			return getScreeningsArray();
-		}
-	}
-
-	/**
-	 * * {@inheritDoc}
-	 */
-	@Override
-	public Screening[] findScreenings (String text) {
-		synchronized (screenings) {
-			return getScreeningsArray(text);
-		}
-	}
-
-	/**
-	 * * {@inheritDoc}
-	 */
-	@Override
-	public Screening getScreening (int id) {
-		synchronized (screenings) {
-			if (screenings.containsKey(id)) {
-				return screenings.get(id);
-			} else {
-				return null;
-			}
-		}
-	}
-
-	/**
-	 * * {@inheritDoc}
-	 */
-	@Override
 	public Screening createScreening (Screening screening) throws IOException {
 		synchronized (screenings) {
-			// We create a new screening object because the id field is immutable,
-			// and we need to assign the next unique id
+			// We create a new screening object because the id field is immutable, and we need to assign the next unique id
 			Screening newScreening = new Screening(nextId(), screening.getMovie());
 			screenings.put(newScreening.getId(), newScreening);
 			save(); // may throw an IOException
@@ -212,6 +172,40 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 			} else {
 				return false;
 			}
+		}
+	}
+
+	/**
+	 * * {@inheritDoc}
+	 */
+	@Override
+	public Screening getScreening (int id) {
+		synchronized (screenings) {
+			if (screenings.containsKey(id)) {
+				return screenings.get(id);
+			} else {
+				return null;
+			}
+		}
+	}
+
+	/**
+	 * * {@inheritDoc}
+	 */
+	@Override
+	public Screening[] getScreenings () {
+		synchronized (screenings) {
+			return getScreeningsArray();
+		}
+	}
+
+	/**
+	 * * {@inheritDoc}
+	 */
+	@Override
+	public Screening[] findScreenings (String text) {
+		synchronized (screenings) {
+			return getScreeningsArray(text);
 		}
 	}
 }

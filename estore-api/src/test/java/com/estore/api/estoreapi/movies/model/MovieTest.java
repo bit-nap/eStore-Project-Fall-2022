@@ -15,42 +15,35 @@ public class MovieTest {
 	@Test
 	public void testCtor () {
 		// Setup
-		int expected_id = 99;
-		String expected_name = "Star Wars";
-
-		// Invoke
-		Movie movie = new Movie(expected_id, expected_name);
-
-		// Analyze
-		assertEquals(expected_id, movie.getId());
-		assertEquals(expected_name, movie.getTitle());
-	}
-
-	@Test
-	public void testName () {
-		// Setup
 		int id = 99;
-		String name = "Star Wars IV";
-		Movie movie = new Movie(id, name);
-
-		String expected_name = "Star Wars V";
+		String name = "Star Wars: Episode IV – A New Hope";
+		String runtime = "1:45";
+		String mpaRating = "PG";
+		int year = 1977;
 
 		// Invoke
-		movie.setTitle(expected_name);
+		Movie movie = new Movie(id, name, runtime, mpaRating, year);
 
 		// Analyze
-		assertEquals(expected_name, movie.getTitle());
+		assertEquals(id, movie.getId());
+		assertEquals(name, movie.getTitle());
+		assertEquals(runtime, movie.getRuntime());
+		assertEquals(mpaRating, movie.getMpaRating());
+		assertEquals(year, movie.getYear());
 	}
 
 	@Test
 	public void testToString () {
 		// Setup
 		int id = 99;
-		String name = "Star Wars";
-		String expected_string = String.format(Movie.STRING_FORMAT, id, name);
-		Movie movie = new Movie(id, name);
+		String title = "Star Wars: Episode IV – A New Hope";
+		String runtime = "1:45";
+		String mpaRating = "PG";
+		int year = 1977;
+		String expected_string = String.format(Movie.STRING_FORMAT, id, title, runtime, mpaRating, year);
 
 		// Invoke
+		Movie movie = new Movie(id, title, runtime, mpaRating, year);
 		String actual_string = movie.toString();
 
 		// Analyze

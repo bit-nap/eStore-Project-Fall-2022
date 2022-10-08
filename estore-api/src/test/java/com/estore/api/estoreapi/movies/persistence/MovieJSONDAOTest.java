@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
  */
 @Tag("Persistence-tier")
 public class MovieJSONDAOTest {
-	MovieJSONDAO heroFileDAO;
+	MovieJSONDAO movieFileDAO;
 	Movie[] testMovies;
 	ObjectMapper mockObjectMapper;
 
@@ -28,27 +28,25 @@ public class MovieJSONDAOTest {
 	 * Before each test, we will create and inject a Mock Object Mapper to
 	 * isolate the tests from the underlying file
 	 *
-	 * @throws IOException
+	 * @throws IOException if movieFileDAO cannot read from fake file
 	 */
 	@BeforeEach
 	public void setupMovieJSONDAO () throws IOException {
 		mockObjectMapper = mock(ObjectMapper.class);
 		testMovies = new Movie[3];
-		testMovies[0] = new Movie(99, "Wi-Fire");
-		testMovies[1] = new Movie(100, "Galactic Agent");
-		testMovies[2] = new Movie(101, "Ice Gladiator");
+		testMovies[0] = new Movie(104, "Star Wars: Episode IV – A New Hope", "1:45", "PG", 1977);
+		testMovies[1] = new Movie(105, "Star Wars: Episode V – The Empire Strikes Back", "2:04", "PG", 1980);
+		testMovies[2] = new Movie(106, "Star Wars: Episode VI - Return of the Jedi", "2:11", "PG", 1983);
 
-		// When the object mapper is supposed to read from the file the mock object mapper will return the hero array above
-		when(mockObjectMapper
-			     .readValue(new File("doesnt_matter.txt"), Movie[].class))
-			.thenReturn(testMovies);
-		heroFileDAO = new MovieJSONDAO("doesnt_matter.txt", mockObjectMapper);
+		// When the object mapper is supposed to read from the file the mock object mapper will return the movie array above
+		when(mockObjectMapper.readValue(new File("mao-zedongs-little-red-book.epub"), Movie[].class)).thenReturn(testMovies);
+		movieFileDAO = new MovieJSONDAO("mao-zedongs-little-red-book.epub", mockObjectMapper);
 	}
 
 	@Test
 	public void testGetMovies () {
 		// Invoke
-		Movie[] movies = heroFileDAO.getMovies();
+		Movie[] movies = movieFileDAO.getMovies();
 
 		// Analyze
 		assertEquals(movies.length, testMovies.length);
@@ -60,108 +58,102 @@ public class MovieJSONDAOTest {
 	@Test
 	public void testFindMovies () {
 		// Invoke
-		Movie[] movies = heroFileDAO.findMovies("la");
+		Movie[] movies = movieFileDAO.findMovies("Star Wars");
 
 		// Analyze
-		assertEquals(movies.length, 2);
-		assertEquals(movies[0], testMovies[1]);
-		assertEquals(movies[1], testMovies[2]);
+		assertEquals(movies.length, 3);
+		assertEquals(movies[0], testMovies[0]);
+		assertEquals(movies[1], testMovies[1]);
+		assertEquals(movies[2], testMovies[2]);
 	}
 
 	@Test
 	public void testGetMovie () {
 		// Invoke
-		Movie hero = heroFileDAO.getMovie(99);
+		Movie movie = movieFileDAO.getMovie(104);
 
 		// Analyze
-		assertEquals(hero, testMovies[0]);
+		assertEquals(movie, testMovies[0]);
 	}
 
 	@Test
 	public void testDeleteMovie () {
 		// Invoke
-		boolean result = assertDoesNotThrow(() -> heroFileDAO.deleteMovie(99),
-		                                    "Unexpected exception thrown");
+		boolean result = assertDoesNotThrow(() -> movieFileDAO.deleteMovie(104), "Unexpected exception thrown");
 
 		// Analyze
 		assertTrue(result);
 		// We check the internal tree map size against the length of the test movies array - 1 (because of the delete function call)
 		// Because movies attribute of MovieJSONDAO is package private we can access it directly
-		assertEquals(heroFileDAO.movies.size(), testMovies.length - 1);
+		assertEquals(movieFileDAO.movies.size(), testMovies.length - 1);
 	}
 
 	@Test
 	public void testCreateMovie () {
 		// Setup
-		Movie hero = new Movie(102, "Wonder-Person");
+		Movie movie = new Movie(107, "Star Wars: The Force Awakens", "2:16", "PG-13", 2015);
 
 		// Invoke
-		Movie result = assertDoesNotThrow(() -> heroFileDAO.createMovie(hero),
-		                                  "Unexpected exception thrown");
+		Movie result = assertDoesNotThrow(() -> movieFileDAO.createMovie(movie), "Unexpected exception thrown");
 
 		// Analyze
 		assertNotNull(result);
-		Movie actual = heroFileDAO.getMovie(hero.getId());
-		assertEquals(actual.getId(), hero.getId());
-		assertEquals(actual.getTitle(), hero.getTitle());
+		Movie actual = movieFileDAO.getMovie(movie.getId());
+		assertEquals(actual.getId(), movie.getId());
+		assertEquals(actual.getTitle(), movie.getTitle());
+		assertEquals(actual.getRuntime(), movie.getRuntime());
+		assertEquals(actual.getYear(), movie.getYear());
 	}
 
 	@Test
 	public void testUpdateMovie () {
 		// Setup
-		Movie hero = new Movie(99, "Galactic Agent");
+		Movie movie = new Movie(104, "Star Wars: The Force Awakens", "2:16", "PG-13", 2015);
 
 		// Invoke
-		Movie result = assertDoesNotThrow(() -> heroFileDAO.updateMovie(hero),
-		                                  "Unexpected exception thrown");
+		Movie result = assertDoesNotThrow(() -> movieFileDAO.updateMovie(movie), "Unexpected exception thrown");
 
 		// Analyze
 		assertNotNull(result);
-		Movie actual = heroFileDAO.getMovie(hero.getId());
-		assertEquals(actual, hero);
+		Movie actual = movieFileDAO.getMovie(movie.getId());
+		assertEquals(actual, movie);
 	}
 
 	@Test
 	public void testSaveException () throws IOException {
-		doThrow(new IOException())
-			.when(mockObjectMapper)
-			.writeValue(any(File.class), any(Movie[].class));
+		doThrow(new IOException()).when(mockObjectMapper).writeValue(any(File.class), any(Movie[].class));
 
-		Movie hero = new Movie(102, "Wi-Fire");
+		Movie movie = new Movie(107, "Star Wars: The Force Awakens", "2:16", "PG-13", 2015);
 
-		assertThrows(IOException.class,
-		             () -> heroFileDAO.createMovie(hero),
-		             "IOException not thrown");
+		assertThrows(IOException.class, () -> movieFileDAO.createMovie(movie), "IOException not thrown");
 	}
 
 	@Test
 	public void testGetMovieNotFound () {
 		// Invoke
-		Movie hero = heroFileDAO.getMovie(98);
+		Movie movie = movieFileDAO.getMovie(103);
 
 		// Analyze
-		assertNull(hero);
+		assertNull(movie);
 	}
 
 	@Test
 	public void testDeleteMovieNotFound () {
 		// Invoke
-		boolean result = assertDoesNotThrow(() -> heroFileDAO.deleteMovie(98),
-		                                    "Unexpected exception thrown");
+		boolean result = assertDoesNotThrow(() -> movieFileDAO.deleteMovie(103), "Unexpected exception thrown");
 
 		// Analyze
 		assertFalse(result);
-		assertEquals(heroFileDAO.movies.size(), testMovies.length);
+		assertEquals(movieFileDAO.movies.size(), testMovies.length);
 	}
 
 	@Test
 	public void testUpdateMovieNotFound () {
 		// Setup
-		Movie hero = new Movie(98, "Bolt");
+		Movie movie = new Movie(103, "Star Wars: The Force Awakens", "2:16", "PG-13", 2015);
 
 		// Invoke
-		Movie result = assertDoesNotThrow(() -> heroFileDAO.updateMovie(hero),
-		                                  "Unexpected exception thrown");
+		Movie result = assertDoesNotThrow(() -> movieFileDAO.updateMovie(movie), "Unexpected exception thrown");
 
 		// Analyze
 		assertNull(result);
@@ -173,13 +165,9 @@ public class MovieJSONDAOTest {
 		ObjectMapper mockObjectMapper = mock(ObjectMapper.class);
 		// We want to simulate with a Mock Object Mapper that an exception was raised during JSON object deserialization into Java objects
 		// When the Mock Object Mapper readValue method is called from the MovieJSONDAO load method, an IOException is raised
-		doThrow(new IOException())
-			.when(mockObjectMapper)
-			.readValue(new File("doesnt_matter.txt"), Movie[].class);
+		doThrow(new IOException()).when(mockObjectMapper).readValue(new File("mao-zedongs-little-red-book.epub"), Movie[].class);
 
 		// Invoke & Analyze
-		assertThrows(IOException.class,
-		             () -> new MovieJSONDAO("doesnt_matter.txt", mockObjectMapper),
-		             "IOException not thrown");
+		assertThrows(IOException.class, () -> new MovieJSONDAO("mao-zedongs-little-red-book.epub", mockObjectMapper), "IOException not thrown");
 	}
 }

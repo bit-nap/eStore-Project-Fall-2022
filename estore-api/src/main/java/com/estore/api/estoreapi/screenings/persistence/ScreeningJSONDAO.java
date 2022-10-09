@@ -1,5 +1,6 @@
 package com.estore.api.estoreapi.screenings.persistence;
 
+import com.estore.api.estoreapi.movies.MovieGetter;
 import com.estore.api.estoreapi.screenings.model.Screening;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +28,8 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 	Map<Integer, Screening> screenings;
 	/** Provides conversion between Java Screening and JSON Screening objects. */
 	private ObjectMapper objectMapper;
+	/** Provides Screening objects with Movie objects based on their movieId field. */
+	private MovieGetter movieGetter;
 	/** The next id to assign to a new screening. */
 	private static int nextId;
 	/** Name of the file to read and write to. */
@@ -39,10 +42,10 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 	 * @param objectMapper Provides JSON Object to/from Java Object serialization and deserialization
 	 * @throws IOException when file cannot be accessed or read from
 	 */
-	public ScreeningJSONDAO (@Value("${screenings.file}") String filename, ObjectMapper objectMapper)
-		throws IOException {
+	public ScreeningJSONDAO (@Value("${screenings.file}") String filename, ObjectMapper objectMapper, MovieGetter movieGetter) throws IOException {
 		this.filename = filename;
 		this.objectMapper = objectMapper;
+		this.movieGetter = movieGetter;
 		load();  // load the screenings from the file
 	}
 
@@ -68,7 +71,7 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 
 	/**
 	 * Generates an array of {@linkplain Screening screenings} from the tree map for any
-	 * {@linkplain Screening screenings} that contains the screening title specified by text argument.
+	 * {@linkplain Screening screenings} that contains the movie title specified by text argument.
 	 *
 	 * @param text The text to find within a {@link Screening screenings} screening<p>
 	 *             If text is null, the array contains all of the {@linkplain Screening screenings} in the tree map.
@@ -78,7 +81,7 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 		ArrayList<Screening> screeningArrayList = new ArrayList<>();
 
 		for (Screening screening : screenings.values()) {
-			if (text == null || screening.getMovie().contains(text)) {
+			if (text == null || screening.getMovie().getTitle().contains(text)) {
 				screeningArrayList.add(screening);
 			}
 		}
@@ -137,7 +140,8 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 	public Screening createScreening (Screening screening) throws IOException {
 		synchronized (screenings) {
 			// We create a new screening object because the id field is immutable, and we need to assign the next unique id
-			Screening newScreening = new Screening(nextId(), screening.getMovie());
+			Screening newScreening = new Screening(movieGetter, nextId(), screening.getMovieId(), screening.getTicketsRemaining(),
+			                                       screening.getDate(), screening.getTime());
 			screenings.put(newScreening.getId(), newScreening);
 			save(); // may throw an IOException
 			return newScreening;

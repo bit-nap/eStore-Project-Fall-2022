@@ -59,10 +59,10 @@ public interface ScreeningDAO {
 	Screening[] getScreenings () throws IOException;
 
 	/**
-	 * Finds all {@linkplain Screening screenings} whose screening title contains the given text.
+	 * Finds all {@linkplain Screening screenings} whose movie title contains the given text.
 	 *
 	 * @param text The text to match against
-	 * @return An array of {@link Screening screenings} whose screening title contains the given text, may be empty
+	 * @return An array of {@link Screening screenings} whose movie title contains the given text, may be empty
 	 * @throws IOException if an issue with underlying storage
 	 */
 	Screening[] findScreenings (String text) throws IOException;

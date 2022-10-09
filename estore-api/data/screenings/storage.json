@@ -1,42 +1,177 @@
 [
 	{
 		"id": 1,
-		"movie": "The Terminator"
+		"movieId": 5,
+		"ticketsRemaining": 4,
+		"date": "2023-01-17",
+		"time": "16:00"
 	},
 	{
 		"id": 2,
-		"movie": "Terminator 2: Judgment Day"
+		"movieId": 6,
+		"ticketsRemaining": 4,
+		"date": "2023-01-17",
+		"time": "18:00"
 	},
 	{
 		"id": 3,
-		"movie": "Rambo"
+		"movieId": 7,
+		"ticketsRemaining": 4,
+		"date": "2023-01-17",
+		"time": "20:00"
 	},
 	{
 		"id": 4,
-		"movie": "Flashdance"
+		"movieId": 20,
+		"ticketsRemaining": 4,
+		"date": "2023-01-18",
+		"time": "16:00"
 	},
 	{
 		"id": 5,
-		"movie": "Back to the Future"
+		"movieId": 23,
+		"ticketsRemaining": 4,
+		"date": "2023-01-18",
+		"time": "18:00"
 	},
 	{
 		"id": 6,
-		"movie": "The Breakfast Club"
+		"movieId": 15,
+		"ticketsRemaining": 4,
+		"date": "2023-01-18",
+		"time": "20:00"
 	},
 	{
 		"id": 7,
-		"movie": "Rocky"
+		"movieId": 9,
+		"ticketsRemaining": 4,
+		"date": "2023-01-19",
+		"time": "16:00"
 	},
 	{
 		"id": 8,
-		"movie": "Rocky II"
+		"movieId": 10,
+		"ticketsRemaining": 4,
+		"date": "2023-01-19",
+		"time": "18:00"
 	},
 	{
 		"id": 9,
-		"movie": "Rocky III"
+		"movieId": 11,
+		"ticketsRemaining": 4,
+		"date": "2023-01-19",
+		"time": "20:00"
 	},
 	{
 		"id": 10,
-		"movie": "Rocky IV"
+		"movieId": 12,
+		"ticketsRemaining": 4,
+		"date": "2023-01-19",
+		"time": "22:00"
+	},
+	{
+		"id": 11,
+		"movieId": 23,
+		"ticketsRemaining": 4,
+		"date": "2023-01-20",
+		"time": "16:00"
+	},
+	{
+		"id": 12,
+		"movieId": 21,
+		"ticketsRemaining": 4,
+		"date": "2023-01-20",
+		"time": "18:00"
+	},
+	{
+		"id": 13,
+		"movieId": 21,
+		"ticketsRemaining": 4,
+		"date": "2023-01-20",
+		"time": "21:00"
+	},
+	{
+		"id": 14,
+		"movieId": 18,
+		"ticketsRemaining": 4,
+		"date": "2023-01-21",
+		"time": "12:00"
+	},
+	{
+		"id": 15,
+		"movieId": 19,
+		"ticketsRemaining": 4,
+		"date": "2023-01-21",
+		"time": "14:15"
+	},
+	{
+		"id": 16,
+		"movieId": 8,
+		"ticketsRemaining": 4,
+		"date": "2023-01-21",
+		"time": "16:30"
+	},
+	{
+		"id": 17,
+		"movieId": 17,
+		"ticketsRemaining": 4,
+		"date": "2023-01-21",
+		"time": "18:15"
+	},
+	{
+		"id": 18,
+		"movieId": 15,
+		"ticketsRemaining": 4,
+		"date": "2023-01-21",
+		"time": "20:00"
+	},
+	{
+		"id": 19,
+		"movieId": 16,
+		"ticketsRemaining": 4,
+		"date": "2023-01-22",
+		"time": "12:00"
+	},
+	{
+		"id": 19,
+		"movieId": 16,
+		"ticketsRemaining": 4,
+		"date": "2023-01-22",
+		"time": "14:15"
+	},
+	{
+		"id": 20,
+		"movieId": 21,
+		"ticketsRemaining": 4,
+		"date": "2023-01-22",
+		"time": "17:15"
+	},
+	{
+		"id": 21,
+		"movieId": 13,
+		"ticketsRemaining": 4,
+		"date": "2023-01-22",
+		"time": "20:45"
+	},
+	{
+		"id": 22,
+		"movieId": 9,
+		"ticketsRemaining": 4,
+		"date": "2023-01-23",
+		"time": "16:00"
+	},
+	{
+		"id": 23,
+		"movieId": 20,
+		"ticketsRemaining": 4,
+		"date": "2023-01-23",
+		"time": "18:00"
+	},
+	{
+		"id": 24,
+		"movieId": 24,
+		"ticketsRemaining": 4,
+		"date": "2023-01-23",
+		"time": "20:00"
 	}
 ]

@@ -22,8 +22,9 @@ import java.util.logging.Logger;
 public class MovieController {
 	/** TODO: Add description of the purpose of Logger, once it's actually used. */
 	private static final Logger LOG = Logger.getLogger(MovieController.class.getName());
+
 	/** The MovieDAO object this Controller interacts with to get Movie objects. */
-	private MovieDAO movieDao;
+	private final MovieDAO movieDao;
 
 	/**
 	 * Creates a REST API controller to respond to Movie requests.

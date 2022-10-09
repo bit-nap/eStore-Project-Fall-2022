@@ -21,16 +21,19 @@ import java.util.logging.Logger;
  */
 @Component
 public class MovieJSONDAO implements MovieDAO {
-	/** TODO: Add description of the purpose of Logger, once it's actually used. */
-	private static final Logger LOG = Logger.getLogger(MovieJSONDAO.class.getName());
 	/** A local cache of Movie objects, to avoid reading from file each time. */
 	Map<Integer, Movie> movies;
-	/** Provides conversion between Java Movie and JSON Movie objects. */
-	private ObjectMapper objectMapper;
+
+	/** TODO: Add description of the purpose of Logger, once it's actually used. */
+	private static final Logger LOG = Logger.getLogger(MovieJSONDAO.class.getName());
+
 	/** The next id to assign to a new movie. */
 	private static int nextId;
+
 	/** Name of the file to read and write to. */
-	private String filename;
+	private final String filename;
+	/** Provides conversion between Java Movie and JSON Movie objects. */
+	private final ObjectMapper objectMapper;
 
 	/**
 	 * Creates a Data Access Object for JSON-based Movies.

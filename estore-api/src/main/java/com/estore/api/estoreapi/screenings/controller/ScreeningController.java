@@ -22,8 +22,9 @@ import java.util.logging.Logger;
 public class ScreeningController {
 	/** TODO: Add description of the purpose of Logger, once it's actually used. */
 	private static final Logger LOG = Logger.getLogger(ScreeningController.class.getName());
+
 	/** The ScreeningDAO object this Controller interacts with to get Screening objects. */
-	private ScreeningDAO screeningDao;
+	private final ScreeningDAO screeningDao;
 
 	/**
 	 * Creates a REST API controller to respond to Screening requests.

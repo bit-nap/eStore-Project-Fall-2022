@@ -11,8 +11,8 @@ import java.io.IOException;
  */
 @Component
 public class MovieGetter {
-	/** Object to retrieve Movie objects from. */
-	private MovieDAO movieDAO;
+	/** MovieDAO to retrieve Movie objects from. */
+	private final MovieDAO movieDAO;
 
 	/**
 	 * Create a new MovieGetter object with the given MovieDAO object.

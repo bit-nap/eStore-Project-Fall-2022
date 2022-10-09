@@ -10,11 +10,11 @@ import java.util.logging.Logger;
  * @author Group 3C, The Code Monkeys
  */
 public class Movie {
-	/** TODO: Add description of the purpose of Logger, once it's actually used. */
-	private static final Logger LOG = Logger.getLogger(Movie.class.getName());
-
 	// Package private for tests - Prof
 	static final String STRING_FORMAT = "Movie [id=%d, title=%s, runtime=%s, mpaRating=%s, year=%d]";
+
+	/** TODO: Add description of the purpose of Logger, once it's actually used. */
+	private static final Logger LOG = Logger.getLogger(Movie.class.getName());
 
 	/** The id of this movie. */
 	@JsonProperty("id") private int id;

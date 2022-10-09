@@ -22,18 +22,21 @@ import java.util.logging.Logger;
  */
 @Component
 public class ScreeningJSONDAO implements ScreeningDAO {
-	/** TODO: Add description of the purpose of Logger, once it's actually used. */
-	private static final Logger LOG = Logger.getLogger(ScreeningJSONDAO.class.getName());
 	/** A local cache of Screening objects, to avoid reading from file each time. */
 	Map<Integer, Screening> screenings;
-	/** Provides conversion between Java Screening and JSON Screening objects. */
-	private ObjectMapper objectMapper;
-	/** Provides Screening objects with Movie objects based on their movieId field. */
-	private MovieGetter movieGetter;
+
+	/** TODO: Add description of the purpose of Logger, once it's actually used. */
+	private static final Logger LOG = Logger.getLogger(ScreeningJSONDAO.class.getName());
+
 	/** The next id to assign to a new screening. */
 	private static int nextId;
+
 	/** Name of the file to read and write to. */
-	private String filename;
+	private final String filename;
+	/** Provides conversion between Java Screening and JSON Screening objects. */
+	private final ObjectMapper objectMapper;
+	/** Provides Screening objects with Movie objects based on their movieId field. */
+	private final MovieGetter movieGetter;
 
 	/**
 	 * Creates a Data Access Object for JSON-based Screenings.
@@ -123,6 +126,7 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 
 		// Add each screening to the tree map and keep track of the greatest id
 		for (Screening screening : screeningArray) {
+			screening.setMovieGetter(movieGetter);
 			screenings.put(screening.getId(), screening);
 			if (screening.getId() > nextId) {
 				nextId = screening.getId();
@@ -140,8 +144,9 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 	public Screening createScreening (Screening screening) throws IOException {
 		synchronized (screenings) {
 			// We create a new screening object because the id field is immutable, and we need to assign the next unique id
-			Screening newScreening = new Screening(movieGetter, nextId(), screening.getMovieId(), screening.getTicketsRemaining(),
-			                                       screening.getDate(), screening.getTime());
+			Screening newScreening = new Screening(nextId(), screening.getMovieId(), screening.getTicketsRemaining(), screening.getDate(),
+			                                       screening.getTime());
+			newScreening.setMovieGetter(movieGetter);
 			screenings.put(newScreening.getId(), newScreening);
 			save(); // may throw an IOException
 			return newScreening;

@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -27,11 +26,9 @@ public class ScreeningTest {
 	/**
 	 * Before each test, we will create and inject a Mock Object Mapper to
 	 * isolate the tests from the underlying file
-	 *
-	 * @throws IOException if screeningFileDAO cannot read from fake file
 	 */
 	@BeforeEach
-	public void setupScreeningJSONDAO () throws IOException {
+	public void setupScreeningJSONDAO () {
 		mockMovieGetter = mock(MovieGetter.class);
 		testMovie = new Movie(104, "Star Wars: Episode IV – A New Hope", "1:45", "PG", 1977);
 		when(mockMovieGetter.getMovie(104)).thenReturn(testMovie);
@@ -47,7 +44,7 @@ public class ScreeningTest {
 		LocalTime time = LocalTime.parse("18:00");
 
 		// Invoke
-		Screening screening = new Screening(mockMovieGetter, id, movieId, tickets, date, time);
+		Screening screening = new Screening(id, movieId, tickets, date, time, mockMovieGetter);
 
 		// Analyze
 		assertEquals(id, screening.getId());
@@ -66,7 +63,7 @@ public class ScreeningTest {
 		int tickets = 10;
 		LocalDate date = LocalDate.parse("2023-01-17");
 		LocalTime time = LocalTime.parse("18:00");
-		Screening screening = new Screening(mockMovieGetter, id, movieId, tickets, date, time);
+		Screening screening = new Screening(id, movieId, tickets, date, time, mockMovieGetter);
 
 		// Invoke
 		int newMovieId = 105;
@@ -87,7 +84,7 @@ public class ScreeningTest {
 		int tickets = 10;
 		LocalDate date = LocalDate.parse("2023-01-17");
 		LocalTime time = LocalTime.parse("18:00");
-		Screening screening = new Screening(mockMovieGetter, id, movieId, tickets, date, time);
+		Screening screening = new Screening(id, movieId, tickets, date, time, mockMovieGetter);
 		String expected_string = String.format(Screening.STRING_FORMAT, id, movieId, tickets, date, time);
 
 		// Invoke

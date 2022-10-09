@@ -28,13 +28,13 @@ public class Movie {
 	@JsonProperty("year") private int year;
 
 	/**
-	 * Create a Movie object with the given information.
+	 * Create a Movie object with the given information
 	 *
-	 * @param id        The id of this movie.
-	 * @param title     The title of the movie.
-	 * @param runtime   The runtime of the movie.
-	 * @param mpaRating The Motion Pictures Association (MPA) rating of the movie.
-	 * @param year      The year the movie was released.
+	 * @param id        The id of this movie
+	 * @param title     The title of the movie
+	 * @param runtime   The runtime of the movie
+	 * @param mpaRating The Motion Pictures Association (MPA) rating of the movie
+	 * @param year      The year the movie was released
 	 *                  <p>
 	 *                  {@literal @}JsonProperty is used in serialization and deserialization
 	 *                  of the JSON object to the Java object in mapping the fields.  If a field
@@ -52,35 +52,35 @@ public class Movie {
 	}
 
 	/**
-	 * @return The id of this movie.
+	 * @return The id of this movie
 	 */
 	public int getId () {
 		return id;
 	}
 
 	/**
-	 * @return The title of the movie.
+	 * @return The title of the movie
 	 */
 	public String getTitle () {
 		return title;
 	}
 
 	/**
-	 * @return The runtime of the movie.
+	 * @return The runtime of the movie
 	 */
 	public String getRuntime () {
 		return runtime;
 	}
 
 	/**
-	 * @return The Motion Pictures Association (MPA) rating of the movie.
+	 * @return The Motion Pictures Association (MPA) rating of the movie
 	 */
 	public String getMpaRating () {
 		return mpaRating;
 	}
 
 	/**
-	 * @return The year the movie was released.
+	 * @return The year the movie was released
 	 */
 	public int getYear () {
 		return year;

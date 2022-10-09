@@ -39,8 +39,7 @@ public class MovieJSONDAO implements MovieDAO {
 	 * @param objectMapper Provides JSON Object to/from Java Object serialization and deserialization
 	 * @throws IOException when file cannot be accessed or read from
 	 */
-	public MovieJSONDAO (@Value("${movies.file}") String filename, ObjectMapper objectMapper)
-		throws IOException {
+	public MovieJSONDAO (@Value("${movies.file}") String filename, ObjectMapper objectMapper) throws IOException {
 		this.filename = filename;
 		this.objectMapper = objectMapper;
 		load();  // load the movies from the file

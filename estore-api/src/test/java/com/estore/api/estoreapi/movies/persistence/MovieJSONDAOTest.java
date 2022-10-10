@@ -34,9 +34,9 @@ public class MovieJSONDAOTest {
 	public void setupMovieJSONDAO () throws IOException {
 		mockObjectMapper = mock(ObjectMapper.class);
 		testMovies = new Movie[3];
-		testMovies[0] = new Movie(104, "Star Wars: Episode IV – A New Hope", "1:45", "PG", 1977);
-		testMovies[1] = new Movie(105, "Star Wars: Episode V – The Empire Strikes Back", "2:04", "PG", 1980);
-		testMovies[2] = new Movie(106, "Star Wars: Episode VI - Return of the Jedi", "2:11", "PG", 1983);
+		testMovies[0] = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", "1:45", "PG", 1977);
+		testMovies[1] = new Movie(105, "Star Wars: Episode V – The Empire Strikes Back", "death/star/2/plans.jpg", "2:04", "PG", 1980);
+		testMovies[2] = new Movie(106, "Star Wars: Episode VI - Return of the Jedi", "death/star/3/plans.jpg", "2:11", "PG", 1983);
 
 		// When the object mapper is supposed to read from the file the mock object mapper will return the movie array above
 		when(mockObjectMapper.readValue(new File("mao-zedongs-little-red-book.epub"), Movie[].class)).thenReturn(testMovies);
@@ -91,7 +91,7 @@ public class MovieJSONDAOTest {
 	@Test
 	public void testCreateMovie () {
 		// Setup
-		Movie movie = new Movie(107, "Star Wars: The Force Awakens", "2:16", "PG-13", 2015);
+		Movie movie = new Movie(107, "Star Wars: The Force Awakens", "death/star/4/plans.jpg", "2:16", "PG-13", 2015);
 
 		// Invoke
 		Movie result = assertDoesNotThrow(() -> movieFileDAO.createMovie(movie), "Unexpected exception thrown");
@@ -108,7 +108,7 @@ public class MovieJSONDAOTest {
 	@Test
 	public void testUpdateMovie () {
 		// Setup
-		Movie movie = new Movie(104, "Star Wars: The Force Awakens", "2:16", "PG-13", 2015);
+		Movie movie = new Movie(104, "Star Wars: The Force Awakens", "death/star/4/plans.jpg", "2:16", "PG-13", 2015);
 
 		// Invoke
 		Movie result = assertDoesNotThrow(() -> movieFileDAO.updateMovie(movie), "Unexpected exception thrown");
@@ -123,7 +123,7 @@ public class MovieJSONDAOTest {
 	public void testSaveException () throws IOException {
 		doThrow(new IOException()).when(mockObjectMapper).writeValue(any(File.class), any(Movie[].class));
 
-		Movie movie = new Movie(107, "Star Wars: The Force Awakens", "2:16", "PG-13", 2015);
+		Movie movie = new Movie(107, "Star Wars: The Force Awakens", "death/star/4/plans.jpg", "2:16", "PG-13", 2015);
 
 		assertThrows(IOException.class, () -> movieFileDAO.createMovie(movie), "IOException not thrown");
 	}
@@ -150,7 +150,7 @@ public class MovieJSONDAOTest {
 	@Test
 	public void testUpdateMovieNotFound () {
 		// Setup
-		Movie movie = new Movie(103, "Star Wars: The Force Awakens", "2:16", "PG-13", 2015);
+		Movie movie = new Movie(103, "Star Wars: The Force Awakens", "death/star/4/plans.jpg", "2:16", "PG-13", 2015);
 
 		// Invoke
 		Movie result = assertDoesNotThrow(() -> movieFileDAO.updateMovie(movie), "Unexpected exception thrown");

@@ -30,7 +30,7 @@ public class ScreeningTest {
 	@BeforeEach
 	public void setupScreeningJSONDAO () {
 		mockMovieGetter = mock(MovieGetter.class);
-		testMovie = new Movie(104, "Star Wars: Episode IV – A New Hope", "1:45", "PG", 1977);
+		testMovie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", "1:45", "PG", 1977);
 		when(mockMovieGetter.getMovie(104)).thenReturn(testMovie);
 	}
 
@@ -67,7 +67,7 @@ public class ScreeningTest {
 
 		// Invoke
 		int newMovieId = 105;
-		Movie newMovie = new Movie(newMovieId, "Star Wars: Episode V – The Empire Strikes Back", "2:04", "PG", 1980);
+		Movie newMovie = new Movie(newMovieId, "Star Wars: Episode V – The Empire Strikes Back", "death/star/2/plans.jpg", "2:04", "PG", 1980);
 		when(mockMovieGetter.getMovie(newMovieId)).thenReturn(newMovie);
 		screening.setMovieId(newMovieId);
 

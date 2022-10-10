@@ -139,7 +139,7 @@ public class MovieJSONDAO implements MovieDAO {
 	public Movie createMovie (Movie movie) throws IOException {
 		synchronized (movies) {
 			// We create a new movie object because the id field is immutable, and we need to assign the next unique id
-			Movie newMovie = new Movie(nextId(), movie.getTitle(), movie.getRuntime(), movie.getMpaRating(), movie.getYear());
+			Movie newMovie = new Movie(nextId(), movie.getTitle(), movie.getPoster(), movie.getRuntime(), movie.getMpaRating(), movie.getYear());
 			movies.put(newMovie.getId(), newMovie);
 			save(); // may throw an IOException
 			return newMovie;

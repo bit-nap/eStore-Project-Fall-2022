@@ -16,17 +16,19 @@ public class MovieTest {
 	public void testCtor () {
 		// Setup
 		int id = 99;
-		String name = "Star Wars: Episode IV – A New Hope";
+		String title = "Star Wars: Episode IV – A New Hope";
+		String poster = "death/star/plans.jpg";
 		String runtime = "1:45";
 		String mpaRating = "PG";
 		int year = 1977;
 
 		// Invoke
-		Movie movie = new Movie(id, name, runtime, mpaRating, year);
+		Movie movie = new Movie(id, title, poster, runtime, mpaRating, year);
 
 		// Analyze
 		assertEquals(id, movie.getId());
-		assertEquals(name, movie.getTitle());
+		assertEquals(title, movie.getTitle());
+		assertEquals(poster, movie.getPoster());
 		assertEquals(runtime, movie.getRuntime());
 		assertEquals(mpaRating, movie.getMpaRating());
 		assertEquals(year, movie.getYear());
@@ -37,13 +39,14 @@ public class MovieTest {
 		// Setup
 		int id = 99;
 		String title = "Star Wars: Episode IV – A New Hope";
+		String poster = "death/star/plans.jpg";
 		String runtime = "1:45";
 		String mpaRating = "PG";
 		int year = 1977;
 		String expected_string = String.format(Movie.STRING_FORMAT, id, title, runtime, mpaRating, year);
 
 		// Invoke
-		Movie movie = new Movie(id, title, runtime, mpaRating, year);
+		Movie movie = new Movie(id, title, poster, runtime, mpaRating, year);
 		String actual_string = movie.toString();
 
 		// Analyze

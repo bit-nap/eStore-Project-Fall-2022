@@ -13,8 +13,7 @@ import java.util.TreeMap;
 import java.util.logging.Logger;
 
 /**
- * Implements the functionality for JSON file-based persistence for Movies.
- * <p>
+ * Implements the functionality for JSON file-based persistence for Movies.<p>
  * {@literal @}Component Spring annotation instantiates a single instance of this
  * class and injects the instance into other classes as needed
  *
@@ -22,16 +21,19 @@ import java.util.logging.Logger;
  */
 @Component
 public class MovieJSONDAO implements MovieDAO {
-	/** TODO: Add description of the purpose of Logger, once it's actually used. */
-	private static final Logger LOG = Logger.getLogger(MovieJSONDAO.class.getName());
 	/** A local cache of Movie objects, to avoid reading from file each time. */
 	Map<Integer, Movie> movies;
-	/** Provides conversion between Java Movie and JSON Movie objects. */
-	private ObjectMapper objectMapper;
+
+	/** TODO: Add description of the purpose of Logger, once it's actually used. */
+	private static final Logger LOG = Logger.getLogger(MovieJSONDAO.class.getName());
+
 	/** The next id to assign to a new movie. */
 	private static int nextId;
+
 	/** Name of the file to read and write to. */
-	private String filename;
+	private final String filename;
+	/** Provides conversion between Java Movie and JSON Movie objects. */
+	private final ObjectMapper objectMapper;
 
 	/**
 	 * Creates a Data Access Object for JSON-based Movies.
@@ -40,8 +42,7 @@ public class MovieJSONDAO implements MovieDAO {
 	 * @param objectMapper Provides JSON Object to/from Java Object serialization and deserialization
 	 * @throws IOException when file cannot be accessed or read from
 	 */
-	public MovieJSONDAO (@Value("${movies.file}") String filename, ObjectMapper objectMapper)
-		throws IOException {
+	public MovieJSONDAO (@Value("${movies.file}") String filename, ObjectMapper objectMapper) throws IOException {
 		this.filename = filename;
 		this.objectMapper = objectMapper;
 		load();  // load the movies from the file
@@ -71,16 +72,15 @@ public class MovieJSONDAO implements MovieDAO {
 	 * Generates an array of {@linkplain Movie movies} from the tree map for any
 	 * {@linkplain Movie movies} that contains the movie title specified by text argument.
 	 *
-	 * @param text The text to find within a {@link Movie movies} movie
-	 *             <p>
+	 * @param text The text to find within a {@link Movie movies} movie<p>
 	 *             If text is null, the array contains all of the {@linkplain Movie movies} in the tree map.
-	 * @return The array of {@link Novie movies}, may be empty
+	 * @return The array of {@link Movie movies}, may be empty
 	 */
 	private Movie[] getMoviesArray (String text) {
 		ArrayList<Movie> movieArrayList = new ArrayList<>();
 
 		for (Movie movie : movies.values()) {
-			if (text == null || movie.getMovie().contains(text)) {
+			if (text == null || movie.getTitle().contains(text)) {
 				movieArrayList.add(movie);
 			}
 		}
@@ -99,16 +99,14 @@ public class MovieJSONDAO implements MovieDAO {
 	private boolean save () throws IOException {
 		Movie[] movieArray = getMoviesArray();
 
-		// Serializes the Java Objects to JSON objects into the file
-		// writeValue will throw an IOException if there is an issue
-		// with the file or reading from the file
+		// Serializes the Java Objects to JSON objects into the file,
+		// writeValue will throw an IOException if there is an issue with or reading from the file
 		objectMapper.writeValue(new File(filename), movieArray);
 		return true;
 	}
 
 	/**
-	 * Loads {@linkplain Movie movies} from the JSON file into the map.
-	 * <br>
+	 * Loads {@linkplain Movie movies} from the JSON file into the map.<br>
 	 * Also sets this object's nextId to one more than the greatest id found in the file.
 	 *
 	 * @return true if the file was read successfully
@@ -118,9 +116,8 @@ public class MovieJSONDAO implements MovieDAO {
 		movies = new TreeMap<>();
 		nextId = 0;
 
-		// Deserializes the JSON objects from the file into an array of movies
-		// readValue will throw an IOException if there's an issue with the file
-		// or reading from the file
+		// Deserializes the JSON objects from the file into an array of movies,
+		// readValue will throw an IOException if there's an issue with or reading from the file
 		Movie[] movieArray = objectMapper.readValue(new File(filename), Movie[].class);
 
 		// Add each movie to the tree map and keep track of the greatest id
@@ -139,45 +136,10 @@ public class MovieJSONDAO implements MovieDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public Movie[] getMovies () {
-		synchronized (movies) {
-			return getMoviesArray();
-		}
-	}
-
-	/**
-	 * * {@inheritDoc}
-	 */
-	@Override
-	public Movie[] findMovies (String text) {
-		synchronized (movies) {
-			return getMoviesArray(text);
-		}
-	}
-
-	/**
-	 * * {@inheritDoc}
-	 */
-	@Override
-	public Movie getMovie (int id) {
-		synchronized (movies) {
-			if (movies.containsKey(id)) {
-				return movies.get(id);
-			} else {
-				return null;
-			}
-		}
-	}
-
-	/**
-	 * * {@inheritDoc}
-	 */
-	@Override
 	public Movie createMovie (Movie movie) throws IOException {
 		synchronized (movies) {
-			// We create a new movie object because the id field is immutable,
-			// and we need to assign the next unique id
-			Movie newMovie = new Movie(nextId(), movie.getMovie());
+			// We create a new movie object because the id field is immutable, and we need to assign the next unique id
+			Movie newMovie = new Movie(nextId(), movie.getTitle(), movie.getPoster(), movie.getRuntime(), movie.getMpaRating(), movie.getYear());
 			movies.put(newMovie.getId(), newMovie);
 			save(); // may throw an IOException
 			return newMovie;
@@ -212,6 +174,40 @@ public class MovieJSONDAO implements MovieDAO {
 			} else {
 				return false;
 			}
+		}
+	}
+
+	/**
+	 * * {@inheritDoc}
+	 */
+	@Override
+	public Movie getMovie (int id) {
+		synchronized (movies) {
+			if (movies.containsKey(id)) {
+				return movies.get(id);
+			} else {
+				return null;
+			}
+		}
+	}
+
+	/**
+	 * * {@inheritDoc}
+	 */
+	@Override
+	public Movie[] getMovies () {
+		synchronized (movies) {
+			return getMoviesArray();
+		}
+	}
+
+	/**
+	 * * {@inheritDoc}
+	 */
+	@Override
+	public Movie[] findMovies (String text) {
+		synchronized (movies) {
+			return getMoviesArray(text);
 		}
 	}
 }

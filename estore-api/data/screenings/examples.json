@@ -1,0 +1,30 @@
+[
+	{
+		"id": 101,
+		"movieId": 23,
+		"ticketsRemaining": 4,
+		"date": "2023-01-24",
+		"time": "16:00"
+	},
+	{
+		"id": 102,
+		"movieId": 20,
+		"ticketsRemaining": 4,
+		"date": "2023-01-24",
+		"time": "18:00"
+	},
+	{
+		"id": 103,
+		"movieId": 9,
+		"ticketsRemaining": 4,
+		"date": "2023-01-24",
+		"time": "20:00"
+	},
+	{
+		"id": 104,
+		"movieId": 1,
+		"ticketsRemaining": 4,
+		"date": "2023-01-24",
+		"time": "22:00"
+	}
+]

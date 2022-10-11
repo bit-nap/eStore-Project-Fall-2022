@@ -75,6 +75,40 @@ public class MovieControllerTest {
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
 	}
 
+	/**
+	 * Method to test if getting all of the movies works
+	 * @throws Exception if something goes wrong with the http request
+	 */
+	@Test
+	public void testGetMovies () throws Exception {
+		// New list of movies
+		Movie movies[] = new Movie[3];
+		movies[0] = new Movie(1, "The Godfather", null, "60", "R", 1972);
+		movies[0] = new Movie(2, "The Godfather II", null, "90", "R", 1974);
+		movies[0] = new Movie(3, "The Godfather III", null, "80", "R", 1990);
+		// When getMovies is called, return the list of movies from above
+		when(mockMovieDao.getMovies()).thenReturn(movies);
+
+		ResponseEntity<Movie[]> response = movieController.getMovies();
+
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertEquals(movies, response.getBody());
+	}
+
+	/**
+	 * Test to make sure the exception is handled when getMovies throws one
+	 * @throws Exception if something goes wrong with Http request
+	 */
+	@Test
+	public void testGetMoviesHandleException() throws Exception {
+		// Throw an expection when the get movies method is called
+		doThrow(new IOException()).when(mockMovieDao).getMovies();
+
+		ResponseEntity<Movie[]> response = movieController.getMovies();
+
+		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+	}
+
 	@Test
 	public void testCreateMovie () throws IOException {
 		// setup

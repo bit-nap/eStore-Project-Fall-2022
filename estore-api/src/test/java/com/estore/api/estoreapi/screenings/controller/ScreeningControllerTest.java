@@ -85,6 +85,40 @@ public class ScreeningControllerTest {
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
 	}
 
+	/**
+	 * Method to test if getting all of the screenings works
+	 * @throws Exception if something goes wrong with the http request
+	 */
+	@Test
+	public void testGetScreenings () throws Exception {
+		// New list of screenings
+		Screening screenings[] = new Screening[3];
+		screenings[0] = new Screening(1, 1, 80, LocalDate.now(), LocalTime.now());
+		screenings[0] = new Screening(2, 2, 50, LocalDate.now(), LocalTime.now());
+		screenings[0] = new Screening(2, 2, 20, LocalDate.now(), LocalTime.now());
+		// When getScreenings is called, return the list of screenings from above
+		when(mockScreeningDao.getScreenings()).thenReturn(screenings);
+
+		ResponseEntity<Screening[]> response = screeningController.getScreenings();
+
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertEquals(screenings, response.getBody());
+	}
+
+	/**
+	 * Test to make sure the exception is handled when getScreenings throws one
+	 * @throws Exception if something goes wrong with Http request
+	 */
+	@Test
+	public void testGetScreeningsHandleException() throws Exception {
+		// Throw an expection when the get screenings method is called
+		doThrow(new IOException()).when(mockScreeningDao).getScreenings();
+
+		ResponseEntity<Screening[]> response = screeningController.getScreenings();
+
+		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+	}
+
 	@Test
 	public void testCreateScreening () throws IOException {
 		// setup

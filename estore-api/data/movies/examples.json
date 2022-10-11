@@ -3,7 +3,7 @@
 		"id": 101,
 		"title": "Howard the Duck",
 		"poster": null,
-		"runtime": "1:51",
+		"runtime": 111,
 		"mpaRating": "PG",
 		"year": 1986
 	},
@@ -11,7 +11,7 @@
 		"id": 102,
 		"title": "Reservoir Dogs",
 		"poster": null,
-		"runtime": "1:39",
+		"runtime": 99,
 		"mpaRating": "R",
 		"year": 1992
 	},
@@ -19,7 +19,7 @@
 		"id": 103,
 		"title": "The Godfather: Part III",
 		"poster": null,
-		"runtime": "2:42",
+		"runtime": 162,
 		"mpaRating": "R",
 		"year": 1990
 	},
@@ -27,7 +27,7 @@
 		"id": 104,
 		"title": "Star Wars: Episode IV – A New Hope",
 		"poster": null,
-		"runtime": "1:45",
+		"runtime": 105,
 		"mpaRating": "PG",
 		"year": 1977
 	},
@@ -35,7 +35,7 @@
 		"id": 105,
 		"title": "Star Wars: Episode V – The Empire Strikes Back",
 		"poster": null,
-		"runtime": "2:04",
+		"runtime": 124,
 		"mpaRating": "PG",
 		"year": 1980
 	},
@@ -43,7 +43,7 @@
 		"id": 106,
 		"title": "Star Wars: Episode VI - Return of the Jedi",
 		"poster": null,
-		"runtime": "2:11",
+		"runtime": 131,
 		"mpaRating": "PG",
 		"year": 1983
 	}

@@ -36,7 +36,7 @@ public class ScreeningControllerTest {
 		mockScreeningDao = mock(ScreeningDAO.class);
 		screeningController = new ScreeningController(mockScreeningDao);
 
-		Movie testMovie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", "1:45", "PG", 1977);
+		Movie testMovie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
 		mockMovieGetter = mock(MovieGetter.class);
 		when(mockMovieGetter.getMovie(104)).thenReturn(testMovie);
 		when(mockMovieGetter.getMovie(105)).thenReturn(testMovie);

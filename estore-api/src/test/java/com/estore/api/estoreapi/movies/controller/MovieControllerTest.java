@@ -35,7 +35,7 @@ public class MovieControllerTest {
 	@Test
 	public void testGetMovie () throws IOException {
 		// setup
-		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", "1:45", "PG", 1977);
+		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
 		// when the same id is passed in, our mock movie DAO will return the Movie object
 		when(mockMovieDao.getMovie(movie.getId())).thenReturn(movie);
 
@@ -84,9 +84,9 @@ public class MovieControllerTest {
 	public void testGetMovies () throws Exception {
 		// New list of movies
 		Movie[] movies = new Movie[3];
-		movies[0] = new Movie(1, "The Godfather", null, "60", "R", 1972);
-		movies[1] = new Movie(2, "The Godfather II", null, "90", "R", 1974);
-		movies[2] = new Movie(3, "The Godfather III", null, "80", "R", 1990);
+		movies[0] = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
+		movies[1] = new Movie(105, "Star Wars: Episode V – The Empire Strikes Back", "death/star/2/plans.jpg", 124, "PG", 1980);
+		movies[2] = new Movie(106, "Star Wars: Episode VI - Return of the Jedi", "death/star/3/plans.jpg", 131, "PG", 1983);
 		// When getMovies is called, return the list of movies from above
 		when(mockMovieDao.getMovies()).thenReturn(movies);
 
@@ -114,7 +114,7 @@ public class MovieControllerTest {
 	@Test
 	public void testCreateMovie () throws IOException {
 		// setup
-		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", "1:45", "PG", 1977);
+		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
 		// when createMovie is called, return true simulating successful creation and save
 		when(mockMovieDao.createMovie(movie)).thenReturn(movie);
 
@@ -129,7 +129,7 @@ public class MovieControllerTest {
 	@Test
 	public void testCreateMovieFailed () throws IOException {
 		// setup
-		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", "1:45", "PG", 1977);
+		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
 		// when createMovie is called, return false simulating failed creation and save
 		when(mockMovieDao.createMovie(movie)).thenReturn(null);
 
@@ -143,7 +143,7 @@ public class MovieControllerTest {
 	@Test
 	public void testCreateMovieHandleException () throws IOException {
 		// setup
-		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", "1:45", "PG", 1977);
+		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
 
 		// when createMovie is called, throw an IOException
 		doThrow(new IOException()).when(mockMovieDao).createMovie(movie);
@@ -160,9 +160,9 @@ public class MovieControllerTest {
 		// Setup
 		String searchString = "Star Wars";
 		Movie[] foundMovies = new Movie[3];
-		foundMovies[0] = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", "1:45", "PG", 1977);
-		foundMovies[1] = new Movie(105, "Star Wars: Episode V – The Empire Strikes Back", "death/star/2/plans.jpg", "2:04", "PG", 1980);
-		foundMovies[2] = new Movie(106, "Star Wars: Episode VI - Return of the Jedi", "death/star/3/plans.jpg", "2:11", "PG", 1983);
+		foundMovies[0] = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
+		foundMovies[1] = new Movie(105, "Star Wars: Episode V – The Empire Strikes Back", "death/star/2/plans.jpg", 124, "PG", 1980);
+		foundMovies[2] = new Movie(106, "Star Wars: Episode VI - Return of the Jedi", "death/star/3/plans.jpg", 131, "PG", 1983);
 
 		// When findMovies is called with the search string, return the three movies above
 		when(mockMovieDao.findMovies(searchString)).thenReturn(foundMovies);
@@ -192,7 +192,7 @@ public class MovieControllerTest {
 	@Test
 	public void testUpdateMovie () throws IOException {
 		// Setup
-		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", "1:45", "PG", 1977);
+		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
 		// when updateMovie is called, return true simulating successful update and save
 		when(mockMovieDao.updateMovie(movie)).thenReturn(movie);
 
@@ -207,7 +207,7 @@ public class MovieControllerTest {
 	@Test
 	public void testUpdateMovieExceptionNotFound () throws IOException {
 		// Setup
-		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", "1:45", "PG", 1977);
+		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
 		// when updateMovie is called, return true simulating successful update and save
 		when(mockMovieDao.updateMovie(movie)).thenReturn(null);
 
@@ -221,7 +221,7 @@ public class MovieControllerTest {
 	@Test
 	public void testUpdateMovieHandleException () throws IOException {
 		// Setup
-		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", "1:45", "PG", 1977);
+		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
 		// When updateMovie is called on the Mock Movie DAO, throw an IOException
 		doThrow(new IOException()).when(mockMovieDao).updateMovie(movie);
 

@@ -1,15 +1,15 @@
 <h2>Movies</h2>
 <ul class="movies">
   <li *ngFor="let movie of movies">
-    <button [class.selected]="movie == selectedMovie" type="button" (click)="onSelect(movie)">
+    <button [class.selected]="movie === selectedMovie" type="button" (click)="onSelect(movie)">
       <span style="padding-right:3px; padding-top: 3px; display:block;">
-        <img class="movieImg" src={{movie.poster}}></img>
+        <img class="movieImg" src={{movie.poster}} />
       </span>
-      <span class="id">{{movies.id}}</span>
-      <span class="title">{{movies.title}}</span>
-      <span class="runtime">{{movies.runtime}}</span>
-      <span class="mpaRating">{{movies.mpaRating}}</span>
-      <span class="year">{{movies.year}}</span>
+      <span class="id">{{movie.id}}</span>
+      <span class="title">{{movie.title}}</span>
+      <span class="runtime">{{movie.runtime}}</span>
+      <span class="mpaRating">{{movie.mpaRating}}</span>
+      <span class="year">{{movie.year}}</span>
     </button>
   </li>
 </ul>

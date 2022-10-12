@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Movies } from '../Movies' // Import the interface made for the values of the movie
 
@@ -11,7 +11,7 @@ import { Movies } from '../Movies' // Import the interface made for the values o
 export class MoviesComponent implements OnInit {
 
   movies: Movies[] = [];
-  selectedMovie?: Movies;
+  @Input() selectedMovie?: Movies;
 
   constructor(private http: HttpClient) { }
 

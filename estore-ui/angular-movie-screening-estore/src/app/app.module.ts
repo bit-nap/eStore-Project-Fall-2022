@@ -8,6 +8,8 @@ import { MoviesComponent } from './movies/movies.component';
 // Http component added for angular so that we can make cURL requests from the server
 import { HttpClientModule } from '@angular/common/http';
 
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule //Http module to allow us to make the cURL calls
+    HttpClientModule, //Http module to allow us to make the cURL calls
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,7 +2,7 @@
 	{
 		"id": 1,
 		"title": "The Terminator",
-		"poster": "data/movies/posters/terminator.jpg",
+		"poster": "../../../../estore-api/data/movies/posters/terminator.jpg",
 		"runtime": "1:47",
 		"mpaRating": "R",
 		"year": 1984

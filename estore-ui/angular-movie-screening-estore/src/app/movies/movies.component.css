@@ -4,6 +4,8 @@
   list-style-type: none;
   padding: 0;
   width: 15em;
+  margin-right: 2em;
+  break-inside: avoid;
 }
 
 .movies li {
@@ -18,10 +20,11 @@
   background-color: #EEE;
   margin: .5em;
   padding: 0;
-  border-radius: 4px;
-  display: flex;
+  border-radius: 10px;
+  display: inline-flex;
   align-items: stretch;
-  height: 1.8em;
+  height: 4em;
+  margin-right: 2em;
 }
 
 .movies button:hover {
@@ -52,27 +55,58 @@
 
 .movies .id {
   display: inline-block;
-  font-size: small;
-  color: white;
+  font-size: medium;
+  color: black;
   padding: 0.8em 0.7em 0 0.7em;
-  background-color: #405061;
+  background-color: #EEE;
   line-height: 1em;
   margin-right: .8em;
   border-radius: 4px 0 0 4px;
 }
 
 .movies .title {
-  align-self: center;
+  display: inline-block;
+  font-size: medium;
+  color: white;
+  padding: 0.8em 8em 0 5em;
+  background-color: #152ac7;
+  line-height: 1em;
+  margin-right: .8em;
+  border-radius: 4px 0 0 4px;
+  white-space: nowrap;
 }
 
 .movies .runtime {
-  align-self: center;
+  display: inline-block;
+  font-size: small;
+  color: black;
+  padding: 0.8em 0.7em 0 0.7em;
+  background-color: #EEE;
+  line-height: 1em;
+  margin-right: .8em;
+  border-radius: 4px 0 0 4px;
 }
 
-.movies .mpaRatin {
-  align-self: center;
+.movies .mpaRating {
+  text-align: center;
+  display: inline;
+  font-size: small;
+  color: black;
+  padding: 0.8em 3em 0 1.5em;
+  background-color: #EEE;
+  line-height: 1em;
+  margin-right: 2em;
+  border-radius: 4px 0 0 4px;
+  white-space: nowrap;
 }
 
 .movies .year {
-  align-self: center;
+  display: inline-block;
+  font-size: small;
+  color: black;
+  padding: 0.8em 0.7em 0 0.7em;
+  background-color: #EEE;
+  line-height: 1em;
+  margin-right: .8em;
+  border-radius: 4px 0 0 4px;
 }

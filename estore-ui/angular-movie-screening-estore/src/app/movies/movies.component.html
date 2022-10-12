@@ -3,7 +3,7 @@
   <li *ngFor="let movie of movies">
     <button [class.selected]="movie === selectedMovie" type="button" (click)="onSelect(movie)">
       <span style="padding-right:3px; padding-top: 3px; display:block;">
-        <img class="movieImg" src={{movie.poster}} />
+        <img class="movieImg" src="{{movie.poster}}" />
       </span>
       <span class="id">{{movie.id}}</span>
       <span class="title">{{movie.title}}</span>

@@ -1,18 +1,15 @@
 <h2>Movies</h2>
-<ul class="movies">
-  <li *ngFor="let movie of movies">
-    <button [class.selected]="movie === selectedMovie" type="button" (click)="onSelect(movie)">
-      <span style="padding-right:3px; padding-top: 3px; display:block;">
-        <img class="movieImg" src="{{movie.poster}}" />
-      </span>
-      <span class="id">{{movie.id}}</span>
-      <span class="title">{{movie.title}}</span>
+<div class="movies" ng-init="getData()">
+  <button type="button" *ngFor="let movie of movies" class="movie_card" [class.selected]="movie === selectedMovie" (click)="onSelect(movie)">
+    <img class="movieImg" src="https://m.media-amazon.com/images/I/512HDmXOW3L._AC_.jpg" />
+    <div class="information-wrapper">
+      <h3 class="title">{{movie.title}}</h3>
+      <span class="year">{{movie.year}}</span>
       <span class="runtime">{{movie.runtime}}</span>
       <span class="mpaRating">{{movie.mpaRating}}</span>
-      <span class="year">{{movie.year}}</span>
-    </button>
-  </li>
-</ul>
+    </div>
+  </button>
+</div>
 
 <div *ngIf="selectedMovie">
   <h2>{{selectedMovie.title | uppercase}} Details</h2>

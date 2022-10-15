@@ -9,7 +9,7 @@ import { Movies } from '../Movies' // Import the interface made for the values o
   styleUrls: ['./movies.component.css'],
 })
 export class MoviesComponent implements OnInit {
-
+  imageSrc = "assets/batman-2.jpg";
   movies: Movies[] = [];
   @Input() selectedMovie?: Movies;
 

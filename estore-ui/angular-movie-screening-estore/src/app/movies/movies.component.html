@@ -1,7 +1,12 @@
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+</head>
 <h2>Movies</h2>
 <div class="movies" ng-init="getData()">
   <button type="button" *ngFor="let movie of movies" class="movie_card" [class.selected]="movie === selectedMovie" (click)="onSelect(movie)">
-    <img class="movieImg" src="https://m.media-amazon.com/images/I/512HDmXOW3L._AC_.jpg" />
+    <img class="movieImg" src="{{movie.poster}}" />
     <div class="information-wrapper">
       <h3 class="title">{{movie.title}}</h3>
       <span class="year">{{movie.year}}</span>

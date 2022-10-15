@@ -2,7 +2,7 @@
 	{
 		"id": 1,
 		"title": "The Terminator",
-		"poster": "../../../../estore-api/data/movies/posters/terminator.jpg",
+		"poster": "https://m.media-amazon.com/images/I/61qCgQZyhOL.jpg",
 		"runtime": "1:47",
 		"mpaRating": "R",
 		"year": 1984
@@ -10,7 +10,7 @@
 	{
 		"id": 2,
 		"title": "Terminator 2: Judgment Day",
-		"poster": "data/movies/posters/terminator-2.jpg",
+		"poster": "https://m.media-amazon.com/images/M/MV5BMGU2NzRmZjUtOGUxYS00ZjdjLWEwZWItY2NlM2JhNjkxNTFmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg",
 		"runtime": "2:32",
 		"mpaRating": "R",
 		"year": 1991

@@ -1,17 +1,37 @@
 /* Application-wide Styles */
+*{
+  margin: 0;
+}
 h1 {
   color: #369;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 250%;
+  font-size: 200%;
 }
 h2, h3 {
   color: #444;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: lighter;
 }
+header {
+  background-color: #fff;
+  height: 75px;
+  padding: 0 75px 0 75px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header-right_wrapper {
+  float: right;
+}
+header-right_wrapper input {
+  display: inline;
+  margin-right: 10px;
+}
 body {
-  margin: 2em;
-  background-color: #231942;
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
 }
 body, input[type="text"], button {
   color: #333;

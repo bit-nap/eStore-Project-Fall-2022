@@ -36,7 +36,7 @@ public class ScreeningControllerTest {
 		mockScreeningDao = mock(ScreeningDAO.class);
 		screeningController = new ScreeningController(mockScreeningDao);
 
-		Movie testMovie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", "1:45", "PG", 1977);
+		Movie testMovie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
 		mockMovieGetter = mock(MovieGetter.class);
 		when(mockMovieGetter.getMovie(104)).thenReturn(testMovie);
 		when(mockMovieGetter.getMovie(105)).thenReturn(testMovie);
@@ -82,6 +82,42 @@ public class ScreeningControllerTest {
 		ResponseEntity<Screening> response = screeningController.getScreening(screeningId);
 
 		// analyze
+		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+	}
+
+	/**
+	 * Method to test if getting all of the screenings works
+	 *
+	 * @throws Exception if something goes wrong with the http request
+	 */
+	@Test
+	public void testGetScreenings () throws Exception {
+		// New list of screenings
+		Screening[] screenings = new Screening[3];
+		screenings[0] = new Screening(1, 1, 80, LocalDate.now(), LocalTime.now());
+		screenings[1] = new Screening(2, 2, 50, LocalDate.now(), LocalTime.now());
+		screenings[2] = new Screening(3, 2, 20, LocalDate.now(), LocalTime.now());
+		// When getScreenings is called, return the list of screenings from above
+		when(mockScreeningDao.getScreenings()).thenReturn(screenings);
+
+		ResponseEntity<Screening[]> response = screeningController.getScreenings();
+
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertEquals(screenings, response.getBody());
+	}
+
+	/**
+	 * Test to make sure the exception is handled when getScreenings throws one
+	 *
+	 * @throws Exception if something goes wrong with Http request
+	 */
+	@Test
+	public void testGetScreeningsHandleException () throws Exception {
+		// Throw an exception when the get screenings method is called
+		doThrow(new IOException()).when(mockScreeningDao).getScreenings();
+
+		ResponseEntity<Screening[]> response = screeningController.getScreenings();
+
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
 	}
 

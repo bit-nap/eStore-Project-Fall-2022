@@ -84,7 +84,7 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 		ArrayList<Screening> screeningArrayList = new ArrayList<>();
 
 		for (Screening screening : screenings.values()) {
-			if (text == null || screening.getMovie().getTitle().contains(text)) {
+			if (text == null || screening.movieTitleContains(text)) {
 				screeningArrayList.add(screening);
 			}
 		}

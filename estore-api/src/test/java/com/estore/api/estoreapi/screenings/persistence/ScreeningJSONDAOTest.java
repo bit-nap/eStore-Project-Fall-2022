@@ -40,7 +40,7 @@ public class ScreeningJSONDAOTest {
 	public void setupScreeningJSONDAO () throws IOException {
 		mockObjectMapper = mock(ObjectMapper.class);
 		mockMovieGetter = mock(MovieGetter.class);
-		testMovie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", "1:45", "PG", 1977);
+		testMovie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
 		when(mockMovieGetter.getMovie(104)).thenReturn(testMovie);
 
 		testScreenings = new Screening[3];

@@ -23,7 +23,7 @@ public class Movie {
 	/** The path to the poster for this movie. */
 	@JsonProperty("poster") private String poster;
 	/** The runtime of this movie. */
-	@JsonProperty("runtime") private String runtime;
+	@JsonProperty("runtime") private int runtime;
 	/** The Motion Pictures Association (MPA) rating of this movie. */
 	@JsonProperty("mpaRating") private String mpaRating;
 	/** The year this movie was released. */
@@ -45,7 +45,7 @@ public class Movie {
 	 *                  value, i.e. 0 for int
 	 */
 	public Movie (@JsonProperty("id") int id, @JsonProperty("title") String title, @JsonProperty("poster") String poster,
-	              @JsonProperty("runtime") String runtime, @JsonProperty("mpaRating") String mpaRating, @JsonProperty("year") int year) {
+	              @JsonProperty("runtime") int runtime, @JsonProperty("mpaRating") String mpaRating, @JsonProperty("year") int year) {
 		this.id = id;
 		this.title = title;
 		this.poster = poster;
@@ -78,7 +78,7 @@ public class Movie {
 	/**
 	 * @return The runtime of this movie
 	 */
-	public String getRuntime () {
+	public int getRuntime () {
 		return runtime;
 	}
 

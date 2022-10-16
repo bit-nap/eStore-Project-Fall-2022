@@ -109,6 +109,17 @@ public class Screening {
 	}
 
 	/**
+	 * Check if this screening's movie contains the given text in its title.
+	 * Assumes this screening's movieGetter field has been correctly instantiated.
+	 *
+	 * @param text Text to search within this screening's movie.
+	 * @return True if given text is found in the movie title, else False
+	 */
+	public boolean movieTitleContains (String text) {
+		return movie.getTitle().contains(text);
+	}
+
+	/**
 	 * @return The id of this screening
 	 */
 	public int getId () {

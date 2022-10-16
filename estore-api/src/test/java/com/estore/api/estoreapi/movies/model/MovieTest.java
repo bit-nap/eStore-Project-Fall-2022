@@ -18,7 +18,7 @@ public class MovieTest {
 		int id = 99;
 		String title = "Star Wars: Episode IV – A New Hope";
 		String poster = "death/star/plans.jpg";
-		String runtime = "1:45";
+		int runtime = 105;
 		String mpaRating = "PG";
 		int year = 1977;
 
@@ -40,7 +40,7 @@ public class MovieTest {
 		int id = 99;
 		String title = "Star Wars: Episode IV – A New Hope";
 		String poster = "death/star/plans.jpg";
-		String runtime = "1:45";
+		int runtime = 105;
 		String mpaRating = "PG";
 		int year = 1977;
 		String expected_string = String.format(Movie.STRING_FORMAT, id, title, runtime, mpaRating, year);

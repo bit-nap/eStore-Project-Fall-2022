@@ -2,168 +2,168 @@
 	{
 		"id": 1,
 		"title": "The Terminator",
-		"poster": "assets/posters/terminator.jpg",
-		"runtime": "1:47",
+		"poster": "data/movies/posters/terminator.jpg",
+		"runtime": 107,
 		"mpaRating": "R",
 		"year": 1984
 	},
 	{
 		"id": 2,
 		"title": "Terminator 2: Judgment Day",
-		"poster": "assets/posters/terminator-2.jpg",
-		"runtime": "2:32",
+		"poster": "data/movies/posters/terminator-2.jpg",
+		"runtime": 152,
 		"mpaRating": "R",
 		"year": 1991
 	},
 	{
 		"id": 3,
 		"title": "Rambo: First Blood",
-		"poster": "assets/posters/rambo.jpg",
-		"runtime": "1:33",
+		"poster": "data/movies/posters/rambo.jpg",
+		"runtime": 93,
 		"mpaRating": "R",
 		"year": 1982
 	},
 	{
 		"id": 4,
 		"title": "Ghostbusters",
-		"poster": "assets/posters/ghostbusters.jpg",
-		"runtime": "1:45",
+		"poster": "data/movies/posters/ghostbusters.jpg",
+		"runtime": 105,
 		"mpaRating": "PG",
 		"year": 1984
 	},
 	{
 		"id": 5,
 		"title": "Back to the Future",
-		"poster": "assets/posters/bttf.jpg",
-		"runtime": "1:56",
+		"poster": "data/movies/posters/bttf.jpg",
+		"runtime": 116,
 		"mpaRating": "PG",
 		"year": 1985
 	},
 	{
 		"id": 6,
 		"title": "Back to the Future Part II",
-		"poster": "assets/posters/bttf-2.jpg",
-		"runtime": "1:48",
+		"poster": "data/movies/posters/bttf-2.jpg",
+		"runtime": 108,
 		"mpaRating": "PG",
 		"year": 1989
 	},
 	{
 		"id": 7,
 		"title": "Back to the Future Part III",
-		"poster": "assets/posters/bttf-3.jpg",
-		"runtime": "1:58",
+		"poster": "data/movies/posters/bttf-3.jpg",
+		"runtime": 118,
 		"mpaRating": "PG",
 		"year": 1990
 	},
 	{
 		"id": 8,
 		"title": "Rocky",
-		"poster": "assets/posters/rocky.jpg",
-		"runtime": "1:59",
+		"poster": "data/movies/posters/rocky.jpg",
+		"runtime": 119,
 		"mpaRating": "PG",
 		"year": 1976
 	},
 	{
 		"id": 9,
 		"title": "Rocky II",
-		"poster": "assets/posters/rocky-2.jpg",
-		"runtime": "1:59",
+		"poster": "data/movies/posters/rocky-2.jpg",
+		"runtime": 119,
 		"mpaRating": "PG",
 		"year": 1979
 	},
 	{
 		"id": 10,
 		"title": "Rocky III",
-		"poster": "assets/posters/rocky-3.jpg",
-		"runtime": "1:39",
+		"poster": "data/movies/posters/rocky-3.jpg",
+		"runtime": 99,
 		"mpaRating": "PG",
 		"year": 1982
 	},
 	{
 		"id": 11,
 		"title": "Rocky IV",
-		"poster": "assets/posters/rocky-4.jpg",
-		"runtime": "1:31",
+		"poster": "data/movies/posters/rocky-4.jpg",
+		"runtime": 91,
 		"mpaRating": "PG",
 		"year": 1985
 	},
 	{
 		"id": 12,
 		"title": "Die Hard",
-		"poster": "assets/posters/die-hard.jpg",
-		"runtime": "2:12",
+		"poster": "data/movies/posters/die-hard.jpg",
+		"runtime": 132,
 		"mpaRating": "R",
 		"year": 1988
 	},
 	{
 		"id": 13,
 		"title": "Rush Hour",
-		"poster": "assets/posters/rush-hour.jpg",
-		"runtime": "1:37",
+		"poster": "data/movies/posters/rush-hour.jpg",
+		"runtime": 97,
 		"mpaRating": "PG-13",
 		"year": 1998
 	},
 	{
 		"id": 14,
 		"title": "Pulp Fiction",
-		"poster": "assets/posters/pulp-fiction.jpg",
-		"runtime": "2:34",
+		"poster": "data/movies/posters/pulp-fiction.jpg",
+		"runtime": 154,
 		"mpaRating": "R",
 		"year": 1994
 	},
 	{
 		"id": 15,
 		"title": "Batman",
-		"poster": "assets/posters/batman.jpg",
-		"runtime": "2:06",
+		"poster": "data/movies/posters/batman.jpg",
+		"runtime": 126,
 		"mpaRating": "PG-13",
 		"year": 1989
 	},
 	{
 		"id": 16,
 		"title": "Batman Returns",
-		"poster": "assets/posters/batman-2.jpg",
-		"runtime": "2:06",
+		"poster": "data/movies/posters/batman-2.jpg",
+		"runtime": 126,
 		"mpaRating": "PG-13",
 		"year": 1992
 	},
 	{
 		"id": 17,
 		"title": "Ferris Bueller's Day Off",
-		"poster": "assets/posters/bueller.jpg",
-		"runtime": "1:38",
+		"poster": "data/movies/posters/bueller.jpg",
+		"runtime": 98,
 		"mpaRating": "PG-13",
 		"year": 1986
 	},
 	{
 		"id": 18,
 		"title": "The Godfather",
-		"poster": "assets/posters/godfather.jpg",
-		"runtime": "2:55",
+		"poster": "data/movies/posters/godfather.jpg",
+		"runtime": 175,
 		"mpaRating": "R",
 		"year": 1972
 	},
 	{
 		"id": 19,
 		"title": "The Godfather: Part II",
-		"poster": "assets/posters/godfather-2.jpg",
-		"runtime": "3:22",
+		"poster": "data/movies/posters/godfather-2.jpg",
+		"runtime": 202,
 		"mpaRating": "R",
 		"year": 1974
 	},
 	{
 		"id": 20,
 		"title": "Men in Black",
-		"poster": "assets/posters/mib.jpg",
-		"runtime": "1:38",
+		"poster": "data/movies/posters/mib.jpg",
+		"runtime": 98,
 		"mpaRating": "PG-13",
 		"year": 1997
 	},
 	{
 		"id": 21,
 		"title": "The Matrix",
-		"poster": "assets/posters/matrix.jpg",
-		"runtime": "2:16",
+		"poster": "data/movies/posters/matrix.jpg",
+		"runtime": 136,
 		"mpaRating": "R",
 		"year": 1999
 	}

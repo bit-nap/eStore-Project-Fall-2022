@@ -2,15 +2,15 @@
 	{
 		"id": 1,
 		"title": "The Terminator",
-		"poster": "data/movies/posters/terminator.jpg",
+		"poster": "assets/posters/terminator.jpg",
 		"runtime": 107,
 		"mpaRating": "R",
 		"year": 1984
-	},
+	},	
 	{
 		"id": 2,
 		"title": "Terminator 2: Judgment Day",
-		"poster": "data/movies/posters/terminator-2.jpg",
+		"poster": "assets/posters/terminator-2.jpg",
 		"runtime": 152,
 		"mpaRating": "R",
 		"year": 1991
@@ -18,7 +18,7 @@
 	{
 		"id": 3,
 		"title": "Rambo: First Blood",
-		"poster": "data/movies/posters/rambo.jpg",
+		"poster": "assets/posters/rambo.jpg",
 		"runtime": 93,
 		"mpaRating": "R",
 		"year": 1982
@@ -26,7 +26,7 @@
 	{
 		"id": 4,
 		"title": "Ghostbusters",
-		"poster": "data/movies/posters/ghostbusters.jpg",
+		"poster": "assets/posters/ghostbusters.jpg",
 		"runtime": 105,
 		"mpaRating": "PG",
 		"year": 1984
@@ -34,7 +34,7 @@
 	{
 		"id": 5,
 		"title": "Back to the Future",
-		"poster": "data/movies/posters/bttf.jpg",
+		"poster": "assets/posters/bttf.jpg",
 		"runtime": 116,
 		"mpaRating": "PG",
 		"year": 1985
@@ -42,7 +42,7 @@
 	{
 		"id": 6,
 		"title": "Back to the Future Part II",
-		"poster": "data/movies/posters/bttf-2.jpg",
+		"poster": "assets/posters/bttf-2.jpg",
 		"runtime": 108,
 		"mpaRating": "PG",
 		"year": 1989
@@ -50,7 +50,7 @@
 	{
 		"id": 7,
 		"title": "Back to the Future Part III",
-		"poster": "data/movies/posters/bttf-3.jpg",
+		"poster": "assets/posters/bttf-3.jpg",
 		"runtime": 118,
 		"mpaRating": "PG",
 		"year": 1990
@@ -58,7 +58,7 @@
 	{
 		"id": 8,
 		"title": "Rocky",
-		"poster": "data/movies/posters/rocky.jpg",
+		"poster": "assets/posters/rocky.jpg",
 		"runtime": 119,
 		"mpaRating": "PG",
 		"year": 1976
@@ -66,7 +66,7 @@
 	{
 		"id": 9,
 		"title": "Rocky II",
-		"poster": "data/movies/posters/rocky-2.jpg",
+		"poster": "assets/posters/rocky-2.jpg",
 		"runtime": 119,
 		"mpaRating": "PG",
 		"year": 1979
@@ -74,7 +74,7 @@
 	{
 		"id": 10,
 		"title": "Rocky III",
-		"poster": "data/movies/posters/rocky-3.jpg",
+		"poster": "assets/posters/rocky-3.jpg",
 		"runtime": 99,
 		"mpaRating": "PG",
 		"year": 1982
@@ -82,7 +82,7 @@
 	{
 		"id": 11,
 		"title": "Rocky IV",
-		"poster": "data/movies/posters/rocky-4.jpg",
+		"poster": "assets/posters/rocky-4.jpg",
 		"runtime": 91,
 		"mpaRating": "PG",
 		"year": 1985
@@ -90,7 +90,7 @@
 	{
 		"id": 12,
 		"title": "Die Hard",
-		"poster": "data/movies/posters/die-hard.jpg",
+		"poster": "assets/posters/die-hard.jpg",
 		"runtime": 132,
 		"mpaRating": "R",
 		"year": 1988
@@ -98,7 +98,7 @@
 	{
 		"id": 13,
 		"title": "Rush Hour",
-		"poster": "data/movies/posters/rush-hour.jpg",
+		"poster": "assets/posters/rush-hour.jpg",
 		"runtime": 97,
 		"mpaRating": "PG-13",
 		"year": 1998
@@ -106,7 +106,7 @@
 	{
 		"id": 14,
 		"title": "Pulp Fiction",
-		"poster": "data/movies/posters/pulp-fiction.jpg",
+		"poster": "assets/posters/pulp-fiction.jpg",
 		"runtime": 154,
 		"mpaRating": "R",
 		"year": 1994
@@ -114,7 +114,7 @@
 	{
 		"id": 15,
 		"title": "Batman",
-		"poster": "data/movies/posters/batman.jpg",
+		"poster": "assets/posters/batman.jpg",
 		"runtime": 126,
 		"mpaRating": "PG-13",
 		"year": 1989
@@ -122,7 +122,7 @@
 	{
 		"id": 16,
 		"title": "Batman Returns",
-		"poster": "data/movies/posters/batman-2.jpg",
+		"poster": "assets/posters/batman-2.jpg",
 		"runtime": 126,
 		"mpaRating": "PG-13",
 		"year": 1992
@@ -130,7 +130,7 @@
 	{
 		"id": 17,
 		"title": "Ferris Bueller's Day Off",
-		"poster": "data/movies/posters/bueller.jpg",
+		"poster": "assets/posters/bueller.jpg",
 		"runtime": 98,
 		"mpaRating": "PG-13",
 		"year": 1986
@@ -138,7 +138,7 @@
 	{
 		"id": 18,
 		"title": "The Godfather",
-		"poster": "data/movies/posters/godfather.jpg",
+		"poster": "assets/posters/godfather.jpg",
 		"runtime": 175,
 		"mpaRating": "R",
 		"year": 1972
@@ -146,7 +146,7 @@
 	{
 		"id": 19,
 		"title": "The Godfather: Part II",
-		"poster": "data/movies/posters/godfather-2.jpg",
+		"poster": "assets/posters/godfather-2.jpg",
 		"runtime": 202,
 		"mpaRating": "R",
 		"year": 1974
@@ -154,7 +154,7 @@
 	{
 		"id": 20,
 		"title": "Men in Black",
-		"poster": "data/movies/posters/mib.jpg",
+		"poster": "assets/posters/mib.jpg",
 		"runtime": 98,
 		"mpaRating": "PG-13",
 		"year": 1997
@@ -162,7 +162,7 @@
 	{
 		"id": 21,
 		"title": "The Matrix",
-		"poster": "data/movies/posters/matrix.jpg",
+		"poster": "assets/posters/matrix.jpg",
 		"runtime": 136,
 		"mpaRating": "R",
 		"year": 1999

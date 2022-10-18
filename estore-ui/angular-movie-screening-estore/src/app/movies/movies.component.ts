@@ -16,7 +16,7 @@ export class MoviesComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   /**
-   * Method that will get the list of movies from the cURL command so we can display them on the webpage
+   * Method that will get the list of movies from the cURL command so we can display them on the webpage 
    */
   ngOnInit(): void {
     this.http.get<[Movies]>('http://127.0.0.1:8080/movies').subscribe(data => {

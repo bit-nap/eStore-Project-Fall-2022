@@ -12,11 +12,12 @@ export class MoviesComponent implements OnInit {
   imageSrc = "assets/batman-2.jpg";
   movies: Movies[] = [];
   @Input() selectedMovie?: Movies;
+  @Input() name?: string ="";
 
   constructor(private http: HttpClient) { }
 
   /**
-   * Method that will get the list of movies from the cURL command so we can display them on the webpage 
+   * Method that will get the list of movies from the cURL command so we can display them on the webpage
    */
   ngOnInit(): void {
     this.http.get<[Movies]>('http://127.0.0.1:8080/movies').subscribe(data => {
@@ -30,5 +31,12 @@ export class MoviesComponent implements OnInit {
    */
   onSelect(movie: Movies): void {
     this.selectedMovie = movie;
+  }
+
+  searchMovies(): void {
+    this.http.get<[Movies]>('http://127.0.0.1:8080/movies/?movie='+document.getElementById("movieSearch")).subscribe(data => {
+      this.movies = data;
+      console.log("Movie name:" + document.getElementById("movieSearch")?.nodeValue);
+    })
   }
 }

@@ -13,9 +13,23 @@
   margin: 0 75px 0 75px;
 }
 
+#movieSearch {
+  width: 150px;
+  height: 17px;
+  font-size: 18px;
+}
+
 #dropdownLabel {
   background-color: lightgray;
   color: blue;
+  font-size: 18px;
+}
+
+#movieTimes {
+  width: 150px;
+  height: 21px;
+  position: relative;
+  bottom: 1px;
 }
 
 .movie_card {

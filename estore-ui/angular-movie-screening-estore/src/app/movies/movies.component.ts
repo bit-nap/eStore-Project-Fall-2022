@@ -19,7 +19,7 @@ export class MoviesComponent implements OnInit {
    * Method that will get the list of movies from the cURL command so we can display them on the webpage
    */
   ngOnInit(): void {
-    this.http.get<[Movies]>('http://127.0.0.1:8080/movies').subscribe(data => {
+    this.http.get<[Movies]>('http://127.0.0.1:8080/movies').subscribe((data: Movies[]) => {
       this.movies = data;
     })
   }
@@ -37,14 +37,7 @@ export class MoviesComponent implements OnInit {
    * @param value the name of the movie that the user put into the search box
    */
   searchMovies(value: string): void {
-    // Create an array that will be the split string of the value put into the search box
-    var splitString = value.split(" ");
-    var newString = "";
-    // Capitalize each first letter of each word
-    for (var i = 0; i < splitString.length; i++) {
-      newString = newString.concat(splitString[i].charAt(0).toUpperCase() + splitString[i].substring(1) + " ");
-    }
-    this.http.get<[Movies]>('http://127.0.0.1:8080/movies/?title='+newString).subscribe(data => {
+    this.http.get<[Movies]>('http://127.0.0.1:8080/movies/?title='+value).subscribe((data: Movies[]) => {
       this.movies = data;
     })
   }

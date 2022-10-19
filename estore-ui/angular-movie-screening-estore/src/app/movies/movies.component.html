@@ -13,7 +13,7 @@
     <option value="2">Between 2 and 3 hours</option>
     <option value="3">More than 3 hours</option>
   </select>
-</div>
+</div> 
 
 <div class="movies" ng-init="getData()">
   <button type="button" *ngFor="let movie of movies" class="movie_card" [class.selected]="movie === selectedMovie" (click)="onSelect(movie)">

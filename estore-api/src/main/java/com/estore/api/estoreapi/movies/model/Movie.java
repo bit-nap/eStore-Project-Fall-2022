@@ -55,6 +55,18 @@ public class Movie {
 	}
 
 	/**
+	 * Check if this movie's title contains the given text. Not case-sensitive.
+	 *
+	 * @param text Text to search within this screening's movie.
+	 * @return True if given text is found in the movie title, else False
+	 */
+	public boolean titleContains(String text) {
+		String lowerCaseTitle = title.toLowerCase();
+		String lowerCaseText = text.toLowerCase();
+		return lowerCaseTitle.contains(lowerCaseText);
+	}
+
+	/**
 	 * @return The id of this movie
 	 */
 	public int getId () {

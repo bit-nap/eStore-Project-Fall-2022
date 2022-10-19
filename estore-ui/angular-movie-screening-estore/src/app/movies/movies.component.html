@@ -6,7 +6,13 @@
 <h2>Our Selection</h2>
 
 <div class="header-right_wrapper">
-  <input #searchBox id="movieSearch" (input)="searchMovies(searchBox.value)" />
+  <input #searchBox id="movieSearch" placeholder="Search movies" (input)="searchMovies(searchBox.value)" />
+  <label id="dropdownLabel" for="searchByTime">Runtime:</label>
+  <select name="movie" id="movieTimes">
+    <option value="1">Less than 2 hours</option>
+    <option value="2">Between 2 and 3 hours</option>
+    <option value="3">More than 3 hours</option>
+  </select>
 </div>
 
 <div class="movies" ng-init="getData()">

@@ -12,7 +12,6 @@ export class MoviesComponent implements OnInit {
   imageSrc = "assets/batman-2.jpg";
   movies: Movies[] = [];
   @Input() selectedMovie?: Movies;
-  @Input() name?: string ="";
 
   constructor(private http: HttpClient) { }
 

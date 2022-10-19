@@ -44,11 +44,9 @@ export class MoviesComponent implements OnInit {
     // Capitalize each first letter of each word
     for (var i = 0; i < splitString.length; i++) {
       newString = newString.concat(splitString[i].charAt(0).toUpperCase() + splitString[i].substring(1) + " ");
-      console.log(value);
     }
     this.http.get<[Movies]>('http://127.0.0.1:8080/movies/?title='+newString).subscribe(data => {
       this.movies = data;
-      console.log("Movie name:" + newString);
     })
   }
 }

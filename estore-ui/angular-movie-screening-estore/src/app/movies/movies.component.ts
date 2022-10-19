@@ -33,10 +33,10 @@ export class MoviesComponent implements OnInit {
     this.selectedMovie = movie;
   }
 
-  searchMovies(): void {
-    this.http.get<[Movies]>('http://127.0.0.1:8080/movies/?movie='+document.getElementById("movieSearch")).subscribe(data => {
+  searchMovies(value: string): void {
+    this.http.get<[Movies]>('http://127.0.0.1:8080/movies/?title='+value).subscribe(data => {
       this.movies = data;
-      console.log("Movie name:" + document.getElementById("movieSearch")?.nodeValue);
+      console.log("Movie name:" + value);
     })
   }
 }

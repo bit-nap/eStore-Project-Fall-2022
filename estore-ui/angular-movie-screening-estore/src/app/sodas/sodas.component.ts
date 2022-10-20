@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sodas.component.css']
 })
 export class SodasComponent implements OnInit {
-  
+
   small_value = 0
   medium_value = 0
   large_value = 0
@@ -52,5 +52,10 @@ export class SodasComponent implements OnInit {
     this.small_value = 0;
     this.medium_value = 0;
     this.large_value = 0;
+  }
+
+  confirm(): void {
+    console.log("confirmed");
+    
   }
 }

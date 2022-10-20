@@ -36,8 +36,15 @@ export class MoviesComponent implements OnInit {
    * Method that will only display movies that fit the search name of what the user put in
    * @param value the name of the movie that the user put into the search box
    */
-  searchMovies(value: string): void {
+  searchMoviesByName(value: string): void {
     this.http.get<[Movies]>('http://127.0.0.1:8080/movies/?title='+value).subscribe((data: Movies[]) => {
+      this.movies = data;
+    })
+  }
+
+  searchMoviesByDate(value: string): void {
+    console.log(value);
+    this.http.get<[Movies]>('http://127.0.0.1:8080/movies/?date='+value).subscribe((data: Movies[]) => {
       this.movies = data;
     })
   }

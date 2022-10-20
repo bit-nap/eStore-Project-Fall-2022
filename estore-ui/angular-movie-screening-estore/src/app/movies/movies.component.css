@@ -4,22 +4,41 @@
   padding: 0;
 }
 
-.movies {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-  justify-content: center;
-  margin: 0 75px 0 75px;
-}
-
 #movieSearch {
   width: 150px;
   height: 17px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
-#dropdownLabel {
+#searchByDate {
+  width: 150px;
+  height: 17px;
+  font-size: 16px;
+}
+
+#dateButton {
+  width: 150px;
+  height: 21px;
+  font-size: 12px;
+  text-align: center;
+  border-style: groove;
+  position: relative;
+  bottom: 1px;
+}
+
+#dateButton:hover {
+  background-color: gray;
+  transform: scale(1.2);
+  border-style: groove;
+}
+
+#dateButton:active {
+  background-color: gray;
+  border-style: none;
+  transform: scale(.99);
+}
+
+/*#dropdownLabel {
   background-color: lightgray;
   color: blue;
   font-size: 18px;
@@ -30,6 +49,15 @@
   height: 21px;
   position: relative;
   bottom: 1px;
+}*/
+
+.movies {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  justify-content: center;
+  margin: 0 75px 0 75px;
 }
 
 .movie_card {

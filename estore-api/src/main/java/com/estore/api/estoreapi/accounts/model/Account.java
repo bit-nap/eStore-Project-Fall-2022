@@ -10,11 +10,13 @@ import java.util.logging.Logger;
  * @author Group 3C, The Code Monkeys
  */
 public class Account {
-	static final String STRING_FORMAT = "Account [username=%s, password=%s]";
+	static final String STRING_FORMAT = "Account [id=%d, username=%s, password=%s]";
 
 	/** TODO: Add description of the purpose of Logger, once it's actually used. */
 	private static final Logger LOG = Logger.getLogger(Account.class.getName());
 
+	/** The id of this account */
+	@JsonProperty("id") private int id;
 	/** The username of this account */
 	@JsonProperty("username") private String username;
 	/** The password of this account (in plaintext) */
@@ -23,12 +25,21 @@ public class Account {
 	/**
 	 * Create an Account with a username and password
 	 *
+	 * @param id 		The id of the account
 	 * @param username	The username of the account
 	 * @param password	The password of the account
 	 */
-	public Account(@JsonProperty("username") String username, @JsonProperty("password") String password) {
+	public Account(@JsonProperty("id") int id, @JsonProperty("username") String username, @JsonProperty("password") String password) {
+		this.id = id;
 		this.username = username;
 		this.password = password;
+	}
+
+	/**
+	 * @return The id of this Account
+	 */
+	public int getId() {
+		return id;
 	}
 
 	/**
@@ -51,6 +62,6 @@ public class Account {
 	 */
 	@Override
 	public String toString() {
-		return String.format(STRING_FORMAT, username, password);
+		return String.format(STRING_FORMAT, id, username, password);
 	}
 }

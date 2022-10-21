@@ -88,7 +88,7 @@ public class MovieController {
 	/**
 	 * Deletes a {@linkplain Movie movie} with the given id.
 	 *
-	 * @param id The id of the {@link Movie movie} to deleted
+	 * @param id The id of the {@link Movie movie} to be deleted
 	 * @return ResponseEntity HTTP status of OK if deleted<br>
 	 * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise

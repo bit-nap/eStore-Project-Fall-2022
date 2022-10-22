@@ -44,7 +44,7 @@ export class MoviesComponent implements OnInit {
 
   searchMoviesByDate(value: string): void {
     console.log(value);
-    this.http.get<[Movies]>('http://127.0.0.1:8080/movies/?date='+value).subscribe((data: Movies[]) => {
+    this.http.get<[Movies]>('http://127.0.0.1:8080/movies/?date=2023-01-'+value).subscribe((data: Movies[]) => {
       this.movies = data;
     })
   }

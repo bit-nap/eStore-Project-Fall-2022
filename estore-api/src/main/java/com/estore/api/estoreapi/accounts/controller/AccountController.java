@@ -10,17 +10,36 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * The REST API controller for an Account object
+ *
+ * @author Group 3C, The Code Monkeys
+ */
 @RestController
 @RequestMapping("accounts")
 public class AccountController {
 	private static final Logger LOG = Logger.getLogger(AccountController.class.getName());
 
+	/** The Data Access Object for Account */
 	private final AccountDAO accountDao;
 
+	/**
+	 * Creates a REST API controller to respond to Account requests.
+	 *
+	 * @param accountDao The Account Data Access Object to perform CRUD operations
+	 */
 	public AccountController(AccountDAO accountDao) {
 		this.accountDao = accountDao;
 	}
 
+	/**
+	 * Creates an Account with the provided Account object
+	 *
+	 * @param account The Account to create
+	 * @return ResponseEntity with created {@link Account account} object and HTTP status of CREATED<br>
+	 * ResponseEntity with HTTP status of CONFLICT if {@link Account account} object already exists<br>
+	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+	 */
 	@PostMapping("")
 	public ResponseEntity<Account> createAccount(@RequestBody Account account) {
 		LOG.info("POST /accounts/" + account);
@@ -38,6 +57,14 @@ public class AccountController {
 		}
 	}
 
+	/**
+	 * Updates the {@linkplain Account account} with the provided {@linkplain Account account} object, if it exists.
+	 *
+	 * @param account The {@link Account account} to update
+	 * @return ResponseEntity with updated {@link Account account} object and HTTP status of OK if updated<br>
+	 * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+	 */
 	@PutMapping("")
 	public ResponseEntity<Account> updateAccount(@RequestBody Account account) {
 		LOG.info("PUT /accounts/" + account);

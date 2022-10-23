@@ -1,5 +1,7 @@
 <html>
   <head></head>
-  <h1>This is the login page</h1>
-  <p>On this page you will be able to sign up an account and log in!</p>
+  <h1>Please enter a username</h1>
+  <input #username id="enterUsername" placeholder="Username" />
+  <button id="enterNameButton" (click)="enterUsername(username.value)">Enter Name</button>
+  <p id="usernameMessage"></p>
 </html>

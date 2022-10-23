@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "Coca Cola",
+        "poster": "assets/sodaPosters/"
+    },
+    {
+        "id": 2,
+        "name": "Fanta",
+        "poster": "assets/sodaPosters/"
+    },
+    {
+        "id": 3,
+        "name": "Dr Pepper",
+        "poster": "assets/sodaPosters/"
+    },
+    {
+        "id": 4,
+        "name": "Jarritos",
+        "poster": "assets/sodaPosters/"
+    }
+]

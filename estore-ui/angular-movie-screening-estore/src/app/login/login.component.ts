@@ -1,7 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
-import { Accounts } from '../Accounts'
+import { Accounts } from '../Accounts';
+import { HttpHeaders } from '@angular/common/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    Authorization: 'my-auth-token'
+  })
+};
 
 @Component({
   selector: 'app-login',
@@ -9,7 +17,7 @@ import { Accounts } from '../Accounts'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  username: Accounts[] = [];
+  accounts: Accounts[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -18,11 +26,14 @@ export class LoginComponent implements OnInit {
 
   enterUsername(username: string): void {
     this.http.get<[Accounts]>('http://127.0.0.1:8080/accounts').subscribe((data: Accounts[]) => {
-      this.username = data;
-    })
+      this.accounts = data;
+      console.log(this.accounts);
+    });
 
-    if (this.username.length == 0) {
-      this.http.post<Accounts>('http://127.0.0.1:8080/accounts', username[0]);
+    if (this.accounts.length == 0) {
+      this.http.post<Accounts>('http://127.0.0.1:8080/accounts', {"username": username, "password": ""}, httpOptions).subscribe((data: Accounts) => {
+        this.accounts[0] = data;
+      })
       if (document.getElementById("usernameMessage")) {
         document.getElementById("usernameMessage")!.innerHTML = "Username created";
       }

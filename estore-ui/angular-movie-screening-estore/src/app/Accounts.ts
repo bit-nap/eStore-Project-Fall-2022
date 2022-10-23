@@ -1,4 +1,9 @@
-export interface Accounts {
-  username: string,
-  password: string
+export class Accounts {
+  username: string = ""
+  password: string = ""
+
+  constructor (username: string) {
+    this.username = username;
+    this.password = "";
+  }
 }

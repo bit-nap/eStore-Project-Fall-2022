@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
@@ -85,6 +86,27 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 
 		for (Screening screening : screenings.values()) {
 			if (text == null || screening.movieTitleContains(text)) {
+				screeningArrayList.add(screening);
+			}
+		}
+
+		Screening[] screeningArray = new Screening[screeningArrayList.size()];
+		screeningArrayList.toArray(screeningArray);
+		return screeningArray;
+	}
+
+	/**
+	 * Generates an array of {@linkplain Screening screenings} from the tree map for any
+	 * {@linkplain Screening screenings} that will be presented on a specific date.
+	 *
+	 * @param date The date to find within a {@link Screening screenings}
+	 * @return The array of {@link Screening screenings}, may be empty
+	 */
+	private Screening[] getScreeningsArrayByDate (LocalDate date) {
+		ArrayList<Screening> screeningArrayList = new ArrayList<>();
+
+		for (Screening screening : screenings.values()) {
+			if (screening.getDate().isEqual(date)) {
 				screeningArrayList.add(screening);
 			}
 		}
@@ -215,6 +237,16 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 	public Screening[] findScreenings (String text) {
 		synchronized (screenings) {
 			return getScreeningsArray(text);
+		}
+	}
+
+	/**
+	 * * {@inheritDoc}
+	 */
+	@Override
+	public Screening[] findScreeningsByDate (LocalDate date) {
+		synchronized (screenings) {
+			return getScreeningsArrayByDate(date);
 		}
 	}
 }

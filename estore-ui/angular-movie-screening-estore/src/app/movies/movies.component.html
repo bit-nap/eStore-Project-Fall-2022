@@ -4,7 +4,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
   <title>Monkey Movies</title>
 </head>
-<h2>Our Selection</h2>
 <div class="movies">
   <button routerLink="tickets" type="button" *ngFor="let movie of movies" class="movie_card" (click)="onSelect(movie)">
     <img class="movieImg" src="{{movie.poster}}"  alt="Movie poster for {{movie.title}}"/>

@@ -32,6 +32,13 @@ export class TicketsComponent implements OnInit {
     return <String> this.selectedMovie?.title
   }
 
+  /**
+   * Get the poster fo the selected movie.
+   */
+  getMoviePoster(): String {
+    return <String> this.selectedMovie?.poster;
+  }
+
   completePurchase(): void {
     // TODO: Add actions for completed a purchase, ie, save ticket information as Order class in Java or something
     this.router.navigate(['thank'])  // go to complete purchase page, currently thank

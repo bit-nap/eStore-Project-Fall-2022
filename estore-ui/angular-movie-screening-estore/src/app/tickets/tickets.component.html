@@ -5,9 +5,15 @@
   <title>{{getMovieTitle()}} Tickets</title>
 </head>
 
-<h2>Select Number of Tickets to Purchase for</h2>
-<h3 id="movieTitle">{{getMovieTitle()}}</h3>
+<div class="main-container">
+  <div class="movie-poster-container">
+    <img id="movieImg" src="{{getMoviePoster()}}"  alt="Movie poster for {{getMovieTitle()}}"/>
+  </div>
 
-<input [(ngModel)]="numOfTickets">
-
-<button (click)="completePurchase()" >Complete purchase</button>
+  <div class="ticket-container">
+    <p>Select Number of Tickets to Purchase for</p>
+    <p id="movie-title">{{getMovieTitle()}}</p>
+    <input id="ticket-input" [(ngModel)]="numOfTickets">
+    <button (click)="completePurchase()">Complete purchase</button>
+  </div>
+</div>

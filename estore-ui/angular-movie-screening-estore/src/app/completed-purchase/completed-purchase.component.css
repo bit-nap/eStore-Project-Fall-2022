@@ -1,0 +1,16 @@
+.main-container {
+  display: flex;
+  margin: 40px;
+
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+
+  text-align: center;
+}
+
+#movie-title {
+  color: #FFDD4A;
+  font-size: 30px;
+  font-weight: bold;
+}

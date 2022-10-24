@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Accounts } from '../Accounts';
 import { HttpHeaders } from '@angular/common/http';
+import { LoggedInAccountService } from "../logged-in-account.service";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,7 +20,7 @@ const httpOptions = {
 export class LoginComponent implements OnInit {
   accounts: Accounts[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private loggedInAccount: LoggedInAccountService) { }
 
   ngOnInit(): void {
   }
@@ -46,7 +47,16 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * Method that will create functionality so the user can delete their username 
+   * Sign in the user with the given username.
+   * @param username string of the username passed in from the webpage
+   */
+  signIn(username: String): void {
+    this.loggedInAccount.setUsername(username);
+
+  }
+
+  /**
+   * Method that will create functionality so the user can delete their username
    * @param username string of the username passed in from the webpage
    */
   deleteUsername(username: string) {

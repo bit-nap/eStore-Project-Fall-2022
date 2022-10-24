@@ -16,3 +16,9 @@
   border: red;
   color: white;
 }
+
+#current-user {
+  color: #fafafa;
+  font-size: 21px;
+  margin: 10px;
+}

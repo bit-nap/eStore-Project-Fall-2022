@@ -6,7 +6,7 @@
     <button id="usernameButton" (click)="enterUsername(enterNewUsername.value)">Create Username</button>
 
     <input #signIntoAccount id="enterUsername" placeholder="Username" />
-    <button id="usernameButton" >Sign In</button>
+    <button id="usernameButton" (click)="signIn(signIntoAccount.value)" >Sign In</button>
 
     <input #deleteAUsername id="enterUsername" placeholder="Username" />
     <button id="usernameButton" (click)="deleteUsername(deleteAUsername.value)">Delete Username</button>

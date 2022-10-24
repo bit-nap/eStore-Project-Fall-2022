@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from "@angular/core";
 
 import { Movies } from '../Movies'
-import { MovieSelectorService } from "../movie-selector.service"; // Import the interface made for the values of the movie
+import { MovieSelectorService } from "../movie-selector.service";
+import { Router } from "@angular/router";
+import { LoggedInAccountService } from "../logged-in-account.service"; // Import the interface made for the values of the movie
 
 @Component({
   selector: 'app-movies',
@@ -12,7 +14,7 @@ import { MovieSelectorService } from "../movie-selector.service"; // Import the 
 export class MoviesComponent implements OnInit {
   movies: Movies[] = [];
 
-  constructor(private http: HttpClient, private movieSelector: MovieSelectorService) { }
+  constructor(private http: HttpClient, private router: Router, private movieSelector: MovieSelectorService, private loggedInAccount: LoggedInAccountService) { }
 
   /**
    * Method that will get the list of movies from the cURL command so we can display them on the webpage
@@ -29,6 +31,10 @@ export class MoviesComponent implements OnInit {
    */
   onSelect(movie: Movies): void {
     this.movieSelector.setMovie(movie);
+    if (this.loggedInAccount.isLoggedIn() && !this.loggedInAccount.isAdmin()) {
+      // only go to tickets page if user is logged in, but they are not admin
+      this.router.navigate(['tickets'])
+    }
   }
 
   /**

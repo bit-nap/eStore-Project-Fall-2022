@@ -1,7 +1,6 @@
 <head>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
   <title>Monkey Movies</title>
 </head>
 
@@ -11,7 +10,7 @@
   <button id="dateButton" (click)="searchMoviesByDate(dateSearch.value)">Search Day</button>
 </div>
 <div class="movies">
-  <button routerLink="tickets" type="button" *ngFor="let movie of movies" class="movie_card" (click)="onSelect(movie)">
+  <button type="button" *ngFor="let movie of movies" class="movie_card" (click)="onSelect(movie)">
     <img class="movieImg" src="{{movie.poster}}"  alt="Movie poster for {{movie.title}}"/>
     <div class="information-wrapper">
       <h3 class="title">{{movie.title}}</h3>

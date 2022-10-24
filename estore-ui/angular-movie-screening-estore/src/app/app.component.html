@@ -2,13 +2,10 @@
 
 <div class="header-right_wrapper">
   <button class="login" (click)="goToPage('login')">login</button>
+  <button class="login" (click)="goBack()">Go Back</button>
 </div>
 
 <div>
-  <nav>
-    <!--<li><a routerLink="login">login</a></li>-->
-    <li><a routerLink="back">back</a></li>
-  </nav>
     <router-outlet></router-outlet>
 </div>
 

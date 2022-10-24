@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { Sodas } from '../Sodas'
 
 @Component({
   selector: 'app-sodas',
@@ -6,56 +9,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sodas.component.css']
 })
 export class SodasComponent implements OnInit {
+  sodas: Sodas[] = [];
+  @Input() selectedSoda?: Sodas;
 
-  small_value = 0
-  medium_value = 0
-  large_value = 0
-
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    
+    this.http.get<[Sodas]>('http://127.0.0.1:8080/sodas').subscribe(data => {
+      this.sodas = data;
+    })
   }
 
-  /**
-   * Functions to add or substract number of drinks
-   */
-  addSmall(): void {
-    this.small_value++;
-  }
-  substractSmall(): void {
-    if (this.small_value > 0) {
-      this.small_value--;
-    }
-  }
-  addMedium(): void {
-    this.medium_value++;
-  }
-  substractMedium(): void {
-    if (this.medium_value > 0) {
-      this.medium_value--;
-    }
-  }
-  addLarge(): void {
-    this.large_value++;
-  }
-  substractLarge(): void {
-    if (this.large_value > 0) {
-      this.large_value--;
-    }
+  onSelect(soda: Sodas): void {
+    this.selectedSoda = soda;
   }
 
   /**
    * Resets the value to 0 if the customer presses the button cancel
    */
   cancel(): void {
-    this.small_value = 0;
-    this.medium_value = 0;
-    this.large_value = 0;
   }
 
   confirm(): void {
     console.log("confirmed");
-    
   }
 }

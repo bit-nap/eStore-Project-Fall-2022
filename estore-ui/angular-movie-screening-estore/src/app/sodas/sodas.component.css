@@ -18,60 +18,78 @@
     grid-template-areas: 
       "header header header"
       "list   list   list"
-      "cancel bottom confirm";
+      "cancel . confirm";
 
     height: 70%;
-    width: 50%;
+    width: 80%;
 
     background-color: #fff;
     border-radius: 15px;
 }
+
 .soda-modal h2 {
-    margin: auto;
     grid-area: header;
+    width: 100%;
     text-align: center;
-}
-.soda-modal-button {
-    margin: 15px;
-}
-#confirm {
-    grid-area: confirm;
-}
-#cancel {
-    grid-area: cancel;
 }
 
 .list {
     grid-area: list;
-    text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    justify-content: center;
+    margin: 0 15px 0 15px;
 }
-.list span {
-    display: inline-block;
-    width: auto;
-    height: 100px;
+
+.sodas {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+  
+    width: 120px;
+    height: 190px;
+    background-color: #0f0;
+    border: black solid 2px;
+    border-radius: 10px;
     margin: 5px;
 }
-.list span div {
-    display: inline-grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    border: 2px solid #0f0;
-    border-radius: 40px;
-    overflow: hidden;
-    width: 50%;
-    height: 50%;
-}
-.list span div input {
-    height: 100%;
+
+.sodas img{
     width: 100%;
-    border: none;
-    display: inline-block;
-    text-align: center;
 }
-.list span div button {
-    display: inline-block;
+
+.size-wrapper {
+    display: grid;
+    z-index: 10;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+        "title title title";
+
+    width: 100%;
+    height: 15%;
+    background-color: rgba(0, 0, 0, 0);
+    transition: transform .2s;
+    bottom: 0;
+}
+
+.size-wrapper button {
+    width: 100%;
     margin: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: 0;
+    padding: 0;
+}
+.sodas-title {
+    grid-area: title;
+    display: inline;
+    position: relative;
+    float: left;
+    z-index: 1;
+    margin-top: 5px;
+  
+    text-align: left;
+    font-size: 18px;
+    font-family: 'Josefin Sans', sans-serif;
 }

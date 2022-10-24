@@ -2,21 +2,21 @@
     {
         "id": 1,
         "name": "Coca Cola",
-        "poster": "assets/sodaPosters/"
+        "poster": "assets/sodas/coca-cola.jpg"
     },
     {
         "id": 2,
         "name": "Fanta",
-        "poster": "assets/sodaPosters/"
+        "poster": "assets/sodas/fanta.jpg"
     },
     {
         "id": 3,
         "name": "Dr Pepper",
-        "poster": "assets/sodaPosters/"
+        "poster": "assets/sodas/dr-pepper.jpg"
     },
     {
         "id": 4,
         "name": "Jarritos",
-        "poster": "assets/sodaPosters/"
+        "poster": "assets/sodas/jarritos.jpg"
     }
 ]

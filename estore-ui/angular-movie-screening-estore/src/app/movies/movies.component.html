@@ -6,7 +6,7 @@
 <h2>Our Selection</h2>
 <div class="movies" ng-init="getData()">
   <button type="button" *ngFor="let movie of movies" class="movie_card" [class.selected]="movie === selectedMovie" (click)="onSelect(movie)">
-    <img class="movieImg" src="{{movie.poster}}" />
+    <img class="movieImg" src="{{movie.poster}}"/>
     <div class="information-wrapper">
       <h3 class="title">{{movie.title}}</h3>
       <span class="year">{{movie.year}}</span>

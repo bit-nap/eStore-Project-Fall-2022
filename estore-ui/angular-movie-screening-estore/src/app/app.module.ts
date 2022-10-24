@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { TicketsComponent } from './tickets/tickets.component';
 import { CompletedPurchaseComponent } from './completed-purchase/completed-purchase.component';
+import { SodasComponent } from './sodas/sodas.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { CompletedPurchaseComponent } from './completed-purchase/completed-purch
     MoviesComponent,
     TicketsComponent,
     CompletedPurchaseComponent
+    SodasComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

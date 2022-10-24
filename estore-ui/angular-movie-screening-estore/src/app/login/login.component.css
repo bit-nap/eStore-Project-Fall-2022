@@ -1,0 +1,27 @@
+#enterUsername {
+  width: 150px;
+  height: 31px;
+  position: relative;
+}
+
+#usernameButton {
+  width: 150px;
+  height: 21px;
+  font-size: 12px;
+  text-align: center;
+  border-style: groove;
+  position: relative;
+  top: 6px;
+}
+
+#usernameButton:hover {
+  background-color: gray;
+  transform: scale(1.2);
+  border-style: groove;
+}
+
+#usernameButton:active {
+  background-color: gray;
+  border-style: none;
+  transform: scale(.99);
+}

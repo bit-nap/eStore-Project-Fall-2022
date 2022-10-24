@@ -3,6 +3,7 @@ package com.estore.api.estoreapi.screenings.persistence;
 import com.estore.api.estoreapi.screenings.model.Screening;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 /**
  * Defines the interface for screening object persistence.
@@ -66,4 +67,13 @@ public interface ScreeningDAO {
 	 * @throws IOException if an issue with underlying storage
 	 */
 	Screening[] findScreenings (String text) throws IOException;
+
+	/**
+	 * Finds all {@linkplain Screening screenings} whose movie title contains the given text.
+	 *
+	 * @param date The date to match against
+	 * @return An array of {@link Screening screenings} on a particular day, may be empty
+	 * @throws IOException if an issue with underlying storage
+	 */
+	Screening[] findScreeningsByDate (LocalDate date) throws IOException;
 }

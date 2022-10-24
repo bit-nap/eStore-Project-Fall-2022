@@ -58,6 +58,15 @@ public class Account {
 	}
 
 	/**
+	 * Set the username of the account. Used in change username of account functionality later on.
+	 *
+	 * @param name the String that will be set as the username
+	 */
+	public void setName(String name) {
+		this.username = name;
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override

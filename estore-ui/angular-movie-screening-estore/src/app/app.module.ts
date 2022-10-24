@@ -10,12 +10,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule } from '@angular/forms';
 import { TicketsComponent } from './tickets/tickets.component';
+import { CompletedPurchaseComponent } from './completed-purchase/completed-purchase.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MoviesComponent,
-    TicketsComponent
+    TicketsComponent,
+    CompletedPurchaseComponent
   ],
   imports: [
     BrowserModule,

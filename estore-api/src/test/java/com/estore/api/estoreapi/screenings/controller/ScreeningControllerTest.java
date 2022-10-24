@@ -199,6 +199,40 @@ public class ScreeningControllerTest {
 	}
 
 	@Test
+	public void testSearchScreeningsByDate () throws IOException {
+		// Setup
+		String date = "17"; // the movieId of 104 points to Star Wars IV
+		Screening[] foundScreenings = new Screening[2];
+		foundScreenings[0] = new Screening(101, 104, 6, LocalDate.parse("2023-01-17"), LocalTime.parse("18:00"), mockMovieGetter);
+		foundScreenings[1] = new Screening(101, 104, 6, LocalDate.parse("2023-01-17"), LocalTime.parse("18:00"), mockMovieGetter);
+		// When findScreenings is called with the search string, return the two
+		// screenings above
+		when(mockScreeningDao.findScreeningsByDate(LocalDate.parse("2023-01-" + date))).thenReturn(foundScreenings);
+
+		// Invoke
+		ResponseEntity<Screening[]> response = screeningController.searchScreeningsByDate(date);
+
+		// Analyze
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertEquals(foundScreenings, response.getBody());
+	}
+
+	@Test
+	public void testSearchScreeningsByDateHandleException () throws IOException {
+		// Setup
+		String date = "17";
+		LocalDate localDate = LocalDate.parse("2023-01-17");
+		// When createScreening is called on the Mock Screening DAO, throw an IOException
+		doThrow(new IOException()).when(mockScreeningDao).findScreeningsByDate(localDate);
+
+		// Invoke
+		ResponseEntity<Screening[]> response = screeningController.searchScreeningsByDate(date);
+
+		// Analyze
+		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+	}
+
+	@Test
 	public void testUpdateScreening () throws IOException {
 		// Setup
 		Screening screening = new Screening(101, 104, 6, LocalDate.parse("2023-01-17"), LocalTime.parse("18:00"), mockMovieGetter);

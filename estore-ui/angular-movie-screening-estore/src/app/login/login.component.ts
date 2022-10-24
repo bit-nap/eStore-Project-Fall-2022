@@ -24,6 +24,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Method that will create functionality so the user can create a unique username in the server
+   * @param username string of the username passed in from the webpage
+   */
   enterUsername(username: string): void {
     this.http.get<[Accounts]>('http://127.0.0.1:8080/accounts/?text='+username).subscribe((data: Accounts[]) => {
       this.accounts = data;
@@ -41,6 +45,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /**
+   * Method that will create functionality so the user can delete their username 
+   * @param username string of the username passed in from the webpage
+   */
   deleteUsername(username: string) {
     this.http.get<[Accounts]>('http://127.0.0.1:8080/accounts/?text='+username).subscribe((data: Accounts[]) => {
       this.accounts = data;

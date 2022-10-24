@@ -1,0 +1,19 @@
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+  <title>{{getMovieTitle()}} Tickets</title>
+</head>
+
+<div class="main-container">
+  <div class="movie-poster-container">
+    <img id="movieImg" src="{{getMoviePoster()}}"  alt="Movie poster for {{getMovieTitle()}}"/>
+  </div>
+
+  <div class="ticket-container">
+    <p>Select Number of Tickets to Purchase for</p>
+    <p id="movie-title">{{getMovieTitle()}}</p>
+    <input id="ticket-input" [(ngModel)]="numOfTickets">
+    <button (click)="completePurchase()">Complete purchase</button>
+  </div>
+</div>

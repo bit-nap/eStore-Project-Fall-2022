@@ -1,12 +1,9 @@
-<h1 class="title">{{title}}</h1>
+<header>
+    <h1>{{title}}</h1>
+    <div class="header-right_wrapper">
+      <button class="login" (click)="goToPage('login')">login</button>
+      <button class="login" (click)="goBack()">Go Back</button>
+    </div>
+</header>
 
-<div class="header-right_wrapper">
-  <button class="login" (click)="goToPage('login')">login</button>
-  <button class="login" (click)="goBack()">Go Back</button>
-</div>
-
-<div>
-    <router-outlet></router-outlet>
-</div>
-
-<app-movies ></app-movies>
+<router-outlet></router-outlet>

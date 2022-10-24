@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
-import { Movies } from '../Movies' // Import the interface made for the values of the movie
+import { Movies } from '../Movies'
+import { MovieSelectorService } from "../movie-selector.service"; // Import the interface made for the values of the movie
 
 @Component({
   selector: 'app-movies',
@@ -9,11 +10,9 @@ import { Movies } from '../Movies' // Import the interface made for the values o
   styleUrls: ['./movies.component.css'],
 })
 export class MoviesComponent implements OnInit {
-  imageSrc = "assets/batman-2.jpg";
   movies: Movies[] = [];
-  @Input() selectedMovie?: Movies;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private movieSelector: MovieSelectorService) { }
 
   /**
    * Method that will get the list of movies from the cURL command so we can display them on the webpage
@@ -29,7 +28,7 @@ export class MoviesComponent implements OnInit {
    * @param movie the movie that has been selected
    */
   onSelect(movie: Movies): void {
-    this.selectedMovie = movie;
+    this.movieSelector.setMovie(movie);
   }
 
   /**

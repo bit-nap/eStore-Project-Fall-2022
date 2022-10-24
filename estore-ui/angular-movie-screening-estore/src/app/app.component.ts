@@ -8,7 +8,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Movies Estore';
+  title = 'Monkey Movies';
 
   constructor(private router:Router, private _location: Location) {}
 

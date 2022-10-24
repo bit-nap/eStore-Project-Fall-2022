@@ -1,0 +1,50 @@
+* {
+  font-size: 21px;
+  text-align: center;
+}
+
+button {
+  background-color: #ba5a31;
+}
+
+p {
+  color: #BA5A31;
+}
+
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.movie-poster-container {
+  height: 500px;
+  width: 330px;
+
+  float: left;
+  margin: 20px
+}
+
+.ticket-container {
+  height: 400px;
+  width: 400px;
+
+  display: inline-flex;
+  row-gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#ticket-input {
+  height: auto;
+  width: 200px;
+}
+
+#movie-title {
+  color: #FFDD4A;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+

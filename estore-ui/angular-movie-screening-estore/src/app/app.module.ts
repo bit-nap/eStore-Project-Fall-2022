@@ -19,7 +19,7 @@ import { LoginComponent } from './login/login.component';
     AppComponent,
     MoviesComponent,
     TicketsComponent,
-    CompletedPurchaseComponent
+    CompletedPurchaseComponent,
     SodasComponent,
     LoginComponent
   ],

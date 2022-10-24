@@ -190,7 +190,7 @@ public class ScreeningController {
 	 */
 	@GetMapping("/date/")
 	public ResponseEntity<Screening[]> searchScreeningsByDate (@RequestParam LocalDate date) {
-		LOG.info("GET /screenings/date/" + date);
+		LOG.info("GET /screening/?date=" + date);
 		try {
 			Screening[] foundScreenings = screeningDao.findScreeningsByDate(date);
 			/*

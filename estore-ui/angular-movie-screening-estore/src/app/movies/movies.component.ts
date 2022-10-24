@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Injectable } from "@angular/core";
 
 import { Movies } from '../Movies' // Import the interface made for the values of the movie
 
@@ -8,6 +8,7 @@ import { Movies } from '../Movies' // Import the interface made for the values o
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.css'],
 })
+@Injectable()
 export class MoviesComponent implements OnInit {
   imageSrc = "assets/batman-2.jpg";
   movies: Movies[] = [];
@@ -30,5 +31,9 @@ export class MoviesComponent implements OnInit {
    */
   onSelect(movie: Movies): void {
     this.selectedMovie = movie;
+  }
+
+  getSelected(): Movies {
+    return <Movies> this.selectedMovie;
   }
 }

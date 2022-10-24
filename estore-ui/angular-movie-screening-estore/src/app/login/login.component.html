@@ -1,7 +1,17 @@
 <html>
   <head></head>
-  <h1>Please enter a username</h1>
-  <input #username id="enterUsername" placeholder="Username" />
-  <button id="enterNameButton" (click)="enterUsername(username.value)">Enter Name</button>
-  <p id="usernameMessage"></p>
+  <div>
+    <h1>User Account</h1>
+    <input #enterNewUsername id="enterUsername" placeholder="Username" />
+    <button id="usernameButton" (click)="enterUsername(enterNewUsername.value)">Enter Username</button>
+
+    <input #signIntoAccount id="enterUsername" placeholder="Username" />
+    <button id="usernameButton" >Sign In</button>
+
+    <input #deleteAUsername id="enterUsername" placeholder="Username" />
+    <button id="usernameButton" (click)="deleteUsername(deleteAUsername.value)">Delete Username</button>
+
+    <p id="newUsernameMessage"></p>
+    <p id="deleteUsernameMessage"></p>
+  </div>
 </html>

@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   enterUsername(username: string): void {
-    this.http.get<[Accounts]>('http://127.0.0.1:8080/accounts').subscribe((data: Accounts[]) => {
+    this.http.get<[Accounts]>('http://127.0.0.1:8080/accounts/?text='+username).subscribe((data: Accounts[]) => {
       this.accounts = data;
       console.log(this.accounts);
     });
@@ -34,14 +34,27 @@ export class LoginComponent implements OnInit {
       this.http.post<Accounts>('http://127.0.0.1:8080/accounts', {"username": username, "password": ""}, httpOptions).subscribe((data: Accounts) => {
         this.accounts[0] = data;
       })
-      if (document.getElementById("usernameMessage")) {
-        document.getElementById("usernameMessage")!.innerHTML = "Username created";
-      }
+      document.getElementById("newUsernameMessage")!.innerHTML = "Username created";
     }
     else {
-      if (document.getElementById("usernameMessage")) {
-        document.getElementById("usernameMessage")!.innerHTML = "Username already exists. Please choose another one.";
-      }
+      document.getElementById("newUsernameMessage")!.innerHTML = "Username already exists. Please choose another one.";
+    }
+  }
+
+  deleteUsername(username: string) {
+    this.http.get<[Accounts]>('http://127.0.0.1:8080/accounts/?text='+username).subscribe((data: Accounts[]) => {
+      this.accounts = data;
+      console.log(this.accounts);
+    });
+
+    if (this.accounts.length == 0) {
+      document.getElementById("deleteUsernameMessage")!.innerHTML = "Account does not exist.";
+    }
+    else {
+      this.http.delete<Accounts>('http://127.0.0.1:8080/accounts'+username).subscribe((data: Accounts) => {
+        this.accounts[0] = data;
+      })
+      document.getElementById("deleteUsernameMessage")!.innerHTML = "Account has been deleted.";
     }
   }
 

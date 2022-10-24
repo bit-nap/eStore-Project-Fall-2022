@@ -38,19 +38,6 @@
   transform: scale(.99);
 }
 
-/*#dropdownLabel {
-  background-color: lightgray;
-  color: blue;
-  font-size: 18px;
-}
-
-#movieTimes {
-  width: 150px;
-  height: 21px;
-  position: relative;
-  bottom: 1px;
-}*/
-
 .movies {
   display: flex;
   flex-direction: row;

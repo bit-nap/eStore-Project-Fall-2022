@@ -139,7 +139,7 @@ public class SodaJSONDAO implements SodaDAO {
 	public Soda createSoda (Soda soda) throws IOException {
 		synchronized (sodas) {
 			// We create a new soda object because the id field is immutable, and we need to assign the next unique id
-			Soda newSoda = new Soda(nextId(), soda.getTitle(), soda.getPoster(), soda.getRuntime(), soda.getMpaRating(), soda.getYear());
+			Soda newSoda = new Soda(nextId(), soda.getTitle(), soda.getPoster());
 			sodas.put(newSoda.getId(), newSoda);
 			save(); // may throw an IOException
 			return newSoda;

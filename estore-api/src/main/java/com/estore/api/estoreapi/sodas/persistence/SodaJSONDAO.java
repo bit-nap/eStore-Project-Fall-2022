@@ -70,7 +70,7 @@ public class SodaJSONDAO implements SodaDAO {
 
 	/**
 	 * Generates an array of {@linkplain Soda sodas} from the tree map for any
-	 * {@linkplain Soda sodas} that contains the soda title specified by text argument.
+	 * {@linkplain Soda sodas} that contains the soda name specified by text argument.
 	 *
 	 * @param text The text to find within a {@link Soda sodas} soda<p>
 	 *             If text is null, the array contains all of the {@linkplain Soda sodas} in the tree map.

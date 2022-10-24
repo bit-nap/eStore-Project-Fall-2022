@@ -157,17 +157,17 @@ public class SodaController {
 	}
 
 	/**
-	 * Responds to the GET request for all {@linkplain Soda sodas} whose soda title contains the given text.
+	 * Responds to the GET request for all {@linkplain Soda sodas} whose soda name contains the given text.
 	 *
-	 * @param title A String which contains the text used to find the {@link Soda soda} to a soda
+	 * @param name A String which contains the text used to find the {@link Soda soda} to a soda
 	 * @return ResponseEntity with array of {@link Soda soda} objects (may be empty) and HTTP status of OK<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
 	@GetMapping("/")
-	public ResponseEntity<Soda[]> searchSodas (@RequestParam String title) {
-		LOG.info("GET /sodas/?title=" + title);
+	public ResponseEntity<Soda[]> searchSodas (@RequestParam String name) {
+		LOG.info("GET /sodas/?name=" + name);
 		try {
-			Soda[] foundSodas = sodaDao.findSodas(title);
+			Soda[] foundSodas = sodaDao.findSodas(name);
 			/*
 			 * If sodaDao.findSodas() fails, an IOException is thrown. Assume function
 			 * passed successfully and return the Soda array even if it is empty. Which

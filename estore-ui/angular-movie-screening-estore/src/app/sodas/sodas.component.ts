@@ -10,7 +10,7 @@ import { Sodas } from '../Sodas'
 })
 export class SodasComponent implements OnInit {
   sodas: Sodas[] = [];
-  @Input() selectedSoda?: Sodas;
+  userInventory: Sodas[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -20,16 +20,37 @@ export class SodasComponent implements OnInit {
     })
   }
 
-  onSelect(soda: Sodas): void {
-    this.selectedSoda = soda;
+  /**
+   * Adds a soda to the soda cart
+   * @param soda Sodas
+   */
+  clickSmall(soda: Sodas) {
+    this.userInventory.push(soda)
+    console.log(this.userInventory)
   }
 
   /**
-   * Resets the value to 0 if the customer presses the button cancel
+   * Removes a soda from the soda cart if the remove button is pressed
+   * @param soda Sodas
    */
-  cancel(): void {
+  removeFromInventory(soda: Sodas) {
+    const index = this.userInventory.indexOf(soda)
+    this.userInventory.splice(index, 1)
+    console.log(this.userInventory);
   }
 
+  /**
+   * Empty the soda cart if the customer presses the button cancel
+   */
+  cancel(): void {
+    this.userInventory = []
+    console.log(this.userInventory);
+  }
+
+  /**
+   * TO-DO
+   * Confirmes the order of the sodas
+   */
   confirm(): void {
     console.log("confirmed");
   }

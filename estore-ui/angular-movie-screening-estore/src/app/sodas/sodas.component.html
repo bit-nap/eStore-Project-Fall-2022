@@ -2,14 +2,19 @@
     <div class="soda-modal-size">
         <h2>Choose a beverage</h2>
         <div class="list">
-            <div class="sodas" *ngFor="let soda of sodas" [class.selected]="soda === selectedSoda">
+            <div class="sodas" *ngFor="let soda of sodas">
                 <img src="{{soda.poster}}" alt="" srcset="">
                 <div class="size-wrapper">
                     <h3 class="sodas-title">{{soda.name}}</h3>
-                    <button class="small">S</button>
-                    <button class="medium">M</button>
-                    <button class="large">L</button>
+                    <button class="small" (click)="clickSmall(soda)">add</button>
                 </div>
+            </div>
+        </div>
+        <div class="inventory">
+            <div class="items" *ngFor="let item of userInventory">
+                <!-- <img src="{{item.poster}}" alt=""> -->
+                <h3 class="item-title">{{item.name}}</h3>
+                <button (click)="removeFromInventory(item)">remove</button>
             </div>
         </div>
         <button class="soda-modal-button" id="cancel" (click)="cancel()">Cancel</button>

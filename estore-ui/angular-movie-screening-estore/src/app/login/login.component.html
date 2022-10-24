@@ -1,5 +1,17 @@
 <html>
   <head></head>
-  <h1>This is the login page</h1>
-  <p>On this page you will be able to sign up an account and log in!</p>
+  <div>
+    <h1>User Account</h1>
+    <input #enterNewUsername id="enterUsername" placeholder="Username" />
+    <button id="usernameButton" (click)="enterUsername(enterNewUsername.value)">Create Username</button>
+
+    <input #signIntoAccount id="enterUsername" placeholder="Username" />
+    <button id="usernameButton" >Sign In</button>
+
+    <input #deleteAUsername id="enterUsername" placeholder="Username" />
+    <button id="usernameButton" (click)="deleteUsername(deleteAUsername.value)">Delete Username</button>
+
+    <p id="newUsernameMessage"></p>
+    <p id="deleteUsernameMessage"></p>
+  </div>
 </html>

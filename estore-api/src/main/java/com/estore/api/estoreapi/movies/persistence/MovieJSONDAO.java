@@ -80,7 +80,7 @@ public class MovieJSONDAO implements MovieDAO {
 		ArrayList<Movie> movieArrayList = new ArrayList<>();
 
 		for (Movie movie : movies.values()) {
-			if (text == null || movie.getTitle().contains(text)) {
+			if (text == null || movie.titleContains(text)) {
 				movieArrayList.add(movie);
 			}
 		}

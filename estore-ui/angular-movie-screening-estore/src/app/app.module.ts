@@ -9,11 +9,15 @@ import { MoviesComponent } from './movies/movies.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule } from '@angular/forms';
+import { SodasComponent } from './sodas/sodas.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MoviesComponent
+    MoviesComponent,
+    SodasComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

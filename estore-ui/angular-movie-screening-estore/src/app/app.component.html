@@ -1,9 +1,14 @@
-<header>
-    <h1>{{title}}</h1>
-    <div class="header-right_wrapper">
-        <input type="text" placeholder="Search...">
-        <button>login</button>
-    </div>
-</header>
-    
+<h1 class="title">{{title}}</h1>
+
+<div class="header-right_wrapper">
+  <button class="login" (click)="goToPage('login')">login</button>
+</div>
+
+<div>
+  <nav>
+    <li><a routerLink="login">login</a></li>
+  </nav>
+    <router-outlet></router-outlet>
+</div>
+
 <app-movies ></app-movies>

@@ -19,7 +19,7 @@ export class MoviesComponent implements OnInit {
    * Method that will get the list of movies from the cURL command so we can display them on the webpage
    */
   ngOnInit(): void {
-    this.http.get<[Movies]>('http://127.0.0.1:8080/movies').subscribe(data => {
+    this.http.get<[Movies]>('http://127.0.0.1:8080/movies').subscribe((data: Movies[]) => {
       this.movies = data;
     })
   }
@@ -30,5 +30,22 @@ export class MoviesComponent implements OnInit {
    */
   onSelect(movie: Movies): void {
     this.selectedMovie = movie;
+  }
+
+  /**
+   * Method that will only display movies that fit the search name of what the user put in
+   * @param value the name of the movie that the user put into the search box
+   */
+  searchMoviesByName(value: string): void {
+    this.http.get<[Movies]>('http://127.0.0.1:8080/movies/?title='+value).subscribe((data: Movies[]) => {
+      this.movies = data;
+    })
+  }
+
+  searchMoviesByDate(value: string): void {
+    console.log(value);
+    this.http.get<[Movies]>('http://127.0.0.1:8080/screenings/?date=2023-01-'+value).subscribe((data: Movies[]) => {
+      this.movies = data;
+    })
   }
 }

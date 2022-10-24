@@ -4,6 +4,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
 </head>
 <h2>Our Selection</h2>
+
+<div class="header-right_wrapper">
+  <input #nameSearch id="movieSearch" placeholder="Search movies" (input)="searchMoviesByName(nameSearch.value)" />
+  <input #dateSearch id="searchByDate" placeholder="Enter Day" />
+  <button id="dateButton" (click)="searchMoviesByDate(dateSearch.value)">Search Day</button>
+  <!--<label id="dropdownLabel" for="searchByTime">Runtime:</label>
+  <select name="movie" id="movieTimes">
+    <option value="1">Less than 2 hours</option>
+    <option value="2">Between 2 and 3 hours</option>
+    <option value="3">More than 3 hours</option>
+  </select>-->
+</div>
+
 <div class="movies" ng-init="getData()">
   <button type="button" *ngFor="let movie of movies" class="movie_card" [class.selected]="movie === selectedMovie" (click)="onSelect(movie)">
     <img class="movieImg" src="{{movie.poster}}" />

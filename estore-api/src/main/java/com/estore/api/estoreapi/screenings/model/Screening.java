@@ -116,7 +116,7 @@ public class Screening {
 	 * @return True if given text is found in the movie title, else False
 	 */
 	public boolean movieTitleContains (String text) {
-		return movie.getTitle().contains(text);
+		return movie.titleContains(text);
 	}
 
 	/**

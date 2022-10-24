@@ -4,6 +4,53 @@
   padding: 0;
 }
 
+#movieSearch {
+  width: 150px;
+  height: 17px;
+  font-size: 16px;
+}
+
+#searchByDate {
+  width: 150px;
+  height: 17px;
+  font-size: 16px;
+}
+
+#dateButton {
+  width: 150px;
+  height: 21px;
+  font-size: 12px;
+  text-align: center;
+  border-style: groove;
+  position: relative;
+  bottom: 1px;
+}
+
+#dateButton:hover {
+  background-color: gray;
+  transform: scale(1.2);
+  border-style: groove;
+}
+
+#dateButton:active {
+  background-color: gray;
+  border-style: none;
+  transform: scale(.99);
+}
+
+/*#dropdownLabel {
+  background-color: lightgray;
+  color: blue;
+  font-size: 18px;
+}
+
+#movieTimes {
+  width: 150px;
+  height: 21px;
+  position: relative;
+  bottom: 1px;
+}*/
+
 .movies {
   display: flex;
   flex-direction: row;
@@ -112,7 +159,7 @@
   z-index: 10;
   grid-template-columns: 77px 77px 77px;
   grid-template-rows: auto;
-  grid-template-areas: 
+  grid-template-areas:
     "title title title";
 
   width: 100%;

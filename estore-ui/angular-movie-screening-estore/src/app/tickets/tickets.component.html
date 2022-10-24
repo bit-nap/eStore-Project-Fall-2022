@@ -2,8 +2,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+  <title>{{getMovieTitle()}} Tickets</title>
 </head>
 
-<h2>Select Number of Tickets to Purchase:</h2>
+<h2>Select Number of Tickets to Purchase for</h2>
+<h3 id="movieTitle">{{getMovieTitle()}}</h3>
 
 <input [(ngModel)]="numOfTickets">

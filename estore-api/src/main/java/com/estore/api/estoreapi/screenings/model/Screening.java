@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 public class Screening {
 	/** The total number of tickets available for any screening. */
-	public static final int TOTAL_TICKETS = 40;
+	public static final int TOTAL_TICKETS = 20;
 	/** TODO: Add description of the purpose of Logger, once it's actually used. */
 	private static final Logger LOG = Logger.getLogger(Screening.class.getName());
 

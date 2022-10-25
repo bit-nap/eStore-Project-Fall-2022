@@ -60,7 +60,8 @@ public class Movie {
 	 * @param text Text to search within this screening's movie.
 	 * @return True if given text is found in the movie title, else False
 	 */
-	public boolean titleContains(String text) {String lowerCaseTitle = title.toLowerCase();
+	public boolean titleContains (String text) {
+		String lowerCaseTitle = title.toLowerCase();
 		String lowerCaseText = text.toLowerCase();
 		return lowerCaseTitle.contains(lowerCaseText);
 	}

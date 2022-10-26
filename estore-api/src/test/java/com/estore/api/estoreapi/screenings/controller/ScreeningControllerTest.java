@@ -43,7 +43,7 @@ public class ScreeningControllerTest {
 	@Test
 	public void testGetScreening () throws IOException {
 		// setup
-		Screening screening = new Screening(101, 104, 6, "2023-01-17", "18:00", mockMovieGetter);
+		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", mockMovieGetter);
 		// when the same id is passed in, our mock screening DAO will return the Screening object
 		when(mockScreeningDao.getScreening(screening.getId())).thenReturn(screening);
 
@@ -92,9 +92,9 @@ public class ScreeningControllerTest {
 	public void testGetScreenings () throws Exception {
 		// New list of screenings
 		Screening[] screenings = new Screening[3];
-		screenings[0] = new Screening(1, 1, 80, "2023-01-01", "18:00:00");
-		screenings[1] = new Screening(2, 2, 50, "2023-01-01", "18:00:00");
-		screenings[2] = new Screening(3, 2, 20, "2023-01-01", "18:00:00");
+		screenings[0] = new Screening(1, 1, 80, "01/01/2023", "18:00:00");
+		screenings[1] = new Screening(2, 2, 50, "01/01/2023", "18:00:00");
+		screenings[2] = new Screening(3, 2, 20, "01/01/2023", "18:00:00");
 		// When getScreenings is called, return the list of screenings from above
 		when(mockScreeningDao.getScreenings()).thenReturn(screenings);
 
@@ -122,7 +122,7 @@ public class ScreeningControllerTest {
 	@Test
 	public void testCreateScreening () throws IOException {
 		// setup
-		Screening screening = new Screening(101, 104, 6, "2023-01-17", "18:00", mockMovieGetter);
+		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", mockMovieGetter);
 		// when createScreening is called, return true simulating successful creation and save
 		when(mockScreeningDao.createScreening(screening)).thenReturn(screening);
 
@@ -137,7 +137,7 @@ public class ScreeningControllerTest {
 	@Test
 	public void testCreateScreeningFailed () throws IOException {
 		// setup
-		Screening screening = new Screening(101, 104, 6, "2023-01-17", "18:00", mockMovieGetter);
+		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", mockMovieGetter);
 		// when createScreening is called, return false simulating failed creation and save
 		when(mockScreeningDao.createScreening(screening)).thenReturn(null);
 
@@ -151,7 +151,7 @@ public class ScreeningControllerTest {
 	@Test
 	public void testCreateScreeningHandleException () throws IOException {
 		// setup
-		Screening screening = new Screening(101, 104, 6, "2023-01-17", "18:00", mockMovieGetter);
+		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", mockMovieGetter);
 
 		// when createScreening is called, throw an IOException
 		doThrow(new IOException()).when(mockScreeningDao).createScreening(screening);
@@ -168,8 +168,8 @@ public class ScreeningControllerTest {
 		// Setup
 		String searchString = "Star Wars"; // the movieId of 104 points to Star Wars IV
 		Screening[] foundScreenings = new Screening[2];
-		foundScreenings[0] = new Screening(101, 104, 6, "2023-01-17", "18:00", mockMovieGetter);
-		foundScreenings[1] = new Screening(101, 104, 6, "2023-01-17", "18:00", mockMovieGetter);
+		foundScreenings[0] = new Screening(101, 104, 6, "01/17/2023", "18:00", mockMovieGetter);
+		foundScreenings[1] = new Screening(101, 104, 6, "01/17/2023", "18:00", mockMovieGetter);
 		// When findScreenings is called with the search string, return the two
 		// screenings above
 		when(mockScreeningDao.findScreenings(searchString)).thenReturn(foundScreenings);
@@ -201,8 +201,8 @@ public class ScreeningControllerTest {
 		// Setup
 		int searchId = 104; // the movieId of 104 points to Star Wars IV
 		Screening[] foundScreenings = new Screening[2];
-		foundScreenings[0] = new Screening(101, 104, 6, "2023-01-17", "18:00", mockMovieGetter);
-		foundScreenings[1] = new Screening(102, 104, 6, "2023-01-17", "18:00", mockMovieGetter);
+		foundScreenings[0] = new Screening(101, 104, 6, "01/17/2023", "18:00", mockMovieGetter);
+		foundScreenings[1] = new Screening(102, 104, 6, "01/17/2023", "18:00", mockMovieGetter);
 		// When findScreenings is called with the search string, return the two screenings above
 		when(mockScreeningDao.findScreeningsForMovie(searchId)).thenReturn(foundScreenings);
 
@@ -231,7 +231,7 @@ public class ScreeningControllerTest {
 	@Test
 	public void testUpdateScreening () throws IOException {
 		// Setup
-		Screening screening = new Screening(101, 104, 6, "2023-01-17", "18:00", mockMovieGetter);
+		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", mockMovieGetter);
 		// when updateScreening is called, return true simulating successful update and save
 		when(mockScreeningDao.updateScreening(screening)).thenReturn(screening);
 		ResponseEntity<Screening> response = screeningController.updateScreening(screening);
@@ -248,7 +248,7 @@ public class ScreeningControllerTest {
 	@Test
 	public void testUpdateScreeningExceptionNotFound () throws IOException {
 		// Setup
-		Screening screening = new Screening(101, 104, 6, "2023-01-17", "18:00", mockMovieGetter);
+		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", mockMovieGetter);
 		// when updateScreening is called, return null simulating screening not found
 		when(mockScreeningDao.updateScreening(screening)).thenReturn(null);
 
@@ -262,7 +262,7 @@ public class ScreeningControllerTest {
 	@Test
 	public void testUpdateScreeningHandleException () throws IOException {
 		// Setup
-		Screening screening = new Screening(101, 104, 6, "2023-01-17", "18:00", mockMovieGetter);
+		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", mockMovieGetter);
 		// When updateScreening is called on the Mock Screening DAO, throw an IOException
 		doThrow(new IOException()).when(mockScreeningDao).updateScreening(screening);
 

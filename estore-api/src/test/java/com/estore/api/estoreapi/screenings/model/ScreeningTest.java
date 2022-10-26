@@ -41,7 +41,7 @@ public class ScreeningTest {
 		int id = 99;
 		int movieId = 104;
 		int tickets = 10;
-		String date = "2023-01-17";
+		String date = "01/17/2023";
 		String time = "18:00";
 
 		// Invoke
@@ -62,7 +62,7 @@ public class ScreeningTest {
 		int id = 99;
 		int movieId = 104;
 		int tickets = 10;
-		String date = "2023-01-17";
+		String date = "01/17/2023";
 		String time = "18:00";
 		Screening screening = new Screening(id, movieId, tickets, date, time, mockMovieGetter);
 
@@ -79,20 +79,20 @@ public class ScreeningTest {
 
 	@Test
 	public void testMovieIdIs () {
-		Screening screening = new Screening(99, 104, 10, "2023-01-17", "18:00", mockMovieGetter);
+		Screening screening = new Screening(99, 104, 10, "01/17/2023", "18:00", mockMovieGetter);
 		assertTrue(screening.movieIdIs(104));
 		assertFalse(screening.movieIdIs(99));
 	}
 
 	@Test
 	public void testCompareTo () {
-		Screening o1 = new Screening(101, 104, 6, "2023-01-16", "16:00", mockMovieGetter);
-		Screening o2 = new Screening(103, 104, 8, "2023-01-17", "16:00", mockMovieGetter);
-		Screening o3 = new Screening(101, 104, 6, "2023-01-17", "18:00", mockMovieGetter);
-		Screening o4 = new Screening(102, 104, 0, "2023-01-18", "16:00", mockMovieGetter);
-		Screening o5 = new Screening(103, 104, 8, "2023-01-20", "16:00", mockMovieGetter);
-		Screening o6 = new Screening(103, 104, 8, "2023-01-20", "16:00", mockMovieGetter);
-		Screening o7 = new Screening(102, 104, 0, "2024-01-17", "20:00", mockMovieGetter);
+		Screening o1 = new Screening(101, 104, 6, "01/16/2023", "16:00", mockMovieGetter);
+		Screening o2 = new Screening(103, 104, 8, "01/17/2023", "16:00", mockMovieGetter);
+		Screening o3 = new Screening(101, 104, 6, "01/17/2023", "18:00", mockMovieGetter);
+		Screening o4 = new Screening(102, 104, 0, "01/18/2023", "16:00", mockMovieGetter);
+		Screening o5 = new Screening(103, 104, 8, "01/20/2023", "16:00", mockMovieGetter);
+		Screening o6 = new Screening(103, 104, 8, "01/20/2023", "16:00", mockMovieGetter);
+		Screening o7 = new Screening(102, 104, 0, "01/17/2023", "20:00", mockMovieGetter);
 		List<Screening> sortedList = new ArrayList<>();  // arraylist with manually sorted Screenings
 		sortedList.add(o1);
 		sortedList.add(o2);
@@ -121,7 +121,7 @@ public class ScreeningTest {
 		int id = 99;
 		int movieId = 104;
 		int tickets = 10;
-		String date = "2023-01-17";
+		String date = "01/17/2023";
 		String time = "18:00";
 		Screening screening = new Screening(id, movieId, tickets, date, time, mockMovieGetter);
 		String expected_string = String.format(Screening.STRING_FORMAT, id, movieId, tickets, date, time);

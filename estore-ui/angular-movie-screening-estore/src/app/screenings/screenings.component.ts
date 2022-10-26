@@ -12,19 +12,41 @@ import { Screening } from "../screening";
 })
 export class ScreeningsComponent implements OnInit {
   /* Array of Screenings for the selected movie. */
-  screenings: Screening[] = [];
+  screenings?: Screening[];
 
   constructor(private http: HttpClient, private router: Router, private movieSelector: MovieSelectorService, private screeningSelector: ScreeningSelectorService) { }
 
   ngOnInit(): void {
+    this.getScreenings();
+  }
+
+  getScreenings(): void {
+    // TODO: Figure out when in the lifecycle of the component to call this method
     this.http.get<[Screening]>('http://127.0.0.1:8080/screenings?title'+ this.movieSelector.getMovieTitle()).subscribe((data: Screening[]) => {
       this.screenings = data;
     })
   }
 
-  onSelect(screening: Screening) {
+  /**
+   * Actions to perform when the user selects a Screening.
+   * @param screening The Screening selected
+   */
+  onSelect(screening: Screening): void {
     this.screeningSelector.setScreening(screening);
     this.router.navigate(['tickets']);
   }
 
+  /**
+   * Get the selected movie's poster.
+   */
+  getMoviePoster(): string {
+    return this.movieSelector.getMoviePoster();
+  }
+
+  /**
+   * Get the selected movie's title.
+   */
+  getMovieTitle(): string {
+    return this.movieSelector.getMovieTitle();
+  }
 }

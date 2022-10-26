@@ -3,10 +3,6 @@
   text-align: center;
 }
 
-button {
-  background-color: #ba5a31;
-}
-
 p {
   color: #BA5A31;
 }
@@ -25,7 +21,7 @@ p {
   margin: 20px
 }
 
-.ticket-container {
+.select-screenings-container {
   height: 400px;
   width: 400px;
 

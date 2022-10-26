@@ -33,7 +33,7 @@ export class MoviesComponent implements OnInit {
     this.movieSelector.setMovie(movie);
     if (this.loggedInAccount.isLoggedIn() && !this.loggedInAccount.isAdmin()) {
       // only go to tickets page if user is logged in, but they are not admin
-      this.router.navigate(['tickets'])
+      this.router.navigate(['screenings'])
     }
   }
 

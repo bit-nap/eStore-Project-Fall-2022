@@ -21,6 +21,11 @@ p {
   margin: 20px
 }
 
+.screening-info {
+  color: #fafafa;
+  margin-right: 16px;
+}
+
 .select-screenings-container {
   height: 400px;
   width: 400px;

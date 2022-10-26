@@ -1,0 +1,19 @@
+<div class="main-container">
+  <div class="movie-poster-container">
+    <img id="movieImg" src="{{getMoviePoster()}}"  alt="Movie poster for {{getMovieTitle()}}"/>
+  </div>
+
+  <div class="select-screenings-container">
+    <p>Select Screening for</p>
+    <p id="movie-title">{{getMovieTitle()}}</p>
+    <div class="screenings-list">
+      <button type="button" *ngFor="let screening of screenings" class="screening_card" (click)="onSelect(screening)">
+        <div class="information-wrapper">
+          <span class="screening-info date">{{screening.date}}</span>
+          <span class="screening-info time">{{screening.time}}</span>
+          <span class="screening-info tickets-remaining">{{screening.ticketsRemaining}}</span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>

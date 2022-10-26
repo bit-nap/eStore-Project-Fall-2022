@@ -6,11 +6,13 @@ import { MoviesComponent } from './movies/movies.component';
 import { TicketsComponent } from "./tickets/tickets.component";
 import { CompletedPurchaseComponent } from "./completed-purchase/completed-purchase.component";
 import { AdminComponent } from './admin/admin.component';
+import { ScreeningsComponent } from "./screenings/screenings.component";
 
 const routes: Routes = [
   { path: '', component: MoviesComponent},
-  { path: 'sodas', component: SodasComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'screenings', component: ScreeningsComponent},
+  { path: 'sodas', component: SodasComponent },
   { path: 'tickets', component: TicketsComponent},
   { path: 'thank', component: CompletedPurchaseComponent},
   { path: 'admin', component: AdminComponent }

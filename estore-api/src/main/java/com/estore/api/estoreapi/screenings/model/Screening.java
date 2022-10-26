@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 /**
@@ -15,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author Group 3C, The Code Monkeys
  */
-public class Screening {
+public class Screening implements Comparable<Screening> {
 	/** The total number of tickets available for any screening. */
 	public static final int TOTAL_TICKETS = 20;
 	/** TODO: Add description of the purpose of Logger, once it's actually used. */
@@ -159,6 +160,42 @@ public class Screening {
 	 */
 	public Movie getMovie () {
 		return movie;
+	}
+
+	/**
+	 * Compare the given Screening object to this Screening object, by comparing their date and time fields.
+	 *
+	 * @param o Screening object to compare to
+	 * @return a negative integer if this < o,<br>
+	 * zero if this == o,<br>
+	 * a positive integer if this > o
+	 */
+	@Override
+	public int compareTo (Screening o) {
+		int dateResult = this.date.compareTo(o.date);
+		if (dateResult == 0) {
+			// only compare times if both Screenings are on the same date
+			return this.time.compareTo(o.time);
+		}
+		return dateResult;
+	}
+
+	/**
+	 * Check if this Screening object equals the given object. If they are both Screening objects, compare their date and times.
+	 *
+	 * @param other Screening to compare to
+	 * @return True if this and other Screening are at the same date and time else False
+	 */
+	@Override
+	public boolean equals (Object other) {
+		if (this == other) return true;
+		if (other == null || getClass() != other.getClass()) return false;
+		Screening screening = (Screening) other;
+		return date.equals(screening.date) && time.equals(screening.time);
+	}
+
+	@Override public int hashCode () {
+		return Objects.hash(date, time);
 	}
 
 	/**

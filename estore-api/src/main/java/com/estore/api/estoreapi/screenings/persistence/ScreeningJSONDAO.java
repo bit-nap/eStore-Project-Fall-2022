@@ -9,9 +9,7 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.logging.Logger;
 
 /**
@@ -75,14 +73,15 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 
 	/**
 	 * Generates an array of {@linkplain Screening screenings} from the tree map for any
-	 * {@linkplain Screening screenings} that contains the movie title specified by text argument.
+	 * {@linkplain Screening screenings} that contains the movie title specified by text argument,
+	 * sorted by their Screening date and time.
 	 *
 	 * @param text The text to find within a {@link Screening screenings} screening<p>
 	 *             If text is null, the array contains all of the {@linkplain Screening screenings} in the tree map.
 	 * @return The array of {@link Screening screenings}, may be empty
 	 */
 	private Screening[] getScreeningsArray (String text) {
-		ArrayList<Screening> screeningArrayList = new ArrayList<>();
+		List<Screening> screeningArrayList = new ArrayList<>();
 
 		for (Screening screening : screenings.values()) {
 			if (text == null || screening.movieTitleContains(text)) {
@@ -91,6 +90,7 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 		}
 
 		Screening[] screeningArray = new Screening[screeningArrayList.size()];
+		Collections.sort(screeningArrayList);
 		screeningArrayList.toArray(screeningArray);
 		return screeningArray;
 	}

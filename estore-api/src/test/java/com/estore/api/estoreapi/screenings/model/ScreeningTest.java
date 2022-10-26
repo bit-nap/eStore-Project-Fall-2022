@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -74,6 +77,37 @@ public class ScreeningTest {
 		// Analyze
 		assertEquals(newMovieId, screening.getMovieId());
 		assertEquals(newMovie, screening.getMovie());
+	}
+
+	@Test
+	public void testCompareTo () {
+		Screening o1 = new Screening(101, 104, 6, LocalDate.parse("2023-01-16"), LocalTime.parse("16:00"), mockMovieGetter);
+		Screening o2 = new Screening(103, 104, 8, LocalDate.parse("2023-01-17"), LocalTime.parse("16:00"), mockMovieGetter);
+		Screening o3 = new Screening(101, 104, 6, LocalDate.parse("2023-01-17"), LocalTime.parse("18:00"), mockMovieGetter);
+		Screening o4 = new Screening(102, 104, 0, LocalDate.parse("2023-01-18"), LocalTime.parse("16:00"), mockMovieGetter);
+		Screening o5 = new Screening(103, 104, 8, LocalDate.parse("2023-01-20"), LocalTime.parse("16:00"), mockMovieGetter);
+		Screening o6 = new Screening(103, 104, 8, LocalDate.parse("2023-01-20"), LocalTime.parse("16:00"), mockMovieGetter);
+		Screening o7 = new Screening(102, 104, 0, LocalDate.parse("2024-01-17"), LocalTime.parse("20:00"), mockMovieGetter);
+		List<Screening> sortedList = new ArrayList<>();  // arraylist with manually sorted Screenings
+		sortedList.add(o1);
+		sortedList.add(o2);
+		sortedList.add(o3);
+		sortedList.add(o4);
+		sortedList.add(o5);
+		sortedList.add(o6);
+		sortedList.add(o7);
+		List<Screening> screeningList = new ArrayList<>();  // arraylist to sort
+		screeningList.add(o6);
+		screeningList.add(o2);
+		screeningList.add(o1);
+		screeningList.add(o4);
+		screeningList.add(o7);
+		screeningList.add(o5);
+		screeningList.add(o3);
+		Collections.sort(screeningList);  // sort using the Screening#compareTo method
+		for (int i = 0; i < screeningList.size(); i++) {
+			assertEquals(sortedList.get(i), screeningList.get(i));
+		}
 	}
 
 	@Test

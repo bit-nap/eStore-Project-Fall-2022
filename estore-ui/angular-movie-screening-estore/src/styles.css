@@ -33,7 +33,7 @@ body, input[type="text"], button {
   color: #333333;
 }
 
-button, button:hover, button:active {
+button {
   background-color: #BA5A31;
   border: none;
   cursor: pointer;
@@ -41,6 +41,10 @@ button, button:hover, button:active {
   font-size: 1.2rem;
   padding: 1rem;
   margin: 1rem;
+}
+
+button:active, button:hover {
+  text-decoration: underline;
 }
 
 input {

@@ -182,6 +182,26 @@ public class ScreeningController {
 	}
 
 	/**
+	 * Responds to the GET request for all {@linkplain Screening screenings} whose movie id is the given id.
+	 * Used to find all screenings for a given movie.
+	 *
+	 * @param movieId An integer representing the movie id of a movie screened at a {@link Screening screening}
+	 * @return ResponseEntity with array of {@link Screening screening} objects (may be empty) and HTTP status of OK<br>
+	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+	 */
+	@RequestMapping(value = "/", method = RequestMethod.GET, params = "movieId")
+	public ResponseEntity<Screening[]> searchScreenings (@RequestParam("movieId") int movieId) {
+		LOG.info("GET /screenings/?movieId=" + movieId);
+		try {
+			Screening[] foundScreenings = screeningDao.findScreeningsForMovie(movieId);
+			return new ResponseEntity<>(foundScreenings, HttpStatus.OK);
+		} catch (IOException e) {
+			LOG.log(Level.SEVERE, e.getLocalizedMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	/**
 	 * Responds to the GET request for all {@linkplain Screening screenings} whose screening title contains the given text.
 	 *
 	 * @param date A String which contains the text used to find the {@link Screening screening} to a screening

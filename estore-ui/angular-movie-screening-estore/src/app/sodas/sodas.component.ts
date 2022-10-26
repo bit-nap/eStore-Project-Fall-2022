@@ -14,7 +14,7 @@ export class SodasComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    
+
   }
 
   /**
@@ -56,6 +56,6 @@ export class SodasComponent implements OnInit {
 
   confirm(): void {
     console.log("confirmed");
-    
+
   }
 }

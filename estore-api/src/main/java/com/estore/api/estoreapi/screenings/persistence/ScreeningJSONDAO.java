@@ -97,6 +97,29 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 
 	/**
 	 * Generates an array of {@linkplain Screening screenings} from the tree map for any
+	 * {@linkplain Screening screenings} that is screening the movie specified by movieId argument,
+	 * sorted by their Screening date and time.
+	 *
+	 * @param movieId The movie to find within all {@link Screening screenings}
+	 * @return The array of {@link Screening screenings}, may be empty
+	 */
+	private Screening[] getScreeningsArrayForMovie (int movieId) {
+		List<Screening> screeningArrayList = new ArrayList<>();
+
+		for (Screening screening : screenings.values()) {
+			if (screening.movieIdIs(movieId)) {
+				screeningArrayList.add(screening);
+			}
+		}
+
+		Screening[] screeningArray = new Screening[screeningArrayList.size()];
+		Collections.sort(screeningArrayList);
+		screeningArrayList.toArray(screeningArray);
+		return screeningArray;
+	}
+
+	/**
+	 * Generates an array of {@linkplain Screening screenings} from the tree map for any
 	 * {@linkplain Screening screenings} that will be presented on a specific date.
 	 *
 	 * @param date The date to find within a {@link Screening screenings}
@@ -237,6 +260,16 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 	public Screening[] findScreenings (String text) {
 		synchronized (screenings) {
 			return getScreeningsArray(text);
+		}
+	}
+
+	/**
+	 * * {@inheritDoc}
+	 */
+	@Override
+	public Screening[] findScreeningsForMovie (int movieId) {
+		synchronized (screenings) {
+			return getScreeningsArrayForMovie(movieId);
 		}
 	}
 

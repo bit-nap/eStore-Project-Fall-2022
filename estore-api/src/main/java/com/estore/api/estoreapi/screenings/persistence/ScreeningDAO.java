@@ -69,6 +69,15 @@ public interface ScreeningDAO {
 	Screening[] findScreenings (String text) throws IOException;
 
 	/**
+	 * Finds all {@linkplain Screening screenings} whose movie id matches the given id.
+	 *
+	 * @param movieId The movie id to match against
+	 * @return An array of {@link Screening screenings} that are screening the given movie, by the given movieId, may be empty
+	 * @throws IOException if an issue with underlying storage
+	 */
+	Screening[] findScreeningsForMovie (int movieId) throws IOException;
+
+	/**
 	 * Finds all {@linkplain Screening screenings} whose movie title contains the given text.
 	 *
 	 * @param date The date to match against

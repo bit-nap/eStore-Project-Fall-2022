@@ -121,6 +121,16 @@ public class Screening implements Comparable<Screening> {
 	}
 
 	/**
+	 * Check if this screening's movie id is the same as the given movie id.
+	 *
+	 * @param movieId Movie id to compare to
+	 * @return True if this screening has the given movie id, else False
+	 */
+	public boolean movieIdIs (int movieId) {
+		return this.movieId == movieId;
+	}
+
+	/**
 	 * @return The id of this screening
 	 */
 	public int getId () {

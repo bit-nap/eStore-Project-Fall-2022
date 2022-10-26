@@ -3,6 +3,7 @@
 </header>
 
 <div class="inventory-options">
+  <h2>Add a new product:</h2>
   <input #addScreeningTickets id="screening" placeholder="Enter tickers remaing" />
   <input #addScreeningDate id="screening" placeholder="Enter date of screening" />
   <input #addScreeningTime id="screening" placeholder="Enter time of screening" />
@@ -44,7 +45,7 @@
     </div>
   </button>-->
   <h2>Select the name of the screening you want to edit:</h2>
-  <select #addScreeningMovie id="movie-select" name="Movie" >
+  <select #addScreening id="movie-select" name="Movie" (change)="selectScreening(addScreening.value)">
     <option id="movie-select" value="1">The Terminator</option>
     <option id="movie-select" value="2">Terminator 2: Judgment Day</option>
     <option id="movie-select" value="3">"Rambo: First Blood</option>
@@ -68,7 +69,10 @@
     <option id="movie-select" value="21">The Matrix</option>
   </select>
 
-  <button type="button" *ngFor="let screening of screenings" class="screening-card" (click)="selectScreening">
-    
+  <button type="button" *ngFor="let screening of screenings" class="screening-card" (click)="changeButton(screening)">
+    <h3 class="id">ID: {{screening.id}}</h3>
+    <span class="movieId"> Tickets: {{screening.ticketsRemaining}}</span>
+    <span class="date"> Date: {{screening.date}}</span>
+    <span class="time"> Time: {{screening.time}}</span>
   </button>
 </div>

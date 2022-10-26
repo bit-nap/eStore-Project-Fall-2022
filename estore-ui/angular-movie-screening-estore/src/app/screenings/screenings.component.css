@@ -7,7 +7,13 @@ p {
   color: #BA5A31;
 }
 
+.screening-card {
+  height: 80px;
+  width: 420px;
+}
+
 .main-container {
+  padding: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,19 +28,12 @@ p {
 }
 
 .select-screenings-container {
-  height: 400px;
-  width: 400px;
-
+  width: min-content;
   display: inline-flex;
   row-gap: 10px;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-}
-
-#ticket-input {
-  height: auto;
-  width: 200px;
 }
 
 #movie-title {
@@ -43,4 +42,7 @@ p {
   font-weight: bold;
 }
 
-
+#screening-date, #screening-time, #tickets-remaining {
+  color: #542815;
+  font-weight: bold;
+}

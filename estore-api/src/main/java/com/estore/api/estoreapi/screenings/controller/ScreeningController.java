@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -165,7 +164,7 @@ public class ScreeningController {
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET, params = "title")
-	public ResponseEntity<Screening[]> searchScreenings (@RequestParam("title") String title) {
+	public ResponseEntity<Screening[]> searchScreeningsByTitle (@RequestParam("title") String title) {
 		LOG.info("GET /screenings/?title=" + title);
 		try {
 			Screening[] foundScreenings = screeningDao.findScreenings(title);
@@ -182,22 +181,18 @@ public class ScreeningController {
 	}
 
 	/**
-	 * Responds to the GET request for all {@linkplain Screening screenings} whose screening title contains the given text.
+	 * Responds to the GET request for all {@linkplain Screening screenings} whose movie id is the given id.
+	 * Used to find all screenings for a given movie.
 	 *
-	 * @param date A String which contains the text used to find the {@link Screening screening} to a screening
+	 * @param movieId An integer representing the movie id of a movie screened at a {@link Screening screening}
 	 * @return ResponseEntity with array of {@link Screening screening} objects (may be empty) and HTTP status of OK<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET, params = "date")
-	public ResponseEntity<Screening[]> searchScreeningsByDate (@RequestParam("date") String date) {
-		LOG.info("GET /screenings/?date=" + date);
+	@RequestMapping(value = "/", method = RequestMethod.GET, params = "movieId")
+	public ResponseEntity<Screening[]> searchScreeningsByMovieId (@RequestParam("movieId") int movieId) {
+		LOG.info("GET /screenings/?movieId=" + movieId);
 		try {
-			Screening[] foundScreenings = screeningDao.findScreeningsByDate(LocalDate.parse("2023-01-" + date));
-			/*
-			 * If screeningDao.findScreeningsByDate() fails, an IOException is thrown. Assume function
-			 * passed successfully and return the Screening array even if it is empty. Which
-			 * returns a null list
-			 */
+			Screening[] foundScreenings = screeningDao.findScreeningsForMovie(movieId);
 			return new ResponseEntity<>(foundScreenings, HttpStatus.OK);
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());

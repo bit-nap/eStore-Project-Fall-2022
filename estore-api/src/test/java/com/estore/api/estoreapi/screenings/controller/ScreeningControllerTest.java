@@ -177,7 +177,7 @@ public class ScreeningControllerTest {
 		when(mockScreeningDao.findScreenings(searchString)).thenReturn(foundScreenings);
 
 		// Invoke
-		ResponseEntity<Screening[]> response = screeningController.searchScreenings(searchString);
+		ResponseEntity<Screening[]> response = screeningController.searchScreeningsByTitle(searchString);
 
 		// Analyze
 		assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -192,7 +192,39 @@ public class ScreeningControllerTest {
 		doThrow(new IOException()).when(mockScreeningDao).findScreenings(searchString);
 
 		// Invoke
-		ResponseEntity<Screening[]> response = screeningController.searchScreenings(searchString);
+		ResponseEntity<Screening[]> response = screeningController.searchScreeningsByTitle(searchString);
+
+		// Analyze
+		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+	}
+
+	@Test
+	public void testSearchScreeningsByMovieId () throws IOException {
+		// Setup
+		int searchId = 104; // the movieId of 104 points to Star Wars IV
+		Screening[] foundScreenings = new Screening[2];
+		foundScreenings[0] = new Screening(101, 104, 6, LocalDate.parse("2023-01-17"), LocalTime.parse("18:00"), mockMovieGetter);
+		foundScreenings[1] = new Screening(102, 104, 6, LocalDate.parse("2023-01-17"), LocalTime.parse("18:00"), mockMovieGetter);
+		// When findScreenings is called with the search string, return the two screenings above
+		when(mockScreeningDao.findScreeningsForMovie(searchId)).thenReturn(foundScreenings);
+
+		// Invoke
+		ResponseEntity<Screening[]> response = screeningController.searchScreeningsByMovieId(searchId);
+
+		// Analyze
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertEquals(foundScreenings, response.getBody());
+	}
+
+	@Test
+	public void testSearchScreeningsByMovieIdHandleException () throws IOException {
+		// Setup
+		int searchId = 104;
+		// When createScreening is called on the Mock Screening DAO, throw an IOException
+		doThrow(new IOException()).when(mockScreeningDao).findScreeningsForMovie(searchId);
+
+		// Invoke
+		ResponseEntity<Screening[]> response = screeningController.searchScreeningsByMovieId(searchId);
 
 		// Analyze
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -77,6 +77,13 @@ public class ScreeningTest {
 		// Analyze
 		assertEquals(newMovieId, screening.getMovieId());
 		assertEquals(newMovie, screening.getMovie());
+	}
+
+	@Test
+	public void testMovieIdIs () {
+		Screening screening = new Screening(99, 104, 10, LocalDate.parse("2023-01-17"), LocalTime.parse("18:00"), mockMovieGetter);
+		assertTrue(screening.movieIdIs(104));
+		assertFalse(screening.movieIdIs(99));
 	}
 
 	@Test

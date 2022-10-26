@@ -150,6 +150,21 @@ public class ScreeningJSONDAOTest {
 	}
 
 	@Test
+	public void testScreeningsForMovie () {
+		// Invoke
+		Screening[] screenings = screeningFileDAO.findScreeningsForMovie(104);
+		Screening[] emptyScreenings = screeningFileDAO.findScreeningsForMovie(0);
+
+		// Analyze
+		assertEquals(screenings.length, 3);
+		assertEquals(screenings[0], testScreenings[0]);
+		assertEquals(screenings[1], testScreenings[1]);
+		assertEquals(screenings[2], testScreenings[2]);
+		assertEquals(emptyScreenings.length, 0); // no screenings with movieId = 0 should be found
+
+	}
+
+	@Test
 	public void testDeleteScreeningNotFound () {
 		// Invoke
 		boolean result = assertDoesNotThrow(() -> screeningFileDAO.deleteScreening(104), "Unexpected exception thrown");

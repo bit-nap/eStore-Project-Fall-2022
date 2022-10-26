@@ -165,7 +165,7 @@ public class ScreeningController {
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET, params = "title")
-	public ResponseEntity<Screening[]> searchScreenings (@RequestParam("title") String title) {
+	public ResponseEntity<Screening[]> searchScreeningsByTitle (@RequestParam("title") String title) {
 		LOG.info("GET /screenings/?title=" + title);
 		try {
 			Screening[] foundScreenings = screeningDao.findScreenings(title);
@@ -190,7 +190,7 @@ public class ScreeningController {
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET, params = "movieId")
-	public ResponseEntity<Screening[]> searchScreenings (@RequestParam("movieId") int movieId) {
+	public ResponseEntity<Screening[]> searchScreeningsByMovieId (@RequestParam("movieId") int movieId) {
 		LOG.info("GET /screenings/?movieId=" + movieId);
 		try {
 			Screening[] foundScreenings = screeningDao.findScreeningsForMovie(movieId);

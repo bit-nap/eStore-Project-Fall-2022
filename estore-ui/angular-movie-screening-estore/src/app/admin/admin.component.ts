@@ -72,7 +72,7 @@ export class AdminComponent implements OnInit {
       time = this.accountToChange.ticketsRemaining.toString();
     }
 
-    this.http.put<Screenings>('http://127.0.0.1:8080/screenings', {id: 1, movieId: this.accountToChange.movieId, ticketsRemaining: tickets, date: date, time: time}).subscribe((data: Screenings) => {
+    this.http.put<Screenings>('http://127.0.0.1:8080/screenings', {id: this.accountToChange.movieId, movieId: this.accountToChange.movieId, ticketsRemaining: tickets, date: date, time: time}).subscribe((data: Screenings) => {
       this.accountToChange = data;
     })
   }

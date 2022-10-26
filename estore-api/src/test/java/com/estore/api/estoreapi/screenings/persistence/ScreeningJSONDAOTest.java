@@ -10,8 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -44,9 +42,9 @@ public class ScreeningJSONDAOTest {
 		when(mockMovieGetter.getMovie(104)).thenReturn(testMovie);
 
 		testScreenings = new Screening[3];
-		testScreenings[0] = new Screening(101, 104, 6, LocalDate.parse("2023-01-17"), LocalTime.parse("18:00"), mockMovieGetter);
-		testScreenings[1] = new Screening(102, 104, 0, LocalDate.parse("2023-01-17"), LocalTime.parse("20:00"), mockMovieGetter);
-		testScreenings[2] = new Screening(103, 104, 8, LocalDate.parse("2023-01-17"), LocalTime.parse("22:00"), mockMovieGetter);
+		testScreenings[0] = new Screening(101, 104, 6, "2023-01-17", "18:00", mockMovieGetter);
+		testScreenings[1] = new Screening(102, 104, 0, "2023-01-17", "20:00", mockMovieGetter);
+		testScreenings[2] = new Screening(103, 104, 8, "2023-01-17", "22:00", mockMovieGetter);
 
 		// When the object mapper is supposed to read from the file the mock object mapper will return the screening array above
 		when(mockObjectMapper.readValue(new File("mao-zedongs-little-red-book.epub"), Screening[].class)).thenReturn(testScreenings);
@@ -101,7 +99,7 @@ public class ScreeningJSONDAOTest {
 	@Test
 	public void testCreateScreening () {
 		// Setup
-		Screening screening = new Screening(104, 104, 6, LocalDate.parse("2023-01-18"), LocalTime.parse("18:00"), mockMovieGetter);
+		Screening screening = new Screening(104, 104, 6, "2023-01-18", "18:00", mockMovieGetter);
 
 		// Invoke
 		Screening result = assertDoesNotThrow(() -> screeningFileDAO.createScreening(screening), "Unexpected exception thrown");
@@ -120,7 +118,7 @@ public class ScreeningJSONDAOTest {
 	@Test
 	public void testUpdateScreening () {
 		// Setup
-		Screening screening = new Screening(101, 105, 6, LocalDate.parse("2023-01-18"), LocalTime.parse("18:00"), mockMovieGetter);
+		Screening screening = new Screening(101, 105, 6, "2023-01-18", "18:00", mockMovieGetter);
 
 		// Invoke
 		Screening result = assertDoesNotThrow(() -> screeningFileDAO.updateScreening(screening), "Unexpected exception thrown");
@@ -135,7 +133,7 @@ public class ScreeningJSONDAOTest {
 	public void testSaveException () throws IOException {
 		doThrow(new IOException()).when(mockObjectMapper).writeValue(any(File.class), any(Screening[].class));
 
-		Screening screening = new Screening(104, 104, 6, LocalDate.parse("2023-01-18"), LocalTime.parse("18:00"), mockMovieGetter);
+		Screening screening = new Screening(104, 104, 6, "2023-01-18", "18:00", mockMovieGetter);
 
 		assertThrows(IOException.class, () -> screeningFileDAO.createScreening(screening), "IOException not thrown");
 	}
@@ -177,7 +175,7 @@ public class ScreeningJSONDAOTest {
 	@Test
 	public void testUpdateScreeningNotFound () {
 		// Setup
-		Screening screening = new Screening(104, 104, 6, LocalDate.parse("2023-01-18"), LocalTime.parse("18:00"), mockMovieGetter);
+		Screening screening = new Screening(104, 104, 6, "2023-01-18", "18:00", mockMovieGetter);
 
 		// Invoke
 		Screening result = assertDoesNotThrow(() -> screeningFileDAO.updateScreening(screening), "Unexpected exception thrown");

@@ -4,10 +4,8 @@
   <title>Monkey Movies</title>
 </head>
 
-<div class="header-right_wrapper">
-  <input #nameSearch id="movieSearch" placeholder="Search movies" (input)="searchMoviesByName(nameSearch.value)" />
-  <input #dateSearch id="searchByDate" placeholder="Enter Day" />
-  <button id="dateButton" (click)="searchMoviesByDate(dateSearch.value)">Search Day</button>
+<div class="search-bar-container">
+  <input #nameSearch id="search-bar-input" placeholder="Search movies" (input)="searchMoviesByName(nameSearch.value)" />
 </div>
 <div class="movies">
   <button type="button" *ngFor="let movie of movies" class="movie_card" (click)="onSelect(movie)">

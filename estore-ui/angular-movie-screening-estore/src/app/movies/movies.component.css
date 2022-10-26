@@ -4,38 +4,20 @@
   padding: 0;
 }
 
-#movieSearch {
-  width: 150px;
-  height: 17px;
-  font-size: 16px;
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 80px;
+  width: auto;
 }
 
-#searchByDate {
-  width: 150px;
-  height: 17px;
-  font-size: 16px;
-}
-
-#dateButton {
-  width: 150px;
-  height: 21px;
-  font-size: 12px;
+#search-bar-input {
+  width: 500px;
+  height: 50px;
+  font-size: 18px;
   text-align: center;
-  border-style: groove;
-  position: relative;
-  bottom: 1px;
-}
-
-#dateButton:hover {
-  background-color: gray;
-  transform: scale(1.2);
-  border-style: groove;
-}
-
-#dateButton:active {
-  background-color: gray;
-  border-style: none;
-  transform: scale(.99);
 }
 
 .movies {

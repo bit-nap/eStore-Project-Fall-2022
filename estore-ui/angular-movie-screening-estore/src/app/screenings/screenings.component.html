@@ -7,12 +7,13 @@
     <p>Select Screening for</p>
     <p id="movie-title">{{getMovieTitle()}}</p>
     <div class="screenings-list">
-      <button type="button" *ngFor="let screening of screenings" class="screening_card" (click)="onSelect(screening)">
-        <div class="information-wrapper">
-          <span class="screening-info date">{{screening.date}}</span>
-          <span class="screening-info time">{{screening.time}}</span>
-          <span class="screening-info tickets-remaining">{{screening.ticketsRemaining}}</span>
-        </div>
+      <button type="button" *ngFor="let screening of screenings" class="screening-card" (click)="onSelect(screening)">
+        <span id="screening-date">{{screening.date}}</span>
+        <span> at </span>
+        <span id="screening-time">{{screening.time}}</span>
+        <br>
+        <span>Tickets Remaining: </span>
+        <span id="tickets-remaining">{{screening.ticketsRemaining}}</span>
       </button>
     </div>
   </div>

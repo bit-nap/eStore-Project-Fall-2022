@@ -6,8 +6,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -32,9 +30,9 @@ public class Screening implements Comparable<Screening> {
 	/** The number of tickets remaining for this screening. */
 	@JsonProperty("ticketsRemaining") private int ticketsRemaining;
 	/** The date of this screening. */
-	@JsonProperty("date") private LocalDate date;
+	@JsonProperty("date") private String date;
 	/** The time of this screening. */
-	@JsonProperty("time") private LocalTime time;
+	@JsonProperty("time") private String time;
 
 	/** The MovieGetter object used to set this object's movie field. */
 	@JsonIgnore MovieGetter movieGetter;
@@ -58,8 +56,8 @@ public class Screening implements Comparable<Screening> {
 	 */
 	@JsonCreator
 	public Screening (@JsonProperty("id") int id, @JsonProperty("movieId") int movieId,
-	                  @JsonProperty("ticketsRemaining") int ticketsRemaining, @JsonProperty("date") LocalDate date,
-	                  @JsonProperty("time") LocalTime time) {
+	                  @JsonProperty("ticketsRemaining") int ticketsRemaining, @JsonProperty("date") String date,
+	                  @JsonProperty("time") String time) {
 		this.id = id;
 		this.movieId = movieId;
 		this.ticketsRemaining = ticketsRemaining;
@@ -83,8 +81,8 @@ public class Screening implements Comparable<Screening> {
 	 *                         value, i.e. 0 for int
 	 */
 	public Screening (@JsonProperty("id") int id, @JsonProperty("movieId") int movieId,
-	                  @JsonProperty("ticketsRemaining") int ticketsRemaining, @JsonProperty("date") LocalDate date,
-	                  @JsonProperty("time") LocalTime time, MovieGetter movieGetter) {
+	                  @JsonProperty("ticketsRemaining") int ticketsRemaining, @JsonProperty("date") String date,
+	                  @JsonProperty("time") String time, MovieGetter movieGetter) {
 		this(id, movieId, ticketsRemaining, date, time);
 		setMovieGetter(movieGetter);
 	}
@@ -154,14 +152,14 @@ public class Screening implements Comparable<Screening> {
 	/**
 	 * @return The date of this screening
 	 */
-	public LocalDate getDate () {
+	public String getDate () {
 		return date;
 	}
 
 	/**
 	 * @return The time of this screening
 	 */
-	public LocalTime getTime () {
+	public String getTime () {
 		return time;
 	}
 

@@ -5,13 +5,15 @@ import { LoginComponent } from './login/login.component';
 import { MoviesComponent } from './movies/movies.component';
 import { TicketsComponent } from "./tickets/tickets.component";
 import { CompletedPurchaseComponent } from "./completed-purchase/completed-purchase.component";
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   { path: '', component: MoviesComponent},
   { path: 'sodas', component: SodasComponent },
   { path: 'login', component: LoginComponent },
   { path: 'tickets', component: TicketsComponent},
-  { path: 'thank', component: CompletedPurchaseComponent}
+  { path: 'thank', component: CompletedPurchaseComponent},
+  { path: 'admin', component: AdminComponent }
 ];
 
 @NgModule({

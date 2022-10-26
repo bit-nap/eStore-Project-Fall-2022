@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { Movie } from '../movie';
 import { Screenings } from '../Screenings';
 
 @Component({
@@ -18,13 +19,21 @@ export class AdminComponent implements OnInit {
     time: ''
   };
   screenings: Screenings[] = [];
-  accountSelected: boolean = false;
-  accountToChange: Screenings = {
+  screeningSelected: boolean = false;
+  screeningToChange: Screenings = {
     id: 0,
     movieId: 0,
     ticketsRemaining: 0,
     date: '',
     time: ''
+  };
+  movieForSelectedScreening: Movie = {
+    id: 0,
+    title: '',
+    poster: '',
+    runtime: '',
+    mpaRating: '',
+    year: 0
   };
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -39,8 +48,8 @@ export class AdminComponent implements OnInit {
   }
 
   selectScreening(screening: string): void {
-    this.accountSelected = false;
-    this.accountToChange = {
+    this.screeningSelected = false;
+    this.screeningToChange = {
       id: 0,
       movieId: 0,
       ticketsRemaining: 0,
@@ -53,8 +62,14 @@ export class AdminComponent implements OnInit {
   }
 
   changeButton(screening: Screenings): void {
-    this.accountSelected = true;
-    this.accountToChange = screening;
+    this.screeningSelected = true;
+    this.screeningToChange = screening;
+
+    this.http.get<Movie>('http://127.0.0.1:8080/movies/'+this.screeningToChange.movieId).subscribe((data: Movie) => {
+      this.movieForSelectedScreening = data;
+    });
+
+    // Need to add screening here to get
   }
 
   changeAccount(updateTickets: string, updateDate: string, updateTime: string): void {
@@ -63,22 +78,22 @@ export class AdminComponent implements OnInit {
     var time = new String("");
 
     if (updateTickets === null || updateTickets === "") {
-      tickets = this.accountToChange.ticketsRemaining.toString();
+      tickets = this.screeningToChange.ticketsRemaining.toString();
     }
     if (updateDate === null || updateDate === "") {
-      date = this.accountToChange.ticketsRemaining.toString();
+      date = this.screeningToChange.ticketsRemaining.toString();
     }
     if (updateTime === null || updateTime === "") {
-      time = this.accountToChange.ticketsRemaining.toString();
+      time = this.screeningToChange.ticketsRemaining.toString();
     }
 
-    this.http.put<Screenings>('http://127.0.0.1:8080/screenings', {id: this.accountToChange.movieId, movieId: this.accountToChange.movieId, ticketsRemaining: tickets, date: date, time: time}).subscribe((data: Screenings) => {
-      this.accountToChange = data;
+    this.http.put<Screenings>('http://127.0.0.1:8080/screenings', {id: this.screeningToChange.movieId, movieId: this.screeningToChange.movieId, ticketsRemaining: tickets, date: date, time: time}).subscribe((data: Screenings) => {
+      this.screeningToChange = data;
     })
   }
 
   deleteScreening(): void {
-    this.http.delete<[Screenings]>('http://127.0.0.1:8080/screenings/'+this.accountToChange.id).subscribe((data: Screenings[]) => {
+    this.http.delete<[Screenings]>('http://127.0.0.1:8080/screenings/'+this.screeningToChange.id).subscribe((data: Screenings[]) => {
       this.screenings = data;
     });
   }

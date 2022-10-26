@@ -67,8 +67,8 @@
   </button>
 </div>
 
-<div *ngIf="accountSelected" class="change-accounts">
-  <h2>ID: {{accountToChange.id}}</h2>
+<div *ngIf="screeningSelected" class="change-accounts">
+  <h2>Movie Name: {{movieForSelectedScreening.title}}</h2>
   <input #updateScreeningTickets id="screening" placeholder="Enter tickers remaing" />
   <input #updateScreeningDate id="screening" placeholder="Enter date of screening" />
   <input #updateScreeningTime id="screening" placeholder="Enter time of screening" />

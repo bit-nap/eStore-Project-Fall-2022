@@ -23,15 +23,6 @@ header {
   justify-content: space-between;
 }
 
-header-right_wrapper {
-  float: right;
-}
-
-header-right_wrapper input {
-  display: inline;
-  margin-right: 10px;
-}
-
 body {
   background: #212121;
   background-size: 400% 400%;

@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -194,30 +193,6 @@ public class ScreeningController {
 		LOG.info("GET /screenings/?movieId=" + movieId);
 		try {
 			Screening[] foundScreenings = screeningDao.findScreeningsForMovie(movieId);
-			return new ResponseEntity<>(foundScreenings, HttpStatus.OK);
-		} catch (IOException e) {
-			LOG.log(Level.SEVERE, e.getLocalizedMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
-	/**
-	 * Responds to the GET request for all {@linkplain Screening screenings} whose screening title contains the given text.
-	 *
-	 * @param date A String which contains the text used to find the {@link Screening screening} to a screening
-	 * @return ResponseEntity with array of {@link Screening screening} objects (may be empty) and HTTP status of OK<br>
-	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
-	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET, params = "date")
-	public ResponseEntity<Screening[]> searchScreeningsByDate (@RequestParam("date") String date) {
-		LOG.info("GET /screenings/?date=" + date);
-		try {
-			Screening[] foundScreenings = screeningDao.findScreeningsByDate(LocalDate.parse("2023-01-" + date));
-			/*
-			 * If screeningDao.findScreeningsByDate() fails, an IOException is thrown. Assume function
-			 * passed successfully and return the Screening array even if it is empty. Which
-			 * returns a null list
-			 */
 			return new ResponseEntity<>(foundScreenings, HttpStatus.OK);
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());

@@ -1,12 +1,21 @@
+span {
+  font-size: 24px;
+}
+
 .main-container {
+  padding: 40px;
+
   display: flex;
-  margin: 40px;
+  flex-direction: column;
+  row-gap: 20px;
 
   align-items: center;
-  flex-direction: column;
-  gap: 20px;
+  justify-content: center;
+}
 
-  text-align: center;
+.screening-info {
+  font-size: 26px;
+  font-weight: bold;
 }
 
 #movie-title {

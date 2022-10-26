@@ -59,10 +59,19 @@
     <option id="movie-select" value="21">The Matrix</option>
   </select>
 
-  <button type="button" *ngFor="let screening of screenings" class="screening-card" (click)="changeButton(screening)">
+  <button type="button" *ngFor="let screening of screenings" id="enter-screening" (click)="changeButton(screening)">
     <h3 class="id">ID: {{screening.id}}</h3>
     <span class="movieId"> Tickets: {{screening.ticketsRemaining}}</span>
     <span class="date"> Date: {{screening.date}}</span>
     <span class="time"> Time: {{screening.time}}</span>
   </button>
+</div>
+
+<div *ngIf="accountSelected" class="change-accounts">
+  <h2>ID: {{accountToChange.id}}</h2>
+  <input #updateScreeningTickets id="screening" placeholder="Enter tickers remaing" />
+  <input #updateScreeningDate id="screening" placeholder="Enter date of screening" />
+  <input #updateScreeningTime id="screening" placeholder="Enter time of screening" />
+  <button type="button" id="enter-screening" (click)="changeAccount(updateScreeningTickets.value, updateScreeningDate.value, updateScreeningTime.value)">Update Screening</button>
+  <button type="button" id="enter-screening" (click)="deleteScreening()">Delete Screening</button>
 </div>

@@ -8,6 +8,7 @@ p {
 }
 
 .main-container {
+  padding: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,7 +22,7 @@ p {
   margin: 20px
 }
 
-.select-screenings-container {
+.select-items-container {
   height: 400px;
   width: 400px;
 

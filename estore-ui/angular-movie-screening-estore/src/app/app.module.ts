@@ -11,7 +11,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { TicketsComponent } from './tickets/tickets.component';
 import { CompletedPurchaseComponent } from './completed-purchase/completed-purchase.component';
-import { SodasComponent } from './sodas/sodas.component';
 import { LoginComponent } from './login/login.component';
 import { ScreeningsComponent } from './screenings/screenings.component';
 
@@ -21,7 +20,6 @@ import { ScreeningsComponent } from './screenings/screenings.component';
     MoviesComponent,
     TicketsComponent,
     CompletedPurchaseComponent,
-    SodasComponent,
     LoginComponent,
     ScreeningsComponent
   ],

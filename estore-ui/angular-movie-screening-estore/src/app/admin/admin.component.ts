@@ -9,17 +9,26 @@ import { Screenings } from '../Screenings';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
+  newScreenings: Screenings[] = [];
   screenings: Screenings[] = [];
 
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+    // Change this to search the screenings by movie id
+    this.http.get<[Screenings]>('http://127.0.0.1:8080/screenings').subscribe((data: Screenings[]) => {
+      this.screenings = data;
+    })
   }
 
   enterNewScreening(screeningTicket:string, screeningDate:string, screeningTime:string, screeningMovie:string) {
     this.http.post<Screenings>('http://127.0.0.1:8080/screenings', { id: 1, movieId: screeningMovie, tickets: screeningTicket.replace(/\D/g, ''), date: screeningDate, time: screeningTime }).subscribe((data:Screenings) => {
-      this.screenings[0] = data;
+      this.newScreenings[0] = data;
     })
+  }
+
+  selectScreening(screening: Screenings): void {
+
   }
 
 }

@@ -31,3 +31,44 @@
   </select>
   <button id="enter-screening" (click)="enterNewScreening(addScreeningTickets.value, addScreeningDate.value, addScreeningTime.value, addScreeningMovie.value)">Add New Screening</button>
 </div>
+
+<div class="change-and-delete">
+  <!--<h2>Select Screeenings to Change or Delete:</h2>
+  <button type="button" *ngFor="let screening of screenings" class="screenings-select" (click)="selectScreening(screening)">
+    <div class="info-wrapper">
+      <h3 class="id">{{screening.id}}</h3>
+      <span class="movie-id">{{screening.id}}</span>
+      <span class="tickets-remaining">{{screening.ticketsRemaining}}</span>
+      <span class="date">{{screening.date}}</span>
+      <span class="time">{{screening.time}}</span>
+    </div>
+  </button>-->
+  <h2>Select the name of the screening you want to edit:</h2>
+  <select #addScreeningMovie id="movie-select" name="Movie" >
+    <option id="movie-select" value="1">The Terminator</option>
+    <option id="movie-select" value="2">Terminator 2: Judgment Day</option>
+    <option id="movie-select" value="3">"Rambo: First Blood</option>
+    <option id="movie-select" value="4">Ghostbusters</option>
+    <option id="movie-select" value="5">Back to the Future</option>
+    <option id="movie-select" value="6">Back to the Future Part II</option>
+    <option id="movie-select" value="7">Back to the Future Part III</option>
+    <option id="movie-select" value="8">Rocky</option>
+    <option id="movie-select" value="9">Rocky II</option>
+    <option id="movie-select" value="10">Rocky III</option>
+    <option id="movie-select" value="11">Rocky IV</option>
+    <option id="movie-select" value="12">Die Hard</option>
+    <option id="movie-select" value="13">Rush Hour</option>
+    <option id="movie-select" value="14">Pulp Fiction</option>
+    <option id="movie-select" value="15">Batman</option>
+    <option id="movie-select" value="16">Batman Returns</option>
+    <option id="movie-select" value="17">Ferris Bueller's Day Off</option>
+    <option id="movie-select" value="18">The Godfather</option>
+    <option id="movie-select" value="19">The Godfather: Part II</option>
+    <option id="movie-select" value="20">Men in Black</option>
+    <option id="movie-select" value="21">The Matrix</option>
+  </select>
+
+  <button type="button" *ngFor="let screening of screenings" class="screening-card" (click)="selectScreening">
+    
+  </button>
+</div>

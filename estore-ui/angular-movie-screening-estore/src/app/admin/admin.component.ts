@@ -16,10 +16,6 @@ export class AdminComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
-    // Change this to search the screenings by movie id
-    /*this.http.get<[Screenings]>('http://127.0.0.1:8080/screenings').subscribe((data: Screenings[]) => {
-      this.screenings = data;
-    })*/
   }
 
   enterNewScreening(screeningTicket:string, screeningDate:string, screeningTime:string, screeningMovie:string) {
@@ -29,6 +25,7 @@ export class AdminComponent implements OnInit {
   }
 
   selectScreening(screening: string): void {
+    console.log(screening);
     this.http.get<[Screenings]>('http://127.0.0.1:8080/screenings/?movieId='+screening).subscribe((data: Screenings[]) => {
       this.screenings = data;
     })

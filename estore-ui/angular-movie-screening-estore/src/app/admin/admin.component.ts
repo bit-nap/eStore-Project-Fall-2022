@@ -56,9 +56,10 @@ export class AdminComponent implements OnInit {
       date: '',
       time: ''
     };
-    this.http.get<[Screenings]>('http://127.0.0.1:8080/screenings/?movieId='+screening).subscribe((data: Screenings[]) => {
+    /*this.http.get<[Screenings]>('http://127.0.0.1:8080/screenings/?movieId='+screening).subscribe((data: Screenings[]) => {
       this.screenings = data;
-    });
+    });*/
+    this.getScreeningListings(screening);
   }
 
   changeButton(screening: Screenings): void {
@@ -68,8 +69,6 @@ export class AdminComponent implements OnInit {
     this.http.get<Movie>('http://127.0.0.1:8080/movies/'+this.screeningToChange.movieId).subscribe((data: Movie) => {
       this.movieForSelectedScreening = data;
     });
-
-    // Need to add screening here to get
   }
 
   changeAccount(updateTickets: string, updateDate: string, updateTime: string): void {
@@ -79,21 +78,40 @@ export class AdminComponent implements OnInit {
 
     if (updateTickets === null || updateTickets === "") {
       tickets = this.screeningToChange.ticketsRemaining.toString();
+    } else {
+      tickets = updateTickets;
     }
     if (updateDate === null || updateDate === "") {
-      date = this.screeningToChange.ticketsRemaining.toString();
+      date = this.screeningToChange.date.toString();
+    } else {
+      date = updateDate;
     }
     if (updateTime === null || updateTime === "") {
-      time = this.screeningToChange.ticketsRemaining.toString();
+      time = this.screeningToChange.time.toString();
+    } else {
+      time = updateTime;
     }
 
-    this.http.put<Screenings>('http://127.0.0.1:8080/screenings', {id: this.screeningToChange.movieId, movieId: this.screeningToChange.movieId, ticketsRemaining: tickets, date: date, time: time}).subscribe((data: Screenings) => {
+    console.log(this.screeningToChange.id, this.screeningToChange.movieId, tickets.replace(/\D/g, ''), date, time);
+
+    this.http.put<Screenings>('http://127.0.0.1:8080/screenings', {id: this.screeningToChange.id, movieId: this.screeningToChange.movieId, ticketsRemaining: Number(tickets), date: date, time: time}).subscribe((data: Screenings) => {
       this.screeningToChange = data;
-    })
+    });
+
+    console.log(this.screeningToChange.id);
+    this.getScreeningListings(this.screeningToChange.movieId.toString());
   }
 
   deleteScreening(): void {
     this.http.delete<[Screenings]>('http://127.0.0.1:8080/screenings/'+this.screeningToChange.id).subscribe((data: Screenings[]) => {
+      this.screenings = data;
+    });
+
+    this.getScreeningListings(this.screeningToChange.movieId.toString());
+  }
+
+  getScreeningListings(movieId: string): void {
+    this.http.get<[Screenings]>('http://127.0.0.1:8080/screenings/?movieId='+movieId).subscribe((data: Screenings[]) => {
       this.screenings = data;
     });
   }

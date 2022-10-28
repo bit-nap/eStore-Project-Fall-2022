@@ -39,4 +39,8 @@ export class LoggedInAccountService {
   isAdmin(): Boolean {
     return this.username === 'admin';
   }
+
+  logout(): void {
+    this.username = undefined;
+  }
 }

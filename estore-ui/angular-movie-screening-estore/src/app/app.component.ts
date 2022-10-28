@@ -20,6 +20,7 @@ export class AppComponent {
   }
 
   logout(): void {
+    this.loggedInAccount.logout();
     this.isUserLoggedIn = false;
     this.router.navigate(['']);
   }

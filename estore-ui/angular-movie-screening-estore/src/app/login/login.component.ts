@@ -55,6 +55,8 @@ export class LoginComponent implements OnInit {
     this.loggedInAccount.setUsername(username);
     if (username === "admin") {
       this.router.navigate(['admin']);
+    } else {
+      this.router.navigate(['']);
     }
 
   }

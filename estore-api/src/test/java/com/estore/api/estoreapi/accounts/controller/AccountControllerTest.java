@@ -209,7 +209,7 @@ public class AccountControllerTest {
         when(mockAccountDAO.findAccounts(searchString)).thenReturn(accounts);
 
         // Invoke
-        ResponseEntity<Account[]> response = accountController.findAccounts(searchString);
+        ResponseEntity<Account> response = accountController.findAccounts(searchString);
 
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
@@ -224,7 +224,7 @@ public class AccountControllerTest {
         doThrow(new IOException()).when(mockAccountDAO).findAccounts(searchString);
 
         // Invoke
-        ResponseEntity<Account[]> response = accountController.findAccounts(searchString);
+        ResponseEntity<Account> response = accountController.findAccounts(searchString);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());

@@ -1,0 +1,23 @@
+#movie-select {
+  color: black;
+  height: 50px;
+  width: 300px;
+}
+
+.inventory-options {
+  background-color: gray;
+}
+
+#enter-screening:hover {
+  scale: 1.05;
+}
+
+#enter-screening:active {
+  scale: .95;
+  background-color: #a54a22;
+}
+
+#screening {
+  height: 50px;
+  width: 300px;
+}

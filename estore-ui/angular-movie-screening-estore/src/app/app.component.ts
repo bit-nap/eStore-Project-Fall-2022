@@ -11,11 +11,18 @@ import { LoggedInAccountService } from "./logged-in-account.service";
 export class AppComponent {
   title = 'Monkey Movies';
   username: String = '';
+  isUserLoggedIn: boolean = false;
 
   constructor(private router:Router, private _location: Location, private loggedInAccount: LoggedInAccountService) {}
 
   goToPage(pageName:string):void {
     this.router.navigate([`${pageName}`]);
+  }
+
+  logout(): void {
+    this.loggedInAccount.logout();
+    this.isUserLoggedIn = false;
+    this.router.navigate(['']);
   }
 
   goBack(): void {
@@ -24,8 +31,10 @@ export class AppComponent {
 
   updateUsername(): String {
     if (!this.loggedInAccount.isLoggedIn()) {
+      this.isUserLoggedIn = true;
       return '';
     } else {
+      this.isUserLoggedIn = false;
       return 'Welcome, ' + this.loggedInAccount.getUsername() + '!';
     }
   }

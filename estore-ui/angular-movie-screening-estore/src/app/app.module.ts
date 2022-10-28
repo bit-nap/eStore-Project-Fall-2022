@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { TicketsComponent } from './tickets/tickets.component';
 import { CompletedPurchaseComponent } from './completed-purchase/completed-purchase.component';
 import { LoginComponent } from './login/login.component';
+import { AdminComponent } from './admin/admin.component';
 import { ScreeningsComponent } from './screenings/screenings.component';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { ScreeningsComponent } from './screenings/screenings.component';
     TicketsComponent,
     CompletedPurchaseComponent,
     LoginComponent,
+    AdminComponent,
     ScreeningsComponent
   ],
   imports: [

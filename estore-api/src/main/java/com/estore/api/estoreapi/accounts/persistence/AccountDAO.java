@@ -66,4 +66,13 @@ public interface AccountDAO {
 	 * @throws IOException if an issue with underlying storage
 	 */
 	Account[] findAccounts (String text) throws IOException;
+
+	/**
+	 * Find only one {@Link Account account} object that matches the username entered
+	 *
+	 * @param text The text to match against
+	 * @return An account that matches the name given
+	 * @throws IOException if an issue with underyling storage
+	 */
+	Account findOneAccount (String text) throws IOException;
 }

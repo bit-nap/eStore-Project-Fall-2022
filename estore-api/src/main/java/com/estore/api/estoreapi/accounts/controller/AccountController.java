@@ -153,6 +153,7 @@ public class AccountController {
 	}
 
 	/**
+	 * TODO: Fix to work so it searches one account
 	 * Responds to the GET request for all {@linkplain Account accounts} whose account username contains the given text.
 	 *
 	 * @param text A String which contains the text used to query {@link Account account} to find all accounts with the text.
@@ -160,10 +161,10 @@ public class AccountController {
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
 	@GetMapping("/")
-	public ResponseEntity<Account[]> findAccounts (@RequestParam String text) {
+	public ResponseEntity<Account> findAccounts (@RequestParam String text) {
 		LOG.info("GET /accounts/?text=" + text);
 		try {
-			Account[] foundAccounts = accountDao.findAccounts(text);
+			Account foundAccounts = accountDao.findOneAccount(text);
 			/*
 			 * If accountDao.findAccounts() fails, an IOException is thrown. Assume function
 			 * passed successfully and return the Account array even if it is empty. Which

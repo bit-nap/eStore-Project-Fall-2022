@@ -56,9 +56,6 @@ export class AdminComponent implements OnInit {
       date: '',
       time: ''
     };
-    /*this.http.get<[Screenings]>('http://127.0.0.1:8080/screenings/?movieId='+screening).subscribe((data: Screenings[]) => {
-      this.screenings = data;
-    });*/
     this.getScreeningListings(screening);
   }
 

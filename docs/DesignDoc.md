@@ -4,52 +4,46 @@ geometry: margin=1in
 
 # PROJECT Design Documentation
 
-> _The following template provides the headings for your Design
-> Documentation. As you edit each section make sure you remove these
-> commentary 'blockquotes'; the lines that start with a > character
-> and appear in the generated PDF in italics._
-
 ## Team Information
 
-* Team name: TEAMNAME
+* Team name: Group 3C, The Code Monkeys
 * Team members
-	* MEMBER1
-	* MEMBER2
-	* MEMBER3
-	* MEMBER4
+	* Adrian Cliteur
+	* Gino Coppola
+	* Louan Flammanc
+	* Norton Perez
+	* Oscar Rojas
 
 ## Executive Summary
 
-This is a summary of the project.
+This is the website for a small theater, only one actual theater, which screens "classic" movies.
 
 ### Purpose
 
-> _Provide a very brief statement about the project and the most
-> important user group and user goals._
+This website allows users to buy tickets and snacks (soda and popcorn) to the screening of a movie at this movie theater.
+The admin (theater owner) can edit screenings and change the movie shown at a screening.
+The admin can also create new screenings of the existing movies.
 
 ### Glossary and Acronyms
 
-> _Provide a table of terms and acronyms._
-
-| Term | Definition |
-|------|------------|
-| SPA | Single Page |
+| Term      | Definition                                |
+|-----------|-------------------------------------------|
+| Movie     | A film                                    |
+| Screening | The showing of a movie at a movie theater |
 
 ## Requirements
 
 This section describes the features of the application.
 
-> _In this section you do not need to be exhaustive and list every
-> story. Focus on top-level features from the Vision document and
-> maybe Epics and critical Stories._
-
 ### Definition of MVP
 
-> _Provide a simple description of the Minimum Viable Product._
+The website allows users to purchase tickets to the screening of a movie.
 
 ### MVP Features
 
-> _Provide a list of top-level Epics and/or Stories of the MVP._
+- Users can manage their cart, which includes the ability to add tickets, soda and popcorn for a screening.
+- Users can make accounts to make purchases and view their order history.
+- Users can vote/suggest on new movies to be shown at a screening.
 
 ### Roadmap of Enhancements
 
@@ -59,11 +53,19 @@ This section describes the features of the application.
 
 This section describes the application domain.
 
-![Domain Model](domain-model-placeholder.png)
+![Domain Model](domain-model.jpg)
 
-> _Provide a high-level overview of the domain for this application. You
-> can discuss the more important domain entities and their relationship
-> to each other._
+In our design, a Screening would display a Movie, which has various attributes specific to that movie.
+A Screening has date and time fields for the user to choose based on.
+Screening also has a counter of tickets remaining so the product owner can prevent overbooking a Screening.
+
+The shopping cart contains information about the tickets, soda and popcorn which a customer is buying to attend a Screening.
+A customer cannot purchase tickets to multiple Screenings at once.
+
+There must be at least 1 ticket for the shopping cart to exist, and there is at most 20 seats in a theater so the number of ticekts cannot exceed 20.
+Soda and popcorn is optional and a user can complete a checkout without purchasing any.
+
+The customer must either make an account, or sign in to an existing account to make a purchase. A customer can also delete theri account.
 
 ## Architecture and Design
 

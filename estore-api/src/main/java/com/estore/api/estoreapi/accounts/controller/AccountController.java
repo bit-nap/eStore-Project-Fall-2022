@@ -153,24 +153,18 @@ public class AccountController {
 	}
 
 	/**
-	 * TODO: Fix to work so it searches one account
-	 * Responds to the GET request for all {@linkplain Account accounts} whose account username contains the given text.
+	 * Responds to the GET request for {@linkplain Account accounts} whose account username matches the given text.
 	 *
-	 * @param text A String which contains the text used to query {@link Account account} to find all accounts with the text.
-	 * @return ResponseEntity with array of {@link Account account} objects (may be empty) and HTTP status of OK<br>
+	 * @param username A String used to query {@link Account account} to find the account with the text.
+	 * @return ResponseEntity of {@link Account account} and HTTP status of OK<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
 	@GetMapping("/")
-	public ResponseEntity<Account> findAccounts (@RequestParam String text) {
-		LOG.info("GET /accounts/?text=" + text);
+	public ResponseEntity<Account> findAccounts (@RequestParam String username) {
+		LOG.info("GET /accounts/?username=" + username);
 		try {
-			Account foundAccounts = accountDao.findOneAccount(text);
-			/*
-			 * If accountDao.findAccounts() fails, an IOException is thrown. Assume function
-			 * passed successfully and return the Account array even if it is empty. Which
-			 * returns a null list
-			 */
-			return new ResponseEntity<>(foundAccounts, HttpStatus.OK);
+			Account foundAccount = accountDao.findOneAccount(username);
+			return new ResponseEntity<>(foundAccount, HttpStatus.OK);
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

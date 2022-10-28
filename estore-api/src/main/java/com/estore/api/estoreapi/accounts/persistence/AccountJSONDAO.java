@@ -91,20 +91,17 @@ public class AccountJSONDAO implements AccountDAO {
 	}
 
 	/**
-	 *	Generates a {@linkplain Account account} from the list of accounts that matches the text given
+	 *	Finds a {@linkplain Account account} from the list of accounts that exactly matches the username given
 	 *
-	 * @param text The text field that will be used to search for an account
+	 * @param username The text field that will be used to search for an account
 	 * @return The {@link Account account}, if there is one
 	 */
-	private Account getAccount (String text) {
-		Account account = new Account(0, "", "");
-
-		for (Account account2 : accounts.values()) {
-			if (account2.getUsername().equals(text)) {
+	private Account getAccount (String username) {
+		for (Account account : accounts.values()) {
+			if (account.getUsername().equals(username)) {
 				return account;
 			}
 		}
-
 		return null;
 	}
 
@@ -233,9 +230,9 @@ public class AccountJSONDAO implements AccountDAO {
 	 * * {@inheritDoc}}
 	 */
 	@Override
-	public Account findOneAccount (String text) {
+	public Account findOneAccount (String username) {
 		synchronized (accounts) {
-			return getAccount(text);
+			return getAccount(username);
 		}
 	}
 }

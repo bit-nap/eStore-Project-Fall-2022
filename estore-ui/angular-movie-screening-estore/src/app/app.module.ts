@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { ScreeningsComponent } from './screenings/screenings.component';
 import { VoteSuggestComponent } from './vote-suggest/vote-suggest.component';
+import { VoteSuggestAdminComponent } from './vote-suggest-admin/vote-suggest-admin.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { VoteSuggestComponent } from './vote-suggest/vote-suggest.component';
     LoginComponent,
     AdminComponent,
     ScreeningsComponent,
-    VoteSuggestComponent
+    VoteSuggestComponent,
+    VoteSuggestAdminComponent
   ],
   imports: [
     BrowserModule,

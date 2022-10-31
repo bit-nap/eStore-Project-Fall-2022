@@ -38,4 +38,12 @@ export class AppComponent {
       return 'Welcome, ' + this.loggedInAccount.getUsername() + '!';
     }
   }
+
+  voteSuggestMovie(): void {
+    if (this.loggedInAccount.getUsername() === "admin") {
+      this.router.navigate(['vote-admin']);
+    } else {
+      this.router.navigate(['vote']);
+    }
+  }
 }

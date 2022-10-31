@@ -11,8 +11,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { TicketsComponent } from './tickets/tickets.component';
 import { CompletedPurchaseComponent } from './completed-purchase/completed-purchase.component';
-import { SodasComponent } from './sodas/sodas.component';
 import { LoginComponent } from './login/login.component';
+import { AdminComponent } from './admin/admin.component';
+import { ScreeningsComponent } from './screenings/screenings.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +21,9 @@ import { LoginComponent } from './login/login.component';
     MoviesComponent,
     TicketsComponent,
     CompletedPurchaseComponent,
-    SodasComponent,
-    LoginComponent
+    LoginComponent,
+    AdminComponent,
+    ScreeningsComponent
   ],
   imports: [
     BrowserModule,

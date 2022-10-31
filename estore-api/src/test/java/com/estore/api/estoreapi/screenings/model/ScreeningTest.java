@@ -6,10 +6,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -40,8 +41,8 @@ public class ScreeningTest {
 		int id = 99;
 		int movieId = 104;
 		int tickets = 10;
-		LocalDate date = LocalDate.parse("2023-01-17");
-		LocalTime time = LocalTime.parse("18:00");
+		String date = "01/17/2023";
+		String time = "18:00";
 
 		// Invoke
 		Screening screening = new Screening(id, movieId, tickets, date, time, mockMovieGetter);
@@ -61,8 +62,8 @@ public class ScreeningTest {
 		int id = 99;
 		int movieId = 104;
 		int tickets = 10;
-		LocalDate date = LocalDate.parse("2023-01-17");
-		LocalTime time = LocalTime.parse("18:00");
+		String date = "01/17/2023";
+		String time = "18:00";
 		Screening screening = new Screening(id, movieId, tickets, date, time, mockMovieGetter);
 
 		// Invoke
@@ -77,13 +78,51 @@ public class ScreeningTest {
 	}
 
 	@Test
+	public void testMovieIdIs () {
+		Screening screening = new Screening(99, 104, 10, "01/17/2023", "18:00", mockMovieGetter);
+		assertTrue(screening.movieIdIs(104));
+		assertFalse(screening.movieIdIs(99));
+	}
+
+	@Test
+	public void testCompareTo () {
+		Screening o1 = new Screening(101, 104, 6, "01/16/2023", "16:00", mockMovieGetter);
+		Screening o2 = new Screening(103, 104, 8, "01/17/2023", "16:00", mockMovieGetter);
+		Screening o3 = new Screening(101, 104, 6, "01/17/2023", "18:00", mockMovieGetter);
+		Screening o4 = new Screening(102, 104, 0, "01/18/2023", "16:00", mockMovieGetter);
+		Screening o5 = new Screening(103, 104, 8, "01/20/2023", "16:00", mockMovieGetter);
+		Screening o6 = new Screening(103, 104, 8, "01/20/2023", "16:00", mockMovieGetter);
+		Screening o7 = new Screening(102, 104, 0, "01/17/2023", "20:00", mockMovieGetter);
+		List<Screening> sortedList = new ArrayList<>();  // arraylist with manually sorted Screenings
+		sortedList.add(o1);
+		sortedList.add(o2);
+		sortedList.add(o3);
+		sortedList.add(o4);
+		sortedList.add(o5);
+		sortedList.add(o6);
+		sortedList.add(o7);
+		List<Screening> screeningList = new ArrayList<>();  // arraylist to sort
+		screeningList.add(o6);
+		screeningList.add(o2);
+		screeningList.add(o1);
+		screeningList.add(o4);
+		screeningList.add(o7);
+		screeningList.add(o5);
+		screeningList.add(o3);
+		Collections.sort(screeningList);  // sort using the Screening#compareTo method
+		for (int i = 0; i < screeningList.size(); i++) {
+			assertEquals(sortedList.get(i), screeningList.get(i));
+		}
+	}
+
+	@Test
 	public void testToString () {
 		// Setup
 		int id = 99;
 		int movieId = 104;
 		int tickets = 10;
-		LocalDate date = LocalDate.parse("2023-01-17");
-		LocalTime time = LocalTime.parse("18:00");
+		String date = "01/17/2023";
+		String time = "18:00";
 		Screening screening = new Screening(id, movieId, tickets, date, time, mockMovieGetter);
 		String expected_string = String.format(Screening.STRING_FORMAT, id, movieId, tickets, date, time);
 

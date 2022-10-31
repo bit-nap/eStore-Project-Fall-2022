@@ -1,0 +1,48 @@
+* {
+  font-size: 21px;
+  text-align: center;
+}
+
+p {
+  color: #BA5A31;
+}
+
+.screening-card {
+  height: 80px;
+  width: 420px;
+}
+
+.main-container {
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.movie-poster-container {
+  height: 500px;
+  width: 330px;
+
+  float: left;
+  margin: 20px
+}
+
+.select-screenings-container {
+  width: min-content;
+  display: inline-flex;
+  row-gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#movie-title {
+  color: #FFDD4A;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#screening-date, #screening-time, #tickets-remaining {
+  color: #542815;
+  font-weight: bold;
+}

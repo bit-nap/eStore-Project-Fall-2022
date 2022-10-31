@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { MoviesComponent } from "../movies/movies.component";
-import { Movies } from "../Movies";
 import { MovieSelectorService } from "../movie-selector.service";
 import { Router } from "@angular/router";
 
@@ -13,8 +12,6 @@ import { Router } from "@angular/router";
 export class TicketsComponent implements OnInit {
   /** The number of tickets selected. */
   @Input() numOfTickets: Number = 0;
-  /** The currently selected movie. */
-  selectedMovie?:Movies;
 
   constructor(private router: Router, private movieSelector: MovieSelectorService) { }
 
@@ -22,21 +19,20 @@ export class TicketsComponent implements OnInit {
    * Set this TicketsComponent's selected movie using the MovieSelectorService.
    */
   ngOnInit(): void {
-    this.selectedMovie = this.movieSelector.getMovie()
   }
 
   /**
    * Get the title of the selected movie.
    */
   getMovieTitle(): String {
-    return <String> this.selectedMovie?.title
+    return this.movieSelector.getMovieTitle();
   }
 
   /**
    * Get the poster fo the selected movie.
    */
   getMoviePoster(): String {
-    return <String> this.selectedMovie?.poster;
+    return this.movieSelector.getMoviePoster();
   }
 
   /**
@@ -44,6 +40,6 @@ export class TicketsComponent implements OnInit {
    */
   completePurchase(): void {
     // TODO: Add actions for completed a purchase, ie, save ticket information as Order class in Java or something
-    this.router.navigate(['thank'])  // go to complete purchase page, currently thank
+    this.router.navigate(['thank'])
   }
 }

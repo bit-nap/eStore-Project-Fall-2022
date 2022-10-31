@@ -23,15 +23,6 @@ header {
   justify-content: space-between;
 }
 
-header-right_wrapper {
-  float: right;
-}
-
-header-right_wrapper input {
-  display: inline;
-  margin-right: 10px;
-}
-
 body {
   background: #212121;
   background-size: 400% 400%;
@@ -51,14 +42,9 @@ button {
   padding: 1rem;
   margin: 1rem;
 }
-button:hover {
-  background-color: #BA5A31;
-  border: none;
-  cursor: pointer;
-  color: black;
-  font-size: 1.2rem;
-  padding: 1rem;
-  margin: 1rem;
+
+button:active, button:hover {
+  text-decoration: underline;
 }
 
 input {

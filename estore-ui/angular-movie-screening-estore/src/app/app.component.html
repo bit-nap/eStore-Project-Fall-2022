@@ -2,7 +2,8 @@
     <h1 routerLink="" style="cursor: pointer">{{title}}</h1>
     <p id="current-user">{{updateUsername()}}</p>
     <div class="header-right_wrapper">
-      <button class="login" (click)="goToPage('login')">login</button>
+      <button *ngIf="isUserLoggedIn" class="login" (click)="goToPage('login')">Login</button>
+      <button *ngIf="!isUserLoggedIn" class="login" (click)="logout()">Logout</button>
       <button class="login" (click)="goBack()">Go Back</button>
     </div>
 </header>

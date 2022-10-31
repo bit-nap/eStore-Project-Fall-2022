@@ -6,8 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 /**
@@ -15,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author Group 3C, The Code Monkeys
  */
-public class Screening {
+public class Screening implements Comparable<Screening> {
 	/** The total number of tickets available for any screening. */
 	public static final int TOTAL_TICKETS = 20;
 	/** TODO: Add description of the purpose of Logger, once it's actually used. */
@@ -31,9 +30,9 @@ public class Screening {
 	/** The number of tickets remaining for this screening. */
 	@JsonProperty("ticketsRemaining") private int ticketsRemaining;
 	/** The date of this screening. */
-	@JsonProperty("date") private LocalDate date;
+	@JsonProperty("date") private String date;
 	/** The time of this screening. */
-	@JsonProperty("time") private LocalTime time;
+	@JsonProperty("time") private String time;
 
 	/** The MovieGetter object used to set this object's movie field. */
 	@JsonIgnore MovieGetter movieGetter;
@@ -57,8 +56,8 @@ public class Screening {
 	 */
 	@JsonCreator
 	public Screening (@JsonProperty("id") int id, @JsonProperty("movieId") int movieId,
-	                  @JsonProperty("ticketsRemaining") int ticketsRemaining, @JsonProperty("date") LocalDate date,
-	                  @JsonProperty("time") LocalTime time) {
+	                  @JsonProperty("ticketsRemaining") int ticketsRemaining, @JsonProperty("date") String date,
+	                  @JsonProperty("time") String time) {
 		this.id = id;
 		this.movieId = movieId;
 		this.ticketsRemaining = ticketsRemaining;
@@ -82,8 +81,8 @@ public class Screening {
 	 *                         value, i.e. 0 for int
 	 */
 	public Screening (@JsonProperty("id") int id, @JsonProperty("movieId") int movieId,
-	                  @JsonProperty("ticketsRemaining") int ticketsRemaining, @JsonProperty("date") LocalDate date,
-	                  @JsonProperty("time") LocalTime time, MovieGetter movieGetter) {
+	                  @JsonProperty("ticketsRemaining") int ticketsRemaining, @JsonProperty("date") String date,
+	                  @JsonProperty("time") String time, MovieGetter movieGetter) {
 		this(id, movieId, ticketsRemaining, date, time);
 		setMovieGetter(movieGetter);
 	}
@@ -120,6 +119,16 @@ public class Screening {
 	}
 
 	/**
+	 * Check if this screening's movie id is the same as the given movie id.
+	 *
+	 * @param movieId Movie id to compare to
+	 * @return True if this screening has the given movie id, else False
+	 */
+	public boolean movieIdIs (int movieId) {
+		return this.movieId == movieId;
+	}
+
+	/**
 	 * @return The id of this screening
 	 */
 	public int getId () {
@@ -143,14 +152,14 @@ public class Screening {
 	/**
 	 * @return The date of this screening
 	 */
-	public LocalDate getDate () {
+	public String getDate () {
 		return date;
 	}
 
 	/**
 	 * @return The time of this screening
 	 */
-	public LocalTime getTime () {
+	public String getTime () {
 		return time;
 	}
 
@@ -159,6 +168,42 @@ public class Screening {
 	 */
 	public Movie getMovie () {
 		return movie;
+	}
+
+	/**
+	 * Compare the given Screening object to this Screening object, by comparing their date and time fields.
+	 *
+	 * @param o Screening object to compare to
+	 * @return a negative integer if this < o,<br>
+	 * zero if this == o,<br>
+	 * a positive integer if this > o
+	 */
+	@Override
+	public int compareTo (Screening o) {
+		int dateResult = this.date.compareTo(o.date);
+		if (dateResult == 0) {
+			// only compare times if both Screenings are on the same date
+			return this.time.compareTo(o.time);
+		}
+		return dateResult;
+	}
+
+	/**
+	 * Check if this Screening object equals the given object. If they are both Screening objects, compare their date and times.
+	 *
+	 * @param other Screening to compare to
+	 * @return True if this and other Screening are at the same date and time else False
+	 */
+	@Override
+	public boolean equals (Object other) {
+		if (this == other) return true;
+		if (other == null || getClass() != other.getClass()) return false;
+		Screening screening = (Screening) other;
+		return date.equals(screening.date) && time.equals(screening.time);
+	}
+
+	@Override public int hashCode () {
+		return Objects.hash(date, time);
 	}
 
 	/**

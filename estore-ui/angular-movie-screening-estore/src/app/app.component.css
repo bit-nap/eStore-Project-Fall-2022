@@ -2,21 +2,6 @@
   font-size: 50px;
 }
 
-.login {
-  background-color: lightgray;
-  border-style: groove;
-}
-
-.login:hover {
-  transform: scale(1.25);
-  background-color: gray;
-}
-
-.login:active {
-  border: red;
-  color: white;
-}
-
 #current-user {
   color: #fafafa;
   font-size: 21px;

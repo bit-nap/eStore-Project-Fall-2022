@@ -3,15 +3,12 @@
   text-align: center;
 }
 
-button {
-  background-color: #ba5a31;
-}
-
 p {
   color: #BA5A31;
 }
 
 .main-container {
+  padding: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,7 +22,7 @@ p {
   margin: 20px
 }
 
-.ticket-container {
+.select-items-container {
   height: 400px;
   width: 400px;
 

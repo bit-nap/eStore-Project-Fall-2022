@@ -91,6 +91,21 @@ public class AccountJSONDAO implements AccountDAO {
 	}
 
 	/**
+	 *	Finds a {@linkplain Account account} from the list of accounts that exactly matches the username given
+	 *
+	 * @param username The text field that will be used to search for an account
+	 * @return The {@link Account account}, if there is one
+	 */
+	private Account getAccountbyNameAccount (String username) {
+		for (Account account : accounts.values()) {
+			if (account.getUsername().equals(username)) {
+				return account;
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Saves the {@linkplain Account accounts} from the map into the file as an array of JSON objects.
 	 *
 	 * @return true if the {@link Account accounts} were written successfully
@@ -208,6 +223,16 @@ public class AccountJSONDAO implements AccountDAO {
 	public Account[] findAccounts (String text) {
 		synchronized (accounts) {
 			return getAccountsArray(text);
+		}
+	}
+
+	/**
+	 * * {@inheritDoc}}
+	 */
+	@Override
+	public Account findOneAccount (String username) {
+		synchronized (accounts) {
+			return getAccountbyNameAccount(username);
 		}
 	}
 }

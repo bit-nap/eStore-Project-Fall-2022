@@ -1,5 +1,5 @@
-/* Movies interface to store the values that are in the JSON objects */
-export interface Movies {
+/* Movie interface to store the values that are in the JSON objects */
+export interface Movie {
   id: number,
   title: string,
   poster: string,

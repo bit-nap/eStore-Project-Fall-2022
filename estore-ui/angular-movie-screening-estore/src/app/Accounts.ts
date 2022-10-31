@@ -1,9 +1,5 @@
-export class Accounts {
-  username: string = ""
-  password: string = ""
-
-  constructor (username: string) {
-    this.username = username;
-    this.password = "";
-  }
+export interface Accounts {
+  id: number,
+  username: string,
+  password: string
 }

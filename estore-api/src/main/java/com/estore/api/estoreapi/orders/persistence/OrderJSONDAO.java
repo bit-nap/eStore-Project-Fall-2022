@@ -3,6 +3,7 @@ package com.estore.api.estoreapi.orders.persistence;
 import com.estore.api.estoreapi.orders.model.Order;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +19,7 @@ import java.util.logging.Logger;
  *
  * @author Group 3C, The Code Monkeys
  */
+@Component
 public class OrderJSONDAO implements OrderDAO {
 	/** A local cache of Order objects, to avoid reading from file each time. */
 	Map<Integer, Order> orders;

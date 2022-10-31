@@ -96,7 +96,7 @@ public class AccountJSONDAO implements AccountDAO {
 	 * @param username The text field that will be used to search for an account
 	 * @return The {@link Account account}, if there is one
 	 */
-	private Account getAccount (String username) {
+	private Account getAccountbyNameAccount (String username) {
 		for (Account account : accounts.values()) {
 			if (account.getUsername().equals(username)) {
 				return account;
@@ -232,7 +232,7 @@ public class AccountJSONDAO implements AccountDAO {
 	@Override
 	public Account findOneAccount (String username) {
 		synchronized (accounts) {
-			return getAccount(username);
+			return getAccountbyNameAccount(username);
 		}
 	}
 }

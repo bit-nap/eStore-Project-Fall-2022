@@ -164,7 +164,12 @@ public class AccountController {
 		LOG.info("GET /accounts/?username=" + username);
 		try {
 			Account foundAccount = accountDao.findOneAccount(username);
-			return new ResponseEntity<>(foundAccount, HttpStatus.OK);
+
+			if (foundAccount != null) {
+				return new ResponseEntity<>(foundAccount, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

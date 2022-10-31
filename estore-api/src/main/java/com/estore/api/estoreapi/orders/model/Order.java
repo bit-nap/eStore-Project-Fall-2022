@@ -1,25 +1,36 @@
 package com.estore.api.estoreapi.orders.model;
 
+import com.estore.api.estoreapi.movies.model.Movie;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.logging.Logger;
+
 /**
  * Represents a customer order. Fields cannot be changed once created.
  *
  * @author Group 3C, The Code Monkeys
  */
 public class Order {
+	// Package private for tests - Prof
+	static final String STRING_FORMAT = "Order [id=%d, screeningId=%d, accountId=%d, tickets=%d, popcornSmall=%d, popcornMedium=%d, popcornLarge=%d, sodaSmall=%d, sodaMedium=%d, sodaLarge=%d]";
+
+	/** TODO: Add description of the purpose of Logger, once it's actually used. */
+	private static final Logger LOG = Logger.getLogger(Movie.class.getName());
+
 	/** The id of this order. */
-	private final int id;
+	@JsonProperty("id") private final int id;
 
 	/** The id of the Screening this order was placed for. */
-	private final int screeningId;
+	@JsonProperty("screeningId") private final int screeningId;
 	/** The id of the user Account that placed this order. */
-	private final int accountId;
+	@JsonProperty("accountId") private final int accountId;
 
 	/** The number of tickets purchased. */
-	private final int tickets;
+	@JsonProperty("tickets") private final int tickets;
 	/** An array of popcorn bags purchased, seperated by size: [small, medium, large]. */
-	private final int[] popcorn;
+	@JsonProperty("popcorn") private final int[] popcorn;
 	/** An array of sodas purchased, seperated by size: [small, medium, large]. */
-	private final int[] soda;
+	@JsonProperty("soda") private final int[] soda;
 
 	/**
 	 * Create an Order object with the given information.
@@ -31,7 +42,8 @@ public class Order {
 	 * @param popcorn     Array of popcorn bags purchased
 	 * @param soda        Array of sodas purchased
 	 */
-	public Order (int id, int screeningId, int accountId, int tickets, int[] popcorn, int[] soda) {
+	public Order (@JsonProperty("id") int id, @JsonProperty("screeningId") int screeningId, @JsonProperty("accountId") int accountId,
+	              @JsonProperty("tickets") int tickets, @JsonProperty("popcorn") int[] popcorn, @JsonProperty("soda") int[] soda) {
 		this.id = id;
 		this.screeningId = screeningId;
 		this.accountId = accountId;
@@ -100,5 +112,13 @@ public class Order {
 	 */
 	public int[] getSoda () {
 		return soda;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString () {
+		return String.format(STRING_FORMAT, id, screeningId, accountId, tickets, popcorn[0], popcorn[1], popcorn[2], soda[0], soda[1], soda[2]);
 	}
 }

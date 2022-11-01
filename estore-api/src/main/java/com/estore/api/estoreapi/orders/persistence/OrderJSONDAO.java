@@ -65,7 +65,10 @@ public class OrderJSONDAO implements OrderDAO {
 	 * @return The array of {@link Order orders}, may be empty
 	 */
 	private Order[] getOrdersArray () {
-		return getScreeningOrdersArray(0);
+		ArrayList<Order> orderArrayList = new ArrayList<>(orders.values());
+		Order[] orderArray = new Order[orderArrayList.size()];
+		orderArrayList.toArray(orderArray);
+		return orderArray;
 	}
 
 	/**
@@ -73,14 +76,13 @@ public class OrderJSONDAO implements OrderDAO {
 	 * {@linkplain Order orders} that has the given screening id.
 	 *
 	 * @param screeningId The screening id to find within a {@link Order orders} order.<p>
-	 *                    If screeningId is 0, the array contains all of the {@linkplain Order orders} in the tree map.
 	 * @return The array of {@link Order orders}, may be empty
 	 */
 	private Order[] getScreeningOrdersArray (int screeningId) {
 		ArrayList<Order> orderArrayList = new ArrayList<>();
 
 		for (Order order : orders.values()) {
-			if (screeningId == 0 || order.screeningIdIs(screeningId)) {
+			if (order.screeningIdIs(screeningId)) {
 				orderArrayList.add(order);
 			}
 		}
@@ -92,17 +94,16 @@ public class OrderJSONDAO implements OrderDAO {
 
 	/**
 	 * Generates an array of {@linkplain Order orders} from the tree map for any
-	 * {@linkplain Order orders} that has the given screening id.
+	 * {@linkplain Order orders} that has the given account id.
 	 *
-	 * @param screeningId The screening id to find within a {@link Order orders} order.<p>
-	 *                    If screeningId is 0, the array contains all of the {@linkplain Order orders} in the tree map.
+	 * @param accountId The account id to find within a {@link Order orders} order.<p>
 	 * @return The array of {@link Order orders}, may be empty
 	 */
-	private Order[] getAccountOrdersArray (int screeningId) {
+	private Order[] getAccountOrdersArray (int accountId) {
 		ArrayList<Order> orderArrayList = new ArrayList<>();
 
 		for (Order order : orders.values()) {
-			if (order.accountIdIs(screeningId)) {
+			if (order.accountIdIs(accountId)) {
 				orderArrayList.add(order);
 			}
 		}

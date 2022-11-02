@@ -84,6 +84,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /**
+   * Method that will reset the paragraphs that show messages for the create username, sign in, and delete
+   * username methodss
+   */
   resetUsernameMessages(): void {
     document.getElementById("newUsernameMessage")!.innerHTML = "";
     document.getElementById("signinUsernameMessage")!.innerHTML = "";

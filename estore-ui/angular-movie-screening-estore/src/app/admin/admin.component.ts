@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { Movie } from '../movie';
 import { Screenings } from '../Screenings';
@@ -36,7 +35,7 @@ export class AdminComponent implements OnInit {
     year: 0
   };
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }

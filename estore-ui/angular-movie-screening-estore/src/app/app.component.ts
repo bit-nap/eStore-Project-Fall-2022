@@ -12,8 +12,11 @@ export class AppComponent {
   title = 'Monkey Movies';
   username: String = '';
   isUserLoggedIn: boolean = false;
+  isOnVoteSuggest: boolean = false;
 
-  constructor(private router:Router, private _location: Location, private loggedInAccount: LoggedInAccountService) {}
+  constructor(private router:Router, private _location: Location, public loggedInAccount: LoggedInAccountService) {
+    this.router.navigate(['']);
+  }
 
   goToPage(pageName:string):void {
     this.router.navigate([`${pageName}`]);
@@ -40,10 +43,16 @@ export class AppComponent {
   }
 
   voteSuggestMovie(): void {
+    this.isOnVoteSuggest = true;
     if (this.loggedInAccount.isAdmin()) {
       this.router.navigate(['vote-admin']);
     } else {
       this.router.navigate(['vote']);
     }
+  }
+
+  inventoryScreen(): void {
+    this.isOnVoteSuggest = false;
+    this.router.navigate(['admin']);
   }
 }

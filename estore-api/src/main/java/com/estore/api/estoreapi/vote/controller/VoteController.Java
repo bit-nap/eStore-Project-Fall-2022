@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 /**
  * Handles the REST API requests for a vote object. <p>
- * {@Litearl @}RestController Spring annotation indentifies this class as a REST API method handler to the Spring framework
+ * {@Literal @}RestController Spring annotation indentifies this class as a REST API method handler to the Spring framework
  */
 
 @RestController

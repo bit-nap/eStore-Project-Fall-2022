@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { Vote } from '../vote';
 
@@ -20,14 +19,17 @@ export class VoteSuggestAdminComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get<Vote[]>('http://127.0.0.1:8080/votes/').subscribe((data: Vote[]) => {
+    this.http.get<[Vote]>('http://127.0.0.1:8080/votes/').subscribe((data: Vote[]) => {
       this.votes = data;
+    }, (response) => {
+      console.log("here");
     })
   }
 
   enterNewMovie(name: String) {
     this.http.post<Vote>('http://127.0.0.1:8080/votes', {id: 1, movieName: name, howManyVotes: 0}).subscribe((data: Vote) => {
       this.newVote = data;
+      console.log("Objcect: " + this.newVote);
     })
   }
 

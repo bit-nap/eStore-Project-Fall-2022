@@ -2,7 +2,6 @@ package com.estore.api.estoreapi.accounts.controller;
 
 import com.estore.api.estoreapi.accounts.model.Account;
 import com.estore.api.estoreapi.accounts.persistence.AccountDAO;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

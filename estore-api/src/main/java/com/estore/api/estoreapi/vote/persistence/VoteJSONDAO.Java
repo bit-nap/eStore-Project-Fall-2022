@@ -16,7 +16,7 @@ public class VoteJSONDAO implements VoteDAO {
 	Map<Integer, Vote> votes;
 
 	/** Logger */
-	private static final Logger LOG = Logger.getLogget(VoteJSONDAO.class.getMovieName);
+	private static final Logger LOG = Logger.getLogger(VoteJSONDAO.class.getMovieName);
 
 	/** The next id to assign to a new vote. */
 	private static int nextId;
@@ -36,6 +36,7 @@ public class VoteJSONDAO implements VoteDAO {
 	public VoteJSONDAO(@Value("$(votes.file)") String filename, ObjectMapper objectMapper) throws IOException {
 		this.filename = filename;
 		this.objectMapper = objectMapper;
+		load();
 	}
 
 	/**
@@ -70,7 +71,7 @@ public class VoteJSONDAO implements VoteDAO {
 	private Vote[] getVotesArray (String text) {
 		List<Vote> voteArrayList = new ArrayList<>();
 
-		for (Vote vote: vote.values()) {
+		for (Vote vote: votes.values()) {
 			if (text == null || vote.movieNameContains(text)) {
 				voteArrayList.add(vote);
 			}

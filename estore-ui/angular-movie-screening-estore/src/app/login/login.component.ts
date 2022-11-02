@@ -55,13 +55,8 @@ export class LoginComponent implements OnInit {
     this.resetUsernameMessages();
 
     this.http.get<Accounts>('http://127.0.0.1:8080/accounts/?username='+username).subscribe((data: Accounts) => {
-      if (data != null && username !== "admin") {
-        this.loggedInAccount.setUsername(username);
+      this.loggedInAccount.setUsername(username);
         this.router.navigate(['']);
-      } else if (username === "admin") {
-        this.loggedInAccount.setUsername(username);
-        this.router.navigate(['admin']);
-      }
     }, (response) => {
       document.getElementById("signinUsernameMessage")!.innerHTML = "Username does not exist.";
     });

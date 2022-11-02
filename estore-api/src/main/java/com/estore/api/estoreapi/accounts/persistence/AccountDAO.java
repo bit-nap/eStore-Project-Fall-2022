@@ -14,7 +14,7 @@ public interface AccountDAO {
 	 * Creates and saves a {@linkplain Account Account}.
 	 *
 	 * @param Account {@linkplain Account Account} object to be created and saved<br>
-	 *              The id of the Account object is ignored and a new unique id is assigned
+	 *                The id of the Account object is ignored and a new unique id is assigned
 	 * @return new {@link Account Account} if successful, false otherwise
 	 * @throws IOException if an issue with underlying storage
 	 */
@@ -51,28 +51,10 @@ public interface AccountDAO {
 	Account getAccount (int id) throws IOException;
 
 	/**
-	 * Retrieves all {@linkplain Account account}.
+	 * Retrieves all {@linkplain Account accounts}.
 	 *
 	 * @return An array of {@link Account account} objects, may be empty
 	 * @throws IOException if an issue with underlying storage
 	 */
 	Account[] getAccounts () throws IOException;
-
-	/**
-	 * Finds all {@linkplain Account accounts} whose account username contains the given text.
-	 *
-	 * @param text The text to match against
-	 * @return An array of {@link Account accounts} whose account username contains the given text, may be empty
-	 * @throws IOException if an issue with underlying storage
-	 */
-	Account[] findAccounts (String text) throws IOException;
-
-	/**
-	 * Find only one {@Link Account account} object that matches the username entered
-	 *
-	 * @param text The text to match against
-	 * @return An account that matches the name given
-	 * @throws IOException if an issue with underyling storage
-	 */
-	Account findOneAccount (String text) throws IOException;
 }

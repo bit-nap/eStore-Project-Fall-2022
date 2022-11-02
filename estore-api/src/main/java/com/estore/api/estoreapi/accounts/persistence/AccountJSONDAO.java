@@ -65,44 +65,10 @@ public class AccountJSONDAO implements AccountDAO {
 	 * @return The array of {@link Account accounts}, may be empty
 	 */
 	private Account[] getAccountsArray () {
-		return getAccountsArray(null);
-	}
-
-	/**
-	 * Generates an array of {@linkplain Account accounts} from the tree map for any
-	 * {@linkplain Account accounts} that contains the account title specified by text argument.
-	 *
-	 * @param text The text to find within a {@link Account accounts} account<p>
-	 *             If text is null, the array contains all of the {@linkplain Account accounts} in the tree map.
-	 * @return The array of {@link Account accounts}, may be empty
-	 */
-	private Account[] getAccountsArray (String text) {
-		ArrayList<Account> accountArrayList = new ArrayList<>();
-
-		for (Account account : accounts.values()) {
-			if (text == null || account.getUsername().contains(text)) {
-				accountArrayList.add(account);
-			}
-		}
-
+		ArrayList<Account> accountArrayList = new ArrayList<>(accounts.values());
 		Account[] accountArray = new Account[accountArrayList.size()];
 		accountArrayList.toArray(accountArray);
 		return accountArray;
-	}
-
-	/**
-	 *	Finds a {@linkplain Account account} from the list of accounts that exactly matches the username given
-	 *
-	 * @param username The text field that will be used to search for an account
-	 * @return The {@link Account account}, if there is one
-	 */
-	private Account getAccountbyNameAccount (String username) {
-		for (Account account : accounts.values()) {
-			if (account.getUsername().equals(username)) {
-				return account;
-			}
-		}
-		return null;
 	}
 
 	/**
@@ -213,26 +179,6 @@ public class AccountJSONDAO implements AccountDAO {
 	public Account[] getAccounts () {
 		synchronized (accounts) {
 			return getAccountsArray();
-		}
-	}
-
-	/**
-	 * * {@inheritDoc}
-	 */
-	@Override
-	public Account[] findAccounts (String text) {
-		synchronized (accounts) {
-			return getAccountsArray(text);
-		}
-	}
-
-	/**
-	 * * {@inheritDoc}}
-	 */
-	@Override
-	public Account findOneAccount (String username) {
-		synchronized (accounts) {
-			return getAccountbyNameAccount(username);
 		}
 	}
 }

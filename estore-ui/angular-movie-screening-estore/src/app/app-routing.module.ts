@@ -6,6 +6,7 @@ import { TicketsComponent } from "./tickets/tickets.component";
 import { CompletedPurchaseComponent } from "./completed-purchase/completed-purchase.component";
 import { AdminComponent } from './admin/admin.component';
 import { ScreeningsComponent } from "./screenings/screenings.component";
+import { SodasComponent } from './sodas/sodas.component';
 
 const routes: Routes = [
   { path: '', component: MoviesComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'screenings', component: ScreeningsComponent},
   { path: 'tickets', component: TicketsComponent},
   { path: 'thank', component: CompletedPurchaseComponent},
-  { path: 'admin', component: AdminComponent }
+  { path: 'admin', component: AdminComponent },
+  { path: 'sodas', component: SodasComponent }
 ];
 
 @NgModule({

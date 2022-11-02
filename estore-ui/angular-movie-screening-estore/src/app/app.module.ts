@@ -14,6 +14,7 @@ import { CompletedPurchaseComponent } from './completed-purchase/completed-purch
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { ScreeningsComponent } from './screenings/screenings.component';
+import { SodasComponent } from './sodas/sodas.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ScreeningsComponent } from './screenings/screenings.component';
     CompletedPurchaseComponent,
     LoginComponent,
     AdminComponent,
-    ScreeningsComponent
+    ScreeningsComponent,
+    SodasComponent
   ],
   imports: [
     BrowserModule,

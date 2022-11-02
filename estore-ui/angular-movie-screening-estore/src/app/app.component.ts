@@ -40,7 +40,7 @@ export class AppComponent {
   }
 
   voteSuggestMovie(): void {
-    if (this.loggedInAccount.getUsername() === "admin") {
+    if (this.loggedInAccount.isAdmin()) {
       this.router.navigate(['vote-admin']);
     } else {
       this.router.navigate(['vote']);

@@ -3,6 +3,7 @@ package com.estore.api.estoreapi.orders.model;
 import com.estore.api.estoreapi.movies.model.Movie;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 /**
@@ -12,7 +13,8 @@ import java.util.logging.Logger;
  */
 public class Order {
 	// Package private for tests - Prof
-	static final String STRING_FORMAT = "Order [id=%d, screeningId=%d, accountId=%d, tickets=%d, popcornSmall=%d, popcornMedium=%d, popcornLarge=%d, sodaSmall=%d, sodaMedium=%d, sodaLarge=%d]";
+	static final String STRING_FORMAT = "Order [id=%d, screeningId=%d, accountId=%d, tickets=%d," +
+		"popcornSmall=%d, popcornMedium=%d, popcornLarge=%d, sodaSmall=%d, sodaMedium=%d, sodaLarge=%d, seats=%s]";
 
 	/** TODO: Add description of the purpose of Logger, once it's actually used. */
 	private static final Logger LOG = Logger.getLogger(Movie.class.getName());
@@ -33,6 +35,12 @@ public class Order {
 	@JsonProperty("soda") private final int[] soda;
 
 	/**
+	 * An array of strings representing the coordinates of the seats reserved for each ticket purchased in this order.
+	 * Part of our 10% feature.
+	 */
+	@JsonProperty("seats") private final String[] seats;
+
+	/**
 	 * Create an Order object with the given information.
 	 *
 	 * @param id          The id of this order
@@ -41,15 +49,18 @@ public class Order {
 	 * @param tickets     Number of tickets purchased
 	 * @param popcorn     Array of popcorn bags purchased
 	 * @param soda        Array of sodas purchased
+	 * @param seats       Array of seats reserved
 	 */
 	public Order (@JsonProperty("id") int id, @JsonProperty("screeningId") int screeningId, @JsonProperty("accountId") int accountId,
-	              @JsonProperty("tickets") int tickets, @JsonProperty("popcorn") int[] popcorn, @JsonProperty("soda") int[] soda) {
+	              @JsonProperty("tickets") int tickets, @JsonProperty("popcorn") int[] popcorn, @JsonProperty("soda") int[] soda,
+	              @JsonProperty("seats") String[] seats) {
 		this.id = id;
 		this.screeningId = screeningId;
 		this.accountId = accountId;
 		this.tickets = tickets;
 		this.popcorn = popcorn;
 		this.soda = soda;
+		this.seats = seats;
 	}
 
 	/**
@@ -115,10 +126,18 @@ public class Order {
 	}
 
 	/**
+	 * @return An array of seats reserved for each ticket purchased
+	 */
+	public String[] getSeats () {
+		return seats;
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString () {
-		return String.format(STRING_FORMAT, id, screeningId, accountId, tickets, popcorn[0], popcorn[1], popcorn[2], soda[0], soda[1], soda[2]);
+		return String.format(STRING_FORMAT, id, screeningId, accountId, tickets,
+		                     popcorn[0], popcorn[1], popcorn[2], soda[0], soda[1], soda[2], Arrays.toString(seats));
 	}
 }

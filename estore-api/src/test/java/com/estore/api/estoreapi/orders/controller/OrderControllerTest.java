@@ -35,7 +35,7 @@ public class OrderControllerTest {
 	@Test
 	public void testGetOrder () throws IOException {
 		// setup
-		Order order = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 });
+		Order order = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 }, new String[]{ "a1", "a2", "a3" });
 		// when the same id is passed in, our mock order DAO will return the Order object
 		when(mockOrderDao.getOrder(order.getId())).thenReturn(order);
 
@@ -84,9 +84,9 @@ public class OrderControllerTest {
 	public void testGetOrders () throws Exception {
 		// New list of orders
 		Order[] orders = new Order[3];
-		orders[0] = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 });
-		orders[1] = new Order(2, 2, 1, 1, new int[]{ 0, 0, 1 }, new int[]{ 0, 0, 1 });
-		orders[2] = new Order(3, 3, 1, 2, new int[]{ 2, 0, 0 }, new int[]{ 0, 1, 1 });
+		orders[0] = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 }, new String[]{ "a1", "a2", "a3" });
+		orders[1] = new Order(2, 2, 1, 1, new int[]{ 0, 0, 1 }, new int[]{ 0, 0, 1 }, new String[]{ "a1" });
+		orders[2] = new Order(3, 3, 1, 2, new int[]{ 2, 0, 0 }, new int[]{ 0, 1, 1 }, new String[]{ "a1", "a2" });
 		// When getOrders is called, return the list of orders from above
 		when(mockOrderDao.getOrders()).thenReturn(orders);
 
@@ -114,7 +114,7 @@ public class OrderControllerTest {
 	@Test
 	public void testCreateOrder () throws IOException {
 		// setup
-		Order order = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 });
+		Order order = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 }, new String[]{ "a1", "a2", "a3" });
 		// when createOrder is called, return true simulating successful creation and save
 		when(mockOrderDao.createOrder(order)).thenReturn(order);
 
@@ -129,7 +129,7 @@ public class OrderControllerTest {
 	@Test
 	public void testCreateOrderFailed () throws IOException {
 		// setup
-		Order order = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 });
+		Order order = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 }, new String[]{ "a1", "a2", "a3" });
 		// when createOrder is called, return false simulating failed creation and save
 		when(mockOrderDao.createOrder(order)).thenReturn(null);
 
@@ -143,7 +143,7 @@ public class OrderControllerTest {
 	@Test
 	public void testCreateOrderHandleException () throws IOException {
 		// setup
-		Order order = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 });
+		Order order = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 }, new String[]{ "a1", "a2", "a3" });
 
 		// when createOrder is called, throw an IOException
 		doThrow(new IOException()).when(mockOrderDao).createOrder(order);
@@ -160,9 +160,9 @@ public class OrderControllerTest {
 		// Setup
 		int screeningId = 1;
 		Order[] foundOrders = new Order[3];
-		foundOrders[0] = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 });
-		foundOrders[1] = new Order(2, 1, 1, 1, new int[]{ 0, 0, 1 }, new int[]{ 0, 0, 1 });
-		foundOrders[2] = new Order(3, 1, 1, 2, new int[]{ 2, 0, 0 }, new int[]{ 0, 1, 1 });
+		foundOrders[0] = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 }, new String[]{ "a1", "a2", "a3" });
+		foundOrders[1] = new Order(2, 1, 1, 1, new int[]{ 0, 0, 1 }, new int[]{ 0, 0, 1 }, new String[]{ "a1" });
+		foundOrders[2] = new Order(3, 1, 1, 2, new int[]{ 2, 0, 0 }, new int[]{ 0, 1, 1 }, new String[]{ "a1", "a2" });
 
 		// When findOrders is called with the search string, return the three orders above
 		when(mockOrderDao.findScreeningOrders(screeningId)).thenReturn(foundOrders);
@@ -194,9 +194,9 @@ public class OrderControllerTest {
 		// Setup
 		int accountId = 1;
 		Order[] foundOrders = new Order[3];
-		foundOrders[0] = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 });
-		foundOrders[1] = new Order(2, 2, 1, 1, new int[]{ 0, 0, 1 }, new int[]{ 0, 0, 1 });
-		foundOrders[2] = new Order(3, 3, 1, 2, new int[]{ 2, 0, 0 }, new int[]{ 0, 1, 1 });
+		foundOrders[0] = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 }, new String[]{ "a1", "a2", "a3" });
+		foundOrders[1] = new Order(2, 2, 1, 1, new int[]{ 0, 0, 1 }, new int[]{ 0, 0, 1 }, new String[]{ "a1" });
+		foundOrders[2] = new Order(3, 3, 1, 2, new int[]{ 2, 0, 0 }, new int[]{ 0, 1, 1 }, new String[]{ "a1", "a2" });
 
 		// When findOrders is called with the search string, return the three orders above
 		when(mockOrderDao.findAccountOrders(accountId)).thenReturn(foundOrders);

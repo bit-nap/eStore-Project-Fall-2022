@@ -163,7 +163,7 @@ public class OrderJSONDAO implements OrderDAO {
 		synchronized (orders) {
 			// We create a new order object because the id field is immutable, and we need to assign the next unique id
 			Order newOrder = new Order(nextId(), order.getScreeningId(), order.getAccountId(), order.getTickets(), order.getPopcorn(),
-			                           order.getSoda());
+			                           order.getSoda(), order.getSeats());
 			orders.put(newOrder.getId(), newOrder);
 			save(); // may throw an IOException
 			return newOrder;

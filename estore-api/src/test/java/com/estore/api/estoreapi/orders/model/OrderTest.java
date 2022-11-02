@@ -3,6 +3,8 @@ package com.estore.api.estoreapi.orders.model;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -20,9 +22,10 @@ public class OrderTest {
 		int tickets = 3;
 		int[] popcorn = new int[]{ 2, 0, 1 };
 		int[] soda = new int[]{ 1, 1, 1 };
+		String[] seats = { "a1", "a2", "a3" };
 
 		// Invoke
-		Order order = new Order(id, screeningId, accountId, tickets, popcorn, soda);
+		Order order = new Order(id, screeningId, accountId, tickets, popcorn, soda, seats);
 		assertTrue(order.screeningIdIs(screeningId));
 	}
 
@@ -34,9 +37,10 @@ public class OrderTest {
 		int tickets = 3;
 		int[] popcorn = new int[]{ 2, 0, 1 };
 		int[] soda = new int[]{ 1, 1, 1 };
+		String[] seats = new String[]{ "a1", "a2", "a3" };
 
 		// Invoke
-		Order order = new Order(id, screeningId, accountId, tickets, popcorn, soda);
+		Order order = new Order(id, screeningId, accountId, tickets, popcorn, soda, seats);
 		assertTrue(order.accountIdIs(accountId));
 	}
 
@@ -49,9 +53,10 @@ public class OrderTest {
 		int tickets = 3;
 		int[] popcorn = new int[]{ 2, 0, 1 };
 		int[] soda = new int[]{ 1, 1, 1 };
+		String[] seats = new String[]{ "a1", "a2", "a3" };
 
 		// Invoke
-		Order order = new Order(id, screeningId, accountId, tickets, popcorn, soda);
+		Order order = new Order(id, screeningId, accountId, tickets, popcorn, soda, seats);
 
 		// Analyze
 		assertEquals(id, order.getId());
@@ -71,11 +76,12 @@ public class OrderTest {
 		int tickets = 3;
 		int[] popcorn = new int[]{ 2, 0, 1 };
 		int[] soda = new int[]{ 1, 1, 1 };
+		String[] seats = new String[]{ "a1", "a2", "a3" };
 		String expected_string = String.format(Order.STRING_FORMAT, id, screeningId, accountId, tickets,
-		                                       popcorn[0], popcorn[1], popcorn[2], soda[0], soda[1], soda[2]);
+		                                       popcorn[0], popcorn[1], popcorn[2], soda[0], soda[1], soda[2], Arrays.toString(seats));
 
 		// Invoke
-		Order order = new Order(id, screeningId, accountId, tickets, popcorn, soda);
+		Order order = new Order(id, screeningId, accountId, tickets, popcorn, soda, seats);
 		String actual_string = order.toString();
 
 		// Analyze

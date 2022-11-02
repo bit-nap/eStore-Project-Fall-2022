@@ -32,9 +32,9 @@ public class OrderJSONDAOTest {
 	public void setupOrderJSONDAO () throws IOException {
 		mockObjectMapper = mock(ObjectMapper.class);
 		testOrders = new Order[3];
-		testOrders[0] = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 });
-		testOrders[1] = new Order(2, 2, 1, 1, new int[]{ 0, 0, 1 }, new int[]{ 0, 0, 1 });
-		testOrders[2] = new Order(3, 3, 1, 2, new int[]{ 2, 0, 0 }, new int[]{ 0, 1, 1 });
+		testOrders[0] = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 }, new String[]{ "a1", "a2", "a3" });
+		testOrders[1] = new Order(2, 2, 1, 1, new int[]{ 0, 0, 1 }, new int[]{ 0, 0, 1 }, new String[]{ "a1" });
+		testOrders[2] = new Order(3, 3, 1, 2, new int[]{ 2, 0, 0 }, new int[]{ 0, 1, 1 }, new String[]{ "a1", "a2" });
 
 		// When the object mapper is supposed to read from the file the mock object mapper will return the order array above
 		when(mockObjectMapper.readValue(new File("mao-zedongs-little-red-book.epub"), Order[].class)).thenReturn(testOrders);
@@ -107,7 +107,7 @@ public class OrderJSONDAOTest {
 	@Test
 	public void testCreateOrder () {
 		// Setup
-		Order order = new Order(4, 1, 2, 1, new int[]{ 0, 0, 1 }, new int[]{ 0, 0, 1 });
+		Order order = new Order(4, 1, 2, 1, new int[]{ 0, 0, 1 }, new int[]{ 0, 0, 1 }, new String[]{ "a1" });
 		// Invoke
 		Order result = assertDoesNotThrow(() -> orderJSONDAO.createOrder(order), "Unexpected exception thrown");
 		// Analyze
@@ -125,7 +125,7 @@ public class OrderJSONDAOTest {
 	public void testSaveException () throws IOException {
 		doThrow(new IOException()).when(mockObjectMapper).writeValue(any(File.class), any(Order[].class));
 
-		Order order = new Order(4, 1, 2, 1, new int[]{ 0, 0, 1 }, new int[]{ 0, 0, 1 });
+		Order order = new Order(4, 1, 2, 1, new int[]{ 0, 0, 1 }, new int[]{ 0, 0, 1 }, new String[]{ "a1" });
 
 		assertThrows(IOException.class, () -> orderJSONDAO.createOrder(order), "IOException not thrown");
 	}

@@ -167,7 +167,7 @@ public class VoteJSONDAO implements VoteDAO {
 	public Vote updateVote (Vote vote) throws IOException {
 		synchronized (votes) {
 			if (!votes.containsKey(vote.getId())) {
-				return null;  // screening does not exist
+				return null;  // vote does not exist
 			}
 
 			votes.put(vote.getId(), vote);
@@ -229,9 +229,9 @@ public class VoteJSONDAO implements VoteDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public Vote[] findVotessForMovie (String movieName) {
-		synchronized (screenings) {
-			return getScreeningsArrayForMovie(movieName);
+	public Vote[] findVotesForMovie (String movieName) {
+		synchronized (votes) {
+			return getVotesArrayForMovie(movieName);
 		}
 	}
 }

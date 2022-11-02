@@ -1,6 +1,6 @@
 package com.estore.api.estoreapi.vote.persistence;
 
-import com.estore.api.estoreapi.vote.model.vote;
+import com.estore.api.estoreapi.vote.model.Vote;
 
 import java.io.IOException;
 

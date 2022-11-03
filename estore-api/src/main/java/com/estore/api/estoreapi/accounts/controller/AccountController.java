@@ -2,7 +2,6 @@ package com.estore.api.estoreapi.accounts.controller;
 
 import com.estore.api.estoreapi.accounts.model.Account;
 import com.estore.api.estoreapi.accounts.persistence.AccountDAO;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +28,7 @@ public class AccountController {
 	 *
 	 * @param accountDao The Account Data Access Object to perform CRUD operations
 	 */
-	public AccountController(AccountDAO accountDao) {
+	public AccountController (AccountDAO accountDao) {
 		this.accountDao = accountDao;
 	}
 
@@ -42,7 +41,7 @@ public class AccountController {
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
 	@PostMapping("")
-	public ResponseEntity<Account> createAccount(@RequestBody Account account) {
+	public ResponseEntity<Account> createAccount (@RequestBody Account account) {
 		LOG.info("POST /accounts/" + account);
 
 		try {
@@ -67,7 +66,7 @@ public class AccountController {
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
 	@PutMapping("")
-	public ResponseEntity<Account> updateAccount(@RequestBody Account account) {
+	public ResponseEntity<Account> updateAccount (@RequestBody Account account) {
 		LOG.info("PUT /accounts/" + account);
 		try {
 			Account updatedAccount = accountDao.updateAccount(account);
@@ -83,18 +82,18 @@ public class AccountController {
 	}
 
 	/**
-	 * Deletes a {@linkplain Account account} with the given id.
+	 * Deletes a {@linkplain Account account} with the given username.
 	 *
-	 * @param id The id of the {@link Account account} to be deleted
+	 * @param username The username of the {@link Account account} to be deleted
 	 * @return ResponseEntity HTTP status of OK if deleted<br>
 	 * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Account> deleteAccount(@PathVariable int id) {
-		LOG.info("DELETE /accounts/" + id);
+	@DeleteMapping("/{username}")
+	public ResponseEntity<Account> deleteAccount (@PathVariable String username) {
+		LOG.info("DELETE /accounts/" + username);
 		try {
-			if (accountDao.deleteAccount(id)) {
+			if (accountDao.deleteAccount(username)) {
 				return new ResponseEntity<>(HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -106,19 +105,19 @@ public class AccountController {
 	}
 
 	/**
-	 * Responds to the GET request for a {@linkplain Account account} with the given id.
+	 * Responds to the GET request for a {@linkplain Account account} with the given username.
 	 *
-	 * @param id the id used to locate a {@link Account account}
+	 * @param username the username used to locate a {@link Account account}
 	 * @return ResponseEntity with {@link Account account} object and HTTP status of OK if found<br>
 	 * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
-	@GetMapping("/{id}")
-	public ResponseEntity<Account> getAccount (@PathVariable int id) {
-		LOG.info("GET /accounts/" + id);
+	@GetMapping("/{username}")
+	public ResponseEntity<Account> getAccount (@PathVariable String username) {
+		LOG.info("GET /accounts/" + username);
 		try {
 			// Try to get the account based on the id entered by the user
-			Account account = accountDao.getAccount(id);
+			Account account = accountDao.getAccount(username);
 			if (account != null) {
 				return new ResponseEntity<>(account, HttpStatus.OK);
 			} else {
@@ -144,30 +143,6 @@ public class AccountController {
 			Account[] accounts = accountDao.getAccounts();
 			if (accounts != null) {
 				return new ResponseEntity<>(accounts, HttpStatus.OK);
-			} else {
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			}
-		} catch (IOException e) {
-			LOG.log(Level.SEVERE, e.getLocalizedMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
-	/**
-	 * Responds to the GET request for {@linkplain Account accounts} whose account username matches the given text.
-	 *
-	 * @param username A String used to query {@link Account account} to find the account with the text.
-	 * @return ResponseEntity of {@link Account account} and HTTP status of OK<br>
-	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
-	 */
-	@GetMapping("/")
-	public ResponseEntity<Account> findAccounts (@RequestParam String username) {
-		LOG.info("GET /accounts/?username=" + username);
-		try {
-			Account foundAccount = accountDao.findOneAccount(username);
-
-			if (foundAccount != null) {
-				return new ResponseEntity<>(foundAccount, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}

@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 @Component
 public class AccountJSONDAO implements AccountDAO {
 	/** A local cache of Account objects, to avoid reading from file each time. */
-	Map<Integer, Account> accounts;
+	Map<String, Account> accounts;
 
 	/** TODO: Add description of the purpose of Logger, once it's actually used. */
 	private static final Logger LOG = Logger.getLogger(AccountJSONDAO.class.getName());
@@ -103,7 +103,7 @@ public class AccountJSONDAO implements AccountDAO {
 
 		// Add each account to the tree map and keep track of the greatest id
 		for (Account account : accountArray) {
-			accounts.put(account.getId(), account);
+			accounts.put(account.getUsername(), account);
 			if (account.getId() > nextId) {
 				nextId = account.getId();
 			}
@@ -121,7 +121,7 @@ public class AccountJSONDAO implements AccountDAO {
 		synchronized (accounts) {
 			// We create a new account object because the id field is immutable, and we need to assign the next unique id
 			Account newAccount = new Account(nextId(), account.getUsername(), account.getPassword());
-			accounts.put(newAccount.getId(), newAccount);
+			accounts.put(newAccount.getUsername(), newAccount);
 			save(); // may throw an IOException
 			return newAccount;
 		}
@@ -133,11 +133,11 @@ public class AccountJSONDAO implements AccountDAO {
 	@Override
 	public Account updateAccount (Account account) throws IOException {
 		synchronized (accounts) {
-			if (!accounts.containsKey(account.getId())) {
+			if (!accounts.containsKey(account.getUsername())) {
 				return null;  // account does not exist
 			}
 
-			accounts.put(account.getId(), account);
+			accounts.put(account.getUsername(), account);
 			save(); // may throw an IOException
 			return account;
 		}
@@ -147,10 +147,10 @@ public class AccountJSONDAO implements AccountDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public boolean deleteAccount (int id) throws IOException {
+	public boolean deleteAccount (String username) throws IOException {
 		synchronized (accounts) {
-			if (accounts.containsKey(id)) {
-				accounts.remove(id);
+			if (accounts.containsKey(username)) {
+				accounts.remove(username);
 				return save();
 			} else {
 				return false;
@@ -162,10 +162,10 @@ public class AccountJSONDAO implements AccountDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public Account getAccount (int id) {
+	public Account getAccount (String username) {
 		synchronized (accounts) {
-			if (accounts.containsKey(id)) {
-				return accounts.get(id);
+			if (accounts.containsKey(username)) {
+				return accounts.get(username);
 			} else {
 				return null;
 			}

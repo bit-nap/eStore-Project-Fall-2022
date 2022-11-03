@@ -31,24 +31,24 @@ public interface AccountDAO {
 	Account updateAccount (Account Account) throws IOException;
 
 	/**
-	 * Deletes a {@linkplain Account Account} with the given id.
+	 * Deletes a {@linkplain Account Account} with the given username.
 	 *
-	 * @param id The id of the {@link Account Account}
+	 * @param username The id of the {@link Account Account}
 	 * @return true if the {@link Account Account} was deleted<br>
 	 * false if Account with the given id does not exist
 	 * @throws IOException if underlying storage cannot be accessed
 	 */
-	boolean deleteAccount (int id) throws IOException;
+	boolean deleteAccount (String username) throws IOException;
 
 	/**
-	 * Retrieves a {@linkplain Account Account} with the given id.
+	 * Retrieves a {@linkplain Account Account} with the given username.
 	 *
-	 * @param id The id of the {@link Account Account} to get.
+	 * @param username The username of the {@link Account Account} to get.
 	 * @return a {@link Account Account} object with the matching id.<br>
 	 * null if no {@link Account Account} with a matching id is found.
 	 * @throws IOException if an issue with underlying storage
 	 */
-	Account getAccount (int id) throws IOException;
+	Account getAccount (String username) throws IOException;
 
 	/**
 	 * Retrieves all {@linkplain Account accounts}.

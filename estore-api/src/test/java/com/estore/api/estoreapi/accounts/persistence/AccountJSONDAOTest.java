@@ -22,8 +22,6 @@ public class AccountJSONDAOTest {
 	/**
 	 * Before each test, we will create and inject a Mock Object Mapper to
 	 * isolate the tests from the underlying file
-	 *
-	 * @throws IOException
 	 */
 	@BeforeEach
 	public void setupAccountJSONDAO () throws IOException {
@@ -56,7 +54,7 @@ public class AccountJSONDAOTest {
 	@Test
 	public void testGetAccount () {
 		// Arrange
-		Account account = accountJSONDAO.getAccount(99);
+		Account account = accountJSONDAO.getAccount("Adrian");
 
 		// Analzye
 		assertEquals(account, testAccounts[0]);
@@ -65,7 +63,7 @@ public class AccountJSONDAOTest {
 	@Test
 	public void testDeleteAccount () {
 		// Arrange
-		boolean result = assertDoesNotThrow(() -> accountJSONDAO.deleteAccount(99),
+		boolean result = assertDoesNotThrow(() -> accountJSONDAO.deleteAccount("Adrian"),
 		                                    "Unexpected exception thrown");
 
 		// Analzye
@@ -88,7 +86,7 @@ public class AccountJSONDAOTest {
 
 		// Analyze
 		assertNotNull(result);
-		Account actual = accountJSONDAO.getAccount(account.getId());
+		Account actual = accountJSONDAO.getAccount(account.getUsername());
 		assertEquals(actual.getId(), account.getId());
 		assertEquals(actual.getUsername(), account.getUsername());
 	}
@@ -96,7 +94,7 @@ public class AccountJSONDAOTest {
 	@Test
 	public void testUpdateAccount () {
 		// Setup
-		Account account = new Account(99, "Gino", "GinoPass");
+		Account account = new Account(99, "Adrian", "newpass");
 
 		// Arrange
 		Account result = assertDoesNotThrow(() -> accountJSONDAO.updateAccount(account),
@@ -104,7 +102,7 @@ public class AccountJSONDAOTest {
 
 		// Analyze
 		assertNotNull(result);
-		Account actual = accountJSONDAO.getAccount(account.getId());
+		Account actual = accountJSONDAO.getAccount(account.getUsername());
 		assertEquals(actual, account);
 	}
 
@@ -124,7 +122,7 @@ public class AccountJSONDAOTest {
 	@Test
 	public void testGetAccountNotFound () {
 		// Arrange
-		Account account = accountJSONDAO.getAccount(98);
+		Account account = accountJSONDAO.getAccount("null");
 
 		// Analyze
 		assertNull(account);
@@ -133,7 +131,7 @@ public class AccountJSONDAOTest {
 	@Test
 	public void testDeleteAccountNotFound () {
 		// Arrange
-		boolean result = assertDoesNotThrow(() -> accountJSONDAO.deleteAccount(98),
+		boolean result = assertDoesNotThrow(() -> accountJSONDAO.deleteAccount("null"),
 		                                    "Unexpected exception thrown");
 
 		// Analyze

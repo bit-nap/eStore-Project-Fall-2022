@@ -14,7 +14,7 @@ public interface AccountDAO {
 	 * Creates and saves a {@linkplain Account Account}.
 	 *
 	 * @param Account {@linkplain Account Account} object to be created and saved<br>
-	 *              The id of the Account object is ignored and a new unique id is assigned
+	 *                The id of the Account object is ignored and a new unique id is assigned
 	 * @return new {@link Account Account} if successful, false otherwise
 	 * @throws IOException if an issue with underlying storage
 	 */
@@ -31,48 +31,30 @@ public interface AccountDAO {
 	Account updateAccount (Account Account) throws IOException;
 
 	/**
-	 * Deletes a {@linkplain Account Account} with the given id.
+	 * Deletes a {@linkplain Account Account} with the given username.
 	 *
-	 * @param id The id of the {@link Account Account}
+	 * @param username The id of the {@link Account Account}
 	 * @return true if the {@link Account Account} was deleted<br>
 	 * false if Account with the given id does not exist
 	 * @throws IOException if underlying storage cannot be accessed
 	 */
-	boolean deleteAccount (int id) throws IOException;
+	boolean deleteAccount (String username) throws IOException;
 
 	/**
-	 * Retrieves a {@linkplain Account Account} with the given id.
+	 * Retrieves a {@linkplain Account Account} with the given username.
 	 *
-	 * @param id The id of the {@link Account Account} to get.
+	 * @param username The username of the {@link Account Account} to get.
 	 * @return a {@link Account Account} object with the matching id.<br>
 	 * null if no {@link Account Account} with a matching id is found.
 	 * @throws IOException if an issue with underlying storage
 	 */
-	Account getAccount (int id) throws IOException;
+	Account getAccount (String username) throws IOException;
 
 	/**
-	 * Retrieves all {@linkplain Account account}.
+	 * Retrieves all {@linkplain Account accounts}.
 	 *
 	 * @return An array of {@link Account account} objects, may be empty
 	 * @throws IOException if an issue with underlying storage
 	 */
 	Account[] getAccounts () throws IOException;
-
-	/**
-	 * Finds all {@linkplain Account accounts} whose account username contains the given text.
-	 *
-	 * @param text The text to match against
-	 * @return An array of {@link Account accounts} whose account username contains the given text, may be empty
-	 * @throws IOException if an issue with underlying storage
-	 */
-	Account[] findAccounts (String text) throws IOException;
-
-	/**
-	 * Find only one {@Link Account account} object that matches the username entered
-	 *
-	 * @param text The text to match against
-	 * @return An account that matches the name given
-	 * @throws IOException if an issue with underyling storage
-	 */
-	Account findOneAccount (String text) throws IOException;
 }

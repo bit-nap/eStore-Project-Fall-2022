@@ -19,7 +19,7 @@ export class VoteSuggestAdminComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get<[Vote]>('http://127.0.0.1:8080/votes/').subscribe((data: Vote[]) => {
+    this.http.get<[Vote]>('http://127.0.0.1:8080/votes/').subscribe((data: [Vote]) => {
       this.votes = data;
     }, (response) => {
       console.log("here");

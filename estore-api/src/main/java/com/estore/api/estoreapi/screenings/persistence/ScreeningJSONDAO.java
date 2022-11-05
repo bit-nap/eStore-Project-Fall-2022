@@ -168,7 +168,7 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 		synchronized (screenings) {
 			// We create a new screening object because the id field is immutable, and we need to assign the next unique id
 			Screening newScreening = new Screening(nextId(), screening.getMovieId(), screening.getTicketsRemaining(), screening.getDate(),
-			                                       screening.getTime());
+			                                       screening.getTime(), screening.getSeats());
 			newScreening.setMovieGetter(movieGetter);
 			screenings.put(newScreening.getId(), newScreening);
 			save(); // may throw an IOException

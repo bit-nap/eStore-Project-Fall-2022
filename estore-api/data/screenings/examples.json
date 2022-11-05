@@ -25,6 +25,13 @@
 		"movieId": 1,
 		"ticketsRemaining": 4,
 		"date": "2023-01-24",
-		"time": "22:00"
+		"time": "22:00",
+		"seats": [
+			[false, true, true, false],
+			[true, true, true, false],
+			[true, true, true, true],
+			[false, true, true, true],
+			[true, true, true, true]
+		 ]
 	}
 ]

@@ -3,6 +3,7 @@
     <h2>Add a new product:</h2>
     <input #addMovieName id="vote" placeholder="Enter name of new movie" />
     <button id="enter-new-movie" (click)="enterNewMovie(addMovieName.value)">Add New Movie</button>
+    <p id="adminAddVote"></p>
   </div>
 
   <button type="Button" *ngFor="let vote of votes" id="change-vote" (click)="changeVote(vote)">

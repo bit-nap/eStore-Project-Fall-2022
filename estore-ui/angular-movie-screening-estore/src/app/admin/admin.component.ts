@@ -88,13 +88,10 @@ export class AdminComponent implements OnInit {
       time = updateTime;
     }
 
-    console.log(this.screeningToChange.id, this.screeningToChange.movieId, tickets.replace(/\D/g, ''), date, time);
-
     this.http.put<Screenings>('http://127.0.0.1:8080/screenings', {id: this.screeningToChange.id, movieId: this.screeningToChange.movieId, ticketsRemaining: Number(tickets), date: date, time: time}).subscribe((data: Screenings) => {
       this.screeningToChange = data;
     });
-
-    console.log(this.screeningToChange.id);
+    
     this.getScreeningListings(this.screeningToChange.movieId.toString());
   }
 

@@ -1,7 +1,7 @@
-package com.estore.api.estoreapi.vote.controller;
+package com.estore.api.estoreapi.votes.controller;
 
-import com.estore.api.estoreapi.vote.model.Vote;
-import com.estore.api.estoreapi.vote.persistence.VoteDao;
+import com.estore.api.estoreapi.votes.model.Vote;
+import com.estore.api.estoreapi.votes.persistence.VoteDao;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +40,7 @@ public class VoteController {
 
 	@PutMapping("")
 	public ResponseEntity<Vote> updateVote (@RequestBody Vote vote) {
-		LOG.info("PUT /vote/" + vote);
+		LOG.info("PUT /votes/" + vote);
 		try {
 			Vote updatedVote = voteDao.updateVote(vote);
 			if (updatedVote != null) {

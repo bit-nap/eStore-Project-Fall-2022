@@ -154,6 +154,11 @@ public class VoteJSONDAO implements VoteDAO {
 	@Override
 	public Vote createVote (Vote vote) throws IOException {
 		synchronized (votes) {
+			for (Vote checkVote: voteArray) {
+				if (checkVote.movieNamesEqual(vote.getMovieName())) {
+					return null;
+				}
+			}
 			Vote newVote = new Vote(nextId(), vote.getMovieName, vote.getHowManyVotes);
 			votes.put(newVote.getId(), newVote);
 			save();

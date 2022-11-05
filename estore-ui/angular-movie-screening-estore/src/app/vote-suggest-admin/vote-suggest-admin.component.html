@@ -10,4 +10,10 @@
     <span>Movie Name: {{vote.movieName}}</span>
     <span>Number of Votes: {{vote.howManyVotes}}</span>
   </button>
+
+  <div *ngIf="voteSelected">
+    <h2>Change Vote for: {{voteSelectedToChange.movieName}}</h2>
+    <input #updateName id="votes" placeholder="Enter new movie name" />
+    <button type="button" id="enter-new-movie" (click)="changeVoteSubmit(updateName.value)">Change Vote</button>
+  </div>
 </div>

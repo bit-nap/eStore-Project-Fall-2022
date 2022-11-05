@@ -15,6 +15,12 @@ export class VoteSuggestAdminComponent implements OnInit {
     movieName: '',
     howManyVotes: 0
   };
+  voteSelected: boolean = false;
+  voteSelectedToChange: Vote = {
+    id: 0,
+    movieName: "",
+    howManyVotes: 0
+  };
 
   constructor(private http: HttpClient) { }
 
@@ -26,15 +32,30 @@ export class VoteSuggestAdminComponent implements OnInit {
     })
   }
 
-  enterNewMovie(name: String) {
-    this.http.post<Vote>('http://127.0.0.1:8080/votes', {id: 1, movieName: name, howManyVotes: 0}).subscribe((data: Vote) => {
+  enterNewMovie(name: String): void {
+    this.http.post<Vote>('http://127.0.0.1:8080/votes/', {id: 1, movieName: name, howManyVotes: 0}).subscribe((data: Vote) => {
       this.newVote = data;
       console.log("Objcect: " + this.newVote);
     })
   }
 
   changeVote(vote: Vote): void {
+    this.voteSelected = true;
+    this.voteSelectedToChange = vote;
+  }
 
+  changeVoteSubmit(updateName: String): void {
+    var name = new String("");
+
+    if (updateName === null || updateName === "") {
+      name = this.voteSelectedToChange.movieName;
+    } else {
+      name = updateName;
+    }
+
+    this.http.put<Vote>('http://127.0.0.1:8080/votes/', {id: 1, movieName: name, howManyVotes: this.voteSelectedToChange.howManyVotes}).subscribe((data: Vote) => {
+      this.voteSelectedToChange = data;
+    });
   }
 
 }

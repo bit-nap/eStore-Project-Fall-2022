@@ -17,6 +17,9 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
+/**
+ * The test for the VoteController class
+ */
 @Tag("Controller-Tier")
 public class VoteControllerTest {
 	private VoteController voteController;

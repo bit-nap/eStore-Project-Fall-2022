@@ -1,6 +1,6 @@
 package com.estore.api.estoreapi.vote.persistence;
 
-import com.estore.api.estoreapi.vote.model.Vote;
+import com.estore.api.estoreapi.votes.model.Vote;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -60,50 +60,21 @@ public class VoteJSONDAO implements VoteDAO {
 	}
 
 	/**
-	 * Generates an array of {@linkplain Vote votes} from the tree map for any
-	 * {@linkplain Vote votes} that contains the movie name specified by text argument,
-	 * sorted by their vote name.
+	 * Generates a vote of {@linkplain Vote vote} from the tree map for any
+	 * {@linkplain Vote votes} that equals the movie name specified by text argument
 	 *
-	 * @param text The text to find within a {@link vote votes} vote<p>
-	 *             If text is null, the array contains all of the {@linkplain vote votes} in the tree map.
-	 * @return The array of {@link vote votes}, may be empty
+	 * @param text The text to find within a {@link Vote vote} vote<p>
+	 *             If text is null then it will return null.
+	 * @return The the {@Link Vote vote} if the movie name is found
 	 */
-	private Vote[] getVotesArray (String text) {
-		List<Vote> voteArrayList = new ArrayList<>();
-
+	private Vote getVote (String text) {
 		for (Vote vote: votes.values()) {
-			if (text == null || vote.movieNameContains(text)) {
-				voteArrayList.add(vote);
+			if (vote.getMovieName.equals(text)) {
+				return vote;
 			}
 		}
 
-		Vote[] voteArray = new Vote[voteArrayList.size()];
-		Collections.sort(voteArray);
-		voteArrayList.toArray(voteArray);
-		return voteArray;
-	}
-
-	/**
-	 * Generates an array of {@linkplain Vote votes} from the tree map for any
-	 * {@linkplain Vote votes} that has the movie id specified by movieId argument,
-	 * sorted by their movie name.
-	 *
-	 * @param movieId The movie to find within all {@link Vote votes}
-	 * @return The array of {@link Vote votes}, may be empty
-	 */
-	private Vote[] getVotesArrayForMovie (int movieId) {
-		List<Vote> voteArrayList = new ArrayList<>();
-
-		for (Vote vote : votes.values()) {
-			if (vote.movieIdIs(movieId)) {
-				voteArrayList.add(vote);
-			}
-		}
-
-		Vote[] voteArray = new Vote[voteArrayList.size()];
-		Collections.sort(voteArrayList);
-		voteArrayList.toArray(voteArray);
-		return voteArray;
+		return null;
 	}
 
 	/**
@@ -155,7 +126,7 @@ public class VoteJSONDAO implements VoteDAO {
 	public Vote createVote (Vote vote) throws IOException {
 		synchronized (votes) {
 			for (Vote checkVote: voteArray) {
-				if (checkVote.movieNamesEqual(vote.getMovieName())) {
+				if (checkVote.getMovieName.equals(vote.getMovieName())) {
 					return null;
 				}
 			}
@@ -201,21 +172,7 @@ public class VoteJSONDAO implements VoteDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public Vote getVote (int id) {
-		synchronized (votes) {
-			if (votes.containsKey(id)) {
-				return votes.get(id);
-			} else {
-				return null;
-			}
-		}
-	}
-
-	/**
-	 * * {@inheritDoc}
-	 */
-	@Override
-	public Vote[] getVotes () {
+	public Vote[] getVotes () throws IOException {
 		synchronized (votes) {
 			return getVotesArray();
 		}
@@ -225,19 +182,9 @@ public class VoteJSONDAO implements VoteDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public Vote[] findVotes (String text) {
-		synchronized (Votes) {
-			return getVotesArray(text);
-		}
-	}
-
-	/**
-	 * * {@inheritDoc}
-	 */
-	@Override
-	public Vote[] findVotesForMovie (String movieName) {
+	Vote findVote (String text) throws IOException() {
 		synchronized (votes) {
-			return getVotesArrayForMovie(movieName);
+			return getVote(text);
 		}
 	}
 }

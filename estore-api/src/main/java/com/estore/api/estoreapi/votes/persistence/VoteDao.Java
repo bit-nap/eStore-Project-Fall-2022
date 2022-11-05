@@ -41,16 +41,6 @@ public interface VoteDAO {
 	boolean deleteVote (int id) throws IOException;
 
 	/**
-	 * Retrieves a {@linkplain Vote Vote} with the given id.
-	 *
-	 * @param id The id of the {@link Vote Vote} to get.
-	 * @return a {@link Vote Vote} object with the matching id.<br>
-	 * null if no {@link Vote Vote} with a matching id is found.
-	 * @throws IOException if an issue with underlying storage
-	 */
-	Vote getVote (int id) throws IOException;
-
-	/**
 	 * Retrieves all {@linkplain Vote Vote}.
 	 *
 	 * @return An array of {@link Vote Vote} objects, may be empty
@@ -62,8 +52,8 @@ public interface VoteDAO {
 	 * Finds all {@linkplain Vote Votes} whose movie name contains the given text.
 	 *
 	 * @param text The text to match against
-	 * @return An array of {@link Vote Votes} whose movie title contains the given text, may be empty
+	 * @return An {@linkplain Vote vote} if the text matches one of the movie names
 	 * @throws IOException if an issue with underlying storage
 	 */
-	Vote[] findVotes (String text) throws IOException;
+	Vote findVote (String text) throws IOException;
 }

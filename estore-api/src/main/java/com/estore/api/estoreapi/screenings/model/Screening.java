@@ -33,7 +33,7 @@ public class Screening implements Comparable<Screening> {
 	@JsonProperty("date") private String date;
 	/** The time of this screening. */
 	@JsonProperty("time") private String time;
-	/** The seats and their availability for the screening. Boolean.FALSE if the seat is empty*/
+	/** The seats and their availability for the screening. false if the seat is empty*/
 	@JsonProperty("seats") private boolean[][] seats;
 
 	/** The MovieGetter object used to set this object's movie field. */
@@ -173,7 +173,7 @@ public class Screening implements Comparable<Screening> {
 	}
 
 	/** 
-	 * @return The seats and their availability for this screening. False for empty seats
+	 * @return The seats and their availability for this screening, false for empty seats
 	*/
 	public boolean[][] getSeats() {
 		return seats;

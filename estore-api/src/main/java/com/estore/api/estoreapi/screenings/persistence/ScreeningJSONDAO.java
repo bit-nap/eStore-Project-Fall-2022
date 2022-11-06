@@ -250,4 +250,13 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 			return getScreeningsArrayForMovie(movieId);
 		}
 	}
+
+	/** 
+	 * * {@inheritDoc}
+	*/
+	public boolean[][] findScreeningSeats(Screening screening){
+		synchronized (screenings){
+			return screening.getSeats();
+		}
+	}
 }

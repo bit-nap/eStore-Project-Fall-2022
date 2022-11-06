@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
 
     this.http.get<Accounts>('http://127.0.0.1:8080/accounts/?username=' + username).subscribe((data: Accounts) => {
       if (data.username === username) {
-        this.http.delete<Accounts>('http://127.0.0.1:8080/'+data.id).subscribe((data: Accounts) => { })
+        this.http.delete<Accounts>('http://127.0.0.1:8080/accounts/'+data.id).subscribe((data: Accounts) => { })
         document.getElementById("deleteUsernameMessage")!.innerHTML = "Account has been deleted.";
       }
     }, (response) => {

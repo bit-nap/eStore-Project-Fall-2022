@@ -1,0 +1,21 @@
+[
+	{
+		"id": 1,
+		"screeningId": 1,
+		"accountId": 1,
+		"tickets": 1,
+		"popcorn": [
+			0,
+			0,
+			0
+		],
+		"soda": [
+			0,
+			0,
+			0
+		],
+		"seats": [
+			"a1"
+		]
+	}
+]

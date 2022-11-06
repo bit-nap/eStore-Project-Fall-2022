@@ -89,10 +89,10 @@ public class ScreeningTest {
 		Screening o1 = new Screening(101, 104, 6, "01/16/2023", "16:00", mockMovieGetter);
 		Screening o2 = new Screening(103, 104, 8, "01/17/2023", "16:00", mockMovieGetter);
 		Screening o3 = new Screening(101, 104, 6, "01/17/2023", "18:00", mockMovieGetter);
-		Screening o4 = new Screening(102, 104, 0, "01/18/2023", "16:00", mockMovieGetter);
-		Screening o5 = new Screening(103, 104, 8, "01/20/2023", "16:00", mockMovieGetter);
+		Screening o4 = new Screening(102, 104, 0, "01/17/2023", "20:00", mockMovieGetter);
+		Screening o5 = new Screening(102, 104, 0, "01/18/2023", "16:00", mockMovieGetter);
 		Screening o6 = new Screening(103, 104, 8, "01/20/2023", "16:00", mockMovieGetter);
-		Screening o7 = new Screening(102, 104, 0, "01/17/2023", "20:00", mockMovieGetter);
+		Screening o7 = new Screening(103, 104, 8, "01/20/2023", "16:00", mockMovieGetter);
 		List<Screening> sortedList = new ArrayList<>();  // arraylist with manually sorted Screenings
 		sortedList.add(o1);
 		sortedList.add(o2);

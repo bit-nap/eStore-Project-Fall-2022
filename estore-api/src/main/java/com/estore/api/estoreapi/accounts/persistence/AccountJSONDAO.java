@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 @Component
 public class AccountJSONDAO implements AccountDAO {
 	/** A local cache of Account objects, to avoid reading from file each time. */
-	Map<Integer, Account> accounts;
+	Map<String, Account> accounts;
 
 	/** TODO: Add description of the purpose of Logger, once it's actually used. */
 	private static final Logger LOG = Logger.getLogger(AccountJSONDAO.class.getName());
@@ -65,44 +65,10 @@ public class AccountJSONDAO implements AccountDAO {
 	 * @return The array of {@link Account accounts}, may be empty
 	 */
 	private Account[] getAccountsArray () {
-		return getAccountsArray(null);
-	}
-
-	/**
-	 * Generates an array of {@linkplain Account accounts} from the tree map for any
-	 * {@linkplain Account accounts} that contains the account title specified by text argument.
-	 *
-	 * @param text The text to find within a {@link Account accounts} account<p>
-	 *             If text is null, the array contains all of the {@linkplain Account accounts} in the tree map.
-	 * @return The array of {@link Account accounts}, may be empty
-	 */
-	private Account[] getAccountsArray (String text) {
-		ArrayList<Account> accountArrayList = new ArrayList<>();
-
-		for (Account account : accounts.values()) {
-			if (text == null || account.getUsername().contains(text)) {
-				accountArrayList.add(account);
-			}
-		}
-
+		ArrayList<Account> accountArrayList = new ArrayList<>(accounts.values());
 		Account[] accountArray = new Account[accountArrayList.size()];
 		accountArrayList.toArray(accountArray);
 		return accountArray;
-	}
-
-	/**
-	 *	Finds a {@linkplain Account account} from the list of accounts that exactly matches the username given
-	 *
-	 * @param username The text field that will be used to search for an account
-	 * @return The {@link Account account}, if there is one
-	 */
-	private Account getAccountbyNameAccount (String username) {
-		for (Account account : accounts.values()) {
-			if (account.getUsername().equals(username)) {
-				return account;
-			}
-		}
-		return null;
 	}
 
 	/**
@@ -137,7 +103,7 @@ public class AccountJSONDAO implements AccountDAO {
 
 		// Add each account to the tree map and keep track of the greatest id
 		for (Account account : accountArray) {
-			accounts.put(account.getId(), account);
+			accounts.put(account.getUsername(), account);
 			if (account.getId() > nextId) {
 				nextId = account.getId();
 			}
@@ -155,7 +121,7 @@ public class AccountJSONDAO implements AccountDAO {
 		synchronized (accounts) {
 			// We create a new account object because the id field is immutable, and we need to assign the next unique id
 			Account newAccount = new Account(nextId(), account.getUsername(), account.getPassword());
-			accounts.put(newAccount.getId(), newAccount);
+			accounts.put(newAccount.getUsername(), newAccount);
 			save(); // may throw an IOException
 			return newAccount;
 		}
@@ -167,11 +133,11 @@ public class AccountJSONDAO implements AccountDAO {
 	@Override
 	public Account updateAccount (Account account) throws IOException {
 		synchronized (accounts) {
-			if (!accounts.containsKey(account.getId())) {
+			if (!accounts.containsKey(account.getUsername())) {
 				return null;  // account does not exist
 			}
 
-			accounts.put(account.getId(), account);
+			accounts.put(account.getUsername(), account);
 			save(); // may throw an IOException
 			return account;
 		}
@@ -181,10 +147,10 @@ public class AccountJSONDAO implements AccountDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public boolean deleteAccount (int id) throws IOException {
+	public boolean deleteAccount (String username) throws IOException {
 		synchronized (accounts) {
-			if (accounts.containsKey(id)) {
-				accounts.remove(id);
+			if (accounts.containsKey(username)) {
+				accounts.remove(username);
 				return save();
 			} else {
 				return false;
@@ -196,10 +162,10 @@ public class AccountJSONDAO implements AccountDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public Account getAccount (int id) {
+	public Account getAccount (String username) {
 		synchronized (accounts) {
-			if (accounts.containsKey(id)) {
-				return accounts.get(id);
+			if (accounts.containsKey(username)) {
+				return accounts.get(username);
 			} else {
 				return null;
 			}
@@ -213,26 +179,6 @@ public class AccountJSONDAO implements AccountDAO {
 	public Account[] getAccounts () {
 		synchronized (accounts) {
 			return getAccountsArray();
-		}
-	}
-
-	/**
-	 * * {@inheritDoc}
-	 */
-	@Override
-	public Account[] findAccounts (String text) {
-		synchronized (accounts) {
-			return getAccountsArray(text);
-		}
-	}
-
-	/**
-	 * * {@inheritDoc}}
-	 */
-	@Override
-	public Account findOneAccount (String username) {
-		synchronized (accounts) {
-			return getAccountbyNameAccount(username);
 		}
 	}
 }

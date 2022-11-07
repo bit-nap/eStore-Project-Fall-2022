@@ -28,7 +28,7 @@ export class AppComponent {
   }
 
   goBack(): void {
-    this._location.back();
+    this.router.navigate(['']);
   }
 
   updateUsername(): String {

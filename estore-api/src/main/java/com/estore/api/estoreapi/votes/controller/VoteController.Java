@@ -1,7 +1,7 @@
 package com.estore.api.estoreapi.votes.controller;
 
 import com.estore.api.estoreapi.votes.model.Vote;
-import com.estore.api.estoreapi.votes.persistence.VoteDao;
+import com.estore.api.estoreapi.votes.persistence.VoteDAO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

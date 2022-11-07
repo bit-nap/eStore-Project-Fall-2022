@@ -17,5 +17,25 @@
 		"seats": [
 			"a1"
 		]
+	},
+	{
+		"id": 2,
+		"screeningId": 5,
+		"accountId": 1,
+		"tickets": 3,
+		"popcorn": [
+			0,
+			1,
+			0
+		],
+		"soda": [
+			0,
+			1,
+			0
+		],
+		"seats": [
+			"a1",
+			"a2"
+		]
 	}
 ]

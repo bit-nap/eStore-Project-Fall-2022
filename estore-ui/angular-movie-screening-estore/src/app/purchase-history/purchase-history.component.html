@@ -1,8 +1,18 @@
-<h2>Order history:</h2>
-<div>
-  <ul class="orders">
-    <li *ngFor="let order of orders">
-        <span class="badge">{{order.id}}</span> {{order.screeningId}}
-    </li>
-  </ul>
-</div>
+<html>
+  <div>
+    <button (click)="getAccountOrders()" >Display Orders</button>
+
+    <h2>{{user.username}}'s Order History:</h2>
+    <br>
+
+    <ul class="orders">
+      <li *ngFor="let order of orders">
+          <span class = "id">{{order.id}}</span>
+          <span class = "item">({{order.tickets}}) Screening: {{order.screeningId}}</span>
+      </li>
+    </ul>
+
+    <p id="getUsernameMessage"></p>
+    <p id="getOrdersMessage"></p>
+  </div>
+</html>

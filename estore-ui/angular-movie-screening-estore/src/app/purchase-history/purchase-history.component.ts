@@ -34,19 +34,31 @@ export class PurchaseHistoryComponent implements OnInit {
   constructor(private login: LoggedInAccountService, private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.getAccount;
-    this.getAccountOrders;
+    this.getAccount();
+    // this.getAccountOrders();
   }
 
   getAccount(): void {
-    this.http.get<Accounts>('http://127.0.0.1:8080/accounts/' + this.login.getUsername).subscribe((account_data: Accounts) => {
-      this.user = account_data;
-    })
+    this.http.get<Accounts>('http://127.0.0.1:8080/accounts/' + this.login.getUsername()).subscribe((account_data: Accounts) => {
+      // Check if account exists and has a valid id
+      if (account_data != null && account_data.id > 0) {
+        // Save user account data
+        this.user = account_data;
+        document.getElementById("getUsernameMessage")!.innerHTML = "User exists";
+      }
+    },
+    (error) => { document.getElementById("getUsernameMessage")!.innerHTML = "User does not exist"; }
+    );
   }
 
   getAccountOrders(): void {
     this.http.get<[Order]>('http://127.0.0.1:8080/orders/?accountId=' + this.user.id).subscribe((orders_data: Order[]) => {
-      this.orders = orders_data;
+      if (orders_data != null && orders_data.length > 0) {
+        this.orders = orders_data;
+        document.getElementById("getOrdersMessage")!.innerHTML = "Displaying user's orders";
+      } else {
+        document.getElementById("getOrdersMessage")!.innerHTML = "No orders found";
+      }
     })
   }
 }

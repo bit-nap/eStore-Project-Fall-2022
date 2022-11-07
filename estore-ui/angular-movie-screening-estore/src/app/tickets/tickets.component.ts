@@ -3,6 +3,7 @@ import { MoviesComponent } from "../movies/movies.component";
 import { MovieSelectorService } from "../movie-selector.service";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
+import { Order } from "../order";
 
 @Component({
   selector: 'app-tickets',
@@ -13,6 +14,8 @@ import { HttpClient } from "@angular/common/http";
 export class TicketsComponent implements OnInit {
   /** The number of tickets selected. */
   @Input() numOfTickets: Number = 0;
+  
+  private orderUrl: string;
 
   bsmall_value = 0
   bmedium_value = 0
@@ -23,7 +26,7 @@ export class TicketsComponent implements OnInit {
   plarge_value = 0
 
   constructor(private router: Router, private movieSelector: MovieSelectorService, private http: HttpClient) {
-
+    this.orderUrl = 'http://localhost:8080/orders'
   }
 
   /**
@@ -51,10 +54,13 @@ export class TicketsComponent implements OnInit {
    */
   completePurchase(): void {
     // TODO: Add actions for completed a purchase, ie, save ticket information as Order class in Java or something
-
+    this.saveOrder({id: 1, screeningId: 5, accountId: 3, tickets: 5, popcorn: [this.psmall_value, this.pmedium_value, this.plarge_value], soda: [this.bsmall_value, this.bmedium_value, this.blarge_value]})
     this.router.navigate(['thank'])
   }
 
+  public saveOrder(order: Order) {
+    return this.http.post<Order>(this.orderUrl, order)
+  }
   
   /**
    * Functions to add or substract number of drinks

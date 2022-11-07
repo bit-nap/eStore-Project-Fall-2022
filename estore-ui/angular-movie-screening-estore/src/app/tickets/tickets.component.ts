@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { MoviesComponent } from "../movies/movies.component";
 import { MovieSelectorService } from "../movie-selector.service";
 import { Router } from "@angular/router";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: 'app-tickets',
@@ -13,7 +14,17 @@ export class TicketsComponent implements OnInit {
   /** The number of tickets selected. */
   @Input() numOfTickets: Number = 0;
 
-  constructor(private router: Router, private movieSelector: MovieSelectorService) { }
+  bsmall_value = 0
+  bmedium_value = 0
+  blarge_value = 0
+  
+  psmall_value = 0
+  pmedium_value = 0
+  plarge_value = 0
+
+  constructor(private router: Router, private movieSelector: MovieSelectorService, private http: HttpClient) {
+    this.movieUrl
+  }
 
   /**
    * Set this TicketsComponent's selected movie using the MovieSelectorService.
@@ -40,6 +51,65 @@ export class TicketsComponent implements OnInit {
    */
   completePurchase(): void {
     // TODO: Add actions for completed a purchase, ie, save ticket information as Order class in Java or something
+
     this.router.navigate(['thank'])
   }
+
+  
+  /**
+   * Functions to add or substract number of drinks
+   */
+   baddSmall(): void {
+    this.bsmall_value++;
+  }
+  bsubstractSmall(): void {
+    if (this.bsmall_value > 0) {
+      this.bsmall_value--;
+    }
+  }
+  baddMedium(): void {
+    this.bmedium_value++;
+  }
+  bsubstractMedium(): void {
+    if (this.bmedium_value > 0) {
+      this.bmedium_value--;
+    }
+  }
+  baddLarge(): void {
+    this.blarge_value++;
+  }
+  bsubstractLarge(): void {
+    if (this.blarge_value > 0) {
+      this.blarge_value--;
+    }
+  }
+
+  /**
+   * Functions to add or substract number of snacks
+   */
+   paddSmall(): void {
+    this.psmall_value++;
+  }
+  psubstractSmall(): void {
+    if (this.psmall_value > 0) {
+      this.bsmall_value--;
+    }
+  }
+  paddMedium(): void {
+    this.pmedium_value++;
+  }
+  psubstractMedium(): void {
+    if (this.pmedium_value > 0) {
+      this.pmedium_value--;
+    }
+  }
+  paddLarge(): void {
+    this.plarge_value++;
+  }
+  psubstractLarge(): void {
+    if (this.plarge_value > 0) {
+      this.plarge_value--;
+    }
+  }
+
 }

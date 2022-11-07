@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 // Class interfaces
 import { Order } from '../Order';
 import { Accounts } from '../Accounts';
-// Service
+// Service for logged in user
 import { LoggedInAccountService } from '../logged-in-account.service';
-
+// HTTP calls
 import { HttpClient } from '@angular/common/http';
 
 
@@ -18,6 +18,7 @@ export class PurchaseHistoryComponent implements OnInit {
   orders: Order[] = [];
 
   // The account of the user logged in
+  // Required initialization so initialized to default values
   user: Accounts = {
     id: -1,
     username: "",
@@ -27,8 +28,8 @@ export class PurchaseHistoryComponent implements OnInit {
   /**
    * Required objects for deserializing the objects in the JSON based on user logged
    *
-   * @param LoginService
-   * @param http
+   * @param login LoggedInAccountService object to keep track of logged in user
+   * @param http  HttpClient object for API calls
    */
   constructor(private login: LoggedInAccountService, private http: HttpClient) { }
 

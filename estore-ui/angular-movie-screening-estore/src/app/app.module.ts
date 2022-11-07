@@ -15,6 +15,8 @@ import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { ScreeningsComponent } from './screenings/screenings.component';
 import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
+import { VoteSuggestComponent } from './vote-suggest/vote-suggest.component';
+import { VoteSuggestAdminComponent } from './vote-suggest-admin/vote-suggest-admin.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { PurchaseHistoryComponent } from './purchase-history/purchase-history.co
     LoginComponent,
     AdminComponent,
     ScreeningsComponent,
-    PurchaseHistoryComponent
+    PurchaseHistoryComponent,
+    VoteSuggestComponent,
+    VoteSuggestAdminComponent
   ],
   imports: [
     BrowserModule,

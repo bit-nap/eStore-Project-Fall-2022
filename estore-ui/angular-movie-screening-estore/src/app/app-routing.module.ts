@@ -7,6 +7,8 @@ import { CompletedPurchaseComponent } from "./completed-purchase/completed-purch
 import { AdminComponent } from './admin/admin.component';
 import { ScreeningsComponent } from "./screenings/screenings.component";
 import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
+import { VoteSuggestComponent } from './vote-suggest/vote-suggest.component';
+import { VoteSuggestAdminComponent } from './vote-suggest-admin/vote-suggest-admin.component';
 
 const routes: Routes = [
   { path: '', component: MoviesComponent},
@@ -15,7 +17,9 @@ const routes: Routes = [
   { path: 'tickets', component: TicketsComponent},
   { path: 'thank', component: CompletedPurchaseComponent},
   { path: 'admin', component: AdminComponent },
-  { path: 'purchase-history', component: PurchaseHistoryComponent}
+  { path: 'purchase-history', component: PurchaseHistoryComponent},
+  { path: 'vote', component: VoteSuggestComponent },
+  { path: 'vote-admin', component: VoteSuggestAdminComponent }
 ];
 
 @NgModule({

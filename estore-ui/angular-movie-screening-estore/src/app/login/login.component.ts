@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
   enterUsername(username: string): void {
     this.resetUsernameMessages();
 
-    this.http.get<Accounts>('http://127.0.0.1:8080/accounts/?username='+username).subscribe((data: Accounts) => {
+    this.http.get<Accounts>('http://127.0.0.1:8080/accounts/'+username).subscribe((data: Accounts) => {
       if (data.username === username) {
         document.getElementById("newUsernameMessage")!.innerHTML = "Username already exists. Please choose another one.";
       }
@@ -55,13 +55,8 @@ export class LoginComponent implements OnInit {
     this.resetUsernameMessages();
 
     this.http.get<Accounts>('http://127.0.0.1:8080/accounts/?username='+username).subscribe((data: Accounts) => {
-      if (data != null && username !== "admin") {
-        this.loggedInAccount.setUsername(username);
+      this.loggedInAccount.setUsername(username);
         this.router.navigate(['']);
-      } else if (username === "admin") {
-        this.loggedInAccount.setUsername(username);
-        this.router.navigate(['admin']);
-      }
     }, (response) => {
       document.getElementById("signinUsernameMessage")!.innerHTML = "Username does not exist.";
     });
@@ -74,16 +69,17 @@ export class LoginComponent implements OnInit {
   deleteUsername(username: string): void {
     this.resetUsernameMessages();
 
-    this.http.get<Accounts>('http://127.0.0.1:8080/accounts/?username=' + username).subscribe((data: Accounts) => {
-      if (data.username === username) {
-        this.http.delete<Accounts>('http://127.0.0.1:8080/accounts/'+data.id).subscribe((data: Accounts) => { })
-        document.getElementById("deleteUsernameMessage")!.innerHTML = "Account has been deleted.";
-      }
+    this.http.delete<Accounts>('http://127.0.0.1:8080/accounts/' + username).subscribe((data: Accounts) => {
+      document.getElementById("deleteUsernameMessage")!.innerHTML = "Account has been deleted.";
     }, (response) => {
       document.getElementById("deleteUsernameMessage")!.innerHTML = "Account does not exist.";
     });
   }
 
+  /**
+   * Method that will reset the paragraphs that show messages for the create username, sign in, and delete
+   * username methodss
+   */
   resetUsernameMessages(): void {
     document.getElementById("newUsernameMessage")!.innerHTML = "";
     document.getElementById("signinUsernameMessage")!.innerHTML = "";

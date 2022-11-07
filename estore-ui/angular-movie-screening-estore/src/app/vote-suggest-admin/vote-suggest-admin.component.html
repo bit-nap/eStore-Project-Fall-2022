@@ -1,0 +1,20 @@
+<div>
+  <div class="inventory-options">
+    <h2>Add a new product:</h2>
+    <input #addMovieName id="vote" placeholder="Enter name of new movie" />
+    <button id="enter-new-movie" (click)="enterNewMovie(addMovieName.value)">Add New Movie</button>
+    <p id="adminAddVote"></p>
+  </div>
+
+  <button type="Button" *ngFor="let vote of votes" id="change-vote" (click)="changeVote(vote)">
+    <h3>Id: {{vote.id}}</h3>
+    <span>Movie Name: {{vote.movieName}}</span>
+    <span>Number of Votes: {{vote.howManyVotes}}</span>
+  </button>
+
+  <div *ngIf="voteSelected">
+    <h2>Change Vote for: {{voteSelectedToChange.movieName}}</h2>
+    <input #updateName id="votes" placeholder="Enter new movie name" />
+    <button type="button" id="enter-new-movie" (click)="changeVoteSubmit(updateName.value)">Change Vote</button>
+  </div>
+</div>

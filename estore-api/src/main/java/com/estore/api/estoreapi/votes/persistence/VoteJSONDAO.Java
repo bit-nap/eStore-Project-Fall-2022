@@ -1,4 +1,4 @@
-package com.estore.api.estoreapi.vote.persistence;
+package com.estore.api.estoreapi.votes.persistence;
 
 import com.estore.api.estoreapi.votes.model.Vote;
 import com.fasterxml.jackson.databind.ObjectMapper;

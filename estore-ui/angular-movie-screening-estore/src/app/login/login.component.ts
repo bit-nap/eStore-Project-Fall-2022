@@ -18,6 +18,9 @@ const httpOptions = {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+/**
+ * Class to allow the user or admin to log in on the homepage. This will grant certain permissions
+ */
 export class LoginComponent implements OnInit {
   account: Accounts = {
     id: -1,

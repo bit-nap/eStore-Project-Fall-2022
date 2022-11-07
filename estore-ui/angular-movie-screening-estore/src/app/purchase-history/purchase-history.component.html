@@ -1,4 +1,8 @@
 <h2>Order history:</h2>
 <div>
-  <p>This is where orders will be listed</p>
+  <ul class="orders">
+    <li *ngFor="let order of orders">
+        <span class="badge">{{order.id}}</span> {{order.screeningId}}
+    </li>
+  </ul>
 </div>

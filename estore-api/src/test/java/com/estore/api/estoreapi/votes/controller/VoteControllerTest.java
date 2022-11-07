@@ -1,7 +1,7 @@
 package com.estore.api.estoreapi.votes.controller;
 
-import com.estore.api.estoreapi.votes.model.Vote;
-import com.estore.api.estoreapi.votes.persistence.VoteDAO;
+import com.estore.api.estoreapi.votes.model.*;
+import com.estore.api.estoreapi.votes.persistence.*;
 
 import net.bytebuddy.agent.VirtualMachine.ForHotSpot.Connection.Response;
 

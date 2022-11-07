@@ -1,7 +1,5 @@
-package com.estore.api.estoreapi.vote.model;
+package com.estore.api.estoreapi.votes.model;
 
-import com.estore.api.estoreapi.movies.MovieGetter;
-import com.estore.api.estoreapi.movies.model.Movie;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

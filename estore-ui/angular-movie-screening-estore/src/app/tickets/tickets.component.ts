@@ -23,7 +23,7 @@ export class TicketsComponent implements OnInit {
   plarge_value = 0
 
   constructor(private router: Router, private movieSelector: MovieSelectorService, private http: HttpClient) {
-    this.movieUrl
+
   }
 
   /**

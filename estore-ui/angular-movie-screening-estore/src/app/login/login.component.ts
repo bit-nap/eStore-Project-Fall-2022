@@ -18,6 +18,9 @@ const httpOptions = {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+/**
+ * Class to allow the user or admin to log in on the homepage. This will grant certain permissions
+ */
 export class LoginComponent implements OnInit {
   account: Accounts = {
     id: -1,
@@ -54,7 +57,7 @@ export class LoginComponent implements OnInit {
   signIn(username: String): void {
     this.resetUsernameMessages();
 
-    this.http.get<Accounts>('http://127.0.0.1:8080/accounts/?username='+username).subscribe((data: Accounts) => {
+    this.http.get<Accounts>('http://127.0.0.1:8080/accounts/'+username).subscribe((data: Accounts) => {
       this.loggedInAccount.setUsername(username);
         this.router.navigate(['']);
     }, (response) => {

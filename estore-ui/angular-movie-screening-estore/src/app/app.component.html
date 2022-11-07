@@ -4,7 +4,9 @@
     <div class="header-right_wrapper">
       <button *ngIf="isUserLoggedIn" class="login" (click)="goToPage('login')">Login</button>
       <button *ngIf="!isUserLoggedIn" class="login" (click)="logout()">Logout</button>
-      <button class="login" (click)="goBack()">Go Back</button>
+      <button *ngIf="!isUserLoggedIn" class="login" (click)="voteSuggestMovie()">Vote/Suggest</button>
+      <button *ngIf="!isUserLoggedIn && this.loggedInAccount.isAdmin()" class="login" (click)="inventoryScreen()">Inventory</button>
+      <button *ngIf="!isUserLoggedIn" class="login" (click)="goBack()">Home</button>
     </div>
 </header>
 

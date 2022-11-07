@@ -11,6 +11,9 @@ import { LoggedInAccountService } from "../logged-in-account.service"; // Import
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.css'],
 })
+/**
+ * Class to allow the user to select on a movie after they select a screening
+ */
 export class MoviesComponent implements OnInit {
   movies: Movie[] = [];
 
@@ -47,6 +50,10 @@ export class MoviesComponent implements OnInit {
     })
   }
 
+  /**
+   * Method that will allow a user to search for a movie based on a date
+   * @param value the day what will be used to search
+   */
   searchMoviesByDate(value: string): void {
     console.log(value);
     this.http.get<[Movie]>('http://127.0.0.1:8080/screenings/?date=2023-01-'+value).subscribe((data: Movie[]) => {

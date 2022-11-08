@@ -65,6 +65,7 @@ public class Screening implements Comparable<Screening> {
 		this.ticketsRemaining = ticketsRemaining;
 		this.date = date;
 		this.time = time;
+		this.seats = seats;
 	}
 
 	/**
@@ -220,6 +221,6 @@ public class Screening implements Comparable<Screening> {
 	 */
 	@Override
 	public String toString () {
-		return String.format(STRING_FORMAT, id, movieId, ticketsRemaining, date, time);
+		return String.format(STRING_FORMAT, id, movieId, ticketsRemaining, date, time,seats);
 	}
 }

@@ -16,16 +16,27 @@ export class TicketsComponent implements OnInit {
   /** The number of tickets selected. */
   @Input() numOfTickets: number = 0;
   
+  /* URL for the orders */
   private orderUrl: string;
 
+  /** Small, medium and large vlues for beverage (drinks) */
   bsmall_value = 0
   bmedium_value = 0
   blarge_value = 0
   
+  /** Small, medium and large values for popcorn */
   psmall_value = 0
   pmedium_value = 0
   plarge_value = 0
 
+  /**
+   * Contains the URL for the orders (orderURL)
+   * 
+   * @param router Router that redirects to other pages
+   * @param movieSelector Gets the information from current movie
+   * @param http HttpClient Gets the link for the orders
+   * @param screeningSelector ScreeningSelectorService Gets the information from current screening
+   */
   constructor(private router: Router, private movieSelector: MovieSelectorService, private http: HttpClient, private screeningSelector: ScreeningSelectorService) {
     this.orderUrl = 'http://localhost:8080/orders'
   }
@@ -51,14 +62,24 @@ export class TicketsComponent implements OnInit {
   }
 
   /**
-   * Method to call user presses the complete purchase button.
+   * Method called when the user presses the `complete purchase` button.
+   * 
+   * >Saves the order in the JSON
+   * 
+   * >Redirects to `thank` page
    */
   completePurchase(): void {
-    // TODO: Add actions for completed a purchase, ie, save ticket information as Order class in Java or something
+    // save ticket information as Order class in Java or something
     this.saveOrder({id: 1, screeningId: this.screeningSelector.getScreeningId(), accountId: 3, tickets: this.numOfTickets, popcorn: [this.psmall_value, this.pmedium_value, this.plarge_value], soda: [this.bsmall_value, this.bmedium_value, this.blarge_value]})
     this.router.navigate(['thank'])
   }
 
+  /**
+   * Creates an order
+   * 
+   * @param order The order object
+   * @returns the order using `orderURL` along with `POST` and the information contained in the object `order`
+   */
   public saveOrder(order: Order) {
     return this.http.post<Order>(this.orderUrl, order).subscribe()
   }
@@ -66,7 +87,7 @@ export class TicketsComponent implements OnInit {
   /**
    * Functions to add or substract number of drinks
    */
-   baddSmall(): void {
+  baddSmall(): void {
     this.bsmall_value++;
   }
   bsubstractSmall(): void {
@@ -94,7 +115,7 @@ export class TicketsComponent implements OnInit {
   /**
    * Functions to add or substract number of snacks
    */
-   paddSmall(): void {
+  paddSmall(): void {
     this.psmall_value++;
   }
   psubstractSmall(): void {

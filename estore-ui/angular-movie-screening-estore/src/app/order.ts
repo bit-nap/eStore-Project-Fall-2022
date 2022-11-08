@@ -1,8 +1,8 @@
 export interface Order {
-    id: number;
+    id: number; // Id is overwritten 
     screeningId: number;
     accountId: number;
     tickets: number;
-    popcorn: number[];
-    soda: number[];
+    popcorn: number[]; // small, medium, large
+    soda: number[]; // small, medium, large
 }

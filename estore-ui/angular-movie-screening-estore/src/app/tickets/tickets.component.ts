@@ -4,6 +4,7 @@ import { MovieSelectorService } from "../movie-selector.service";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { Order } from "../order";
+import { ScreeningSelectorService } from "../screening-selector.service";
 
 @Component({
   selector: 'app-tickets',
@@ -13,7 +14,7 @@ import { Order } from "../order";
 })
 export class TicketsComponent implements OnInit {
   /** The number of tickets selected. */
-  @Input() numOfTickets: Number = 0;
+  @Input() numOfTickets: number = 0;
   
   private orderUrl: string;
 
@@ -25,7 +26,7 @@ export class TicketsComponent implements OnInit {
   pmedium_value = 0
   plarge_value = 0
 
-  constructor(private router: Router, private movieSelector: MovieSelectorService, private http: HttpClient) {
+  constructor(private router: Router, private movieSelector: MovieSelectorService, private http: HttpClient, private screeningSelector: ScreeningSelectorService) {
     this.orderUrl = 'http://localhost:8080/orders'
   }
 
@@ -54,12 +55,12 @@ export class TicketsComponent implements OnInit {
    */
   completePurchase(): void {
     // TODO: Add actions for completed a purchase, ie, save ticket information as Order class in Java or something
-    this.saveOrder({id: 1, screeningId: 5, accountId: 3, tickets: 5, popcorn: [this.psmall_value, this.pmedium_value, this.plarge_value], soda: [this.bsmall_value, this.bmedium_value, this.blarge_value]})
+    this.saveOrder({id: 1, screeningId: this.screeningSelector.getScreeningId(), accountId: 3, tickets: this.numOfTickets, popcorn: [this.psmall_value, this.pmedium_value, this.plarge_value], soda: [this.bsmall_value, this.bmedium_value, this.blarge_value]})
     this.router.navigate(['thank'])
   }
 
   public saveOrder(order: Order) {
-    return this.http.post<Order>(this.orderUrl, order)
+    return this.http.post<Order>(this.orderUrl, order).subscribe()
   }
   
   /**

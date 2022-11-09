@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { MovieSelectorService } from "../movie-selector.service";
 import { ScreeningSelectorService } from "../screening-selector.service";
 import { Screening } from "../screening";
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-screenings',

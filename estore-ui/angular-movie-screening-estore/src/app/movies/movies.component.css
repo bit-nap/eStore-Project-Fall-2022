@@ -143,6 +143,7 @@
   overflow: hidden;
   background-repeat: no-repeat;
   background-size: cover;
+  box-shadow: 0px -50px 50px -28px #0C0E1E inset;
 }
 
 @keyframes changeImg {

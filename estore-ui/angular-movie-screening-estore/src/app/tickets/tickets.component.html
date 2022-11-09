@@ -1,14 +1,14 @@
 <div class="main-container">
-  <div class="movie-poster-container">
-    <img id="movieImg" src="{{getMoviePoster()}}"  alt="Movie poster for {{getMovieTitle()}}"/>
-  </div>
-
+  
   <div class="select-items-container">
-    <p>Select Items to Purchase</p>
+    <!-- <p>Select Items to Purchase</p> -->
     <p id="movie-title">{{getMovieTitle()}}</p>
+    <div class="movie-poster-container">
+      <img id="movieImg" src="{{getMoviePoster()}}"  alt="Movie poster for {{getMovieTitle()}}"/>
+    </div>
     <input id="ticket-input" [(ngModel)]="numOfTickets">
     <span class="list">
-      <h2>Choose a Beverage</h2>
+      <!-- <h2>Choose a Beverage</h2> -->
       <span>
           <h3>Small</h3>
           <div>
@@ -35,7 +35,7 @@
         </span>
     </span>
       <span class="list">
-        <h2>Choose a Snack</h2>
+        <!-- <h2>Choose a Snack</h2> -->
         <span>
             <h3>Small</h3>
             <div>
@@ -61,6 +61,6 @@
             </div>
         </span>
       </span>
-    <button (click)="completePurchase()">Complete purchase</button>
+    <button id="completePurchase" (click)="completePurchase()">Complete purchase</button>
   </div>
 </div>

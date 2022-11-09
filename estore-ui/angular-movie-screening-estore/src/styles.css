@@ -44,6 +44,7 @@ header button:hover {
 body {
   height: 100%;
   background-image: linear-gradient(to right top, #330872, #1e135e, #111547, #0e122f, #0b0c17);
+  box-shadow: 0px -75px 50px -28px #0C0E1E inset;
 }
 
 body, input[type="text"], button {

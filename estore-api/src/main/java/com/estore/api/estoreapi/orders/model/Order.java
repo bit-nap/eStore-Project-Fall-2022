@@ -1,10 +1,8 @@
 package com.estore.api.estoreapi.orders.model;
 
-import com.estore.api.estoreapi.movies.model.Movie;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Arrays;
-import java.util.logging.Logger;
 
 /**
  * Represents a customer order. Fields cannot be changed once created.
@@ -15,9 +13,6 @@ public class Order {
 	// Package private for tests - Prof
 	static final String STRING_FORMAT = "Order [id=%d, screeningId=%d, accountId=%d, tickets=%d," +
 		"popcornSmall=%d, popcornMedium=%d, popcornLarge=%d, sodaSmall=%d, sodaMedium=%d, sodaLarge=%d, seats=%s]";
-
-	/** TODO: Add description of the purpose of Logger, once it's actually used. */
-	private static final Logger LOG = Logger.getLogger(Movie.class.getName());
 
 	/** The id of this order. */
 	@JsonProperty("id") private final int id;

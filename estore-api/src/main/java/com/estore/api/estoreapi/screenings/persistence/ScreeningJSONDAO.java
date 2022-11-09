@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.logging.Logger;
 
 /**
  * Implements the functionality for JSON file-based persistence for Screenings.<p>
@@ -22,9 +21,6 @@ import java.util.logging.Logger;
 public class ScreeningJSONDAO implements ScreeningDAO {
 	/** A local cache of Screening objects, to avoid reading from file each time. */
 	Map<Integer, Screening> screenings;
-
-	/** TODO: Add description of the purpose of Logger, once it's actually used. */
-	private static final Logger LOG = Logger.getLogger(ScreeningJSONDAO.class.getName());
 
 	/** The next id to assign to a new screening. */
 	private static int nextId;

@@ -2,8 +2,6 @@ package com.estore.api.estoreapi.movies.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.logging.Logger;
-
 /**
  * Represents a movie.
  *
@@ -12,9 +10,6 @@ import java.util.logging.Logger;
 public class Movie {
 	// Package private for tests - Prof
 	static final String STRING_FORMAT = "Movie [id=%d, title=%s, runtime=%s, mpaRating=%s, year=%d]";
-
-	/** TODO: Add description of the purpose of Logger, once it's actually used. */
-	private static final Logger LOG = Logger.getLogger(Movie.class.getName());
 
 	/** The id of this movie. */
 	@JsonProperty("id") private int id;

@@ -1,13 +1,8 @@
 package com.estore.api.estoreapi.accounts.model;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestClassOrder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Unit tests for the Account Model
@@ -16,8 +11,6 @@ import static org.mockito.Mockito.when;
  */
 @Tag("Model-tier")
 public class AccountTest {
-	private Account testAccount;
-
 	/**
 	 * Tests the Account constructor to make sure a proper Account object
 	 * is instantiated with the proper arguments. This also tests the get

@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
-import java.util.logging.Logger;
 
 /**
  * Represents a screening of a movie.
@@ -17,8 +16,6 @@ import java.util.logging.Logger;
 public class Screening implements Comparable<Screening> {
 	/** The total number of tickets available for any screening. */
 	public static final int TOTAL_TICKETS = 20;
-	/** TODO: Add description of the purpose of Logger, once it's actually used. */
-	private static final Logger LOG = Logger.getLogger(Screening.class.getName());
 
 	// Package private for tests - Prof
 	static final String STRING_FORMAT = "Screening [id=%d, movieId=%s, ticketsRemaining=%s, date=%s, time=%s]";

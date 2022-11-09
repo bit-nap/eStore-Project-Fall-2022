@@ -13,7 +13,9 @@ export class AppComponent {
   username: String = '';
   isUserLoggedIn: boolean = false;
 
-  constructor(private router:Router, private _location: Location, private loggedInAccount: LoggedInAccountService) {}
+  constructor(private router:Router, private _location: Location, public loggedInAccount: LoggedInAccountService) {
+    this.router.navigate(['']);
+  }
 
   goToPage(pageName:string):void {
     this.router.navigate([`${pageName}`]);
@@ -26,7 +28,7 @@ export class AppComponent {
   }
 
   goBack(): void {
-    this._location.back();
+    this.router.navigate(['']);
   }
 
   updateUsername(): String {
@@ -37,5 +39,17 @@ export class AppComponent {
       this.isUserLoggedIn = false;
       return 'Welcome, ' + this.loggedInAccount.getUsername() + '!';
     }
+  }
+
+  voteSuggestMovie(): void {
+    if (this.loggedInAccount.isAdmin()) {
+      this.router.navigate(['vote-admin']);
+    } else {
+      this.router.navigate(['vote']);
+    }
+  }
+
+  inventoryScreen(): void {
+    this.router.navigate(['admin']);
   }
 }

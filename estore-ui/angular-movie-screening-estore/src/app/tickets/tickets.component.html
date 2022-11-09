@@ -7,6 +7,60 @@
     <p>Select Items to Purchase</p>
     <p id="movie-title">{{getMovieTitle()}}</p>
     <input id="ticket-input" [(ngModel)]="numOfTickets">
+    <span class="list">
+      <h2>Choose a Beverage</h2>
+      <span>
+          <h3>Small</h3>
+          <div>
+              <button (click)="bsubstractSmall()">-</button>
+              <input readonly type="number" value="{{bsmall_value}}">
+              <button (click)="baddSmall()">+</button>
+          </div>
+      </span>
+      <span>
+          <h3>Medium</h3>
+          <div>
+              <button (click)="bsubstractMedium()">-</button>
+              <input readonly type="number" value="{{bmedium_value}}">
+              <button (click)="baddMedium()">+</button>
+          </div>
+      </span>
+      <span>
+          <h3>Large</h3>
+          <div>
+              <button (click)="bsubstractLarge()">-</button>
+              <input readonly type="number"  value="{{blarge_value}}">
+              <button (click)="baddLarge()">+</button>
+          </div>
+        </span>
+    </span>
+      <span class="list">
+        <h2>Choose a Snack</h2>
+        <span>
+            <h3>Small</h3>
+            <div>
+                <button (click)="psubstractSmall()">-</button>
+                <input readonly type="number" value="{{psmall_value}}">
+                <button (click)="paddSmall()">+</button>
+            </div>
+        </span>
+        <span>
+            <h3>Medium</h3>
+            <div>
+                <button (click)="psubstractMedium()">-</button>
+                <input readonly type="number" value="{{pmedium_value}}">
+                <button (click)="paddMedium()">+</button>
+            </div>
+        </span>
+        <span>
+            <h3>Large</h3>
+            <div>
+                <button (click)="psubstractLarge()">-</button>
+                <input readonly type="number"  value="{{plarge_value}}">
+                <button (click)="paddLarge()">+</button>
+            </div>
+        </span>
+      </span>
     <button (click)="completePurchase()">Complete purchase</button>
   </div>
 </div>

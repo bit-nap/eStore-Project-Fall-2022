@@ -4,6 +4,8 @@
   <title>Monkey Movies</title>
 </head>
 
+<div id="carousel"></div>
+
 <div class="search-bar-container">
   <input #nameSearch id="search-bar-input" placeholder="Search movies" (input)="searchMoviesByName(nameSearch.value)" />
 </div>
@@ -18,3 +20,17 @@
     </div>
   </button>
 </div>
+
+<script>
+  carouselImages = ['terminator2.jpg', 'batman89.jpg', 'rambo.jpg']
+  banImg = document.getElementById("ban-img")
+  index = 0
+  setInterval(() => {
+    banImg.src = carouselImages[index]
+    if (index < carouselImages.length-1) {
+      index++
+    } else {
+      index = 0
+    }
+  }, 1000)
+</script>

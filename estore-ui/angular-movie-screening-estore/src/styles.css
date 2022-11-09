@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Source+Sans+Pro:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
 /* Application-wide Styles */
 * {
@@ -9,13 +10,15 @@
 }
 
 h1 {
-  color: #ffdd4a;
-  font-family: 'Fredoka One', Arial, Helvetica, sans-serif;
+  color: #AE3442;
+  font-family: 'Righteous', cursive;
+  font-weight: bold;
   font-size: 200%;
 }
 
 header {
-  background-color: #333333;
+  backdrop-filter: blur(6px);
+  background-color: rgba(20, 20, 20, 0.5);
   height: 75px;
   padding: 0 75px 0 75px;
   display: flex;
@@ -23,10 +26,24 @@ header {
   justify-content: space-between;
 }
 
+header button {
+  background-color: rgba(0, 0, 0, 0);
+  color: rgba(255, 255, 255, 0.5);
+  border:rgba(255, 255, 255, 0.5) solid 1px;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+header button:hover {
+  color: rgba(255, 255, 255, 0.9);
+  border:rgba(255, 255, 255, 0.9) solid 1px;
+  text-decoration: none;
+  transition: all .1s;
+}
+
 body {
-  background: #212121;
-  background-size: 400% 400%;
-  height: 100vh;
+  height: 100%;
+  background-image: linear-gradient(to right top, #330872, #1e135e, #111547, #0e122f, #0b0c17);
 }
 
 body, input[type="text"], button {

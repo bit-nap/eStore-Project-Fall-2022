@@ -14,8 +14,8 @@ import { CompletedPurchaseComponent } from './completed-purchase/completed-purch
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { ScreeningsComponent } from './screenings/screenings.component';
-import { VoteSuggestComponent } from './vote-suggest/vote-suggest.component';
-import { VoteSuggestAdminComponent } from './vote-suggest-admin/vote-suggest-admin.component';
+import { SuggestComponent } from './vote-suggest/vote-suggest.component';
+import { SuggestAdminComponent } from './vote-suggest-admin/vote-suggest-admin.component';
 
 @NgModule({
   declarations: [
@@ -26,8 +26,8 @@ import { VoteSuggestAdminComponent } from './vote-suggest-admin/vote-suggest-adm
     LoginComponent,
     AdminComponent,
     ScreeningsComponent,
-    VoteSuggestComponent,
-    VoteSuggestAdminComponent
+    SuggestComponent,
+    SuggestAdminComponent
   ],
   imports: [
     BrowserModule,

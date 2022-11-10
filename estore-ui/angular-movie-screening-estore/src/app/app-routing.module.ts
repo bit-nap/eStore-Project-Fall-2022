@@ -6,8 +6,8 @@ import { TicketsComponent } from "./tickets/tickets.component";
 import { CompletedPurchaseComponent } from "./completed-purchase/completed-purchase.component";
 import { AdminComponent } from './admin/admin.component';
 import { ScreeningsComponent } from "./screenings/screenings.component";
-import { VoteSuggestComponent } from './vote-suggest/vote-suggest.component';
-import { VoteSuggestAdminComponent } from './vote-suggest-admin/vote-suggest-admin.component';
+import { SuggestComponent } from './vote-suggest/vote-suggest.component';
+import { SuggestAdminComponent } from './vote-suggest-admin/vote-suggest-admin.component';
 
 const routes: Routes = [
   { path: '', component: MoviesComponent},
@@ -16,8 +16,8 @@ const routes: Routes = [
   { path: 'tickets', component: TicketsComponent},
   { path: 'thank', component: CompletedPurchaseComponent},
   { path: 'admin', component: AdminComponent },
-  { path: 'vote', component: VoteSuggestComponent },
-  { path: 'vote-admin', component: VoteSuggestAdminComponent }
+  { path: 'vote', component: SuggestComponent },
+  { path: 'vote-admin', component: SuggestAdminComponent }
 ];
 
 @NgModule({

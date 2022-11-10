@@ -8,7 +8,7 @@ An online E-store system built in Java 8=>11 and ___ _replace with other platfor
 
 - gac6151
 - ac8927
-- Louan Flammanc
+- Louan Flammanc (Gloobinours)
 - Norton Andres Perez
 - Oscar Rojas Perez (or8655)
 

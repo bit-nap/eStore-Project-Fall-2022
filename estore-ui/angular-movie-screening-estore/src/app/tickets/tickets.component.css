@@ -54,6 +54,9 @@ p {
   grid-area: button;
   height: auto;
   width: 200px;
+  border-bottom: rgba(255, 255, 255, 0.3) solid 2px;
+  background-color: rgba(0, 0, 0, 0);
+  transition: border .3s;
 }
 
 #movie-title {

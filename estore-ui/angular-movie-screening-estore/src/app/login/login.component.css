@@ -22,20 +22,30 @@ h1 {
 
 .subtitle {
   grid-area: header;
-  
+  display: flex;
+  align-self: flex-end;
 }
 
 #enterUsername {
   grid-area: input;
-  width: 100%;
-  border: none;
+  width: 90%;
+  border-bottom: rgba(255, 255, 255, 0.3) solid 2px;
+  background-color: rgba(0, 0, 0, 0);
+  transition: border .3s;
+}
+#enterUsername:focus {
+  border-bottom: rgba(255, 255, 255, 0.9)solid 2px;
+  outline: none;
+}
+#enterUsername:focus::placeholder {
+  transform: translateY(-15px);
 }
 
 #usernameButton {
   grid-area: button;
 
   height: 100%;
-  width: 100%;
+  width: 90%;
 
   margin: 0;
   padding: 0;
@@ -43,8 +53,14 @@ h1 {
   font-size: 14px;
   text-align: center;
   transition: all .2s;
+
+  border-radius: 10px;
+  border: rgba(255, 255, 255, 0.7) solid 1px;
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(0, 0, 0, 0);
 }
 #usernameButton:hover {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 1);
+  color: rgba(0, 0, 0, 1);
   text-decoration: none;
 }

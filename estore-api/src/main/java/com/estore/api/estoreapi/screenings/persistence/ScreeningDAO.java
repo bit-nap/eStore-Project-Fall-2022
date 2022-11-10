@@ -75,4 +75,12 @@ public interface ScreeningDAO {
 	 * @throws IOException if an issue with underlying storage
 	 */
 	Screening[] findScreeningsForMovie (int movieId) throws IOException;
+
+	/** 
+	 * Finds all {@linkplain Screening screenings} whose movie id matches the given id.
+	 *
+	 * @param screening The screening
+	 * @return An 2d array of {@link bolean seats} that are the seats and the availability of the screening. false if the seat is empty
+	*/
+	boolean[][] findScreeningSeats(Screening screening);
 }

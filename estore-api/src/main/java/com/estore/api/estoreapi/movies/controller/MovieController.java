@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping("movies")
 public class MovieController {
-	/** TODO: Add description of the purpose of Logger, once it's actually used. */
+	// Logger will be used to log when a call is made from the controller to the terminal for maven
 	private static final Logger LOG = Logger.getLogger(MovieController.class.getName());
 
 	/** The MovieDAO object this Controller interacts with to get Movie objects. */

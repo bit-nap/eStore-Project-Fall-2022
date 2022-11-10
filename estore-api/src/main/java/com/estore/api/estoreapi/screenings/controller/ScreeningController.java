@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping("screenings")
 public class ScreeningController {
-	/** TODO: Add description of the purpose of Logger, once it's actually used. */
+	// Logger will be used to log when a call is made from the controller to the terminal for maven
 	private static final Logger LOG = Logger.getLogger(ScreeningController.class.getName());
 
 	/** The ScreeningDAO object this Controller interacts with to get Screening objects. */

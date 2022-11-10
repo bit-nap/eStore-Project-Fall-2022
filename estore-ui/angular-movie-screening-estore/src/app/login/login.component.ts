@@ -18,6 +18,9 @@ const httpOptions = {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+/**
+ * Class to allow the user or admin to log in on the homepage. This will grant certain permissions
+ */
 export class LoginComponent implements OnInit {
   account: Accounts = {
     id: -1,
@@ -54,14 +57,9 @@ export class LoginComponent implements OnInit {
   signIn(username: String): void {
     this.resetUsernameMessages();
 
-    this.http.get<Accounts>('http://127.0.0.1:8080/accounts/'+ username).subscribe((data: Accounts) => {
-      if (data != null && username !== "admin") {
-        this.loggedInAccount.setUsername(username);
+    this.http.get<Accounts>('http://127.0.0.1:8080/accounts/'+username).subscribe((data: Accounts) => {
+      this.loggedInAccount.setUsername(username);
         this.router.navigate(['']);
-      } else if (username === "admin") {
-        this.loggedInAccount.setUsername(username);
-        this.router.navigate(['admin']);
-      }
     }, (response) => {
       document.getElementById("signinUsernameMessage")!.innerHTML = "Username does not exist.";
     });
@@ -74,16 +72,17 @@ export class LoginComponent implements OnInit {
   deleteUsername(username: string): void {
     this.resetUsernameMessages();
 
-    this.http.get<Accounts>('http://127.0.0.1:8080/accounts/' + username).subscribe((data: Accounts) => {
-      if (data.username === username) {
-        this.http.delete<Accounts>('http://127.0.0.1:8080/accounts/'+ data.username).subscribe((data: Accounts) => { })
-        document.getElementById("deleteUsernameMessage")!.innerHTML = "Account has been deleted.";
-      }
+    this.http.delete<Accounts>('http://127.0.0.1:8080/accounts/' + username).subscribe((data: Accounts) => {
+      document.getElementById("deleteUsernameMessage")!.innerHTML = "Account has been deleted.";
     }, (response) => {
       document.getElementById("deleteUsernameMessage")!.innerHTML = "Account does not exist.";
     });
   }
 
+  /**
+   * Method that will reset the paragraphs that show messages for the create username, sign in, and delete
+   * username methodss
+   */
   resetUsernameMessages(): void {
     document.getElementById("newUsernameMessage")!.innerHTML = "";
     document.getElementById("signinUsernameMessage")!.innerHTML = "";

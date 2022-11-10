@@ -3,6 +3,7 @@
 
 /* Application-wide Styles */
 * {
+  box-sizing: border-box;
   font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
   font-weight: normal;
   color: #fafafa;
@@ -10,20 +11,26 @@
 }
 
 h1 {
-  color: #AE3442;
+  color: #DF2C14;
   font-family: 'Righteous', cursive;
   font-weight: bold;
   font-size: 200%;
 }
 
 header {
-  backdrop-filter: blur(6px);
-  background-color: rgba(20, 20, 20, 0.5);
-  height: 75px;
-  padding: 0 75px 0 75px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  height: 75px;
+  top: 0;
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+
+  backdrop-filter: blur(10px);
+  background-color: rgba(200, 200, 200, 0.1);
+  padding: 0 0 0 0;
 }
 
 header button {
@@ -43,8 +50,15 @@ header button:hover {
 
 body {
   height: 100%;
-  background-image: linear-gradient(to right top, #330872, #1e135e, #111547, #0e122f, #0b0c17);
+  width: 100vw;
+  overflow-x: hidden;
+  background:
+    linear-gradient(#0b0c17, transparent),
+    linear-gradient(to top left, #330872, transparent),
+    linear-gradient(to top right, #0C0E1E, transparent);
+  background-blend-mode: screen;
   box-shadow: 0px -75px 50px -28px #0C0E1E inset;
+  padding-top: 75px;
 }
 
 body, input[type="text"], button {

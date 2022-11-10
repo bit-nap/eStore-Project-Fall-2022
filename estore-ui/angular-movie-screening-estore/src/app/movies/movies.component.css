@@ -27,6 +27,9 @@
   border-color: rgba(255, 255, 255, 1);
   outline: none;
 }
+#search-bar-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
 #search-bar-input:focus::placeholder {
   color: rgba(255, 255, 255, 0);
 }
@@ -150,7 +153,6 @@
   background-repeat: no-repeat;
   background-size: cover;
   
-  margin-top: -75px;
   width: 100%;
   height: 500px;
   overflow: hidden;

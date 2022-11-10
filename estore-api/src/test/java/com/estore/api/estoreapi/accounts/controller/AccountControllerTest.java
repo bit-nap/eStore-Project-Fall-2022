@@ -32,10 +32,10 @@ public class AccountControllerTest {
 		// Arrange
 		Account account = new Account(99, "Adrian", "password0");
 		// When the same id is passed in, our mock Account DAO will return the Account object
-		when(mockAccountDAO.getAccount(account.getId())).thenReturn(account);
+		when(mockAccountDAO.getAccount(account.getUsername())).thenReturn(account);
 
 		// Invoke
-		ResponseEntity<Account> response = accountController.getAccount(account.getId());
+		ResponseEntity<Account> response = accountController.getAccount(account.getUsername());
 
 		// Analyze
 		assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -45,13 +45,13 @@ public class AccountControllerTest {
 	@Test
 	public void testGetAccountNotFound () throws Exception { // createAccount may throw IOException
 		// Arrange
-		int accountId = 99;
+		String username = "test";
 		// When the same id is passed in, our mock Account DAO will return null, simulating
 		// no account found
-		when(mockAccountDAO.getAccount(accountId)).thenReturn(null);
+		when(mockAccountDAO.getAccount(username)).thenReturn(null);
 
 		// Invoke
-		ResponseEntity<Account> response = accountController.getAccount(accountId);
+		ResponseEntity<Account> response = accountController.getAccount(username);
 
 		// Analyze
 		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
@@ -60,12 +60,12 @@ public class AccountControllerTest {
 	@Test
 	public void testGetAccountHandleException () throws Exception { // createAccount may throw IOException
 		// Arrange
-		int accountId = 99;
+		String username = "test";
 		// When getAccount is called on the Mock Account DAO, throw an IOException
-		doThrow(new IOException()).when(mockAccountDAO).getAccount(accountId);
+		doThrow(new IOException()).when(mockAccountDAO).getAccount(username);
 
 		// Invoke
-		ResponseEntity<Account> response = accountController.getAccount(accountId);
+		ResponseEntity<Account> response = accountController.getAccount(username);
 
 		// Analyze
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
@@ -197,12 +197,12 @@ public class AccountControllerTest {
 	@Test
 	public void testDeleteAccount () throws IOException { // deleteAccount may throw IOException
 		// Arrange
-		int accountId = 99;
+		String username = "test";
 		// when deleteAccount is called return true, simulating successful deletion
-		when(mockAccountDAO.deleteAccount(accountId)).thenReturn(true);
+		when(mockAccountDAO.deleteAccount(username)).thenReturn(true);
 
 		// Invoke
-		ResponseEntity<Account> response = accountController.deleteAccount(accountId);
+		ResponseEntity<Account> response = accountController.deleteAccount(username);
 
 		// Analyze
 		assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -211,12 +211,12 @@ public class AccountControllerTest {
 	@Test
 	public void testDeleteAccountNotFound () throws IOException { // deleteAccount may throw IOException
 		// Arrange
-		int accountId = 99;
+		String username = "test";
 		// when deleteAccount is called return false, simulating failed deletion
-		when(mockAccountDAO.deleteAccount(accountId)).thenReturn(false);
+		when(mockAccountDAO.deleteAccount(username)).thenReturn(false);
 
 		// Invoke
-		ResponseEntity<Account> response = accountController.deleteAccount(accountId);
+		ResponseEntity<Account> response = accountController.deleteAccount(username);
 
 		// Analyze
 		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
@@ -225,12 +225,12 @@ public class AccountControllerTest {
 	@Test
 	public void testDeleteAccountHandleException () throws IOException { // deleteAccount may throw IOException
 		// Arrange
-		int accountId = 99;
+		String username = "test";
 		// When deleteAccount is called on the Mock Account DAO, throw an IOException
-		doThrow(new IOException()).when(mockAccountDAO).deleteAccount(accountId);
+		doThrow(new IOException()).when(mockAccountDAO).deleteAccount(username);
 
 		// Invoke
-		ResponseEntity<Account> response = accountController.deleteAccount(accountId);
+		ResponseEntity<Account> response = accountController.deleteAccount(username);
 
 		// Analyze
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());

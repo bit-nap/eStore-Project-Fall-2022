@@ -1,0 +1,17 @@
+[
+	{
+		"id": 1,
+		"movieTitle": "Spider-Man",
+		"votes": 1
+	},
+	{
+		"id": 2,
+		"movieTitle": "Spider-Man 2",
+		"votes": 12
+	},
+	{
+		"id": 3,
+		"movieTitle": "Spider-Man 3",
+		"votes": 69
+	}
+]

@@ -82,18 +82,18 @@ public class AccountController {
 	}
 
 	/**
-	 * Deletes a {@linkplain Account account} with the given id.
+	 * Deletes a {@linkplain Account account} with the given username.
 	 *
-	 * @param id The id of the {@link Account account} to be deleted
+	 * @param username The username of the {@link Account account} to be deleted
 	 * @return ResponseEntity HTTP status of OK if deleted<br>
 	 * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Account> deleteAccount (@PathVariable int id) {
-		LOG.info("DELETE /accounts/" + id);
+	@DeleteMapping("/{username}")
+	public ResponseEntity<Account> deleteAccount (@PathVariable String username) {
+		LOG.info("DELETE /accounts/" + username);
 		try {
-			if (accountDao.deleteAccount(id)) {
+			if (accountDao.deleteAccount(username)) {
 				return new ResponseEntity<>(HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -105,19 +105,19 @@ public class AccountController {
 	}
 
 	/**
-	 * Responds to the GET request for a {@linkplain Account account} with the given id.
+	 * Responds to the GET request for a {@linkplain Account account} with the given username.
 	 *
-	 * @param id the id used to locate a {@link Account account}
+	 * @param username the username used to locate a {@link Account account}
 	 * @return ResponseEntity with {@link Account account} object and HTTP status of OK if found<br>
 	 * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
 	 * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
 	 */
-	@GetMapping("/{id}")
-	public ResponseEntity<Account> getAccount (@PathVariable int id) {
-		LOG.info("GET /accounts/" + id);
+	@GetMapping("/{username}")
+	public ResponseEntity<Account> getAccount (@PathVariable String username) {
+		LOG.info("GET /accounts/" + username);
 		try {
 			// Try to get the account based on the id entered by the user
-			Account account = accountDao.getAccount(id);
+			Account account = accountDao.getAccount(username);
 			if (account != null) {
 				return new ResponseEntity<>(account, HttpStatus.OK);
 			} else {

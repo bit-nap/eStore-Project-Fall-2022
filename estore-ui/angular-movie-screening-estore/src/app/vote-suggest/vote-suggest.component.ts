@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Vote } from '../vote';
+import { Suggest } from '../suggest';
 
 @Component({
   selector: 'app-vote-suggest',
@@ -10,9 +10,9 @@ import { Vote } from '../vote';
 /**
  * Class for the user to vote and suggest a new movie
  */
-export class VoteSuggestComponent implements OnInit {
-  votes: Vote[] = [];
-  newVote: Vote = {
+export class SuggestComponent implements OnInit {
+  suggests: Suggest[] = [];
+  newSuggest: Suggest = {
     id: 0,
     movieName: '',
     howManyVotes: 0
@@ -23,8 +23,8 @@ export class VoteSuggestComponent implements OnInit {
 
   ngOnInit(): void {
     document.getElementById("hasUserVoted")!.innerHTML = "";
-    this.http.get<[Vote]>('http://127.0.0.1:8080/votes/').subscribe((data: [Vote]) => {
-      this.votes = data;
+    this.http.get<[Suggest]>('http://127.0.0.1:8080/suggestion/').subscribe((data: [Suggest]) => {
+      this.suggests = data;
     });
   }
 
@@ -32,9 +32,9 @@ export class VoteSuggestComponent implements OnInit {
    * Method for the user to add a vote to a vote object
    * @param vote the vote object that will have a vote added
    */
-  addVote(vote: Vote): void {
-    this.http.put<Vote>('http://127.0.0.1:8080/votes/', {id: vote.id, movieName: vote.movieName, howManyVotes: (vote.howManyVotes+1)}).subscribe((data: Vote) => {
-      this.newVote = data;
+  addSuggest(vote: Suggest): void {
+    this.http.put<Suggest>('http://127.0.0.1:8080/suggestion/', {id: vote.id, movieName: vote.movieName, howManyVotes: (vote.howManyVotes+1)}).subscribe((data: Suggest) => {
+      this.newSuggest = data;
     });
 
     document.getElementById("hasUserVoted")!.innerHTML = "Thank you for voting!";
@@ -44,9 +44,9 @@ export class VoteSuggestComponent implements OnInit {
    * Method to all a user to enter a new vote object if it has not already been added
    * @param name the name that will a vote will be made from
    */
-  enterVote(name: String): void {
-    this.http.post<Vote>('http://127.0.0.1:8080/votes/', {id: 1, movieName: name, howManyVotes: 1}).subscribe((data: Vote) => {
-      this.newVote = data;
+  enterSuggest(name: String): void {
+    this.http.post<Suggest>('http://127.0.0.1:8080/suggestion/', {id: 1, movieName: name, howManyVotes: 1}).subscribe((data: Suggest) => {
+      this.newSuggest = data;
       document.getElementById("hasUserSuggested")!.innerHTML = "Thank you for the suggestion!";
     }, (response) => {
       document.getElementById("hasUserSuggested")!.innerHTML = "Movie has already been suggested.";

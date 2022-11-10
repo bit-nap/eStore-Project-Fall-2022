@@ -1,16 +1,16 @@
 <div>
   <h2>Please Vote on a Movie</h2>
-  <button type="Button" *ngFor="let vote of votes" id="change-vote" (click)="addVote(vote)">
-    <h3>Id: {{vote.id}}</h3>
-    <span>Movie Name: {{vote.movieName}}</span>
-    <span>Number of Votes: {{vote.howManyVotes}}</span>
+  <button type="Button" *ngFor="let suggest of suggests" id="change-vote" (click)="addSuggest(suggest)">
+    <h3>Id: {{suggest.id}}</h3>
+    <span>Movie Name: {{suggest.movieName}}</span>
+    <span>Number of Votes: {{suggest.howManyVotes}}</span>
   </button>
   <p id="hasUserVoted"></p>
 
   <div>
     <h2>Suggest a new movie to be voted on</h2>
     <input #inputMovieName id="voting" placeholder="Enter a movie name">
-    <button type="button" id="enter-voting" (click)="enterVote(inputMovieName.value)">Enter Suggestion</button>
+    <button type="button" id="enter-voting" (click)="enterSuggest(inputMovieName.value)">Enter Suggestion</button>
     <p id="hasUserSuggested"></p>
   </div>
 </div>

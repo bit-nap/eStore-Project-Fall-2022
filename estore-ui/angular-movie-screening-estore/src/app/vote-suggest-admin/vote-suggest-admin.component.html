@@ -6,15 +6,15 @@
     <p id="adminAddVote"></p>
   </div>
 
-  <button type="Button" *ngFor="let vote of votes" id="change-vote" (click)="changeVote(vote)">
-    <h3>Id: {{vote.id}}</h3>
-    <span>Movie Name: {{vote.movieName}}</span>
-    <span>Number of Votes: {{vote.howManyVotes}}</span>
+  <button type="Button" *ngFor="let suggest of suggests" id="change-vote" (click)="changeSuggest(suggest)">
+    <h3>Id: {{suggest.id}}</h3>
+    <span>Movie Name: {{suggest.movieName}}</span>
+    <span>Number of Votes: {{suggest.howManyVotes}}</span>
   </button>
 
-  <div *ngIf="voteSelected">
-    <h2>Change Vote for: {{voteSelectedToChange.movieName}}</h2>
+  <div *ngIf="suggestSelected">
+    <h2>Change Vote for: {{suggestSelectedToChange.movieName}}</h2>
     <input #updateName id="votes" placeholder="Enter new movie name" />
-    <button type="button" id="enter-new-movie" (click)="changeVoteSubmit(updateName.value)">Change Vote</button>
+    <button type="button" id="enter-new-movie" (click)="changeSuggestSubmit(updateName.value)">Change Vote</button>
   </div>
 </div>

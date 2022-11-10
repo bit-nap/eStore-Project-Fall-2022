@@ -7,7 +7,7 @@
 <div id="carousel"></div>
 
 <div class="search-bar-container">
-  <input #nameSearch id="search-bar-input" placeholder="Search movies" (input)="searchMoviesByName(nameSearch.value)" />
+  <input #nameSearch id="search-bar-input" placeholder="Search movies.." (input)="searchMoviesByName(nameSearch.value)" />
 </div>
 <div class="movies">
   <button type="button" *ngFor="let movie of movies" class="movie_card" (click)="onSelect(movie)">

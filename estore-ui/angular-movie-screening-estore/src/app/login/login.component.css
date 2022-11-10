@@ -4,23 +4,47 @@ h1 {
 }
 
 .container {
+  height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 50px 50px;
+  grid-template-areas: 
+  'header header header'
+  'input input button';
+  width: 50%;
+}
+
+.subtitle {
+  grid-area: header;
+  
+}
+
 #enterUsername {
-  width: 150px;
-  height: 31px;
-  position: relative;
+  grid-area: input;
+  width: 100%;
+  border: none;
 }
 
 #usernameButton {
-  width: 150px;
-  height: 21px;
-  font-size: 12px;
+  grid-area: button;
+
+  height: 100%;
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  font-size: 14px;
   text-align: center;
-  position: relative;
-  top: 6px;
+  transition: all .2s;
+}
+#usernameButton:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
 }

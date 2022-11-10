@@ -4,27 +4,55 @@
 		"movieId": 23,
 		"ticketsRemaining": 4,
 		"date": "2023-01-24",
-		"time": "16:00"
+		"time": "16:00",
+		"seats": [
+			[false, true, true, true],
+			[false, true, true, true],
+			[false, true, true, true],
+			[false, true, true, true],
+			[true, true, true, true]
+		 ]
 	},
 	{
 		"id": 102,
 		"movieId": 20,
 		"ticketsRemaining": 4,
 		"date": "2023-01-24",
-		"time": "18:00"
+		"time": "18:00",
+		"seats": [
+			[false, false, false, false],
+			[true, true, true, true],
+			[true, true, true, true],
+			[true, true, true, true],
+			[true, true, true, true]
+		 ]
 	},
 	{
 		"id": 103,
 		"movieId": 9,
 		"ticketsRemaining": 4,
 		"date": "2023-01-24",
-		"time": "20:00"
+		"time": "20:00",
+		"seats": [
+			[false, true, true, false],
+			[true, true, true, false],
+			[true, true, true, true],
+			[false, true, true, true],
+			[true, true, true, true]
+		 ]
 	},
 	{
 		"id": 104,
 		"movieId": 1,
 		"ticketsRemaining": 4,
 		"date": "2023-01-24",
-		"time": "22:00"
+		"time": "22:00",
+		"seats": [
+			[false, true, true, false],
+			[true, true, true, false],
+			[true, true, true, true],
+			[false, true, true, true],
+			[true, true, true, true]
+		 ]
 	}
 ]

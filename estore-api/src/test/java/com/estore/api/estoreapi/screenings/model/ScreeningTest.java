@@ -43,9 +43,11 @@ public class ScreeningTest {
 		int tickets = 10;
 		String date = "01/17/2023";
 		String time = "18:00";
+		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
+				{ true, true, true, true, true }, { true, true, true, true, true } };
 
 		// Invoke
-		Screening screening = new Screening(id, movieId, tickets, date, time, mockMovieGetter);
+		Screening screening = new Screening(id, movieId, tickets, date, time, seats, mockMovieGetter);
 
 		// Analyze
 		assertEquals(id, screening.getId());
@@ -64,7 +66,9 @@ public class ScreeningTest {
 		int tickets = 10;
 		String date = "01/17/2023";
 		String time = "18:00";
-		Screening screening = new Screening(id, movieId, tickets, date, time, mockMovieGetter);
+		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
+				{ true, true, true, true, true }, { true, true, true, true, true } };
+		Screening screening = new Screening(id, movieId, tickets, date, time, seats, mockMovieGetter);
 
 		// Invoke
 		int newMovieId = 105;
@@ -79,20 +83,23 @@ public class ScreeningTest {
 
 	@Test
 	public void testMovieIdIs () {
-		Screening screening = new Screening(99, 104, 10, "01/17/2023", "18:00", mockMovieGetter);
+		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
+				{ true, true, true, true, true }, { true, true, true, true, true } };
+		Screening screening = new Screening(99, 104, 10, "01/17/2023", "18:00", seats, mockMovieGetter);
 		assertTrue(screening.movieIdIs(104));
 		assertFalse(screening.movieIdIs(99));
 	}
 
 	@Test
 	public void testCompareTo () {
-		Screening o1 = new Screening(101, 104, 6, "01/16/2023", "16:00", mockMovieGetter);
-		Screening o2 = new Screening(103, 104, 8, "01/17/2023", "16:00", mockMovieGetter);
-		Screening o3 = new Screening(101, 104, 6, "01/17/2023", "18:00", mockMovieGetter);
-		Screening o4 = new Screening(102, 104, 0, "01/17/2023", "20:00", mockMovieGetter);
-		Screening o5 = new Screening(102, 104, 0, "01/18/2023", "16:00", mockMovieGetter);
-		Screening o6 = new Screening(103, 104, 8, "01/20/2023", "16:00", mockMovieGetter);
-		Screening o7 = new Screening(103, 104, 8, "01/20/2023", "16:00", mockMovieGetter);
+		boolean[][] seats = { { false, false, false, false}, { false, false, false, false } };
+		Screening o1 = new Screening(101, 104, 6, "01/16/2023", "16:00", seats, mockMovieGetter);
+		Screening o2 = new Screening(103, 104, 8, "01/17/2023", "16:00", seats, mockMovieGetter);
+		Screening o3 = new Screening(101, 104, 6, "01/17/2023", "18:00", seats, mockMovieGetter);
+		Screening o4 = new Screening(102, 104, 0, "01/17/2023", "20:00", seats, mockMovieGetter);
+		Screening o5 = new Screening(102, 104, 0, "01/18/2023", "16:00", seats, mockMovieGetter);
+		Screening o6 = new Screening(103, 104, 8, "01/20/2023", "16:00", seats, mockMovieGetter);
+		Screening o7 = new Screening(103, 104, 8, "01/20/2023", "16:00", seats, mockMovieGetter);
 		List<Screening> sortedList = new ArrayList<>();  // arraylist with manually sorted Screenings
 		sortedList.add(o1);
 		sortedList.add(o2);
@@ -123,7 +130,8 @@ public class ScreeningTest {
 		int tickets = 10;
 		String date = "01/17/2023";
 		String time = "18:00";
-		Screening screening = new Screening(id, movieId, tickets, date, time, mockMovieGetter);
+		boolean[][] seats = { { false, false, false, false}, { false, false, false, false } };
+		Screening screening = new Screening(id, movieId, tickets, date, time, seats, mockMovieGetter);
 		String expected_string = String.format(Screening.STRING_FORMAT, id, movieId, tickets, date, time);
 
 		// Invoke

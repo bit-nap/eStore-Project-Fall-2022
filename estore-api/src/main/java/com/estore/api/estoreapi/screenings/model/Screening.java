@@ -30,6 +30,8 @@ public class Screening implements Comparable<Screening> {
 	@JsonProperty("date") private String date;
 	/** The time of this screening. */
 	@JsonProperty("time") private String time;
+	/** The seats and their availability for the screening. false if the seat is empty*/
+	@JsonProperty("seats") private boolean[][] seats;
 
 	/** The MovieGetter object used to set this object's movie field. */
 	@JsonIgnore MovieGetter movieGetter;
@@ -54,12 +56,13 @@ public class Screening implements Comparable<Screening> {
 	@JsonCreator
 	public Screening (@JsonProperty("id") int id, @JsonProperty("movieId") int movieId,
 	                  @JsonProperty("ticketsRemaining") int ticketsRemaining, @JsonProperty("date") String date,
-	                  @JsonProperty("time") String time) {
+	                  @JsonProperty("time") String time, @JsonProperty("seats") boolean[][] seats) {
 		this.id = id;
 		this.movieId = movieId;
 		this.ticketsRemaining = ticketsRemaining;
 		this.date = date;
 		this.time = time;
+		this.seats = seats;
 	}
 
 	/**
@@ -79,8 +82,8 @@ public class Screening implements Comparable<Screening> {
 	 */
 	public Screening (@JsonProperty("id") int id, @JsonProperty("movieId") int movieId,
 	                  @JsonProperty("ticketsRemaining") int ticketsRemaining, @JsonProperty("date") String date,
-	                  @JsonProperty("time") String time, MovieGetter movieGetter) {
-		this(id, movieId, ticketsRemaining, date, time);
+	                  @JsonProperty("time") String time, @JsonProperty("seats") boolean[][] seats, MovieGetter movieGetter) {
+		this(id, movieId, ticketsRemaining, date, time, seats);
 		setMovieGetter(movieGetter);
 	}
 
@@ -167,6 +170,13 @@ public class Screening implements Comparable<Screening> {
 		return movie;
 	}
 
+	/** 
+	 * @return The seats and their availability for this screening, false for empty seats
+	*/
+	public boolean[][] getSeats() {
+		return seats;
+	}
+
 	/**
 	 * Compare the given Screening object to this Screening object, by comparing their date and time fields.
 	 *
@@ -208,6 +218,6 @@ public class Screening implements Comparable<Screening> {
 	 */
 	@Override
 	public String toString () {
-		return String.format(STRING_FORMAT, id, movieId, ticketsRemaining, date, time);
+		return String.format(STRING_FORMAT, id, movieId, ticketsRemaining, date, time, seats);
 	}
 }

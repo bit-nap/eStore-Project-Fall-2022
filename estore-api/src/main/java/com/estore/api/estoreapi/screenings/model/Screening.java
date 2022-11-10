@@ -218,6 +218,6 @@ public class Screening implements Comparable<Screening> {
 	 */
 	@Override
 	public String toString () {
-		return String.format(STRING_FORMAT, id, movieId, ticketsRemaining, date, time,seats);
+		return String.format(STRING_FORMAT, id, movieId, ticketsRemaining, date, time, seats);
 	}
 }

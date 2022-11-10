@@ -15,7 +15,7 @@ import { ScreeningSelectorService } from "../screening-selector.service";
 export class TicketsComponent implements OnInit {
   /** The number of tickets selected. */
   @Input() numOfTickets: number = 0;
-  
+
   /* URL for the orders */
   private orderUrl: string;
 
@@ -23,7 +23,7 @@ export class TicketsComponent implements OnInit {
   bsmall_value = 0
   bmedium_value = 0
   blarge_value = 0
-  
+
   /** Small, medium and large values for popcorn */
   psmall_value = 0
   pmedium_value = 0
@@ -31,7 +31,7 @@ export class TicketsComponent implements OnInit {
 
   /**
    * Contains the URL for the orders (orderURL)
-   * 
+   *
    * @param router Router that redirects to other pages
    * @param movieSelector Gets the information from current movie
    * @param http HttpClient Gets the link for the orders
@@ -63,9 +63,9 @@ export class TicketsComponent implements OnInit {
 
   /**
    * Method called when the user presses the `complete purchase` button.
-   * 
+   *
    * >Saves the order in the JSON
-   * 
+   *
    * >Redirects to `thank` page
    */
   completePurchase(): void {
@@ -76,14 +76,14 @@ export class TicketsComponent implements OnInit {
 
   /**
    * Creates an order
-   * 
+   *
    * @param order The order object
    * @returns the order using `orderURL` along with `POST` and the information contained in the object `order`
    */
   public saveOrder(order: Order) {
     return this.http.post<Order>(this.orderUrl, order).subscribe()
   }
-  
+
   /**
    * Functions to add or substract number of drinks
    */

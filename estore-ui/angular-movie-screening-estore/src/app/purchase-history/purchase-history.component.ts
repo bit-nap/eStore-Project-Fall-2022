@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // Class interfaces
-import { Order } from '../Order';
+import { Order } from '../order';
 import { Accounts } from '../Accounts';
 // Service for logged in user
 import { LoggedInAccountService } from '../logged-in-account.service';

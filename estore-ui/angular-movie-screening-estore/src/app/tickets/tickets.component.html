@@ -7,6 +7,14 @@
       <img id="movieImg" src="{{getMoviePoster()}}"  alt="Movie poster for {{getMovieTitle()}}"/>
     </div>
     <input id="ticket-input" [(ngModel)]="numOfTickets">
+    <button id="snak-button" (click)="isModalOpen = !isModalOpen">Buy Snacks</button>
+    <button id="completePurchase" (click)="completePurchase()">Complete purchase</button>
+  </div>
+  
+</div>
+
+<div class="modal-container" [ngStyle]="{'display': isModalOpen ? 'block' : 'none'}">
+  <div class="modal">
     <span class="list">
       <!-- <h2>Choose a Beverage</h2> -->
       <span>
@@ -61,6 +69,5 @@
             </div>
         </span>
       </span>
-    <button id="completePurchase" (click)="completePurchase()">Complete purchase</button>
   </div>
 </div>

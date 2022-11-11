@@ -47,11 +47,12 @@ p {
   grid-template-areas:
     'header header header header header'
     'poster poster snacks snacks snacks'
+    'poster poster ticket ticket ticket'
     'poster poster button button button';
 }
 
 #ticket-input {
-  grid-area: button;
+  grid-area: ticket;
   height: auto;
   width: 200px;
   border-bottom: rgba(255, 255, 255, 0.3) solid 2px;
@@ -64,6 +65,10 @@ p {
   color: #FFDD4A;
   font-size: 30px;
   font-weight: bold;
+}
+
+#snack-button {
+  grid-area: button;
 }
 
 #completePurchase {

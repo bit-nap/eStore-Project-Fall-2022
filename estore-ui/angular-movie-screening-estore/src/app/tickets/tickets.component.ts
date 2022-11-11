@@ -29,6 +29,8 @@ export class TicketsComponent implements OnInit {
   pmedium_value = 0
   plarge_value = 0
 
+  isModalOpen:boolean = false
+
   /**
    * Contains the URL for the orders (orderURL)
    * 

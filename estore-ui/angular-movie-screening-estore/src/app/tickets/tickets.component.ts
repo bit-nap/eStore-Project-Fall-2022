@@ -66,14 +66,20 @@ export class TicketsComponent implements OnInit {
   /**
    * Method called when the user presses the `complete purchase` button.
    * 
-   * >Saves the order in the JSON
-   * 
-   * >Redirects to `thank` page
+   * ? Is the number of tickets higher than 0?
+   * *  Saves the order in the JSON
+   * *  Redirects to `thank` page
+   * ? If not?
+   * *  Shows error message
    */
   completePurchase(): void {
     // save ticket information as Order class in Java or something
-    this.saveOrder({id: 1, screeningId: this.screeningSelector.getScreeningId(), accountId: 3, tickets: this.numOfTickets, popcorn: [this.psmall_value, this.pmedium_value, this.plarge_value], soda: [this.bsmall_value, this.bmedium_value, this.blarge_value]})
-    this.router.navigate(['thank'])
+    if (this.numOfTickets > 0) {
+      this.saveOrder({id: 1, screeningId: this.screeningSelector.getScreeningId(), accountId: 3, tickets: this.numOfTickets, popcorn: [this.psmall_value, this.pmedium_value, this.plarge_value], soda: [this.bsmall_value, this.bmedium_value, this.blarge_value]})
+      this.router.navigate(['thank'])
+    } else {
+      document.getElementById('error-message')!.innerText ="There's no ticket selected"
+    }
   }
 
   /**
@@ -86,6 +92,10 @@ export class TicketsComponent implements OnInit {
     return this.http.post<Order>(this.orderUrl, order).subscribe()
   }
   
+  clearMessage(): void {
+    
+  }
+
   /**
    * Functions to add or substract number of drinks
    */
@@ -140,6 +150,15 @@ export class TicketsComponent implements OnInit {
     if (this.plarge_value > 0) {
       this.plarge_value--;
     }
+  }
+
+  cancelOrder() : void {
+    this.psmall_value = 0;
+    this.pmedium_value = 0;
+    this.plarge_value = 0;
+    this.bsmall_value = 0;
+    this.bmedium_value = 0;
+    this.blarge_value = 0;
   }
 
 }

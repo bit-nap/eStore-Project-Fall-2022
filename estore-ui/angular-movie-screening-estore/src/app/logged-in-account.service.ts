@@ -26,6 +26,14 @@ export class LoggedInAccountService {
   }
 
   /**
+   * Get the account of the user logged in.
+   * @returns an Account object
+   */
+  getAccount(): Accounts {
+    return <Accounts> this.account;
+  }
+
+  /**
    * Get the username of the currently logged-in user.
    */
   getUsername(): String {
@@ -54,6 +62,9 @@ export class LoggedInAccountService {
     return this.account.username === 'admin';
   }
 
+  /**
+   * Logs user out of website. Tracked Account gets reset to "default"
+   */
   logout(): void {
     this.account.id = -1;
     this.account.username = "";

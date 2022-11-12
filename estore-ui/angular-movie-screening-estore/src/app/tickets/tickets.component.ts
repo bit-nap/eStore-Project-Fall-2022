@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { Order } from "../order";
 import { ScreeningSelectorService } from "../screening-selector.service";
+import { LoggedInAccountService } from "../logged-in-account.service";
 
 @Component({
   selector: 'app-tickets',
@@ -15,7 +16,7 @@ import { ScreeningSelectorService } from "../screening-selector.service";
 export class TicketsComponent implements OnInit {
   /** The number of tickets selected. */
   @Input() numOfTickets: number = 0;
-  
+
   /* URL for the orders */
   private orderUrl: string;
 
@@ -23,7 +24,7 @@ export class TicketsComponent implements OnInit {
   bsmall_value = 0
   bmedium_value = 0
   blarge_value = 0
-  
+
   /** Small, medium and large values for popcorn */
   psmall_value = 0
   pmedium_value = 0
@@ -33,13 +34,13 @@ export class TicketsComponent implements OnInit {
 
   /**
    * Contains the URL for the orders (orderURL)
-   * 
+   *
    * @param router Router that redirects to other pages
    * @param movieSelector Gets the information from current movie
    * @param http HttpClient Gets the link for the orders
    * @param screeningSelector ScreeningSelectorService Gets the information from current screening
    */
-  constructor(private router: Router, private movieSelector: MovieSelectorService, private http: HttpClient, private screeningSelector: ScreeningSelectorService) {
+  constructor(private router: Router, private movieSelector: MovieSelectorService, private http: HttpClient, private screeningSelector: ScreeningSelectorService, private login: LoggedInAccountService) {
     this.orderUrl = 'http://localhost:8080/orders'
   }
 
@@ -65,7 +66,7 @@ export class TicketsComponent implements OnInit {
 
   /**
    * Method called when the user presses the `complete purchase` button.
-   * 
+   *
    * ? Is the number of tickets higher than 0?
    * *  Saves the order in the JSON
    * *  Redirects to `thank` page
@@ -75,7 +76,7 @@ export class TicketsComponent implements OnInit {
   completePurchase(): void {
     // save ticket information as Order class in Java or something
     if (this.numOfTickets > 0) {
-      this.saveOrder({id: 1, screeningId: this.screeningSelector.getScreeningId(), accountId: 3, tickets: this.numOfTickets, popcorn: [this.psmall_value, this.pmedium_value, this.plarge_value], soda: [this.bsmall_value, this.bmedium_value, this.blarge_value]})
+      this.saveOrder({id: 1, screeningId: this.screeningSelector.getScreeningId(), accountId: this.login.getId(), tickets: this.numOfTickets, popcorn: [this.psmall_value, this.pmedium_value, this.plarge_value], soda: [this.bsmall_value, this.bmedium_value, this.blarge_value]})
       this.router.navigate(['thank'])
     } else {
       document.getElementById('error-message')!.innerText ="There's no ticket selected"
@@ -84,16 +85,16 @@ export class TicketsComponent implements OnInit {
 
   /**
    * Creates an order
-   * 
+   *
    * @param order The order object
    * @returns the order using `orderURL` along with `POST` and the information contained in the object `order`
    */
   public saveOrder(order: Order) {
     return this.http.post<Order>(this.orderUrl, order).subscribe()
   }
-  
+
   clearMessage(): void {
-    
+
   }
 
   /**

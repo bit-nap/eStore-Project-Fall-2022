@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
  */
 export class LoggedInAccountService {
   username?: String;
+  id?: number;
 
   constructor() { }
 
@@ -24,6 +25,22 @@ export class LoggedInAccountService {
    */
   getUsername(): String {
     return <String> this.username;
+  }
+
+  /**
+   * Set the id of the user logged-in
+   * @param userId id of user
+   */
+  setId(userId: number): void {
+    this.id = userId;
+  }
+
+  /**
+   * Get the id of the currently logged-in user.
+   * @returns the user's id
+   */
+  getId(): number {
+    return <number> this.id;
   }
 
   /**

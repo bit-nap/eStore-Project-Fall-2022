@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Accounts } from './Accounts';
 
 @Injectable({
   providedIn: 'root'
@@ -7,32 +8,28 @@ import { Injectable } from '@angular/core';
  * Service to keep track of the current user logged in.
  */
 export class LoggedInAccountService {
-  username?: String;
-  id?: number;
+  // Account of user logged in
+  account: Accounts = {
+    id: -1,
+    username: "",
+    password: ""
+  };
 
   constructor() { }
 
   /**
-   * Set the username of the user logged-in.
-   * @param username Username of the user
+   * Set the account of the user logged in. Called as soon as user logs in.
+   * @param account Account object passed in
    */
-  setUsername(username: String): void {
-    this.username = username;
+  setAccount(account: Accounts): void {
+    this.account = account;
   }
 
   /**
    * Get the username of the currently logged-in user.
    */
   getUsername(): String {
-    return <String> this.username;
-  }
-
-  /**
-   * Set the id of the user logged-in
-   * @param userId id of user
-   */
-  setId(userId: number): void {
-    this.id = userId;
+    return <String> this.account.username;
   }
 
   /**
@@ -40,24 +37,26 @@ export class LoggedInAccountService {
    * @returns the user's id
    */
   getId(): number {
-    return <number> this.id;
+    return <number> this.account.id;
   }
 
   /**
    * Is there a user currently logged in?
    */
   isLoggedIn(): Boolean {
-    return !(this.username === undefined);
+    return !(this.account.id === -1);
   }
 
   /**
    * Is the current user logged in the admin?
    */
   isAdmin(): Boolean {
-    return this.username === 'admin';
+    return this.account.username === 'admin';
   }
 
   logout(): void {
-    this.username = undefined;
+    this.account.id = -1;
+    this.account.username = "";
+    this.account.password = "";
   }
 }

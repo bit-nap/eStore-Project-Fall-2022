@@ -37,5 +37,65 @@
 			"a1",
 			"a2"
 		]
+	},
+	{
+		"id": 3,
+		"screeningId": 100,
+		"accountId": 4,
+		"tickets": 3,
+		"popcorn": [
+			0,
+			1,
+			0
+		],
+		"soda": [
+			0,
+			1,
+			0
+		],
+		"seats": [
+			"a1",
+			"a2"
+		]
+	},
+	{
+		"id": 4,
+		"screeningId": 5,
+		"accountId": 4,
+		"tickets": 3,
+		"popcorn": [
+			0,
+			1,
+			0
+		],
+		"soda": [
+			0,
+			1,
+			0
+		],
+		"seats": [
+			"a1",
+			"a2"
+		]
+	},
+	{
+		"id": 5,
+		"screeningId": 5,
+		"accountId": 4,
+		"tickets": 14,
+		"popcorn": [
+			0,
+			1,
+			0
+		],
+		"soda": [
+			0,
+			1,
+			0
+		],
+		"seats": [
+			"a1",
+			"a2"
+		]
 	}
 ]

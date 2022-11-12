@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+
 // Class interfaces
 import { Order } from '../order';
 import { Accounts } from '../Accounts';
+import { Screening } from '../screening';
+
 // Service for logged in user
 import { LoggedInAccountService } from '../logged-in-account.service';
 // HTTP calls
@@ -16,6 +19,9 @@ import { HttpClient } from '@angular/common/http';
 export class PurchaseHistoryComponent implements OnInit {
   // Array of Order objects to store objects from the JSON
   orders: Order[] = [];
+
+  // Array of Screenings objects to obtain details of screening
+  screenings: Screening[] = [];
 
   // The account of the user logged in
   // Required initialization so initialized to default values
@@ -35,7 +41,6 @@ export class PurchaseHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAccount();
-    // this.getAccountOrders();
   }
 
   getAccount(): void {
@@ -54,11 +59,17 @@ export class PurchaseHistoryComponent implements OnInit {
   getAccountOrders(): void {
     this.http.get<[Order]>('http://127.0.0.1:8080/orders/?accountId=' + this.user.id).subscribe((orders_data: Order[]) => {
       if (orders_data != null && orders_data.length > 0) {
-        this.orders = orders_data;
+        // Reversing the list of orders to display from most recent to oldest
+        // (higher id is more recent)
+        this.orders = orders_data.reverse();
         document.getElementById("getOrdersMessage")!.innerHTML = "Displaying user's orders";
       } else {
         document.getElementById("getOrdersMessage")!.innerHTML = "No orders found";
       }
     })
   }
+
+  // getScreenings(): void {
+  //   this.http.get<
+  // }
 }

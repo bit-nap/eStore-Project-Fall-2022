@@ -7,8 +7,10 @@
 
     <ul class="orders">
       <li *ngFor="let order of orders">
-          <span class = "id">{{order.id}}</span>
-          <span class = "item">({{order.tickets}}) Screening: {{order.screeningId}}</span>
+          <span class = "id">{{order.tickets}}</span>
+          <span class = "item">
+            <img>
+          </span>
       </li>
     </ul>
 

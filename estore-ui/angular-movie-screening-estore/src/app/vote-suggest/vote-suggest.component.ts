@@ -14,8 +14,8 @@ export class SuggestComponent implements OnInit {
   suggests: Suggest[] = [];
   newSuggest: Suggest = {
     id: 0,
-    movieName: '',
-    howManyVotes: 0
+    movieTitle: '',
+    votes: 0
   };
 
   /** Constructor for the user vote/suggest class to use an http client */
@@ -23,9 +23,7 @@ export class SuggestComponent implements OnInit {
 
   ngOnInit(): void {
     document.getElementById("hasUserVoted")!.innerHTML = "";
-    this.http.get<[Suggest]>('http://127.0.0.1:8080/suggestion/').subscribe((data: [Suggest]) => {
-      this.suggests = data;
-    });
+    this.getSuggestions();
   }
 
   /**
@@ -33,8 +31,9 @@ export class SuggestComponent implements OnInit {
    * @param vote the vote object that will have a vote added
    */
   addSuggest(vote: Suggest): void {
-    this.http.put<Suggest>('http://127.0.0.1:8080/suggestion/', {id: vote.id, movieName: vote.movieName, howManyVotes: (vote.howManyVotes+1)}).subscribe((data: Suggest) => {
+    this.http.put<Suggest>('http://127.0.0.1:8080/suggestions/', {id: vote.id, movieTitle: vote.movieTitle, votes: (vote.votes+1)}).subscribe((data: Suggest) => {
       this.newSuggest = data;
+      this.getSuggestions();
     });
 
     document.getElementById("hasUserVoted")!.innerHTML = "Thank you for voting!";
@@ -45,11 +44,18 @@ export class SuggestComponent implements OnInit {
    * @param name the name that will a vote will be made from
    */
   enterSuggest(name: String): void {
-    this.http.post<Suggest>('http://127.0.0.1:8080/suggestion/', {id: 1, movieName: name, howManyVotes: 1}).subscribe((data: Suggest) => {
+    this.http.post<Suggest>('http://127.0.0.1:8080/suggestions/', {id: 1, movieTitle: name, votes: 1}).subscribe((data: Suggest) => {
       this.newSuggest = data;
+      this.getSuggestions();
       document.getElementById("hasUserSuggested")!.innerHTML = "Thank you for the suggestion!";
     }, (response) => {
       document.getElementById("hasUserSuggested")!.innerHTML = "Movie has already been suggested.";
     })
+  }
+
+  getSuggestions(): void {
+    this.http.get<[Suggest]>('http://127.0.0.1:8080/suggestions/').subscribe((data: Suggest[]) => {
+      this.suggests = data;
+    });
   }
 }

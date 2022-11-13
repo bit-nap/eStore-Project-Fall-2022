@@ -19,8 +19,11 @@ export class PurchaseHistoryComponent implements OnInit {
   // Array of Order objects to store objects from the JSON
   orders: Order[] = [];
 
-  movie!: Movie;
-  screening!: Screening;
+  // Array of Screening objects for screening details
+  screenings: Screening[] = [];
+
+  // Array of Movie objects for movie details (movie poster URL)
+  movies: Movie[] = [];
 
   /**
    * Required objects for deserializing the objects in the JSON based on user logged
@@ -32,6 +35,9 @@ export class PurchaseHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkAccount();
+    this.getAccountOrders();
+    this.setArrays();
+    this.printArrays();
   }
 
   checkAccount(): void {
@@ -47,10 +53,39 @@ export class PurchaseHistoryComponent implements OnInit {
         // Reversing the list of orders to display from most recent to oldest (higher id is more recent)
         this.orders = orders_data.reverse();
         document.getElementById("getOrdersMessage")!.innerHTML = "Displaying user's orders";
+        console.log("length of orders array: " + this.orders.length);
       } else {
         document.getElementById("getOrdersMessage")!.innerHTML = "No orders found";
       }
     })
+  }
+
+  setArrays(): void {
+    var i: number = 0;
+    for (var order of this.orders) {
+      this.http.get<Screening>('http://127.0.0.1:8080/screenings/' + order.screeningId).subscribe((screening_data: Screening) => {
+        this.screenings[i] = screening_data;
+        console.log("length of screenings array: " + this.screenings.length);
+        this.http.get<Movie>('http://127.0.0.1:8080/movies/' + screening_data.movieId).subscribe((movie_data: Movie) => {
+          this.movies[i] = movie_data;
+          console.log("length of movies array: " + this.movies.length);
+        })
+      })
+      i++;
+    }
+  }
+
+  printArrays(): void {
+    var i: number = 0;
+    for (var order of this.orders) {
+      console.log(i + ": " + this.orders[i].id);
+      console.log(i + ": " + this.screenings[i].id);
+      console.log(i + ": " + this.movies[i].id);
+      // document.getElementById("getOrdersMessage")!.innerHTML = i + ": " + this.orders[i].id;
+      // document.getElementById("getOrdersMessage")!.innerHTML = i + ": " + this.screenings[i].id;
+      // document.getElementById("getOrdersMessage")!.innerHTML = i + ": " + this.movies[i].id;
+      i++;
+    }
   }
 
   // setScreeningMovie(screeningId: number): void {

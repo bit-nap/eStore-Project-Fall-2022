@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 
 // Class interfaces
 import { Order } from '../order';
-import { Accounts } from '../Accounts';
 import { Screening } from '../screening';
+import { Movie } from '../movie';
 
 // Service for logged in user
 import { LoggedInAccountService } from '../logged-in-account.service';
 // HTTP calls
 import { HttpClient } from '@angular/common/http';
-
 
 @Component({
   selector: 'app-purchase-history',
@@ -20,16 +19,8 @@ export class PurchaseHistoryComponent implements OnInit {
   // Array of Order objects to store objects from the JSON
   orders: Order[] = [];
 
-  // Array of Screenings objects to obtain details of screening
-  screenings: Screening[] = [];
-
-  // The account of the user logged in
-  // Required initialization so initialized to default values
-  user: Accounts = {
-    id: -1,
-    username: "",
-    password: ""
-  }
+  movie!: Movie;
+  screening!: Screening;
 
   /**
    * Required objects for deserializing the objects in the JSON based on user logged
@@ -40,32 +31,20 @@ export class PurchaseHistoryComponent implements OnInit {
   constructor(private login: LoggedInAccountService, private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.getAccount();
+    this.checkAccount();
   }
 
-  getAccount(): void {
-    // this.http.get<Accounts>('http://127.0.0.1:8080/accounts/' + this.login.getUsername()).subscribe((account_data: Accounts) => {
-    //   // Check if account exists and has a valid id
-    //   if (account_data != null && account_data.id > 0) {
-    //     // Save user account data
-    //     this.user = account_data;
-    //     document.getElementById("getUsernameMessage")!.innerHTML = "User exists";
-    //   }
-    // },
-    // (error) => { document.getElementById("getUsernameMessage")!.innerHTML = "User does not exist"; }
-    // );
-    this.user = this.login.getAccount();
-    if (this.user.id === -1)
+  checkAccount(): void {
+    if (this.login.getId() === -1)
       document.getElementById("getUsernameMessage")!.innerHTML = "User does not exist";
     else
       document.getElementById("getUsernameMessage")!.innerHTML = "User exists";
   }
 
   getAccountOrders(): void {
-    this.http.get<[Order]>('http://127.0.0.1:8080/orders/?accountId=' + this.user.id).subscribe((orders_data: Order[]) => {
+    this.http.get<[Order]>('http://127.0.0.1:8080/orders/?accountId=' + this.login.getId()).subscribe((orders_data: Order[]) => {
       if (orders_data != null && orders_data.length > 0) {
-        // Reversing the list of orders to display from most recent to oldest
-        // (higher id is more recent)
+        // Reversing the list of orders to display from most recent to oldest (higher id is more recent)
         this.orders = orders_data.reverse();
         document.getElementById("getOrdersMessage")!.innerHTML = "Displaying user's orders";
       } else {
@@ -74,7 +53,30 @@ export class PurchaseHistoryComponent implements OnInit {
     })
   }
 
-  // getScreenings(): void {
-  //   this.http.get<
+  // setScreeningMovie(screeningId: number): void {
+  //   this.http.get<Screening>('http://localhost:8080/screenings/' + screeningId).subscribe((screening_data: Screening) => {
+  //     this.screening = screening_data;
+  //     this.setMovie(screening_data.movieId);
+  //   })
   // }
+
+  // setMovie(movieId: number): void {
+  //   this.http.get<Movie>('http://localhost:8080/movies/' + movieId).subscribe((movie_data: Movie) => {
+  //     this.movie = movie_data;
+  //   })
+  // }
+
+  // getScreenings(): void {
+  //   this.http.get<[Screening]>('http://localhost:8080/screenings').subscribe((screening_data: [Screening]) => {
+  //     this.screenings = screening_data;
+  //   })
+  // }
+
+  // getMovies(): void {
+  //   this.http.get<[Movie]>('http://localhost:8080/movies').subscribe((movie_data: [Movie]) => {
+  //     this.movies = movie_data;
+  //   })
+  // }
+
+
 }

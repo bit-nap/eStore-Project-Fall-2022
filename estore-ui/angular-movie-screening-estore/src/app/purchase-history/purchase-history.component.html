@@ -1,16 +1,15 @@
 <html>
   <div>
-    <button (click)="getAccountOrders()" >Display Orders</button>
+    <button (click)="getAccountOrders()">Display Orders</button>
 
-    <h2>{{user.username}}'s Order History:</h2>
+    <h2>Order History:</h2>
     <br>
 
     <ul class="orders">
       <li *ngFor="let order of orders">
-          <span class = "id">{{order.tickets}}</span>
-          <span class = "item">
-            <img>
-          </span>
+        <span class = "id"># tickets: {{order.tickets}}</span>
+        <span class = "item">order id: {{order.id}}</span>
+        <span class = "item">screening id: {{order.screeningId}}</span>
       </li>
     </ul>
 

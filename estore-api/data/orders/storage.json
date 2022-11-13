@@ -40,7 +40,7 @@
 	},
 	{
 		"id": 3,
-		"screeningId": 100,
+		"screeningId": 10,
 		"accountId": 4,
 		"tickets": 3,
 		"popcorn": [
@@ -60,7 +60,7 @@
 	},
 	{
 		"id": 4,
-		"screeningId": 5,
+		"screeningId": 12,
 		"accountId": 4,
 		"tickets": 3,
 		"popcorn": [
@@ -80,7 +80,7 @@
 	},
 	{
 		"id": 5,
-		"screeningId": 5,
+		"screeningId": 3,
 		"accountId": 4,
 		"tickets": 14,
 		"popcorn": [

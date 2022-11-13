@@ -30,7 +30,10 @@ public class Screening implements Comparable<Screening> {
 	@JsonProperty("date") private String date;
 	/** The time of this screening. */
 	@JsonProperty("time") private String time;
-	/** The seats and their availability for the screening. false if the seat is empty*/
+	/**
+	 * The seats and their availability for the screening.
+	 * If the seat is already taken the element will be true else false.
+	 */
 	@JsonProperty("seats") private boolean[][] seats;
 
 	/** The MovieGetter object used to set this object's movie field. */
@@ -59,7 +62,12 @@ public class Screening implements Comparable<Screening> {
 	                  @JsonProperty("time") String time, @JsonProperty("seats") boolean[][] seats) {
 		this.id = id;
 		this.movieId = movieId;
-		this.ticketsRemaining = ticketsRemaining;
+		if (ticketsRemaining > TOTAL_TICKETS) {
+			// prevents there being more tickets than seats
+			this.ticketsRemaining = TOTAL_TICKETS;
+		} else {
+			this.ticketsRemaining = ticketsRemaining;
+		}
 		this.date = date;
 		this.time = time;
 		this.seats = seats;
@@ -170,10 +178,10 @@ public class Screening implements Comparable<Screening> {
 		return movie;
 	}
 
-	/** 
+	/**
 	 * @return The seats and their availability for this screening, false for empty seats
-	*/
-	public boolean[][] getSeats() {
+	 */
+	public boolean[][] getSeats () {
 		return seats;
 	}
 
@@ -218,6 +226,6 @@ public class Screening implements Comparable<Screening> {
 	 */
 	@Override
 	public String toString () {
-		return String.format(STRING_FORMAT, id, movieId, ticketsRemaining, date, time, seats);
+		return String.format(STRING_FORMAT, id, movieId, ticketsRemaining, date, time);
 	}
 }

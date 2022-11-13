@@ -44,16 +44,21 @@ export class PurchaseHistoryComponent implements OnInit {
   }
 
   getAccount(): void {
-    this.http.get<Accounts>('http://127.0.0.1:8080/accounts/' + this.login.getUsername()).subscribe((account_data: Accounts) => {
-      // Check if account exists and has a valid id
-      if (account_data != null && account_data.id > 0) {
-        // Save user account data
-        this.user = account_data;
-        document.getElementById("getUsernameMessage")!.innerHTML = "User exists";
-      }
-    },
-    (error) => { document.getElementById("getUsernameMessage")!.innerHTML = "User does not exist"; }
-    );
+    // this.http.get<Accounts>('http://127.0.0.1:8080/accounts/' + this.login.getUsername()).subscribe((account_data: Accounts) => {
+    //   // Check if account exists and has a valid id
+    //   if (account_data != null && account_data.id > 0) {
+    //     // Save user account data
+    //     this.user = account_data;
+    //     document.getElementById("getUsernameMessage")!.innerHTML = "User exists";
+    //   }
+    // },
+    // (error) => { document.getElementById("getUsernameMessage")!.innerHTML = "User does not exist"; }
+    // );
+    this.user = this.login.getAccount();
+    if (this.user.id === -1)
+      document.getElementById("getUsernameMessage")!.innerHTML = "User does not exist";
+    else
+      document.getElementById("getUsernameMessage")!.innerHTML = "User exists";
   }
 
   getAccountOrders(): void {

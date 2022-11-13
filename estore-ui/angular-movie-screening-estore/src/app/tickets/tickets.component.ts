@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { Order } from "../order";
 import { ScreeningSelectorService } from "../screening-selector.service";
+import { LoggedInAccountService } from "../logged-in-account.service";
 
 @Component({
   selector: 'app-tickets',
@@ -29,6 +30,8 @@ export class TicketsComponent implements OnInit {
   pmedium_value = 0
   plarge_value = 0
 
+  isModalOpen:boolean = false
+
   /**
    * Contains the URL for the orders (orderURL)
    *
@@ -37,7 +40,7 @@ export class TicketsComponent implements OnInit {
    * @param http HttpClient Gets the link for the orders
    * @param screeningSelector ScreeningSelectorService Gets the information from current screening
    */
-  constructor(private router: Router, private movieSelector: MovieSelectorService, private http: HttpClient, private screeningSelector: ScreeningSelectorService) {
+  constructor(private router: Router, private movieSelector: MovieSelectorService, private http: HttpClient, private screeningSelector: ScreeningSelectorService, private login: LoggedInAccountService) {
     this.orderUrl = 'http://localhost:8080/orders'
   }
 
@@ -64,14 +67,20 @@ export class TicketsComponent implements OnInit {
   /**
    * Method called when the user presses the `complete purchase` button.
    *
-   * >Saves the order in the JSON
-   *
-   * >Redirects to `thank` page
+   * ? Is the number of tickets higher than 0?
+   * *  Saves the order in the JSON
+   * *  Redirects to `thank` page
+   * ? If not?
+   * *  Shows error message
    */
   completePurchase(): void {
     // save ticket information as Order class in Java or something
-    this.saveOrder({id: 1, screeningId: this.screeningSelector.getScreeningId(), accountId: 3, tickets: this.numOfTickets, popcorn: [this.psmall_value, this.pmedium_value, this.plarge_value], soda: [this.bsmall_value, this.bmedium_value, this.blarge_value]})
-    this.router.navigate(['thank'])
+    if (this.numOfTickets > 0) {
+      this.saveOrder({id: 1, screeningId: this.screeningSelector.getScreeningId(), accountId: this.login.getId(), tickets: this.numOfTickets, popcorn: [this.psmall_value, this.pmedium_value, this.plarge_value], soda: [this.bsmall_value, this.bmedium_value, this.blarge_value]})
+      this.router.navigate(['thank'])
+    } else {
+      document.getElementById('error-message')!.innerText ="There's no ticket selected"
+    }
   }
 
   /**
@@ -82,6 +91,10 @@ export class TicketsComponent implements OnInit {
    */
   public saveOrder(order: Order) {
     return this.http.post<Order>(this.orderUrl, order).subscribe()
+  }
+
+  clearMessage(): void {
+
   }
 
   /**
@@ -138,6 +151,15 @@ export class TicketsComponent implements OnInit {
     if (this.plarge_value > 0) {
       this.plarge_value--;
     }
+  }
+
+  cancelOrder() : void {
+    this.psmall_value = 0;
+    this.pmedium_value = 0;
+    this.plarge_value = 0;
+    this.bsmall_value = 0;
+    this.bmedium_value = 0;
+    this.blarge_value = 0;
   }
 
 }

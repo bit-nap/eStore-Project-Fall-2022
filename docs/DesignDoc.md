@@ -164,6 +164,18 @@ selected movie and date and time of the screening using the `MovieSelectorServic
 > _At appropriate places as part of this narrative provide one or more
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 
+![Movie UML Diagram](uml-diagrams/movie-model.png)
+
+The `Movie` model has fields relating to a movie. The `poster` field is the relative path to the poster of the movie
+in the estore-ui folder. The `mpaRating` field is the Motion Pictures Association's rating for the movie, such as G, PG, PG-13 or R.
+
+![Screening UML Diagram](uml-diagrams/screening-model.png)
+
+The `Screening` model has fields relating to the screening of a movie (indicated with `movieId` field), such as the date and time of the screening.
+The `ticketsRemaining` field can never be higher than the `TOTAL_TICKETS` field in the `Screening` class. This number will decrement everytime
+a user purchases tickets to a screening. The `seats` field is a 2D Array of booleans representing the 20 seats in the theater.
+If a seat is already reserved by a user, it will have a value of `True` in the `seats` field. If the seat is empty, it will be `False`.
+
 ### Static Code Analysis/Design Improvements
 
 > _Discuss design improvements that you would make if the project were

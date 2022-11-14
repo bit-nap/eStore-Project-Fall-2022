@@ -161,4 +161,8 @@ export class TicketsComponent implements OnInit {
     this.blarge_value = 0;
   }
 
+  clearErrorMessage(): void {
+    document.getElementById("error-message")!.innerText = ""
+  }
+
 }

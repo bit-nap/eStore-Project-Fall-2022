@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApplicationRef } from '@angular/core';
 
 // Class interfaces
 import { Order } from '../order';
@@ -28,13 +29,11 @@ export class PurchaseHistoryComponent implements OnInit {
    * @param login LoggedInAccountService object to keep track of logged in user
    * @param http  HttpClient object for API calls
    */
-  constructor(private http: HttpClient, private login: LoggedInAccountService) { }
+  constructor(private http: HttpClient, private login: LoggedInAccountService, private appRef: ApplicationRef) { }
 
   ngOnInit(): void {
     this.checkAccount();
     this.getAccountOrders();
-    console.log(this.orders);
-    this.getScreeningsFromOrders();
     // this.setArrays();
     // this.printArrays();
   }
@@ -47,26 +46,34 @@ export class PurchaseHistoryComponent implements OnInit {
   }
 
   getAccountOrders(): void {
+    var that = this;
     this.http.get<[Order]>('http://127.0.0.1:8080/orders/?accountId=' + this.login.getId()).subscribe((orders_data: Order[]) => {
       if (orders_data != null && orders_data.length > 0) {
         // Reversing the list of orders to display from most recent to oldest (higher id is more recent)
-        this.orders = orders_data.reverse();
-        console.log("filled orders: " + this.orders.length);
-        document.getElementById("getOrdersMessage")!.innerHTML = "Displaying " + this.orders.length + " orders";
+        that.orders = orders_data.reverse();
+        that.getScreeningsFromOrders(orders_data.reverse());
+        document.getElementById("getOrdersMessage")!.innerHTML = "Displaying " + that.orders.length + " orders";
       } else {
         document.getElementById("getOrdersMessage")!.innerHTML = "No orders found";
       }
+      this.appRef.tick();
     })
   }
 
-  getScreeningsFromOrders(): void {
+  getScreeningsFromOrders(orderArray: Order[]): void {
     console.log("TEST");
-    console.log("orders length: " + this.orders.length);
-    for (var i = 0; i < this.orders.length; i++) {
-      this.http.get<Screening>('http://localhost:8080/screenings/' + this.orders[i].screeningId).subscribe((screening_data: Screening) => {
-        this.screenings[i] = screening_data;
+    console.log(orderArray);
+    for (var i = 0; i < orderArray.length; i++) {
+      var that = this;
+      this.http.get<Screening>('http://localhost:8080/screenings/' + orderArray[i].screeningId).subscribe((screening_data: Screening) => {
+        // console.log(screening_data);
+        that.screenings[i] = screening_data;
+        console.log(this.screenings[i]);
+        this.appRef.tick();
       })
     }
+    console.log("Screenings array");
+    console.log(this.screenings);
     console.log("loop finished");
   }
 

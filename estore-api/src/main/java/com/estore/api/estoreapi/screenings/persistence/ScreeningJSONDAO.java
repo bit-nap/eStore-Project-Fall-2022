@@ -247,7 +247,7 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 		}
 	}
 
-	/** 
+	/**
 	 * * {@inheritDoc}
 	*/
 	public boolean[][] findScreeningSeats(Screening screening){

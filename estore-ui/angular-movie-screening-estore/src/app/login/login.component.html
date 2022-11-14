@@ -2,17 +2,26 @@
   <head></head>
   <div>
     <h1>User Account</h1>
-    <input #enterNewUsername id="enterUsername" placeholder="Username" />
-    <button id="usernameButton" (click)="enterUsername(enterNewUsername.value)">Create Username</button>
+    <div class="container">
+      <div class="cards">
+        <h3 class="subtitle">Create account</h3>
+        <input #enterNewUsername id="enterUsername" placeholder="Username" />
+        <button id="usernameButton" (click)="enterUsername(enterNewUsername.value)">Create Username</button>
+      </div>
+      <div class="cards">
+        <h3 class="subtitle">Sign In</h3>
+        <input #signIntoAccount id="enterUsername" placeholder="Username" />
+        <button id="usernameButton" (click)="signIn(signIntoAccount.value)" >Sign In</button>
+      </div>
+      <div class="cards">
+        <h3 class="subtitle">Delete account</h3>
+        <input #deleteAUsername id="enterUsername" placeholder="Username" />
+        <button id="usernameButton" (click)="deleteUsername(deleteAUsername.value)">Delete Username</button>
+      </div>
+      <p id="newUsernameMessage"></p>
+      <p id="signinUsernameMessage"></p>
+      <p id="deleteUsernameMessage"></p>
+    </div>
 
-    <input #signIntoAccount id="enterUsername" placeholder="Username" />
-    <button id="usernameButton" (click)="signIn(signIntoAccount.value)" >Sign In</button>
-
-    <input #deleteAUsername id="enterUsername" placeholder="Username" />
-    <button id="usernameButton" (click)="deleteUsername(deleteAUsername.value)">Delete Username</button>
-
-    <p id="newUsernameMessage"></p>
-    <p id="signinUsernameMessage"></p>
-    <p id="deleteUsernameMessage"></p>
   </div>
 </html>

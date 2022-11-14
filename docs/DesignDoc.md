@@ -47,7 +47,20 @@ The website allows users to purchase tickets to the screening of a movie.
 
 ### Roadmap of Enhancements
 
-> _Provide a list of top-level features in the order you plan to consider them._
+- Users have the ability to select one of multiple movies to watch.
+- Users can select the screening of a movie to attend.
+- Users can select the number of tickets to purchase to a screening.
+- Users can complete their purchase.
+- Users can create/log in to/delete an account.
+- Users can select the number of sodas they want to purchase for a screening.
+- Users can select the number of popcorn they want to purchase for a screening.
+- Users can select a specific seat in the theater for each ticket they will purchase.
+- Users can view their purchase history, when logged in.
+
+
+- Admin can view all screenings of all movies.
+- Admin can modify existing screenings.
+- Admin can view what seats are already reserved for each screening.
 
 ## Application Domain
 
@@ -62,7 +75,7 @@ Screening also has a counter of tickets remaining so the product owner can preve
 The shopping cart contains information about the tickets, soda and popcorn which a customer is buying to attend a Screening.
 A customer cannot purchase tickets to multiple Screenings at once.
 
-There must be at least 1 ticket for the shopping cart to exist, and there is at most 20 seats in a theater so the number of ticekts cannot exceed 20.
+There must be at least 1 ticket for the shopping cart to exist, and there is at most 20 seats in a theater so the number of tickets cannot exceed 20.
 Soda and popcorn is optional and a user can complete a checkout without purchasing any.
 
 The customer must either make an account, or sign in to an existing account to make a purchase. A customer can also delete theri account.
@@ -79,7 +92,7 @@ The following Tiers/Layers model shows a high-level view of the webapp's archite
 
 The e-store web application, is built using the Model–View–ViewModel (MVVM) architecture pattern.
 
-The Model stores the application data objects including any functionality to provide persistance.
+The Model stores the application data objects including any functionality to provide persistence.
 
 The View is the client-side SPA built with Angular utilizing HTML, CSS and TypeScript. The ViewModel provides RESTful
 APIs to the client (View) as well as any logic required to manipulate the data objects from the Model.
@@ -92,8 +105,13 @@ supplied below.
 This section describes the web interface flow; this is how the user views and interacts
 with the e-store application.
 
-> _Provide a summary of the application's user interface. Describe, from
-> the user's perspective, the flow of the pages in the web application._
+The landing page displays the all the movies a user can view at the theater.
+There is a navigation header at the top of the webpage that has a button that allows a user to log in to, create, or delete their account.
+
+When logged in, a user can select a movie from the homepage which brings up a list of screenings for that movie.
+Upon selecting a screening, the user can select a seat (thereby selecting a ticket) to purchase for a screening.
+In the same page, a user can select the number of sodas and/or popcorn to purchase for the same screening.
+The user can then finalize their purchase and is displayed a page with information about the screening they have purchased tickets for.
 
 ### View Tier
 
@@ -107,6 +125,26 @@ with the e-store application.
 > sequence diagram of a customer searching for an item and adding to their cart.
 > Be sure to include an relevant HTTP reuqests from the client-side to the server-side
 > to help illustrate the end-to-end flow._
+
+There are several components needed to handle the user purchase of tickets to a screening.
+
+![Sequence Diagram of User Purchase](complete-order-sequence-diagram.png)
+
+The landing page logic is located in the `Movies` component. This component retrieves all `Movie` objects using an HTTP GET request
+and displays them to the user. The search functionality on the landing page also uses an HTTP GET request (with a query string)
+to retrieve all the movies with the given phrase in their title. When the user selects a movie, that `Movie` object is stored with the `MovieSelectorService`.
+The user is then routed to the `/screenings` page.
+
+Similarly, the `Screenings` component retrieves all screenings for the selected movie using the `MovieSelectorService`
+and an HTTP GET request with a query string. When the user selects a screening, that `Screening` object is saved in the `ScreeningSelectorService`.
+The user is then routed to the `/tickets`page.
+
+The `Tickets` component presents allows the user to select the seats for a screening, the number of sodas and popcorn to order for the screening.
+When the user finalizes their purchase using the button at the bottom of the page, the `Tickets` component sends
+an HTTP POST request to the orders endpoint, adding that order to the storage. The user is then routed to the `/thank` page.
+
+The `CompletedPurchase` component then presents the user with a summary of their order. Specifically, it displays information about the
+selected movie and date and time of the screening using the `MovieSelectorService` and `ScreeningSelectorService`.
 
 ### ViewModel Tier
 
@@ -125,6 +163,18 @@ with the e-store application.
 
 > _At appropriate places as part of this narrative provide one or more
 > static models (UML class diagrams) with some details such as critical attributes and methods._
+
+![Movie UML Diagram](uml-diagrams/movie-model.png)
+
+The `Movie` model has fields relating to a movie. The `poster` field is the relative path to the poster of the movie
+in the estore-ui folder. The `mpaRating` field is the Motion Pictures Association's rating for the movie, such as G, PG, PG-13 or R.
+
+![Screening UML Diagram](uml-diagrams/screening-model.png)
+
+The `Screening` model has fields relating to the screening of a movie (indicated with `movieId` field), such as the date and time of the screening.
+The `ticketsRemaining` field can never be higher than the `TOTAL_TICKETS` field in the `Screening` class. This number will decrement everytime
+a user purchases tickets to a screening. The `seats` field is a 2D Array of booleans representing the 20 seats in the theater.
+If a seat is already reserved by a user, it will have a value of `True` in the `seats` field. If the seat is empty, it will be `False`.
 
 ### Static Code Analysis/Design Improvements
 

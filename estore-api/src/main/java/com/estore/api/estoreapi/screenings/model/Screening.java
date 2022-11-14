@@ -18,7 +18,7 @@ public class Screening implements Comparable<Screening> {
 	public static final int TOTAL_TICKETS = 20;
 
 	// Package private for tests - Prof
-	static final String STRING_FORMAT = "Screening [id=%d, movieId=%s, ticketsRemaining=%s, date=%s, time=%s]";
+	static final String STRING_FORMAT = "Screening [id=%d, movieId=%s, ticketsRemaining=%s, date=%s, time=%s, seats]";
 
 	/** The id of this screening. */
 	@JsonProperty("id") private int id;

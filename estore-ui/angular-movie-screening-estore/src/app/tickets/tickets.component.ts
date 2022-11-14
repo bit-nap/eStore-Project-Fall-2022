@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { Order } from "../order";
 import { ScreeningSelectorService } from "../screening-selector.service";
+import { flatMap } from "rxjs";
 
 @Component({
   selector: 'app-tickets',
@@ -14,7 +15,7 @@ import { ScreeningSelectorService } from "../screening-selector.service";
 })
 export class TicketsComponent implements OnInit {
   /** The number of tickets selected. */
-  @Input() numOfTickets: number = 0;
+  numOfTickets: number = 0;
   
   /* URL for the orders */
   private orderUrl: string;
@@ -28,6 +29,13 @@ export class TicketsComponent implements OnInit {
   psmall_value = 0
   pmedium_value = 0
   plarge_value = 0
+
+  /** the seats and their availability*/
+  selectSeats: boolean[][] = this.screeningSelector.getScreeningSeats(); // this is for storage
+  selectSeatsCopy: boolean[][] = this.screeningSelector.getScreeningSeats(); //this is for the user to use
+
+  row = 0
+  column = 0
 
   /**
    * Contains the URL for the orders (orderURL)
@@ -140,4 +148,31 @@ export class TicketsComponent implements OnInit {
     }
   }
 
+  seatCount(row: number, col: number): boolean{
+    if (this.selectSeatsCopy[row][col] == false) {
+      this.selectSeatsCopy[row][col] = true;
+      this.numOfTickets++;
+      return true;
+    } 
+    if (this.selectSeats[row][col] != this.selectSeatsCopy[row][col]) {
+      this.numOfTickets--;
+      this.selectSeatsCopy[row][col] = false;
+      return false;
+    }
+    return false;
+  }
+
+  increaseRow(): number{
+    this.row++;
+    return this.row;
+  }
+
+  increaseColumn(): number{
+    this.column++;
+    return this.column;
+  }
+
+  setColumn(setting: number): void{
+    this.column = setting;
+  }
 }

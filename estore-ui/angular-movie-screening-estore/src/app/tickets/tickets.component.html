@@ -1,66 +1,98 @@
+<div class="header">
+  <p id="movie-title">{{getMovieTitle()}}</p>
+  <input readonly id="ticket-count" value="{{numOfTickets}}">
+</div>
+
+
 <div class="main-container">
   <div class="movie-poster-container">
-    <img id="movieImg" src="{{getMoviePoster()}}"  alt="Movie poster for {{getMovieTitle()}}"/>
+    <img id="movieImg" src="{{getMoviePoster()}}" alt="Movie poster for {{getMovieTitle()}}" />
+  </div>
+
+  <div class="cinema">
+    <div class="showcase">
+      <div class="seat"></div> AVAILABLE
+      <div class="seat-unavailable"></div> UNAVAILABLE
+      <div class="seat-selected"></div> SELECTED
+    </div>
+    
+    <h1>SCREEN</h1>
+    <div class="cinema">
+      <div *ngFor="let i of selectSeats">
+        <div class="row">
+          <ng-container *ngFor="let j of i">
+            <ng-container *ngIf="j; then btnDisabled; else btnEnabled">
+            </ng-container>
+
+            <ng-template #btnEnabled>
+              <button type="button" onclick="seatCount(row,column); myFunction()" class="seat" id="btn">{{increaseColumn()}}</button>
+            </ng-template>
+
+            <ng-template #btnDisabled>
+              <button type="button" disabled class="seat-unavailable">{{increaseColumn()}}</button>
+            </ng-template>
+          </ng-container>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="select-items-container">
     <p>Select Items to Purchase</p>
-    <p id="movie-title">{{getMovieTitle()}}</p>
-    <input id="ticket-input" [(ngModel)]="numOfTickets">
     <span class="list">
       <h2>Choose a Beverage</h2>
       <span>
-          <h3>Small</h3>
-          <div>
-              <button (click)="bsubstractSmall()">-</button>
-              <input readonly type="number" value="{{bsmall_value}}">
-              <button (click)="baddSmall()">+</button>
-          </div>
+        <h3>Small</h3>
+        <div>
+          <button (click)="bsubstractSmall()">-</button>
+          <input readonly type="number" value="{{bsmall_value}}">
+          <button (click)="baddSmall()">+</button>
+        </div>
       </span>
       <span>
-          <h3>Medium</h3>
-          <div>
-              <button (click)="bsubstractMedium()">-</button>
-              <input readonly type="number" value="{{bmedium_value}}">
-              <button (click)="baddMedium()">+</button>
-          </div>
+        <h3>Medium</h3>
+        <div>
+          <button (click)="bsubstractMedium()">-</button>
+          <input readonly type="number" value="{{bmedium_value}}">
+          <button (click)="baddMedium()">+</button>
+        </div>
       </span>
       <span>
-          <h3>Large</h3>
-          <div>
-              <button (click)="bsubstractLarge()">-</button>
-              <input readonly type="number"  value="{{blarge_value}}">
-              <button (click)="baddLarge()">+</button>
-          </div>
-        </span>
+        <h3>Large</h3>
+        <div>
+          <button (click)="bsubstractLarge()">-</button>
+          <input readonly type="number" value="{{blarge_value}}">
+          <button (click)="baddLarge()">+</button>
+        </div>
+      </span>
     </span>
-      <span class="list">
-        <h2>Choose a Snack</h2>
-        <span>
-            <h3>Small</h3>
-            <div>
-                <button (click)="psubstractSmall()">-</button>
-                <input readonly type="number" value="{{psmall_value}}">
-                <button (click)="paddSmall()">+</button>
-            </div>
-        </span>
-        <span>
-            <h3>Medium</h3>
-            <div>
-                <button (click)="psubstractMedium()">-</button>
-                <input readonly type="number" value="{{pmedium_value}}">
-                <button (click)="paddMedium()">+</button>
-            </div>
-        </span>
-        <span>
-            <h3>Large</h3>
-            <div>
-                <button (click)="psubstractLarge()">-</button>
-                <input readonly type="number"  value="{{plarge_value}}">
-                <button (click)="paddLarge()">+</button>
-            </div>
-        </span>
+    <span class="list">
+      <h2>Choose a Snack</h2>
+      <span>
+        <h3>Small</h3>
+        <div>
+          <button (click)="psubstractSmall()">-</button>
+          <input readonly type="number" value="{{psmall_value}}">
+          <button (click)="paddSmall()">+</button>
+        </div>
       </span>
+      <span>
+        <h3>Medium</h3>
+        <div>
+          <button (click)="psubstractMedium()">-</button>
+          <input readonly type="number" value="{{pmedium_value}}">
+          <button (click)="paddMedium()">+</button>
+        </div>
+      </span>
+      <span>
+        <h3>Large</h3>
+        <div>
+          <button (click)="psubstractLarge()">-</button>
+          <input readonly type="number" value="{{plarge_value}}">
+          <button (click)="paddLarge()">+</button>
+        </div>
+      </span>
+    </span>
     <button (click)="completePurchase()">Complete purchase</button>
   </div>
 </div>

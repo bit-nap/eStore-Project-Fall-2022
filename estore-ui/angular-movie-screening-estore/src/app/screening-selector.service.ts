@@ -52,7 +52,16 @@ export class ScreeningSelectorService {
   /**
    * Get the time of the last screening selected.
    */
-  getScreeningTime(): string {
+   getScreeningTime(): string {
     return <string> this.screening?.time;
   }
+
+  /**
+   * Get the seats of the last screening selected.
+   */
+   getScreeningSeats(): boolean[][] {
+    return <boolean[][]> this.screening?.seats;
+  }
+
+  
 }

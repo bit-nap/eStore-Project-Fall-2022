@@ -148,7 +148,7 @@
 }
 
 #carousel {
-  animation: changeImg 10s infinite ease-in-out;
+  animation: changeImg 20s infinite ease-in-out;
   background-image: url("../../assets/carousel/terminator2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -160,9 +160,9 @@
 }
 
 @keyframes changeImg {
-  0%, 24% {background-image: url("../../assets/carousel/terminator2.jpg");}
-  25%, 48% {background-image: url("../../assets/carousel/die-hard.jpg");}
-  49%, 72% {background-image: url("../../assets/carousel/rambo.jpg");}
-  73%, 96% {background-image: url("../../assets/carousel/bttf.jpg");}
-  97%, 100% {background-image: url("../../assets/carousel/rush-hour.jpg");}
+  0%, 20% {background-image: url("../../assets/carousel/terminator2.jpg");}
+  21%, 40% {background-image: url("../../assets/carousel/die-hard.jpg");}
+  41%, 60% {background-image: url("../../assets/carousel/rambo.jpg");}
+  61%, 80% {background-image: url("../../assets/carousel/bttf.jpg");}
+  81%, 100% {background-image: url("../../assets/carousel/rush-hour.jpg");}
 }

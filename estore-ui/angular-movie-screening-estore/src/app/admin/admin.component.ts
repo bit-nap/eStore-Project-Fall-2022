@@ -127,10 +127,10 @@ export class AdminComponent implements OnInit {
    */
   deleteScreening(): void {
     this.http.delete<[Screenings]>('http://127.0.0.1:8080/screenings/'+this.screeningToChange.id).subscribe((data: Screenings[]) => {
-      this.screenings = data;
+      this.getScreeningListings(this.screeningToChange.movieId.toString());
     });
 
-    this.getScreeningListings(this.screeningToChange.movieId.toString());
+    //this.getScreeningListings(this.screeningToChange.movieId.toString());
   }
 
   /**

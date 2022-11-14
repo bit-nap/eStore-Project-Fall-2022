@@ -170,7 +170,7 @@ public class Screening implements Comparable<Screening> {
 		return movie;
 	}
 
-	/** 
+	/**
 	 * @return The seats and their availability for this screening, false for empty seats
 	*/
 	public boolean[][] getSeats() {

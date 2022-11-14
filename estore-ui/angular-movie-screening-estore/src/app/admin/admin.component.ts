@@ -53,7 +53,8 @@ export class AdminComponent implements OnInit {
    * @param screeningMovie the movie associated to the screening
    */
   enterNewScreening(screeningTicket:string, screeningDate:string, screeningTime:string, screeningMovie:string) {
-    this.http.post<Screenings>('http://127.0.0.1:8080/screenings', { id: 1, movieId: screeningMovie, tickets: screeningTicket.replace(/\D/g, ''), date: screeningDate, time: screeningTime }).subscribe((data:Screenings) => {
+    if (Number(screeningTime) > 20) {screeningTime=="20"};
+    this.http.post<Screenings>('http://127.0.0.1:8080/screenings', { id: 1, movieId: screeningMovie, ticketsRemaining: screeningTicket.replace(/\D/g, ''), date: screeningDate, time: screeningTime }).subscribe((data:Screenings) => {
       this.newScreenings = data;
     });
   }

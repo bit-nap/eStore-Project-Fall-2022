@@ -14,6 +14,7 @@ import { CompletedPurchaseComponent } from './completed-purchase/completed-purch
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { ScreeningsComponent } from './screenings/screenings.component';
+import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
 import { SuggestComponent } from './vote-suggest/vote-suggest.component';
 import { SuggestAdminComponent } from './vote-suggest-admin/vote-suggest-admin.component';
 
@@ -26,6 +27,7 @@ import { SuggestAdminComponent } from './vote-suggest-admin/vote-suggest-admin.c
     LoginComponent,
     AdminComponent,
     ScreeningsComponent,
+    PurchaseHistoryComponent,
     SuggestComponent,
     SuggestAdminComponent
   ],

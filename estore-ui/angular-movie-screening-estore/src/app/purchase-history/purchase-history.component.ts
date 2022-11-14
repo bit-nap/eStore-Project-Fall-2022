@@ -7,6 +7,9 @@ import { Movie } from '../movie';
 
 // Service for logged in user
 import { LoggedInAccountService } from '../logged-in-account.service';
+import { ScreeningSelectorService } from '../screening-selector.service';
+import { MovieSelectorService } from '../movie-selector.service';
+
 // HTTP calls
 import { HttpClient } from '@angular/common/http';
 
@@ -20,6 +23,7 @@ export class PurchaseHistoryComponent implements OnInit {
   orders: Order[] = [];
 
   // Array of Screening objects for screening details
+  screening?: Screening;
   screenings: Screening[] = [];
 
   // Array of Movie objects for movie details (movie poster URL)
@@ -31,14 +35,25 @@ export class PurchaseHistoryComponent implements OnInit {
    * @param login LoggedInAccountService object to keep track of logged in user
    * @param http  HttpClient object for API calls
    */
-  constructor(private login: LoggedInAccountService, private http: HttpClient) { }
+  constructor(private http: HttpClient, private login: LoggedInAccountService) { }
 
   ngOnInit(): void {
     this.checkAccount();
     this.getAccountOrders();
-    this.setArrays();
-    this.printArrays();
+    // this.setArrays();
+    // this.printArrays();
   }
+
+  setScreening(screeningId: number): void {
+    this.http.get<Screening>('http://localhost:8080/screenings/' + screeningId).subscribe((screening_data: Screening) => {
+      this.screening = screening_data;
+    })
+  }
+
+  getScreeningId(): number {
+    return <number> this.screening?.id;
+  }
+
 
   checkAccount(): void {
     if (this.login.getId() === -1)
@@ -52,8 +67,7 @@ export class PurchaseHistoryComponent implements OnInit {
       if (orders_data != null && orders_data.length > 0) {
         // Reversing the list of orders to display from most recent to oldest (higher id is more recent)
         this.orders = orders_data.reverse();
-        document.getElementById("getOrdersMessage")!.innerHTML = "Displaying user's orders";
-        console.log("length of orders array: " + this.orders.length);
+        document.getElementById("getOrdersMessage")!.innerHTML = "Displaying " + this.orders.length + " orders";
       } else {
         document.getElementById("getOrdersMessage")!.innerHTML = "No orders found";
       }
@@ -112,6 +126,4 @@ export class PurchaseHistoryComponent implements OnInit {
   //     this.movies = movie_data;
   //   })
   // }
-
-
 }

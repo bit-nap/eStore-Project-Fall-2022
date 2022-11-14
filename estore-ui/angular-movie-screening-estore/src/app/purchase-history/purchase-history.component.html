@@ -7,11 +7,10 @@
 
     <ul class="orders">
       <li *ngFor="let order of orders; let i = index">
-        {{setScreening(order.screeningId)}}
         <span class = "id">index: {{i}}</span>
         <span class = "id"># tickets: {{order.tickets}}</span>
         <span class = "item">order id: {{order.id}}</span>
-        <span class = "item">order screeningid: {{getScreeningId()}}</span>
+        <span class = "item">screeningId: </span>
 
         <!-- <span class = "item">screening id: {{order.screeningId}}</span> -->
         <!-- <span class = "item">screening id: {{screenings[i].id}}</span>

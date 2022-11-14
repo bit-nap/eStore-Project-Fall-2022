@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Source+Sans+Pro:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
 /* Application-wide Styles */
 * {
+  box-sizing: border-box;
   font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
   font-weight: normal;
   color: #fafafa;
@@ -9,24 +11,54 @@
 }
 
 h1 {
-  color: #ffdd4a;
-  font-family: 'Fredoka One', Arial, Helvetica, sans-serif;
+  color: #DF2C14;
+  font-family: 'Righteous', cursive;
+  font-weight: bold;
   font-size: 200%;
 }
 
 header {
-  background-color: #333333;
-  height: 75px;
-  padding: 0 75px 0 75px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  height: 75px;
+  top: 0;
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+
+  backdrop-filter: blur(10px);
+  background-color: rgba(200, 200, 200, 0.1);
+  padding: 0 0 0 0;
+}
+
+header button {
+  background-color: rgba(0, 0, 0, 0);
+  color: rgba(255, 255, 255, 0.5);
+  border:rgba(255, 255, 255, 0.5) solid 1px;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+header button:hover {
+  color: rgba(255, 255, 255, 0.9);
+  border:rgba(255, 255, 255, 0.9) solid 1px;
+  text-decoration: none;
+  transition: all .1s;
 }
 
 body {
-  background: #212121;
-  background-size: 400% 400%;
-  height: 100vh;
+  height: 100%;
+  width: 100vw;
+  overflow-x: hidden;
+  background:
+    linear-gradient(#0b0c17, transparent),
+    linear-gradient(to top left, #330872, transparent),
+    linear-gradient(to top right, #0C0E1E, transparent);
+  background-blend-mode: screen;
+  box-shadow: 0px -75px 50px -28px #0C0E1E inset;
+  padding-top: 75px;
 }
 
 body, input[type="text"], button {
@@ -51,4 +83,17 @@ input {
   background-color: #333333;
   border: none;
   border-bottom: black;
+}
+
+footer {
+  border-top: #0C0E1E solid 5px;
+  background-color: #111547;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  padding: 100px 0 100px 0;
+  margin: 50px 0 0 0;
 }

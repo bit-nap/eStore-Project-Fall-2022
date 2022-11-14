@@ -32,35 +32,206 @@ p {
 }
 
 .movie-poster-container {
+  grid-area: poster;
   height: 500px;
   width: 330px;
 
   float: left;
-  margin: 20px
+  margin: 20px;
+  box-shadow: 10px 10px 43px -13px #DF2C14;
 }
 
 .select-items-container {
-  height: 400px;
-  width: 400px;
-
-  display: inline-flex;
-  row-gap: 10px;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  height: 80%;
+  width: 80%;
+  display: grid;
+  grid-template-areas:
+    'header header header header header'
+    'poster poster snacks snacks snacks'
+    'poster poster info info info'
+    'poster poster ticket ticket ticket'
+    'poster poster button button button';
 }
 
 #ticket-input {
+  grid-area: ticket;
   height: auto;
-  width: 200px;
+  width: 100%;
+  font-size: 10em;
+  font-family: 'Righteous', cursive;
+  border-bottom: rgba(255, 255, 255, 0.3) solid 2px;
+  background-color: rgba(0, 0, 0, 0);
+  transition: border .3s;
+  animation: input-color 5s infinite ease-in-out;
+}
+#ticket-input:focus {
+border-color: rgba(255, 255, 255, 1);
+outline: none;
+}
+#ticket-input::placeholder {
+color: rgba(255, 255, 255, 0.7);
+}
+#ticket-input:focus::placeholder {
+color: rgba(255, 255, 255, 0);
+}
+
+#info {
+  grid-area: info;
+  width: 100%;
+  height: 100%;
+  color: #00C9FF;
 }
 
 #movie-title {
-  color: #FFDD4A;
+  grid-area: header;
+  color: rgba(255, 255, 255, 1);
   font-size: 30px;
   font-weight: bold;
 }
 
-.list {
+#snack-button {
+  grid-area: snacks;
+  background-color: rgba(0, 0, 0, 0);
+  color: rgba(255, 255, 255, 0.5);
+  border:rgba(255, 255, 255, 0.5) solid 1px;
+  border-radius: 10px;
+  transition: all .2s;
+}
+#snack-button:hover {
+  color: rgba(255, 255, 255, 1);
+  border:rgba(255, 255, 255, 1) solid 1px;
+  text-decoration: none;
+}
+
+#completePurchase {
+  grid-area: button;
+  background-color: rgba(0, 0, 0, 0);
+  color: rgba(255, 255, 255, 0.5);
+  border:rgba(255, 255, 255, 0.5) solid 1px;
+  border-radius: 10px;
+  transition: all .2s;
+}
+#completePurchase:hover {
+  color: rgba(0, 0, 0, 1);
+  border:rgba(255, 255, 255, 1) solid 1px;
+  background-color: rgba(255, 255, 255, 1);
+  text-decoration: none;
+}
+
+/***************\
+    Modal Box
+\***************/
+
+.modal-container {
+  position: fixed;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 101;
+
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal {
+  display: grid;
+  grid-template-rows: 10% 40% 40% 10%;
+  grid-template-columns: 5% 90% 5%;
+  grid-template-areas: 
+    '. header .'
+    '. blist .'
+    '. plist .'
+    '. footer .';
+  position: relative;
+  width: 80%;
+  height: 80%;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 10px;
+  padding: 1%;
+}
+.modal button {
+  grid-area: snacks;
+  background-color: rgba(0, 0, 0, 0);
+  color: rgba(0, 0, 0, 0.5);
+  border:rgba(0, 0, 0, 0.5) solid 1px;
+  border-radius: 10px;
+  padding: 15px;
+  transition: all .2s;
+}
+.modal button:hover {
+  color: rgba(0, 0, 0, 1);
+  border:rgba(0, 0, 0, 1) solid 1px;
+  text-decoration: none;
+}
+
+#confirm-button:hover {
+  background-color: #2BFF5B;
+  border-color: #2BFF5B;
+  color: rgba(255, 255, 255, 1);
+}
+#cancel-button:hover {
+  background-color: #FF632B;
+  border-color: #FF632B;
+}
+
+.modal input {
+  border-radius: 10px;
+}
+
+#modal-title {
+  grid-area: header;
+  width: 100%;
+  height: 100%;
+}
+
+.list {
+  grid-area: main;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.list span {
+  display: flex;
+  flex-direction: row;
+}
+#blist {
+  grid-area: blist;
+}
+#plist {
+  grid-area: plist;
+}
+
+h2 {
+  color: #0C0E1E;
+}
+
+h3 {
+  color: #330872;
+}
+
+.modal-footer-container {
+  grid-area: footer;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+@keyframes input-color {
+  0%, 100% {
+    color: #22C1C3;
+  }
+  33% {
+    color: #00C9FF;
+  }
+  66% {
+    color: #92FE9D;
+  }
 }

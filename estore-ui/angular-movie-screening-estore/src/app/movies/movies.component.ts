@@ -16,7 +16,7 @@ import { LoggedInAccountService } from "../logged-in-account.service"; // Import
  */
 export class MoviesComponent implements OnInit {
   movies: Movie[] = [];
-
+  
   constructor(private http: HttpClient, private router: Router, private movieSelector: MovieSelectorService, private loggedInAccount: LoggedInAccountService) { }
 
   /**

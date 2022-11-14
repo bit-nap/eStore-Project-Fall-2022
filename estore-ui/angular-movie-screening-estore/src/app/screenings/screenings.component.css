@@ -37,7 +37,7 @@ p {
 }
 
 #movie-title {
-  color: #FFDD4A;
+  color: rgba(255, 255, 255, 1);
   font-size: 30px;
   font-weight: bold;
 }

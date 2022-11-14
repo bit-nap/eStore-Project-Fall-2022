@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.logging.Logger;
 
 /**
  * Implements the functionality for JSON file-based persistence for Screenings.<p>
@@ -22,9 +21,6 @@ import java.util.logging.Logger;
 public class ScreeningJSONDAO implements ScreeningDAO {
 	/** A local cache of Screening objects, to avoid reading from file each time. */
 	Map<Integer, Screening> screenings;
-
-	/** TODO: Add description of the purpose of Logger, once it's actually used. */
-	private static final Logger LOG = Logger.getLogger(ScreeningJSONDAO.class.getName());
 
 	/** The next id to assign to a new screening. */
 	private static int nextId;
@@ -168,7 +164,7 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 		synchronized (screenings) {
 			// We create a new screening object because the id field is immutable, and we need to assign the next unique id
 			Screening newScreening = new Screening(nextId(), screening.getMovieId(), screening.getTicketsRemaining(), screening.getDate(),
-			                                       screening.getTime());
+			                                       screening.getTime(), screening.getSeats());
 			newScreening.setMovieGetter(movieGetter);
 			screenings.put(newScreening.getId(), newScreening);
 			save(); // may throw an IOException
@@ -248,6 +244,15 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 	public Screening[] findScreeningsForMovie (int movieId) {
 		synchronized (screenings) {
 			return getScreeningsArrayForMovie(movieId);
+		}
+	}
+
+	/** 
+	 * * {@inheritDoc}
+	*/
+	public boolean[][] findScreeningSeats(Screening screening){
+		synchronized (screenings){
+			return screening.getSeats();
 		}
 	}
 }

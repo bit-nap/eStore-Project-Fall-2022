@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Logger;
 
 /**
  * Implements the functionality for JSON file-based persistence for Orders.<p>
@@ -23,9 +22,6 @@ import java.util.logging.Logger;
 public class OrderJSONDAO implements OrderDAO {
 	/** A local cache of Order objects, to avoid reading from file each time. */
 	Map<Integer, Order> orders;
-
-	/** TODO: Add description of the purpose of Logger, once it's actually used. */
-	private static final Logger LOG = Logger.getLogger(OrderJSONDAO.class.getName());
 
 	/** The next id to assign to a new order. */
 	private static int nextId;

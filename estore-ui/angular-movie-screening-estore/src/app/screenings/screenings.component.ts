@@ -33,7 +33,7 @@ export class ScreeningsComponent implements OnInit {
     // TODO: Figure out when in the lifecycle of the component to call this method
     this.http.get<[Screening]>('http://127.0.0.1:8080/screenings/?movieId='+ this.movieSelector.getMovieId()).subscribe((data: Screening[]) => {
       this.screenings = data;
-    })
+    });
   }
 
   /**

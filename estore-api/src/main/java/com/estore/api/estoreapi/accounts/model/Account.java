@@ -2,8 +2,6 @@ package com.estore.api.estoreapi.accounts.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.logging.Logger;
-
 /**
  * Represents an account that may be logged in to
  *
@@ -11,9 +9,6 @@ import java.util.logging.Logger;
  */
 public class Account {
 	static final String STRING_FORMAT = "Account [id=%d, username=%s, password=%s]";
-
-	/** TODO: Add description of the purpose of Logger, once it's actually used. */
-	private static final Logger LOG = Logger.getLogger(Account.class.getName());
 
 	/** The id of this account */
 	@JsonProperty("id") private int id;

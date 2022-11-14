@@ -1,3 +1,12 @@
 .inventory-options {
   background-color: gray;
 }
+
+#change-vote:hover {
+  scale: 1.05;
+}
+
+#change-vote:active {
+  scale: .95;
+  background-color: #a54a22;
+}

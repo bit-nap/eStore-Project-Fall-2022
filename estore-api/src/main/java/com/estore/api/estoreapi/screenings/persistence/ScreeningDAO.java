@@ -59,15 +59,6 @@ public interface ScreeningDAO {
 	Screening[] getScreenings () throws IOException;
 
 	/**
-	 * Finds all {@linkplain Screening screenings} whose movie title contains the given text.
-	 *
-	 * @param text The text to match against
-	 * @return An array of {@link Screening screenings} whose movie title contains the given text, may be empty
-	 * @throws IOException if an issue with underlying storage
-	 */
-	Screening[] findScreenings (String text) throws IOException;
-
-	/**
 	 * Finds all {@linkplain Screening screenings} whose movie id matches the given id.
 	 *
 	 * @param movieId The movie id to match against
@@ -75,12 +66,4 @@ public interface ScreeningDAO {
 	 * @throws IOException if an issue with underlying storage
 	 */
 	Screening[] findScreeningsForMovie (int movieId) throws IOException;
-
-	/** 
-	 * Finds all {@linkplain Screening screenings} whose movie id matches the given id.
-	 *
-	 * @param screening The screening
-	 * @return An 2d array of {@link bolean seats} that are the seats and the availability of the screening. false if the seat is empty
-	*/
-	boolean[][] findScreeningSeats(Screening screening);
 }

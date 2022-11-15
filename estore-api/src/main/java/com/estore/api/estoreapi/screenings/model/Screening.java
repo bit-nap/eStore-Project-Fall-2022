@@ -1,9 +1,6 @@
 package com.estore.api.estoreapi.screenings.model;
 
-import com.estore.api.estoreapi.movies.MovieGetter;
-import com.estore.api.estoreapi.movies.model.Movie;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
@@ -35,11 +32,6 @@ public class Screening implements Comparable<Screening> {
 	 * If the seat is already taken the element will be true else false.
 	 */
 	@JsonProperty("seats") private boolean[][] seats;
-
-	/** The MovieGetter object used to set this object's movie field. */
-	@JsonIgnore MovieGetter movieGetter;
-	/** The Movie being shown at this screening. */
-	@JsonIgnore private Movie movie;
 
 	/**
 	 * Create a Screening object with the given id and movie name. The {@linkplain #setMovieGetter} method should be called
@@ -74,56 +66,12 @@ public class Screening implements Comparable<Screening> {
 	}
 
 	/**
-	 * Create a Screening object with the given information.
-	 *
-	 * @param movieGetter      The MovieGetter object used to set this object's movie field
-	 * @param id               The id of this screening
-	 * @param movieId          The id of the Movie being shown at this screening
-	 * @param ticketsRemaining The number of tickets remaining for this screening
-	 * @param date             The date of this screening
-	 * @param time             The time of this screening
-	 *                         <p>
-	 *                         {@literal @}JsonProperty is used in serialization and deserialization
-	 *                         of the JSON object to the Java object in mapping the fields.  If a field
-	 *                         is not provided in the JSON object, the Java field gets the default Java
-	 *                         value, i.e. 0 for int
-	 */
-	public Screening (@JsonProperty("id") int id, @JsonProperty("movieId") int movieId,
-	                  @JsonProperty("ticketsRemaining") int ticketsRemaining, @JsonProperty("date") String date,
-	                  @JsonProperty("time") String time, @JsonProperty("seats") boolean[][] seats, MovieGetter movieGetter) {
-		this(id, movieId, ticketsRemaining, date, time, seats);
-		setMovieGetter(movieGetter);
-	}
-
-	/**
-	 * Set this object's MovieGetter.
-	 *
-	 * @param movieGetter The MovieGetter object used to set this object's movie field.
-	 */
-	public void setMovieGetter (MovieGetter movieGetter) {
-		this.movieGetter = movieGetter;
-		this.movie = this.movieGetter.getMovie(movieId);
-	}
-
-	/**
 	 * Update this screening's movie.
 	 *
 	 * @param movieId The id of the Movie being shown at this screening
 	 */
 	public void setMovieId (int movieId) {
 		this.movieId = movieId;
-		this.movie = movieGetter.getMovie(movieId);
-	}
-
-	/**
-	 * Check if this screening's movie contains the given text in its title.
-	 * Assumes this screening's movieGetter field has been correctly instantiated.
-	 *
-	 * @param text Text to search within this screening's movie.
-	 * @return True if given text is found in the movie title, else False
-	 */
-	public boolean movieTitleContains (String text) {
-		return movie.titleContains(text);
 	}
 
 	/**
@@ -172,13 +120,6 @@ public class Screening implements Comparable<Screening> {
 	}
 
 	/**
-	 * @return The Movie being shown at this screening
-	 */
-	public Movie getMovie () {
-		return movie;
-	}
-
-	/**
 	 * @return The seats and their availability for this screening, false for empty seats
 	 */
 	public boolean[][] getSeats () {
@@ -217,7 +158,8 @@ public class Screening implements Comparable<Screening> {
 		return date.equals(screening.date) && time.equals(screening.time);
 	}
 
-	@Override public int hashCode () {
+	@Override
+	public int hashCode () {
 		return Objects.hash(date, time);
 	}
 

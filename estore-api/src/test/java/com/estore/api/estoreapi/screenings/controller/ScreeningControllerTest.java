@@ -1,7 +1,5 @@
 package com.estore.api.estoreapi.screenings.controller;
 
-import com.estore.api.estoreapi.movies.MovieGetter;
-import com.estore.api.estoreapi.movies.model.Movie;
 import com.estore.api.estoreapi.screenings.model.Screening;
 import com.estore.api.estoreapi.screenings.persistence.ScreeningDAO;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +22,6 @@ import static org.mockito.Mockito.*;
 public class ScreeningControllerTest {
 	private ScreeningController screeningController;
 	private ScreeningDAO mockScreeningDao;
-	private MovieGetter mockMovieGetter;
 
 	/**
 	 * Before a test, create a new ScreeningController object and inject a mock Screening DAO.
@@ -33,19 +30,14 @@ public class ScreeningControllerTest {
 	public void setupScreeningController () {
 		mockScreeningDao = mock(ScreeningDAO.class);
 		screeningController = new ScreeningController(mockScreeningDao);
-
-		Movie testMovie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
-		mockMovieGetter = mock(MovieGetter.class);
-		when(mockMovieGetter.getMovie(104)).thenReturn(testMovie);
-		when(mockMovieGetter.getMovie(105)).thenReturn(testMovie);
 	}
 
 	@Test
 	public void testGetScreening () throws IOException {
 		// setup
 		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
-				{ true, true, true, true, true }, { true, true, true, true, true } };
-		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", seats, mockMovieGetter);
+			{ true, true, true, true, true }, { true, true, true, true, true } };
+		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", seats);
 		// when the same id is passed in, our mock screening DAO will return the Screening object
 		when(mockScreeningDao.getScreening(screening.getId())).thenReturn(screening);
 
@@ -94,7 +86,7 @@ public class ScreeningControllerTest {
 	public void testGetScreenings () throws Exception {
 		// New list of screenings
 		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
-				{ true, true, true, true, true }, { true, true, true, true, true } };
+			{ true, true, true, true, true }, { true, true, true, true, true } };
 		Screening[] screenings = new Screening[3];
 		screenings[0] = new Screening(1, 1, 80, "01/01/2023", "18:00:00", seats);
 		screenings[1] = new Screening(2, 2, 50, "01/01/2023", "18:00:00", seats);
@@ -127,8 +119,8 @@ public class ScreeningControllerTest {
 	public void testCreateScreening () throws IOException {
 		// setup
 		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
-				{ true, true, true, true, true }, { true, true, true, true, true } };
-		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", seats, mockMovieGetter);
+			{ true, true, true, true, true }, { true, true, true, true, true } };
+		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", seats);
 		// when createScreening is called, return true simulating successful creation and save
 		when(mockScreeningDao.createScreening(screening)).thenReturn(screening);
 
@@ -144,8 +136,8 @@ public class ScreeningControllerTest {
 	public void testCreateScreeningFailed () throws IOException {
 		// setup
 		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
-				{ true, true, true, true, true }, { true, true, true, true, true } };
-		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", seats, mockMovieGetter);
+			{ true, true, true, true, true }, { true, true, true, true, true } };
+		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", seats);
 		// when createScreening is called, return false simulating failed creation and save
 		when(mockScreeningDao.createScreening(screening)).thenReturn(null);
 
@@ -160,8 +152,8 @@ public class ScreeningControllerTest {
 	public void testCreateScreeningHandleException () throws IOException {
 		// setup
 		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
-				{ true, true, true, true, true }, { true, true, true, true, true } };
-		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", seats, mockMovieGetter);
+			{ true, true, true, true, true }, { true, true, true, true, true } };
+		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", seats);
 
 		// when createScreening is called, throw an IOException
 		doThrow(new IOException()).when(mockScreeningDao).createScreening(screening);
@@ -174,49 +166,14 @@ public class ScreeningControllerTest {
 	}
 
 	@Test
-	public void testSearchScreenings () throws IOException {
-		// Setup
-		String searchString = "Star Wars"; // the movieId of 104 points to Star Wars IV
-		Screening[] foundScreenings = new Screening[2];
-		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
-				{ true, true, true, true, true }, { true, true, true, true, true } };
-		foundScreenings[0] = new Screening(101, 104, 6, "01/17/2023", "18:00", seats, mockMovieGetter);
-		foundScreenings[1] = new Screening(101, 104, 6, "01/17/2023", "18:00", seats, mockMovieGetter);
-		// When findScreenings is called with the search string, return the two
-		// screenings above
-		when(mockScreeningDao.findScreenings(searchString)).thenReturn(foundScreenings);
-
-		// Invoke
-		ResponseEntity<Screening[]> response = screeningController.searchScreeningsByTitle(searchString);
-
-		// Analyze
-		assertEquals(HttpStatus.OK, response.getStatusCode());
-		assertEquals(foundScreenings, response.getBody());
-	}
-
-	@Test
-	public void testSearchScreeningsHandleException () throws IOException {
-		// Setup
-		String searchString = "an";
-		// When createScreening is called on the Mock Screening DAO, throw an IOException
-		doThrow(new IOException()).when(mockScreeningDao).findScreenings(searchString);
-
-		// Invoke
-		ResponseEntity<Screening[]> response = screeningController.searchScreeningsByTitle(searchString);
-
-		// Analyze
-		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-	}
-
-	@Test
 	public void testSearchScreeningsByMovieId () throws IOException {
 		// Setup
 		int searchId = 104; // the movieId of 104 points to Star Wars IV
 		Screening[] foundScreenings = new Screening[2];
 		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
-				{ true, true, true, true, true }, { true, true, true, true, true } };
-		foundScreenings[0] = new Screening(101, 104, 6, "01/17/2023", "18:00", seats, mockMovieGetter);
-		foundScreenings[1] = new Screening(102, 104, 6, "01/17/2023", "18:00", seats, mockMovieGetter);
+			{ true, true, true, true, true }, { true, true, true, true, true } };
+		foundScreenings[0] = new Screening(101, 104, 6, "01/17/2023", "18:00", seats);
+		foundScreenings[1] = new Screening(102, 104, 6, "01/17/2023", "18:00", seats);
 		// When findScreenings is called with the search string, return the two screenings above
 		when(mockScreeningDao.findScreeningsForMovie(searchId)).thenReturn(foundScreenings);
 
@@ -246,8 +203,8 @@ public class ScreeningControllerTest {
 	public void testUpdateScreening () throws IOException {
 		// Setup
 		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
-				{ true, true, true, true, true }, { true, true, true, true, true } };
-		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", seats, mockMovieGetter);
+			{ true, true, true, true, true }, { true, true, true, true, true } };
+		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", seats);
 		// when updateScreening is called, return true simulating successful update and save
 		when(mockScreeningDao.updateScreening(screening)).thenReturn(screening);
 		ResponseEntity<Screening> response = screeningController.updateScreening(screening);
@@ -265,8 +222,8 @@ public class ScreeningControllerTest {
 	public void testUpdateScreeningExceptionNotFound () throws IOException {
 		// Setup
 		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
-				{ true, true, true, true, true }, { true, true, true, true, true } };
-		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", seats, mockMovieGetter);
+			{ true, true, true, true, true }, { true, true, true, true, true } };
+		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", seats);
 		// when updateScreening is called, return null simulating screening not found
 		when(mockScreeningDao.updateScreening(screening)).thenReturn(null);
 
@@ -281,8 +238,8 @@ public class ScreeningControllerTest {
 	public void testUpdateScreeningHandleException () throws IOException {
 		// Setup
 		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
-				{ true, true, true, true, true }, { true, true, true, true, true } };
-		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", seats, mockMovieGetter);
+			{ true, true, true, true, true }, { true, true, true, true, true } };
+		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", seats);
 		// When updateScreening is called on the Mock Screening DAO, throw an IOException
 		doThrow(new IOException()).when(mockScreeningDao).updateScreening(screening);
 

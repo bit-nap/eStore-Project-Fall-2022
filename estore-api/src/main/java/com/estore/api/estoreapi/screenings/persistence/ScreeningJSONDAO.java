@@ -1,6 +1,5 @@
 package com.estore.api.estoreapi.screenings.persistence;
 
-import com.estore.api.estoreapi.movies.MovieGetter;
 import com.estore.api.estoreapi.screenings.model.Screening;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,8 +28,6 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 	private final String filename;
 	/** Provides conversion between Java Screening and JSON Screening objects. */
 	private final ObjectMapper objectMapper;
-	/** Provides Screening objects with Movie objects based on their movieId field. */
-	private final MovieGetter movieGetter;
 
 	/**
 	 * Creates a Data Access Object for JSON-based Screenings.
@@ -39,10 +36,9 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 	 * @param objectMapper Provides JSON Object to/from Java Object serialization and deserialization
 	 * @throws IOException when file cannot be accessed or read from
 	 */
-	public ScreeningJSONDAO (@Value("${screenings.file}") String filename, ObjectMapper objectMapper, MovieGetter movieGetter) throws IOException {
+	public ScreeningJSONDAO (@Value("${screenings.file}") String filename, ObjectMapper objectMapper) throws IOException {
 		this.filename = filename;
 		this.objectMapper = objectMapper;
-		this.movieGetter = movieGetter;
 		load();  // load the screenings from the file
 	}
 
@@ -63,27 +59,7 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 	 * @return The array of {@link Screening screenings}, may be empty
 	 */
 	private Screening[] getScreeningsArray () {
-		return getScreeningsArray(null);
-	}
-
-	/**
-	 * Generates an array of {@linkplain Screening screenings} from the tree map for any
-	 * {@linkplain Screening screenings} that contains the movie title specified by text argument,
-	 * sorted by their Screening date and time.
-	 *
-	 * @param text The text to find within a {@link Screening screenings} screening<p>
-	 *             If text is null, the array contains all of the {@linkplain Screening screenings} in the tree map.
-	 * @return The array of {@link Screening screenings}, may be empty
-	 */
-	private Screening[] getScreeningsArray (String text) {
-		List<Screening> screeningArrayList = new ArrayList<>();
-
-		for (Screening screening : screenings.values()) {
-			if (text == null || screening.movieTitleContains(text)) {
-				screeningArrayList.add(screening);
-			}
-		}
-
+		List<Screening> screeningArrayList = new ArrayList<>(screenings.values());
 		Screening[] screeningArray = new Screening[screeningArrayList.size()];
 		Collections.sort(screeningArrayList);
 		screeningArrayList.toArray(screeningArray);
@@ -145,7 +121,6 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 
 		// Add each screening to the tree map and keep track of the greatest id
 		for (Screening screening : screeningArray) {
-			screening.setMovieGetter(movieGetter);
 			screenings.put(screening.getId(), screening);
 			if (screening.getId() > nextId) {
 				nextId = screening.getId();
@@ -165,7 +140,6 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 			// We create a new screening object because the id field is immutable, and we need to assign the next unique id
 			Screening newScreening = new Screening(nextId(), screening.getMovieId(), screening.getTicketsRemaining(), screening.getDate(),
 			                                       screening.getTime(), screening.getSeats());
-			newScreening.setMovieGetter(movieGetter);
 			screenings.put(newScreening.getId(), newScreening);
 			save(); // may throw an IOException
 			return newScreening;
@@ -231,28 +205,9 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 	 * * {@inheritDoc}
 	 */
 	@Override
-	public Screening[] findScreenings (String text) {
-		synchronized (screenings) {
-			return getScreeningsArray(text);
-		}
-	}
-
-	/**
-	 * * {@inheritDoc}
-	 */
-	@Override
 	public Screening[] findScreeningsForMovie (int movieId) {
 		synchronized (screenings) {
 			return getScreeningsArrayForMovie(movieId);
-		}
-	}
-
-	/**
-	 * * {@inheritDoc}
-	*/
-	public boolean[][] findScreeningSeats(Screening screening){
-		synchronized (screenings){
-			return screening.getSeats();
 		}
 	}
 }

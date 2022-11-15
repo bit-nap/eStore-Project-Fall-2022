@@ -161,9 +161,9 @@ selected movie and date and time of the screening using the `MovieSelectorServic
 
 The `ScreeningController` is used to respond to HTTP requests for `Screening` objects. There are methods that handle simple GET, POST, PUT, DELETE requests.
 The POST and PUT requests require a `Screening` object as an argument, to insert into the storage of `Screening` objects.
-The methods `getScreeningByTitle` and `getScreeningsByMovieId` are used to find all `Screenings` related to a movie.
+The method `getScreeningsByMovieId` is used to find all `Screenings` for a `Movie`.
 The `getScreeningsByMovieId` takes an argument representing a movie id to search for, and returns an array of all `Screenings` for that movie.
-This method is used in the View Tier to display all screenings of a movie when they are placing an order.
+This method is used in the View Tier to display all screenings of a movie when a user is placing an order.
 
 ![MovieController UML Diagram](uml-diagrams/movie-controller.png)
 

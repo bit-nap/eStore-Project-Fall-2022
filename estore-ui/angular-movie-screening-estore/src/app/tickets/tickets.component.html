@@ -1,14 +1,4 @@
-<div class="header">
-  <p id="movie-title">{{getMovieTitle()}}</p>
-  <input readonly id="ticket-count" value="{{numOfTickets}}">
-</div>
-
-
 <div class="main-container">
-  <div class="movie-poster-container">
-    <img id="movieImg" src="{{getMoviePoster()}}" alt="Movie poster for {{getMovieTitle()}}" />
-  </div>
-
   <div class="cinema">
     <div class="showcase">
       <div class="seat"></div> AVAILABLE
@@ -36,63 +26,82 @@
       </div>
     </div>
   </div>
-
+  
   <div class="select-items-container">
-    <p>Select Items to Purchase</p>
-    <span class="list">
-      <h2>Choose a Beverage</h2>
+    <!-- <p>Select Items to Purchase</p> -->
+    <p id="movie-title">{{getMovieTitle()}}</p>
+    <div class="movie-poster-container">
+      <img id="movieImg" src="{{getMoviePoster()}}"  alt="Movie poster for {{getMovieTitle()}}"/>
+    </div>
+    <p id="info">Enter number of tickets:</p>
+    <input type="tel" id="ticket-input" [(ngModel)]="numOfTickets" placeholder="#">
+    <button id="snack-button" (click)="isModalOpen = !isModalOpen">Buy Snacks</button>
+    <button id="completePurchase" (click)="completePurchase()">Complete purchase</button>
+  </div>
+  <p id="error-message" (click)="clearErrorMessage()"></p>
+  
+</div>
+
+<div class="modal-container" [ngStyle]="{'display': isModalOpen ? 'flex' : 'none'}">
+  <div class="modal" >
+    <h1 id="modal-title">Chose Snacks</h1>
+    <span class="list" id="blist">
+      <h2>Choose Beverage Size</h2>
       <span>
-        <h3>Small</h3>
-        <div>
-          <button (click)="bsubstractSmall()">-</button>
-          <input readonly type="number" value="{{bsmall_value}}">
-          <button (click)="baddSmall()">+</button>
-        </div>
+          <h3>Small</h3>
+          <div>
+              <button (click)="bsubstractSmall()">-</button>
+              <input readonly type="number" value="{{bsmall_value}}">
+              <button (click)="baddSmall()">+</button>
+          </div>
       </span>
       <span>
-        <h3>Medium</h3>
-        <div>
-          <button (click)="bsubstractMedium()">-</button>
-          <input readonly type="number" value="{{bmedium_value}}">
-          <button (click)="baddMedium()">+</button>
-        </div>
+          <h3>Medium</h3>
+          <div>
+              <button (click)="bsubstractMedium()">-</button>
+              <input readonly type="number" value="{{bmedium_value}}">
+              <button (click)="baddMedium()">+</button>
+          </div>
       </span>
       <span>
-        <h3>Large</h3>
-        <div>
-          <button (click)="bsubstractLarge()">-</button>
-          <input readonly type="number" value="{{blarge_value}}">
-          <button (click)="baddLarge()">+</button>
-        </div>
-      </span>
+          <h3>Large</h3>
+          <div>
+              <button (click)="bsubstractLarge()">-</button>
+              <input readonly type="number"  value="{{blarge_value}}">
+              <button (click)="baddLarge()">+</button>
+          </div>
+        </span>
     </span>
-    <span class="list">
-      <h2>Choose a Snack</h2>
-      <span>
-        <h3>Small</h3>
-        <div>
-          <button (click)="psubstractSmall()">-</button>
-          <input readonly type="number" value="{{psmall_value}}">
-          <button (click)="paddSmall()">+</button>
-        </div>
+      <span class="list" id="plist">
+        <h2>Chose Popcorn Size</h2>
+        <span>
+            <h3>Small</h3>
+            <div>
+                <button (click)="psubstractSmall()">-</button>
+                <input readonly type="number" value="{{psmall_value}}">
+                <button (click)="paddSmall()">+</button>
+            </div>
+        </span>
+        <span>
+            <h3>Medium</h3>
+            <div>
+                <button (click)="psubstractMedium()">-</button>
+                <input readonly type="number" value="{{pmedium_value}}">
+                <button (click)="paddMedium()">+</button>
+            </div>
+        </span>
+        <span>
+            <h3>Large</h3>
+            <div>
+                <button (click)="psubstractLarge()">-</button>
+                <input readonly type="number"  value="{{plarge_value}}">
+                <button (click)="paddLarge()">+</button>
+            </div>
+        </span>
       </span>
-      <span>
-        <h3>Medium</h3>
-        <div>
-          <button (click)="psubstractMedium()">-</button>
-          <input readonly type="number" value="{{pmedium_value}}">
-          <button (click)="paddMedium()">+</button>
-        </div>
-      </span>
-      <span>
-        <h3>Large</h3>
-        <div>
-          <button (click)="psubstractLarge()">-</button>
-          <input readonly type="number" value="{{plarge_value}}">
-          <button (click)="paddLarge()">+</button>
-        </div>
-      </span>
-    </span>
-    <button (click)="completePurchase()">Complete purchase</button>
+      <div class="modal-footer-container">
+        <button id="confirm-button" class="modal-footer-button" (click)="isModalOpen = !isModalOpen">Confirm</button>
+        <button id="cancel-button" class="modal-footer-button" (click)="cancelOrder();isModalOpen = !isModalOpen">Cancel</button>
+      </div>
   </div>
 </div>

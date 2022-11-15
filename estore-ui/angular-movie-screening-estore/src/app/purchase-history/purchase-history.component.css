@@ -1,0 +1,23 @@
+.orders .id {
+  display: inline-block;
+  font-size: large;
+  color: black;
+  padding: 0.8em;
+  background-color: #ba5a31;
+  position: relative;
+  min-width: 16px;
+  text-align: center;
+  margin-bottom: .8em;
+}
+
+.orders .item {
+  display: inline-block;
+  font-size: large;
+  color: black;
+  padding: 0.8em;
+  background-color: #919191;
+  position: relative;
+  min-width: 16px;
+  text-align: center;
+  margin-bottom: .8em;
+}

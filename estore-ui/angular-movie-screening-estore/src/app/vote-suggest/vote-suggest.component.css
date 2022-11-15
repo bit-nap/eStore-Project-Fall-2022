@@ -1,12 +1,46 @@
-.new-suggestion {
-  background-color: gray;
+
+h2 {
+  text-align: center;
 }
 
+.new-suggestion {
+  background-color: transparent;
+}
+
+#change-vote {
+  color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0);
+  border: rgba(255, 255, 255, 0.5) solid 1px;
+  border-radius: 5px;
+  padding: 10px;
+}
 #change-vote:hover {
-  scale: 1.05;
+  color: rgba(255, 255, 255, 1);
+  border:rgba(255, 255, 255, 1) solid 1px;
+  text-decoration: none;
+  transition: all .1s;
 }
 
 #change-vote:active {
   scale: .95;
   background-color: #a54a22;
+}
+
+#voting {
+  width: 30%;
+  height: 50px;
+  border-bottom: rgba(255, 255, 255, 0.3) solid 2px;
+  background-color: rgba(0, 0, 0, 0);
+  transition: border .3s;
+}
+#voting:focus {
+  border-bottom: rgba(255, 255, 255, 0.9)solid 2px;
+  outline: none;
+}
+
+.new-suggestion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
 }

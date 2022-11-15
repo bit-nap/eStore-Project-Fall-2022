@@ -1,0 +1,39 @@
+<html>
+  <div>
+    <h2>Order History:</h2>
+    <br>
+
+    <ul class="orders">
+      <li *ngFor="let order of orders; let i = index">
+        <span class = "id">id: {{order.id}}</span>
+        <span class = "item">screening id: {{order.screeningId}}</span>
+        <div>
+          <span class = "id"># tickets: {{order.tickets}}</span>
+        </div>
+        <!-- Print orders for popcorn if they exist -->
+        <div *ngIf="order.popcorn[0] > 0">
+          <span class = "item"># small popcorn: {{order.popcorn[0]}}</span>
+        </div>
+        <div *ngIf="order.popcorn[1] > 0">
+          <span class = "item"># medium popcorn: {{order.popcorn[1]}}</span>
+        </div>
+        <div *ngIf="order.popcorn[2] > 0">
+          <span class = "item"># large popcorn: {{order.popcorn[2]}}</span>
+        </div>
+        <!-- Print orders for soda if they exist -->
+        <div *ngIf="order.soda[0] > 0">
+          <span class = "item"># small soda: {{order.soda[0]}}</span>
+        </div>
+        <div *ngIf="order.soda[1] > 0">
+          <span class = "item"># medium soda: {{order.soda[1]}}</span>
+        </div>
+        <div *ngIf="order.soda[2] > 0">
+          <span class = "item"># large soda: {{order.soda[2]}}</span>
+        </div>
+      </li>
+    </ul>
+
+    <p id="getUsernameMessage"></p>
+    <p id="getOrdersMessage"></p>
+  </div>
+</html>

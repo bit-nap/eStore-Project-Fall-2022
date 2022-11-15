@@ -6,6 +6,7 @@ import { TicketsComponent } from "./tickets/tickets.component";
 import { CompletedPurchaseComponent } from "./completed-purchase/completed-purchase.component";
 import { AdminComponent } from './admin/admin.component';
 import { ScreeningsComponent } from "./screenings/screenings.component";
+import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
 import { SuggestComponent } from './vote-suggest/vote-suggest.component';
 import { SuggestAdminComponent } from './vote-suggest-admin/vote-suggest-admin.component';
 
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'tickets', component: TicketsComponent},
   { path: 'thank', component: CompletedPurchaseComponent},
   { path: 'admin', component: AdminComponent },
+  { path: 'purchase-history', component: PurchaseHistoryComponent},
   { path: 'vote', component: SuggestComponent },
   { path: 'vote-admin', component: SuggestAdminComponent }
 ];

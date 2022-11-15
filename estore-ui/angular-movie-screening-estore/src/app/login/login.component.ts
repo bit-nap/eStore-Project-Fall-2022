@@ -66,26 +66,11 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * Method that will create functionality so the user can delete their username
-   * @param username string of the username passed in from the webpage
-   */
-  deleteUsername(username: string): void {
-    this.resetUsernameMessages();
-
-    this.http.delete<Accounts>('http://127.0.0.1:8080/accounts/' + username).subscribe((data: Accounts) => {
-      document.getElementById("deleteUsernameMessage")!.innerHTML = "Account has been deleted.";
-    }, (response) => {
-      document.getElementById("deleteUsernameMessage")!.innerHTML = "Account does not exist.";
-    });
-  }
-
-  /**
    * Method that will reset the paragraphs that show messages for the create username, sign in, and delete
    * username methodss
    */
   resetUsernameMessages(): void {
     document.getElementById("newUsernameMessage")!.innerHTML = "";
     document.getElementById("signinUsernameMessage")!.innerHTML = "";
-    document.getElementById("deleteUsernameMessage")!.innerHTML = "";
   }
 }

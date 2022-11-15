@@ -2,6 +2,7 @@
     <h1 routerLink="" style="cursor: pointer">{{title}}</h1>
     <p id="current-user">{{updateUsername()}}</p>
     <div class="header-right_wrapper">
+      <button *ngIf="!isUserLoggedIn && !this.loggedInAccount.isAdmin()" (click)="deleteAccount()">Delete Account</button>
       <button *ngIf="!isUserLoggedIn" (click)="goToPage('purchase-history')">Orders</button>
       <button *ngIf="isUserLoggedIn" class="login" (click)="goToPage('login')">Login</button>
       <button *ngIf="!isUserLoggedIn" class="login" (click)="logout()">Logout</button>

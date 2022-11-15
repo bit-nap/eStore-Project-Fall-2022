@@ -4,5 +4,6 @@ export interface Screening {
   movieId: number,
   ticketsRemaining: number,
   date: string,
-  time: string
+  time: string,
+  seats: boolean[][]
 }

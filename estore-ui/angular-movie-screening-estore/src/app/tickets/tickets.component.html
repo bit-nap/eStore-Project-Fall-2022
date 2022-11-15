@@ -1,4 +1,31 @@
 <div class="main-container">
+  <div class="cinema">
+    <div class="showcase">
+      <div class="seat"></div> AVAILABLE
+      <div class="seat-unavailable"></div> UNAVAILABLE
+      <div class="seat-selected"></div> SELECTED
+    </div>
+    
+    <h1>SCREEN</h1>
+    <div class="cinema">
+      <div *ngFor="let i of selectSeats">
+        <div class="row">
+          <ng-container *ngFor="let j of i">
+            <ng-container *ngIf="j; then btnDisabled; else btnEnabled">
+            </ng-container>
+
+            <ng-template #btnEnabled>
+              <button type="button" onclick="seatCount(row,column); myFunction()" class="seat" id="btn">{{increaseColumn()}}</button>
+            </ng-template>
+
+            <ng-template #btnDisabled>
+              <button type="button" disabled class="seat-unavailable">{{increaseColumn()}}</button>
+            </ng-template>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
   
   <div class="select-items-container">
     <!-- <p>Select Items to Purchase</p> -->

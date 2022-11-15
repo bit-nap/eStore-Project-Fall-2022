@@ -106,6 +106,7 @@ This section describes the web interface flow; this is how the user views and in
 with the e-store application.
 
 The landing page displays the all the movies a user can view at the theater.
+The user can enter text into the search bar to filter the movies they see based on their movie title.
 There is a navigation header at the top of the webpage that has a button that allows a user to log in to, create, or delete their account.
 
 When logged in, a user can select a movie from the homepage which brings up a list of screenings for that movie.
@@ -154,6 +155,23 @@ selected movie and date and time of the screening using the `MovieSelectorServic
 
 > _At appropriate places as part of this narrative provide one or more
 > static models (UML class diagrams) with some details such as critical attributes and methods._
+
+
+![ScreeningController UML Diagram](uml-diagrams/screening-controller.png)
+
+The `ScreeningController` is used to respond to HTTP requests for `Screening` objects. There are methods that handle simple GET, POST, PUT, DELETE requests.
+The POST and PUT requests require a `Screening` object as an argument, to insert into the storage of `Screening` objects.
+The methods `getScreeningByTitle` and `getScreeningsByMovieId` are used to find all `Screenings` related to a movie.
+The `getScreeningsByMovieId` takes an argument representing a movie id to search for, and returns an array of all `Screenings` for that movie.
+This method is used in the View Tier to display all screenings of a movie when they are placing an order.
+
+![MovieController UML Diagram](uml-diagrams/movie-controller.png)
+
+The `MovieController` is used to respond to HTTP requests for `Movie` objects. There are methods that handle simple GET, POST, PUT, DELETE requests.
+The POST and PUT requests require a `Movie` object as an argument, to insert into the storage of `Movie` objects.
+The `searchMovies` method takes an argument of a String to find all movies with a title that contains that string.
+This method is used in the View Tier, providing the functionality of the homepage search bar.
+
 
 ### Model Tier
 

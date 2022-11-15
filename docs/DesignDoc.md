@@ -113,6 +113,9 @@ When logged in, a user can select a movie from the homepage which brings up a li
 Upon selecting a screening, the user can select a seat (thereby selecting a ticket) to purchase for a screening.
 In the same page, a user can select the number of sodas and/or popcorn to purchase for the same screening.
 The user can then finalize their purchase and is displayed a page with information about the screening they have purchased tickets for.
+The user, when logged in, can vote or suggest on a new movie. If they click on a button for a movie, it will increase the number of votes 
+by one. They can click it as many times as they want. They can also suggest a new movie to be added that will have 1 vote added automatically. 
+The admin, when logged in, can add a new movie or change the movie name of a previous one, but they cannot vote themselves.
 
 ### View Tier
 
@@ -147,6 +150,14 @@ an HTTP POST request to the orders endpoint, adding that order to the storage. T
 The `CompletedPurchase` component then presents the user with a summary of their order. Specifically, it displays information about the
 selected movie and date and time of the screening using the `MovieSelectorService` and `ScreeningSelectorService`.
 
+The `VoteSuggestion` component presents the user with a list of movies that they can vote on, or add a new movie. It will use an HTTP GET request to get the movie,
+and then use a PUT to add a vote to the movie.
+
+The `VoteSuggestionAdmin` component presents the admin with a similar pge to the user. But, they will be able to use an HTTP PUT method to change the movie name.
+
+The `AdminComponent` component presents the admin the ability to change inventory and change the vote/suggestions. For the inventory, they will use POST methods to 
+create a new screening, and a PUT method to change the screening, and DELETE method to delete the screening.
+
 ### ViewModel Tier
 
 > _Provide a summary of this tier of your architecture. This
@@ -172,6 +183,11 @@ The POST and PUT requests require a `Movie` object as an argument, to insert int
 The `searchMovies` method takes an argument of a String to find all movies with a title that contains that string.
 This method is used in the View Tier, providing the functionality of the homepage search bar.
 
+![SuggestionController UML Diagram](uml-diagram/suggestion-controller.png)
+
+The `SuggestionController` is used to respond to HTTP requests for `Suggestion` objects. There are methods that handle simple GET, POST, PUT, and DELETE requests.
+The POST and PUT requests require a `Suggestion` object as an argument, to insert into the storage of a `Suggestion` objects.
+
 
 ### Model Tier
 
@@ -193,6 +209,12 @@ The `Screening` model has fields relating to the screening of a movie (indicated
 The `ticketsRemaining` field can never be higher than the `TOTAL_TICKETS` field in the `Screening` class. This number will decrement everytime
 a user purchases tickets to a screening. The `seats` field is a 2D Array of booleans representing the 20 seats in the theater.
 If a seat is already reserved by a user, it will have a value of `True` in the `seats` field. If the seat is empty, it will be `False`.
+
+![Suggestion UML Diagram](uml-diagram/suggestion-model.png)
+
+The `Suggestion` model has fields relating to the number of votes for the movie and the movie name. 
+The `votes` field will be incremented by one everytime the user clicks on the button on the front end. 
+The `movieTitle` field can be changed by the admin, and added by the user.
 
 ### Static Code Analysis/Design Improvements
 

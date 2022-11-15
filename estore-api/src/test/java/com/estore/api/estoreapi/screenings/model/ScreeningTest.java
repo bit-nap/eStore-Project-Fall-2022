@@ -100,6 +100,22 @@ public class ScreeningTest {
 	}
 
 	@Test
+	public void testEquals () {
+		boolean[][] seats = { { false, false, false, false }, { false, false, false, false } };
+		Screening original = new Screening(101, 104, 6, "01/16/2023", "16:00", seats);
+
+		assertEquals(original, original);
+		assertNotEquals(original, null);
+		assertNotEquals(original, "not a Screening object");
+		Screening diffTime = new Screening(102, 104, 8, "01/16/2023", "18:00", seats);
+		Screening diffDate = new Screening(103, 104, 8, "01/17/2023", "18:00", seats);
+		Screening sameDateAndTime = new Screening(104, 104, 8, "01/16/2023", "16:00", seats);
+		assertNotEquals(original, diffTime);
+		assertNotEquals(original, diffDate);
+		assertEquals(original, sameDateAndTime);
+	}
+
+	@Test
 	public void testToString () {
 		// Setup
 		int id = 99;

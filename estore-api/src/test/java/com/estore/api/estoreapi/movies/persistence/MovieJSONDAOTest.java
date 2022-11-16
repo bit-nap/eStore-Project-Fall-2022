@@ -68,6 +68,15 @@ public class MovieJSONDAOTest {
 	}
 
 	@Test
+	public void testFindEmptyMovies () {
+		// Invoke
+		Movie[] movies = movieFileDAO.findMovies("Spider-Man");
+
+		// Analyze
+		assertEquals(movies.length, 0);
+	}
+
+	@Test
 	public void testGetMovie () {
 		// Invoke
 		Movie movie = movieFileDAO.getMovie(104);

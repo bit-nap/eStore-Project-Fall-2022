@@ -151,12 +151,21 @@ Similarly, the `Screenings` component retrieves all screenings for the selected 
 and an HTTP GET request with a query string. When the user selects a screening, that `Screening` object is saved in the `ScreeningSelectorService`.
 The user is then routed to the `/tickets`page.
 
+Once the user is on the landing page and is presented with the `Movie` objects, they may not select any `Screening` objects for purchase.
+First, the user must click the Login button which routes them to the `/login` page. The `Login` component presents the user with the ability to create an `Account` and sign in with the `Account` username.
+The `Login` component uses an HTTP GET request to get an `Account` with the username entered. If an `Account` with a matching username field exists, no `Account` will be created, if not, an HTTP POST request creates a new `Account` object with this username.
+The `Login` component accepts a username and an HTTP GET request to check if an `Account` with the username exists, then sets the `LoggedInAccountService` account field, then routes to the `/screenings` page.
+
+Once the user has logged in using the `Login` sign in functionality, the `LoggedInAccountService` will keep track of this `Account` that is logged into. Other components use this component to check if the `Account` that has been logged in is a user or an admin. Then the logout functionality untracks the user's `Account` to log out. 
+
 The `Tickets` component presents allows the user to select the seats for a screening, the number of sodas and popcorn to order for the screening.
 When the user finalizes their purchase using the button at the bottom of the page, the `Tickets` component sends
 an HTTP POST request to the orders endpoint, adding that `Order` to the orders persistence. The user is then routed to the `/thank` page.
 
 The `CompletedPurchase` component then presents the user with a summary of their order. Specifically, it displays information about the
 selected movie and date and time of the screening using the `MovieSelectorService` and `ScreeningSelectorService`.
+
+Once the user completes a purchase, the Orders button routes to `/purchase-history` page in which a detailed list of `Order` objects of that have the user's `Account` id field. This is done by an HTTP GET request to get `Order` objects based on the accountId passed in. For each `Order` a `Screening` is obtained by a similar HTTP GET request and is used to display the details of an `Order` object's `Screening`. 
 
 The `VoteSuggestion` component presents the user with a list of movies that they can vote on, or add a new movie. It will use an HTTP GET request to get the movie,
 and then use a PUT to add a vote to the movie.

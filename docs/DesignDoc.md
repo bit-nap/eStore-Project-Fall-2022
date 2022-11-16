@@ -261,13 +261,7 @@ The `seats` array is filled by a String determining the seat number, on creation
 This is displayed on the `tickets` component when ordering, and displayed in the `purchase-history` as the seats for each Screening order.
 
 
-### Static Code Analysis/Design Improvements
-
-> _Discuss design improvements that you would make if the project were
-> to continue. These improvement should be based on your direct
-> analysis of where there are problems in the code base which could be
-> addressed with design changes, and describe those suggested design
-> improvements._
+### Static Code Analysis
 
 To perform a static analysis of our Java code, we used the Sonarqube tool. Our results are shown below.
 
@@ -318,6 +312,20 @@ Our final 3 minor code smells are duplicates of the same issue.
 Sonarqube recommends we replace our current use of the `@RequestMapping` annotation with an `@GetMapping` annotation,on the methods used to get objects with query parameters.
 We originally were using the `@GetMapping` annotation on these methods, but we moved over to the `@RequestMapping` annotation so that a Controller class
 could take multiple different query parameters. Because sonarqube marked this issue as a minor code smell, we will ignore these issues.
+
+### Design Improvements
+
+If we were to continue our project, we would look to improve our Angular design. We believe the current state of our Java code is of very high quality,
+but our Angular structure could use improvement. None of us were familiar with Angular before we undertook this project,
+so we have been learning as we go along. Now that we all have a much stronger foundation in Angular, we would go back and redesign some Components
+and Services we created at the start of our project. We would also take the knowledge we now have of our design and use it
+to create better Service methods that our Components can use, such as merging the `ScreeningSelectorService` and the `MovieSelectorService`.
+
+If we were to continue, we'd also like to make our website design more uniform. Certain components are purely functional
+at the moment, and our goal would be to style them to follow the design on the homepage.
+We believe that website uniformity is important to ensuring a user likes our website, and thus encourages them to purchase tickets to a screening.
+
+We may also look into adding unit testing of our Angular code, so we can identify further areas of improvement.
 
 ## Testing
 

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 
 @Tag("Controller-tier")
@@ -124,11 +125,10 @@ public class AccountControllerTest {
 		// when updateAccount is called, return true simulating successful
 		// update and save
 		when(mockAccountDAO.updateAccount(account)).thenReturn(account);
-		ResponseEntity<Account> response = accountController.updateAccount(account);
 		account.setName("BetterLouan");
 
 		// Invoke
-		response = accountController.updateAccount(account);
+		ResponseEntity<Account> response = accountController.updateAccount(account);
 
 		// Analyze
 		assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -179,6 +179,17 @@ public class AccountControllerTest {
 		// Analyze
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(accounts, response.getBody());
+	}
+
+	@Test
+	public void testGetEmptyAccounts () throws Exception {
+		// When getAccounts is called, return null
+		when(mockAccountDAO.getAccounts()).thenReturn(null);
+		// Get NOT_FOUND response from AccountController
+		ResponseEntity<Account[]> response = accountController.getAccounts();
+
+		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+		assertNull(response.getBody());
 	}
 
 	@Test

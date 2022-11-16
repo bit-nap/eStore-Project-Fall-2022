@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 
 /**
@@ -94,6 +95,17 @@ public class SuggestionControllerTest {
 
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(suggestions, response.getBody());
+	}
+
+	@Test
+	public void testGetEmptySuggestions () throws Exception {
+		// When getSuggestions is called, return null
+		when(mockSuggestionDao.getSuggestions()).thenReturn(null);
+		// Get NOT_FOUND response from SuggestionController
+		ResponseEntity<Suggestion[]> response = suggestionController.getSuggestions();
+
+		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+		assertNull(response.getBody());
 	}
 
 	/**

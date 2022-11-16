@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 
 /**
@@ -94,6 +95,17 @@ public class MovieControllerTest {
 
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(movies, response.getBody());
+	}
+
+	@Test
+	public void testGetEmptyMovies () throws Exception {
+		// When getMovies is called, return null
+		when(mockMovieDao.getMovies()).thenReturn(null);
+		// Get NOT_FOUND response from MovieController
+		ResponseEntity<Movie[]> response = movieController.getMovies();
+
+		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+		assertNull(response.getBody());
 	}
 
 	/**

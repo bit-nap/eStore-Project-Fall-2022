@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 
 /**
@@ -98,6 +99,17 @@ public class ScreeningControllerTest {
 
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(screenings, response.getBody());
+	}
+
+	@Test
+	public void testGetEmptyScreenings () throws Exception {
+		// When getScreenings is called, return null
+		when(mockScreeningDao.getScreenings()).thenReturn(null);
+		// Get NOT_FOUND response from ScreeningController
+		ResponseEntity<Screening[]> response = screeningController.getScreenings();
+
+		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+		assertNull(response.getBody());
 	}
 
 	/**
@@ -207,11 +219,10 @@ public class ScreeningControllerTest {
 		Screening screening = new Screening(101, 104, 6, "01/17/2023", "18:00", seats);
 		// when updateScreening is called, return true simulating successful update and save
 		when(mockScreeningDao.updateScreening(screening)).thenReturn(screening);
-		ResponseEntity<Screening> response = screeningController.updateScreening(screening);
 		screening.setMovieId(105); // does not exist, but will not throw an error because of setup in @BeforeEach method
 
 		// Invoke
-		response = screeningController.updateScreening(screening);
+		ResponseEntity<Screening> response = screeningController.updateScreening(screening);
 
 		// Analyze
 		assertEquals(HttpStatus.OK, response.getStatusCode());

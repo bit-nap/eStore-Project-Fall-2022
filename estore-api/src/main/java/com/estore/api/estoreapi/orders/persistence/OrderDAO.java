@@ -13,12 +13,12 @@ public interface OrderDAO {
 	/**
 	 * Creates and saves a {@linkplain Order Order}.
 	 *
-	 * @param Order {@linkplain Order Order} object to be created and saved<br>
+	 * @param order {@linkplain Order Order} object to be created and saved<br>
 	 *              The id of the Order object is ignored and a new unique id is assigned
 	 * @return new {@link Order Order} if successful, false otherwise
 	 * @throws IOException if an issue with underlying storage
 	 */
-	Order createOrder (Order Order) throws IOException;
+	Order createOrder (Order order) throws IOException;
 
 	/**
 	 * Deletes a {@linkplain Order Order} with the given id.

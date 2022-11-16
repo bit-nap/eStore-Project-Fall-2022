@@ -14,7 +14,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @Tag("Persistence-tier")
-public class AccountJSONDAOTest {
+class AccountJSONDAOTest {
 	AccountJSONDAO accountJSONDAO;
 	Account[] testAccounts;
 	ObjectMapper mockObjectMapper;
@@ -24,7 +24,7 @@ public class AccountJSONDAOTest {
 	 * isolate the tests from the underlying file
 	 */
 	@BeforeEach
-	public void setupAccountJSONDAO () throws IOException {
+	void setupAccountJSONDAO () throws IOException {
 		mockObjectMapper = mock(ObjectMapper.class);
 		testAccounts = new Account[3];
 		testAccounts[0] = new Account(99, "Adrian", "AdrianPass");
@@ -40,7 +40,7 @@ public class AccountJSONDAOTest {
 	}
 
 	@Test
-	public void testGetAccounts () {
+	void testGetAccounts () {
 		// Arrange
 		Account[] accounts = accountJSONDAO.getAccounts();
 
@@ -52,7 +52,7 @@ public class AccountJSONDAOTest {
 	}
 
 	@Test
-	public void testGetAccount () {
+	void testGetAccount () {
 		// Arrange
 		Account account = accountJSONDAO.getAccount("Adrian");
 
@@ -61,7 +61,7 @@ public class AccountJSONDAOTest {
 	}
 
 	@Test
-	public void testDeleteAccount () {
+	void testDeleteAccount () {
 		// Arrange
 		boolean result = assertDoesNotThrow(() -> accountJSONDAO.deleteAccount("Adrian"),
 		                                    "Unexpected exception thrown");
@@ -76,7 +76,7 @@ public class AccountJSONDAOTest {
 	}
 
 	@Test
-	public void testCreateAccount () {
+	void testCreateAccount () {
 		// Setup
 		Account account = new Account(102, "Oscar", "OscarPass");
 
@@ -92,7 +92,7 @@ public class AccountJSONDAOTest {
 	}
 
 	@Test
-	public void testUpdateAccount () {
+	void testUpdateAccount () {
 		// Setup
 		Account account = new Account(99, "Adrian", "newpass");
 
@@ -107,7 +107,7 @@ public class AccountJSONDAOTest {
 	}
 
 	@Test
-	public void testSaveException () throws IOException {
+	void testSaveException () throws IOException {
 		doThrow(new IOException())
 			.when(mockObjectMapper)
 			.writeValue(any(File.class), any(Account[].class));
@@ -120,7 +120,7 @@ public class AccountJSONDAOTest {
 	}
 
 	@Test
-	public void testGetAccountNotFound () {
+	void testGetAccountNotFound () {
 		// Arrange
 		Account account = accountJSONDAO.getAccount("null");
 
@@ -129,7 +129,7 @@ public class AccountJSONDAOTest {
 	}
 
 	@Test
-	public void testDeleteAccountNotFound () {
+	void testDeleteAccountNotFound () {
 		// Arrange
 		boolean result = assertDoesNotThrow(() -> accountJSONDAO.deleteAccount("null"),
 		                                    "Unexpected exception thrown");
@@ -140,7 +140,7 @@ public class AccountJSONDAOTest {
 	}
 
 	@Test
-	public void testUpdateAccountNotFound () {
+	void testUpdateAccountNotFound () {
 		// Setup
 		Account account = new Account(98, "Munson", "DJPass");
 
@@ -153,7 +153,7 @@ public class AccountJSONDAOTest {
 	}
 
 	@Test
-	public void testConstructorException () throws IOException {
+	void testConstructorException () throws IOException {
 		// Setup
 		ObjectMapper mockObjectMapper = mock(ObjectMapper.class);
 		// We want to simulate with a Mock Object Mapper that an

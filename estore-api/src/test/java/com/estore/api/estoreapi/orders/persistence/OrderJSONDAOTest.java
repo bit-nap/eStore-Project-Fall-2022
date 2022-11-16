@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
  *
  * @author Group 3C, The Code Monkeys
  */
-public class OrderJSONDAOTest {
+class OrderJSONDAOTest {
 	OrderJSONDAO orderJSONDAO;
 	Order[] testOrders;
 	ObjectMapper mockObjectMapper;
@@ -29,7 +29,7 @@ public class OrderJSONDAOTest {
 	 * @throws IOException if orderFileDAO cannot read from fake file
 	 */
 	@BeforeEach
-	public void setupOrderJSONDAO () throws IOException {
+	void setupOrderJSONDAO () throws IOException {
 		mockObjectMapper = mock(ObjectMapper.class);
 		testOrders = new Order[3];
 		testOrders[0] = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 }, new String[]{ "a1", "a2", "a3" });
@@ -42,7 +42,7 @@ public class OrderJSONDAOTest {
 	}
 
 	@Test
-	public void testGetOrders () {
+	void testGetOrders () {
 		// Invoke
 		Order[] orders = orderJSONDAO.getOrders();
 
@@ -54,7 +54,7 @@ public class OrderJSONDAOTest {
 	}
 
 	@Test
-	public void testFindScreeningOrders () {
+	void testFindScreeningOrders () {
 		// Invoke
 		Order[] orders = orderJSONDAO.findScreeningOrders(1);
 
@@ -68,7 +68,7 @@ public class OrderJSONDAOTest {
 	}
 
 	@Test
-	public void testFindAccountOrders () {
+	void testFindAccountOrders () {
 		// Invoke
 		Order[] orders = orderJSONDAO.findAccountOrders(1);
 
@@ -84,7 +84,7 @@ public class OrderJSONDAOTest {
 	}
 
 	@Test
-	public void testGetOrder () {
+	void testGetOrder () {
 		// Invoke
 		Order order = orderJSONDAO.getOrder(1);
 
@@ -93,7 +93,7 @@ public class OrderJSONDAOTest {
 	}
 
 	@Test
-	public void testDeleteOrder () {
+	void testDeleteOrder () {
 		// Invoke
 		boolean result = assertDoesNotThrow(() -> orderJSONDAO.deleteOrder(1), "Unexpected exception thrown");
 
@@ -105,7 +105,7 @@ public class OrderJSONDAOTest {
 	}
 
 	@Test
-	public void testCreateOrder () {
+	void testCreateOrder () {
 		// Setup
 		Order order = new Order(4, 1, 2, 1, new int[]{ 0, 0, 1 }, new int[]{ 0, 0, 1 }, new String[]{ "a1" });
 		// Invoke
@@ -122,7 +122,7 @@ public class OrderJSONDAOTest {
 	}
 
 	@Test
-	public void testSaveException () throws IOException {
+	void testSaveException () throws IOException {
 		doThrow(new IOException()).when(mockObjectMapper).writeValue(any(File.class), any(Order[].class));
 
 		Order order = new Order(4, 1, 2, 1, new int[]{ 0, 0, 1 }, new int[]{ 0, 0, 1 }, new String[]{ "a1" });
@@ -131,7 +131,7 @@ public class OrderJSONDAOTest {
 	}
 
 	@Test
-	public void testGetOrderNotFound () {
+	void testGetOrderNotFound () {
 		// Invoke
 		Order order = orderJSONDAO.getOrder(99);
 
@@ -140,7 +140,7 @@ public class OrderJSONDAOTest {
 	}
 
 	@Test
-	public void testDeleteOrderNotFound () {
+	void testDeleteOrderNotFound () {
 		// Invoke
 		boolean result = assertDoesNotThrow(() -> orderJSONDAO.deleteOrder(99), "Unexpected exception thrown");
 
@@ -150,7 +150,7 @@ public class OrderJSONDAOTest {
 	}
 
 	@Test
-	public void testConstructorException () throws IOException {
+	void testConstructorException () throws IOException {
 		// Setup
 		ObjectMapper mockObjectMapper = mock(ObjectMapper.class);
 		// We want to simulate with a Mock Object Mapper that an exception was raised during JSON object deserialization into Java objects

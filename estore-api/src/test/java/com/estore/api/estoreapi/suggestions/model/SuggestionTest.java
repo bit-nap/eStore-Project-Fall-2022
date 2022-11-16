@@ -11,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Group 3C, The Code Monkeys
  */
 @Tag("Model-tier")
-public class SuggestionTest {
+class SuggestionTest {
 	@Test
-	public void testCtor () {
+	void testCtor () {
 		// Setup
 		int id = 99;
 		String movieTitle = "Star Wars: Episode IV – A New Hope";
@@ -29,7 +29,7 @@ public class SuggestionTest {
 	}
 
 	@Test
-	public void testToString () {
+	void testToString () {
 		// Setup
 		// Setup
 		int id = 99;

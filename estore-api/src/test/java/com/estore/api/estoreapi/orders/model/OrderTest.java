@@ -13,9 +13,9 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Group 3C, The Code Monkeys
  */
 @Tag("Model-tier")
-public class OrderTest {
+class OrderTest {
 	@Test
-	public void testScreeningIdIs () {
+	void testScreeningIdIs () {
 		int id = 99;
 		int screeningId = 1;
 		int accountId = 1;
@@ -30,7 +30,7 @@ public class OrderTest {
 	}
 
 	@Test
-	public void testAccountIdIs () {
+	void testAccountIdIs () {
 		int id = 99;
 		int screeningId = 1;
 		int accountId = 1;
@@ -45,7 +45,7 @@ public class OrderTest {
 	}
 
 	@Test
-	public void testCtor () {
+	void testCtor () {
 		// Setup
 		int id = 99;
 		int screeningId = 1;
@@ -68,7 +68,7 @@ public class OrderTest {
 	}
 
 	@Test
-	public void testToString () {
+	void testToString () {
 		// Setup
 		int id = 99;
 		int screeningId = 1;

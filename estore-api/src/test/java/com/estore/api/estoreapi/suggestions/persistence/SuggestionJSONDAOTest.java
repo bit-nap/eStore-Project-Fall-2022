@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
  * @author Group 3C, The Code Monkeys
  */
 @Tag("Persistence-tier")
-public class SuggestionJSONDAOTest {
+class SuggestionJSONDAOTest {
 	SuggestionJSONDAO suggestionFileDAO;
 	Suggestion[] testSuggestions;
 	ObjectMapper mockObjectMapper;
@@ -31,7 +31,7 @@ public class SuggestionJSONDAOTest {
 	 * @throws IOException if suggestionFileDAO cannot read from fake file
 	 */
 	@BeforeEach
-	public void setupSuggestionJSONDAO () throws IOException {
+	void setupSuggestionJSONDAO () throws IOException {
 		mockObjectMapper = mock(ObjectMapper.class);
 		testSuggestions = new Suggestion[3];
 		testSuggestions[0] = new Suggestion(104, "Star Wars: Episode IV – A New Hope", 77);
@@ -44,7 +44,7 @@ public class SuggestionJSONDAOTest {
 	}
 
 	@Test
-	public void testGetSuggestions () {
+	void testGetSuggestions () {
 		// Invoke
 		Suggestion[] suggestions = suggestionFileDAO.getSuggestions();
 
@@ -56,7 +56,7 @@ public class SuggestionJSONDAOTest {
 	}
 
 	@Test
-	public void testGetSuggestion () {
+	void testGetSuggestion () {
 		// Invoke
 		Suggestion suggestion = suggestionFileDAO.getSuggestion(104);
 
@@ -65,7 +65,7 @@ public class SuggestionJSONDAOTest {
 	}
 
 	@Test
-	public void testDeleteSuggestion () {
+	void testDeleteSuggestion () {
 		// Invoke
 		boolean result = assertDoesNotThrow(() -> suggestionFileDAO.deleteSuggestion(104), "Unexpected exception thrown");
 
@@ -77,7 +77,7 @@ public class SuggestionJSONDAOTest {
 	}
 
 	@Test
-	public void testCreateSuggestion () {
+	void testCreateSuggestion () {
 		// Setup
 		Suggestion suggestion = new Suggestion(107, "Star Wars: The Force Awakens", 15);
 
@@ -93,7 +93,7 @@ public class SuggestionJSONDAOTest {
 	}
 
 	@Test
-	public void testUpdateSuggestion () {
+	void testUpdateSuggestion () {
 		// Setup
 		Suggestion suggestion = new Suggestion(104, "Star Wars: The Force Awakens", 15);
 
@@ -107,7 +107,7 @@ public class SuggestionJSONDAOTest {
 	}
 
 	@Test
-	public void testSaveException () throws IOException {
+	void testSaveException () throws IOException {
 		doThrow(new IOException()).when(mockObjectMapper).writeValue(any(File.class), any(Suggestion[].class));
 
 		Suggestion suggestion = new Suggestion(107, "Star Wars: The Force Awakens", 15);
@@ -116,7 +116,7 @@ public class SuggestionJSONDAOTest {
 	}
 
 	@Test
-	public void testGetSuggestionNotFound () {
+	void testGetSuggestionNotFound () {
 		// Invoke
 		Suggestion suggestion = suggestionFileDAO.getSuggestion(103);
 
@@ -125,7 +125,7 @@ public class SuggestionJSONDAOTest {
 	}
 
 	@Test
-	public void testDeleteSuggestionNotFound () {
+	void testDeleteSuggestionNotFound () {
 		// Invoke
 		boolean result = assertDoesNotThrow(() -> suggestionFileDAO.deleteSuggestion(103), "Unexpected exception thrown");
 
@@ -135,7 +135,7 @@ public class SuggestionJSONDAOTest {
 	}
 
 	@Test
-	public void testUpdateSuggestionNotFound () {
+	void testUpdateSuggestionNotFound () {
 		// Setup
 		Suggestion suggestion = new Suggestion(107, "Star Wars: The Force Awakens", 15);
 
@@ -147,7 +147,7 @@ public class SuggestionJSONDAOTest {
 	}
 
 	@Test
-	public void testConstructorException () throws IOException {
+	void testConstructorException () throws IOException {
 		// Setup
 		ObjectMapper mockObjectMapper = mock(ObjectMapper.class);
 		// We want to simulate with a Mock Object Mapper that an exception was raised during JSON object deserialization into Java objects

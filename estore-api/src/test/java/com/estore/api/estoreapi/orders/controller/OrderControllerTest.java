@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 
 /**
@@ -19,7 +20,7 @@ import static org.mockito.Mockito.*;
  * @author Group 3C, The Code Monkeys
  */
 @Tag("Controller-Tier")
-public class OrderControllerTest {
+class OrderControllerTest {
 	private OrderController orderController;
 	private OrderDAO mockOrderDao;
 
@@ -27,13 +28,13 @@ public class OrderControllerTest {
 	 * Before a test, create a new OrderController object and inject a mock Order DAO.
 	 */
 	@BeforeEach
-	public void setupOrderController () {
+	void setupOrderController () {
 		mockOrderDao = mock(OrderDAO.class);
 		orderController = new OrderController(mockOrderDao);
 	}
 
 	@Test
-	public void testGetOrder () throws IOException {
+	void testGetOrder () throws IOException {
 		// setup
 		Order order = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 }, new String[]{ "a1", "a2", "a3" });
 		// when the same id is passed in, our mock order DAO will return the Order object
@@ -48,7 +49,7 @@ public class OrderControllerTest {
 	}
 
 	@Test
-	public void testGetOrderNotFound () throws Exception {
+	void testGetOrderNotFound () throws Exception {
 		// setup
 		int orderId = 99;
 		// when the same id is passed in, our mock order DAO will return null, simulating no order found
@@ -62,7 +63,7 @@ public class OrderControllerTest {
 	}
 
 	@Test
-	public void testGetOrderHandleException () throws Exception {
+	void testGetOrderHandleException () throws Exception {
 		// setup
 		int orderId = 99;
 		// when getOrder is called on the mock order DAO, throw an IOException
@@ -81,7 +82,7 @@ public class OrderControllerTest {
 	 * @throws Exception if something goes wrong with the http request
 	 */
 	@Test
-	public void testGetOrders () throws Exception {
+	void testGetOrders () throws Exception {
 		// New list of orders
 		Order[] orders = new Order[3];
 		orders[0] = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 }, new String[]{ "a1", "a2", "a3" });
@@ -96,13 +97,24 @@ public class OrderControllerTest {
 		assertEquals(orders, response.getBody());
 	}
 
+	@Test
+	void testGetEmptyOrders () throws Exception {
+		// When getOrders is called, return null
+		when(mockOrderDao.getOrders()).thenReturn(null);
+		// Get NOT_FOUND response from OrderController
+		ResponseEntity<Order[]> response = orderController.getOrders();
+
+		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+		assertNull(response.getBody());
+	}
+
 	/**
 	 * Test to make sure the exception is handled when getOrders throws one
 	 *
 	 * @throws Exception if something goes wrong with Http request
 	 */
 	@Test
-	public void testGetOrdersHandleException () throws Exception {
+	void testGetOrdersHandleException () throws Exception {
 		// Throw an exception when the get orders method is called
 		doThrow(new IOException()).when(mockOrderDao).getOrders();
 
@@ -112,7 +124,7 @@ public class OrderControllerTest {
 	}
 
 	@Test
-	public void testCreateOrder () throws IOException {
+	void testCreateOrder () throws IOException {
 		// setup
 		Order order = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 }, new String[]{ "a1", "a2", "a3" });
 		// when createOrder is called, return true simulating successful creation and save
@@ -127,7 +139,7 @@ public class OrderControllerTest {
 	}
 
 	@Test
-	public void testCreateOrderFailed () throws IOException {
+	void testCreateOrderFailed () throws IOException {
 		// setup
 		Order order = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 }, new String[]{ "a1", "a2", "a3" });
 		// when createOrder is called, return false simulating failed creation and save
@@ -141,7 +153,7 @@ public class OrderControllerTest {
 	}
 
 	@Test
-	public void testCreateOrderHandleException () throws IOException {
+	void testCreateOrderHandleException () throws IOException {
 		// setup
 		Order order = new Order(1, 1, 1, 3, new int[]{ 2, 0, 1 }, new int[]{ 1, 1, 1 }, new String[]{ "a1", "a2", "a3" });
 
@@ -156,7 +168,7 @@ public class OrderControllerTest {
 	}
 
 	@Test
-	public void testSearchScreeningOrders () throws IOException {
+	void testSearchScreeningOrders () throws IOException {
 		// Setup
 		int screeningId = 1;
 		Order[] foundOrders = new Order[3];
@@ -176,7 +188,7 @@ public class OrderControllerTest {
 	}
 
 	@Test
-	public void testSearchScreeningOrdersHandleException () throws IOException {
+	void testSearchScreeningOrdersHandleException () throws IOException {
 		// Setup
 		int screeningId = 1;
 		// When findOrders is called on the Mock Order DAO, throw an IOException
@@ -190,7 +202,7 @@ public class OrderControllerTest {
 	}
 
 	@Test
-	public void testSearchAccountOrders () throws IOException {
+	void testSearchAccountOrders () throws IOException {
 		// Setup
 		int accountId = 1;
 		Order[] foundOrders = new Order[3];
@@ -210,7 +222,7 @@ public class OrderControllerTest {
 	}
 
 	@Test
-	public void testSearchAccountOrdersHandleException () throws IOException {
+	void testSearchAccountOrdersHandleException () throws IOException {
 		// Setup
 		int accountId = 1;
 		// When findOrders is called on the Mock Order DAO, throw an IOException
@@ -224,7 +236,7 @@ public class OrderControllerTest {
 	}
 
 	@Test
-	public void testDeleteOrder () throws IOException { // deleteOrder may throw IOException
+	void testDeleteOrder () throws IOException { // deleteOrder may throw IOException
 		// Setup
 		int orderId = 99;
 		// when deleteOrder is called return true, simulating successful deletion
@@ -238,7 +250,7 @@ public class OrderControllerTest {
 	}
 
 	@Test
-	public void testDeleteOrderNotFound () throws IOException { // deleteOrder may throw IOException
+	void testDeleteOrderNotFound () throws IOException { // deleteOrder may throw IOException
 		// Setup
 		int orderId = 99;
 		// when deleteOrder is called return false, simulating failed deletion
@@ -252,7 +264,7 @@ public class OrderControllerTest {
 	}
 
 	@Test
-	public void testDeleteOrderHandleException () throws IOException { // deleteOrder may throw IOException
+	void testDeleteOrderHandleException () throws IOException { // deleteOrder may throw IOException
 		// Setup
 		int orderId = 99;
 		// When deleteOrder is called on the Mock Order DAO, throw an IOException

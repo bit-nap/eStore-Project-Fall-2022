@@ -11,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Group 3C, The Code Monkeys
  */
 @Tag("Model-tier")
-public class MovieTest {
+class MovieTest {
 	@Test
-	public void testCtor () {
+	void testCtor () {
 		// Setup
 		int id = 99;
 		String title = "Star Wars: Episode IV – A New Hope";
@@ -35,7 +35,7 @@ public class MovieTest {
 	}
 
 	@Test
-	public void testToString () {
+	void testToString () {
 		// Setup
 		int id = 99;
 		String title = "Star Wars: Episode IV – A New Hope";

@@ -49,7 +49,7 @@ public class AccountJSONDAO implements AccountDAO {
 	 *
 	 * @return The next account id
 	 */
-	private synchronized static int nextId () {
+	private static synchronized int nextId () {
 		int id = nextId;
 		++nextId;
 		return id;

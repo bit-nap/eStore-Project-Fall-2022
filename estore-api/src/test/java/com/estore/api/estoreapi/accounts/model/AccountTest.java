@@ -2,6 +2,7 @@ package com.estore.api.estoreapi.accounts.model;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -10,14 +11,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Group 3C, The Code Monkeys
  */
 @Tag("Model-tier")
-public class AccountTest {
+class AccountTest {
 	/**
 	 * Tests the Account constructor to make sure a proper Account object
 	 * is instantiated with the proper arguments. This also tests the get
 	 * methods in the Account class.
 	 */
 	@Test
-	public void testConstructor() {
+	void testConstructor () {
 		// Arrange
 		int id = 14;
 		String username = "admin";
@@ -33,7 +34,7 @@ public class AccountTest {
 	}
 
 	@Test
-	public void testSetName() {
+	void testSetName () {
 		// Arrange
 		Account testAccount = new Account(16, "oldUsername", "password");
 
@@ -45,7 +46,7 @@ public class AccountTest {
 	}
 
 	@Test
-	public void testToString() {
+	void testToString () {
 		// Arrange
 		int id = 14;
 		String username = "admin";

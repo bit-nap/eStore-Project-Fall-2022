@@ -11,10 +11,11 @@ import org.springframework.http.ResponseEntity;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 
 @Tag("Controller-tier")
-public class AccountControllerTest {
+class AccountControllerTest {
 	private AccountController accountController;
 	private AccountDAO mockAccountDAO;
 
@@ -22,13 +23,13 @@ public class AccountControllerTest {
 	 * Before each test, create a new AccountController object and inject a mock Account DAO
 	 */
 	@BeforeEach
-	public void setupAccountController () {
+	void setupAccountController () {
 		mockAccountDAO = mock(AccountDAO.class);
 		accountController = new AccountController(mockAccountDAO);
 	}
 
 	@Test
-	public void testGetAccount () throws IOException {  // getAccount may throw IOException
+	void testGetAccount () throws IOException {  // getAccount may throw IOException
 		// Arrange
 		Account account = new Account(99, "Adrian", "password0");
 		// When the same id is passed in, our mock Account DAO will return the Account object
@@ -43,7 +44,7 @@ public class AccountControllerTest {
 	}
 
 	@Test
-	public void testGetAccountNotFound () throws Exception { // createAccount may throw IOException
+	void testGetAccountNotFound () throws Exception { // createAccount may throw IOException
 		// Arrange
 		String username = "test";
 		// When the same id is passed in, our mock Account DAO will return null, simulating
@@ -58,7 +59,7 @@ public class AccountControllerTest {
 	}
 
 	@Test
-	public void testGetAccountHandleException () throws Exception { // createAccount may throw IOException
+	void testGetAccountHandleException () throws Exception { // createAccount may throw IOException
 		// Arrange
 		String username = "test";
 		// When getAccount is called on the Mock Account DAO, throw an IOException
@@ -72,7 +73,7 @@ public class AccountControllerTest {
 	}
 
 	@Test
-	public void testCreateAccount () throws IOException {  // createAccount may throw IOException
+	void testCreateAccount () throws IOException {  // createAccount may throw IOException
 		// Arrange
 		Account account = new Account(99, "Gino", "password1");
 		// when createAccount is called, return true simulating successful
@@ -88,7 +89,7 @@ public class AccountControllerTest {
 	}
 
 	@Test
-	public void testCreateAccountFailed () throws IOException {  // createAccount may throw IOException
+	void testCreateAccountFailed () throws IOException {  // createAccount may throw IOException
 		// Arrange
 		Account account = new Account(99, "Oscar", "password2");
 		// when createAccount is called, return false simulating failed
@@ -103,7 +104,7 @@ public class AccountControllerTest {
 	}
 
 	@Test
-	public void testCreateAccountHandleException () throws IOException {  // createAccount may throw IOException
+	void testCreateAccountHandleException () throws IOException {  // createAccount may throw IOException
 		// Arrange
 		Account account = new Account(99, "Norton", "password3");
 
@@ -118,17 +119,16 @@ public class AccountControllerTest {
 	}
 
 	@Test
-	public void testUpdateAccount () throws IOException { // updateAccount may throw IOException
+	void testUpdateAccount () throws IOException { // updateAccount may throw IOException
 		// Arrange
 		Account account = new Account(99, "Louan", "password4");
 		// when updateAccount is called, return true simulating successful
 		// update and save
 		when(mockAccountDAO.updateAccount(account)).thenReturn(account);
-		ResponseEntity<Account> response = accountController.updateAccount(account);
 		account.setName("BetterLouan");
 
 		// Invoke
-		response = accountController.updateAccount(account);
+		ResponseEntity<Account> response = accountController.updateAccount(account);
 
 		// Analyze
 		assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -136,7 +136,7 @@ public class AccountControllerTest {
 	}
 
 	@Test
-	public void testUpdateAccountFailed () throws IOException { // updateAccount may throw IOException
+	void testUpdateAccountFailed () throws IOException { // updateAccount may throw IOException
 		// Arrange
 		Account account = new Account(99, "Sudhir", "123");
 		// when updateAccount is called, return true simulating successful
@@ -151,7 +151,7 @@ public class AccountControllerTest {
 	}
 
 	@Test
-	public void testUpdateAccountHandleException () throws IOException { // updateAccount may throw IOException
+	void testUpdateAccountHandleException () throws IOException { // updateAccount may throw IOException
 		// Arrange
 		Account account = new Account(99, "Sudhir", "456");
 		// When updateAccount is called on the Mock Account DAO, throw an IOException
@@ -165,7 +165,7 @@ public class AccountControllerTest {
 	}
 
 	@Test
-	public void testGetAccounts () throws IOException { // getAccounts may throw IOException
+	void testGetAccounts () throws IOException { // getAccounts may throw IOException
 		// Arrange
 		Account[] accounts = new Account[2];
 		accounts[0] = new Account(99, "Adrian", "password");
@@ -182,7 +182,18 @@ public class AccountControllerTest {
 	}
 
 	@Test
-	public void testGetAccountsHandleException () throws IOException { // getAccounts may throw IOException
+	void testGetEmptyAccounts () throws Exception {
+		// When getAccounts is called, return null
+		when(mockAccountDAO.getAccounts()).thenReturn(null);
+		// Get NOT_FOUND response from AccountController
+		ResponseEntity<Account[]> response = accountController.getAccounts();
+
+		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+		assertNull(response.getBody());
+	}
+
+	@Test
+	void testGetAccountsHandleException () throws IOException { // getAccounts may throw IOException
 		// Arrange
 		// When getAccounts is called on the Mock Account DAO, throw an IOException
 		doThrow(new IOException()).when(mockAccountDAO).getAccounts();
@@ -195,7 +206,7 @@ public class AccountControllerTest {
 	}
 
 	@Test
-	public void testDeleteAccount () throws IOException { // deleteAccount may throw IOException
+	void testDeleteAccount () throws IOException { // deleteAccount may throw IOException
 		// Arrange
 		String username = "test";
 		// when deleteAccount is called return true, simulating successful deletion
@@ -209,7 +220,7 @@ public class AccountControllerTest {
 	}
 
 	@Test
-	public void testDeleteAccountNotFound () throws IOException { // deleteAccount may throw IOException
+	void testDeleteAccountNotFound () throws IOException { // deleteAccount may throw IOException
 		// Arrange
 		String username = "test";
 		// when deleteAccount is called return false, simulating failed deletion
@@ -223,7 +234,7 @@ public class AccountControllerTest {
 	}
 
 	@Test
-	public void testDeleteAccountHandleException () throws IOException { // deleteAccount may throw IOException
+	void testDeleteAccountHandleException () throws IOException { // deleteAccount may throw IOException
 		// Arrange
 		String username = "test";
 		// When deleteAccount is called on the Mock Account DAO, throw an IOException

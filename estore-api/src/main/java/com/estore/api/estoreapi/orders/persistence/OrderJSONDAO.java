@@ -49,7 +49,7 @@ public class OrderJSONDAO implements OrderDAO {
 	 *
 	 * @return The next order id
 	 */
-	private synchronized static int nextId () {
+	private static synchronized int nextId () {
 		int id = nextId;
 		++nextId;
 		return id;

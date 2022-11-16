@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 
 /**
@@ -19,7 +20,7 @@ import static org.mockito.Mockito.*;
  * @author Group 3C, The Code Monkeys
  */
 @Tag("Controller-Tier")
-public class MovieControllerTest {
+class MovieControllerTest {
 	private MovieController movieController;
 	private MovieDAO mockMovieDao;
 
@@ -27,13 +28,13 @@ public class MovieControllerTest {
 	 * Before a test, create a new MovieController object and inject a mock Movie DAO.
 	 */
 	@BeforeEach
-	public void setupMovieController () {
+	void setupMovieController () {
 		mockMovieDao = mock(MovieDAO.class);
 		movieController = new MovieController(mockMovieDao);
 	}
 
 	@Test
-	public void testGetMovie () throws IOException {
+	void testGetMovie () throws IOException {
 		// setup
 		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
 		// when the same id is passed in, our mock movie DAO will return the Movie object
@@ -48,7 +49,7 @@ public class MovieControllerTest {
 	}
 
 	@Test
-	public void testGetMovieNotFound () throws Exception {
+	void testGetMovieNotFound () throws Exception {
 		// setup
 		int movieId = 99;
 		// when the same id is passed in, our mock movie DAO will return null, simulating no movie found
@@ -62,7 +63,7 @@ public class MovieControllerTest {
 	}
 
 	@Test
-	public void testGetMovieHandleException () throws Exception {
+	void testGetMovieHandleException () throws Exception {
 		// setup
 		int movieId = 99;
 		// when getMovie is called on the mock movie DAO, throw an IOException
@@ -81,7 +82,7 @@ public class MovieControllerTest {
 	 * @throws Exception if something goes wrong with the http request
 	 */
 	@Test
-	public void testGetMovies () throws Exception {
+	void testGetMovies () throws Exception {
 		// New list of movies
 		Movie[] movies = new Movie[3];
 		movies[0] = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
@@ -96,13 +97,24 @@ public class MovieControllerTest {
 		assertEquals(movies, response.getBody());
 	}
 
+	@Test
+	void testGetEmptyMovies () throws Exception {
+		// When getMovies is called, return null
+		when(mockMovieDao.getMovies()).thenReturn(null);
+		// Get NOT_FOUND response from MovieController
+		ResponseEntity<Movie[]> response = movieController.getMovies();
+
+		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+		assertNull(response.getBody());
+	}
+
 	/**
 	 * Test to make sure the exception is handled when getMovies throws one
 	 *
 	 * @throws Exception if something goes wrong with Http request
 	 */
 	@Test
-	public void testGetMoviesHandleException () throws Exception {
+	void testGetMoviesHandleException () throws Exception {
 		// Throw an exception when the get movies method is called
 		doThrow(new IOException()).when(mockMovieDao).getMovies();
 
@@ -112,7 +124,7 @@ public class MovieControllerTest {
 	}
 
 	@Test
-	public void testCreateMovie () throws IOException {
+	void testCreateMovie () throws IOException {
 		// setup
 		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
 		// when createMovie is called, return true simulating successful creation and save
@@ -127,7 +139,7 @@ public class MovieControllerTest {
 	}
 
 	@Test
-	public void testCreateMovieFailed () throws IOException {
+	void testCreateMovieFailed () throws IOException {
 		// setup
 		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
 		// when createMovie is called, return false simulating failed creation and save
@@ -141,7 +153,7 @@ public class MovieControllerTest {
 	}
 
 	@Test
-	public void testCreateMovieHandleException () throws IOException {
+	void testCreateMovieHandleException () throws IOException {
 		// setup
 		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
 
@@ -156,7 +168,7 @@ public class MovieControllerTest {
 	}
 
 	@Test
-	public void testSearchMovies () throws IOException {
+	void testSearchMovies () throws IOException {
 		// Setup
 		String searchString = "Star Wars";
 		Movie[] foundMovies = new Movie[3];
@@ -176,7 +188,7 @@ public class MovieControllerTest {
 	}
 
 	@Test
-	public void testSearchMoviesHandleException () throws IOException {
+	void testSearchMoviesHandleException () throws IOException {
 		// Setup
 		String searchString = "an";
 		// When createMovie is called on the Mock Movie DAO, throw an IOException
@@ -190,7 +202,7 @@ public class MovieControllerTest {
 	}
 
 	@Test
-	public void testUpdateMovie () throws IOException {
+	void testUpdateMovie () throws IOException {
 		// Setup
 		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
 		// when updateMovie is called, return true simulating successful update and save
@@ -205,7 +217,7 @@ public class MovieControllerTest {
 	}
 
 	@Test
-	public void testUpdateMovieExceptionNotFound () throws IOException {
+	void testUpdateMovieExceptionNotFound () throws IOException {
 		// Setup
 		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
 		// when updateMovie is called, return true simulating successful update and save
@@ -219,7 +231,7 @@ public class MovieControllerTest {
 	}
 
 	@Test
-	public void testUpdateMovieHandleException () throws IOException {
+	void testUpdateMovieHandleException () throws IOException {
 		// Setup
 		Movie movie = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
 		// When updateMovie is called on the Mock Movie DAO, throw an IOException
@@ -233,7 +245,7 @@ public class MovieControllerTest {
 	}
 
 	@Test
-	public void testDeleteMovie () throws IOException { // deleteMovie may throw IOException
+	void testDeleteMovie () throws IOException { // deleteMovie may throw IOException
 		// Setup
 		int movieId = 99;
 		// when deleteMovie is called return true, simulating successful deletion
@@ -247,7 +259,7 @@ public class MovieControllerTest {
 	}
 
 	@Test
-	public void testDeleteMovieNotFound () throws IOException { // deleteMovie may throw IOException
+	void testDeleteMovieNotFound () throws IOException { // deleteMovie may throw IOException
 		// Setup
 		int movieId = 99;
 		// when deleteMovie is called return false, simulating failed deletion
@@ -261,7 +273,7 @@ public class MovieControllerTest {
 	}
 
 	@Test
-	public void testDeleteMovieHandleException () throws IOException { // deleteMovie may throw IOException
+	void testDeleteMovieHandleException () throws IOException { // deleteMovie may throw IOException
 		// Setup
 		int movieId = 99;
 		// When deleteMovie is called on the Mock Movie DAO, throw an IOException

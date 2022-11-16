@@ -15,9 +15,9 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Group 3C, The Code Monkeys
  */
 @Tag("Model-tier")
-public class ScreeningTest {
+class ScreeningTest {
 	@Test
-	public void testCtor () {
+	void testCtor () {
 		// Setup
 		int id = 99;
 		int movieId = 104;
@@ -39,7 +39,7 @@ public class ScreeningTest {
 	}
 
 	@Test
-	public void testUpdateMovieId () {
+	void testUpdateMovieId () {
 		// Setup
 		int id = 99;
 		int movieId = 104;
@@ -59,7 +59,7 @@ public class ScreeningTest {
 	}
 
 	@Test
-	public void testMovieIdIs () {
+	void testMovieIdIs () {
 		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
 			{ true, true, true, true, true }, { true, true, true, true, true } };
 		Screening screening = new Screening(99, 104, 10, "01/17/2023", "18:00", seats);
@@ -68,7 +68,7 @@ public class ScreeningTest {
 	}
 
 	@Test
-	public void testCompareTo () {
+	void testCompareTo () {
 		boolean[][] seats = { { false, false, false, false }, { false, false, false, false } };
 		Screening o1 = new Screening(101, 104, 6, "01/16/2023", "16:00", seats);
 		Screening o2 = new Screening(103, 104, 8, "01/17/2023", "16:00", seats);
@@ -100,7 +100,7 @@ public class ScreeningTest {
 	}
 
 	@Test
-	public void testEquals () {
+	void testEquals () {
 		boolean[][] seats = { { false, false, false, false }, { false, false, false, false } };
 		Screening original = new Screening(101, 104, 6, "01/16/2023", "16:00", seats);
 
@@ -116,7 +116,7 @@ public class ScreeningTest {
 	}
 
 	@Test
-	public void testToString () {
+	void testToString () {
 		// Setup
 		int id = 99;
 		int movieId = 104;

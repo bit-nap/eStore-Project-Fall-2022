@@ -47,7 +47,7 @@ public class ScreeningJSONDAO implements ScreeningDAO {
 	 *
 	 * @return The next screening id
 	 */
-	private synchronized static int nextId () {
+	private static synchronized int nextId () {
 		int id = nextId;
 		++nextId;
 		return id;

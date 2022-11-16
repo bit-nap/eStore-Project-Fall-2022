@@ -13,22 +13,22 @@ public interface SuggestionDAO {
 	/**
 	 * Creates and saves a {@linkplain Suggestion Suggestion}.
 	 *
-	 * @param Suggestion {@linkplain Suggestion Suggestion} object to be created and saved<br>
+	 * @param suggestion {@linkplain Suggestion Suggestion} object to be created and saved<br>
 	 *                   The id of the Suggestion object is ignored and a new unique id is assigned
 	 * @return new {@link Suggestion Suggestion} if successful, false otherwise
 	 * @throws IOException if an issue with underlying storage
 	 */
-	Suggestion createSuggestion (Suggestion Suggestion) throws IOException;
+	Suggestion createSuggestion (Suggestion suggestion) throws IOException;
 
 	/**
 	 * Updates and saves a {@linkplain Suggestion Suggestion}.
 	 *
-	 * @param Suggestion {@link Suggestion Suggestion} object to be updated and saved
+	 * @param suggestion {@link Suggestion Suggestion} object to be updated and saved
 	 * @return updated {@link Suggestion Suggestion} if successful, null if
 	 * {@link Suggestion Suggestion} could not be found
 	 * @throws IOException if underlying storage cannot be accessed
 	 */
-	Suggestion updateSuggestion (Suggestion Suggestion) throws IOException;
+	Suggestion updateSuggestion (Suggestion suggestion) throws IOException;
 
 	/**
 	 * Deletes a {@linkplain Suggestion Suggestion} with the given id.

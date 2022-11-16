@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping("suggestions")
 public class SuggestionController {
-	/** TODO: Add description of the purpose of Logger, once it's actually used. */
+	/* Logger is used to log to command line the HTTP request performed, or any internal server errors encountered. */
 	private static final Logger LOG = Logger.getLogger(SuggestionController.class.getName());
 
 	/** The SuggestionDAO object this Controller interacts with to get Suggestion objects. */

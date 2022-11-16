@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping("screenings")
 public class ScreeningController {
-	// Logger will be used to log when a call is made from the controller to the terminal for maven
+	/* Logger is used to log to command line the HTTP request performed, or any internal server errors encountered. */
 	private static final Logger LOG = Logger.getLogger(ScreeningController.class.getName());
 
 	/** The ScreeningDAO object this Controller interacts with to get Screening objects. */

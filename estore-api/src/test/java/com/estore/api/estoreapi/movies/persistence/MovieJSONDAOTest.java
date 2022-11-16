@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
  * @author Group 3C, The Code Monkeys
  */
 @Tag("Persistence-tier")
-public class MovieJSONDAOTest {
+class MovieJSONDAOTest {
 	MovieJSONDAO movieFileDAO;
 	Movie[] testMovies;
 	ObjectMapper mockObjectMapper;
@@ -31,7 +31,7 @@ public class MovieJSONDAOTest {
 	 * @throws IOException if movieFileDAO cannot read from fake file
 	 */
 	@BeforeEach
-	public void setupMovieJSONDAO () throws IOException {
+	void setupMovieJSONDAO () throws IOException {
 		mockObjectMapper = mock(ObjectMapper.class);
 		testMovies = new Movie[3];
 		testMovies[0] = new Movie(104, "Star Wars: Episode IV – A New Hope", "death/star/plans.jpg", 105, "PG", 1977);
@@ -44,7 +44,7 @@ public class MovieJSONDAOTest {
 	}
 
 	@Test
-	public void testGetMovies () {
+	void testGetMovies () {
 		// Invoke
 		Movie[] movies = movieFileDAO.getMovies();
 
@@ -56,7 +56,7 @@ public class MovieJSONDAOTest {
 	}
 
 	@Test
-	public void testFindMovies () {
+	void testFindMovies () {
 		// Invoke
 		Movie[] movies = movieFileDAO.findMovies("Star Wars");
 
@@ -68,7 +68,7 @@ public class MovieJSONDAOTest {
 	}
 
 	@Test
-	public void testFindEmptyMovies () {
+	void testFindEmptyMovies () {
 		// Invoke
 		Movie[] movies = movieFileDAO.findMovies("Spider-Man");
 
@@ -77,7 +77,7 @@ public class MovieJSONDAOTest {
 	}
 
 	@Test
-	public void testGetMovie () {
+	void testGetMovie () {
 		// Invoke
 		Movie movie = movieFileDAO.getMovie(104);
 
@@ -86,7 +86,7 @@ public class MovieJSONDAOTest {
 	}
 
 	@Test
-	public void testDeleteMovie () {
+	void testDeleteMovie () {
 		// Invoke
 		boolean result = assertDoesNotThrow(() -> movieFileDAO.deleteMovie(104), "Unexpected exception thrown");
 
@@ -98,7 +98,7 @@ public class MovieJSONDAOTest {
 	}
 
 	@Test
-	public void testCreateMovie () {
+	void testCreateMovie () {
 		// Setup
 		Movie movie = new Movie(107, "Star Wars: The Force Awakens", "death/star/4/plans.jpg", 136, "PG-13", 2015);
 
@@ -115,7 +115,7 @@ public class MovieJSONDAOTest {
 	}
 
 	@Test
-	public void testUpdateMovie () {
+	void testUpdateMovie () {
 		// Setup
 		Movie movie = new Movie(104, "Star Wars: The Force Awakens", "death/star/4/plans.jpg", 136, "PG-13", 2015);
 
@@ -129,7 +129,7 @@ public class MovieJSONDAOTest {
 	}
 
 	@Test
-	public void testSaveException () throws IOException {
+	void testSaveException () throws IOException {
 		doThrow(new IOException()).when(mockObjectMapper).writeValue(any(File.class), any(Movie[].class));
 
 		Movie movie = new Movie(107, "Star Wars: The Force Awakens", "death/star/4/plans.jpg", 136, "PG-13", 2015);
@@ -138,7 +138,7 @@ public class MovieJSONDAOTest {
 	}
 
 	@Test
-	public void testGetMovieNotFound () {
+	void testGetMovieNotFound () {
 		// Invoke
 		Movie movie = movieFileDAO.getMovie(103);
 
@@ -147,7 +147,7 @@ public class MovieJSONDAOTest {
 	}
 
 	@Test
-	public void testDeleteMovieNotFound () {
+	void testDeleteMovieNotFound () {
 		// Invoke
 		boolean result = assertDoesNotThrow(() -> movieFileDAO.deleteMovie(103), "Unexpected exception thrown");
 
@@ -157,7 +157,7 @@ public class MovieJSONDAOTest {
 	}
 
 	@Test
-	public void testUpdateMovieNotFound () {
+	void testUpdateMovieNotFound () {
 		// Setup
 		Movie movie = new Movie(103, "Star Wars: The Force Awakens", "death/star/4/plans.jpg", 136, "PG-13", 2015);
 
@@ -169,7 +169,7 @@ public class MovieJSONDAOTest {
 	}
 
 	@Test
-	public void testConstructorException () throws IOException {
+	void testConstructorException () throws IOException {
 		// Setup
 		ObjectMapper mockObjectMapper = mock(ObjectMapper.class);
 		// We want to simulate with a Mock Object Mapper that an exception was raised during JSON object deserialization into Java objects

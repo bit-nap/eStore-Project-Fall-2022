@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
  * @author Group 3C, The Code Monkeys
  */
 @Tag("Controller-Tier")
-public class ScreeningControllerTest {
+class ScreeningControllerTest {
 	private ScreeningController screeningController;
 	private ScreeningDAO mockScreeningDao;
 
@@ -28,13 +28,13 @@ public class ScreeningControllerTest {
 	 * Before a test, create a new ScreeningController object and inject a mock Screening DAO.
 	 */
 	@BeforeEach
-	public void setupScreeningController () {
+	void setupScreeningController () {
 		mockScreeningDao = mock(ScreeningDAO.class);
 		screeningController = new ScreeningController(mockScreeningDao);
 	}
 
 	@Test
-	public void testGetScreening () throws IOException {
+	void testGetScreening () throws IOException {
 		// setup
 		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
 			{ true, true, true, true, true }, { true, true, true, true, true } };
@@ -51,7 +51,7 @@ public class ScreeningControllerTest {
 	}
 
 	@Test
-	public void testGetScreeningNotFound () throws Exception {
+	void testGetScreeningNotFound () throws Exception {
 		// setup
 		int screeningId = 101;
 		// when the same id is passed in, our mock screening DAO will return null, simulating no screening found
@@ -65,7 +65,7 @@ public class ScreeningControllerTest {
 	}
 
 	@Test
-	public void testGetScreeningHandleException () throws Exception {
+	void testGetScreeningHandleException () throws Exception {
 		// setup
 		int screeningId = 101;
 		// when getScreening is called on the mock screening DAO, throw an IOException
@@ -84,7 +84,7 @@ public class ScreeningControllerTest {
 	 * @throws Exception if something goes wrong with the http request
 	 */
 	@Test
-	public void testGetScreenings () throws Exception {
+	void testGetScreenings () throws Exception {
 		// New list of screenings
 		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
 			{ true, true, true, true, true }, { true, true, true, true, true } };
@@ -102,7 +102,7 @@ public class ScreeningControllerTest {
 	}
 
 	@Test
-	public void testGetEmptyScreenings () throws Exception {
+	void testGetEmptyScreenings () throws Exception {
 		// When getScreenings is called, return null
 		when(mockScreeningDao.getScreenings()).thenReturn(null);
 		// Get NOT_FOUND response from ScreeningController
@@ -118,7 +118,7 @@ public class ScreeningControllerTest {
 	 * @throws Exception if something goes wrong with Http request
 	 */
 	@Test
-	public void testGetScreeningsHandleException () throws Exception {
+	void testGetScreeningsHandleException () throws Exception {
 		// Throw an exception when the get screenings method is called
 		doThrow(new IOException()).when(mockScreeningDao).getScreenings();
 
@@ -128,7 +128,7 @@ public class ScreeningControllerTest {
 	}
 
 	@Test
-	public void testCreateScreening () throws IOException {
+	void testCreateScreening () throws IOException {
 		// setup
 		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
 			{ true, true, true, true, true }, { true, true, true, true, true } };
@@ -145,7 +145,7 @@ public class ScreeningControllerTest {
 	}
 
 	@Test
-	public void testCreateScreeningFailed () throws IOException {
+	void testCreateScreeningFailed () throws IOException {
 		// setup
 		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
 			{ true, true, true, true, true }, { true, true, true, true, true } };
@@ -161,7 +161,7 @@ public class ScreeningControllerTest {
 	}
 
 	@Test
-	public void testCreateScreeningHandleException () throws IOException {
+	void testCreateScreeningHandleException () throws IOException {
 		// setup
 		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
 			{ true, true, true, true, true }, { true, true, true, true, true } };
@@ -178,7 +178,7 @@ public class ScreeningControllerTest {
 	}
 
 	@Test
-	public void testSearchScreeningsByMovieId () throws IOException {
+	void testSearchScreeningsByMovieId () throws IOException {
 		// Setup
 		int searchId = 104; // the movieId of 104 points to Star Wars IV
 		Screening[] foundScreenings = new Screening[2];
@@ -198,7 +198,7 @@ public class ScreeningControllerTest {
 	}
 
 	@Test
-	public void testSearchScreeningsByMovieIdHandleException () throws IOException {
+	void testSearchScreeningsByMovieIdHandleException () throws IOException {
 		// Setup
 		int searchId = 104;
 		// When createScreening is called on the Mock Screening DAO, throw an IOException
@@ -212,7 +212,7 @@ public class ScreeningControllerTest {
 	}
 
 	@Test
-	public void testUpdateScreening () throws IOException {
+	void testUpdateScreening () throws IOException {
 		// Setup
 		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
 			{ true, true, true, true, true }, { true, true, true, true, true } };
@@ -230,7 +230,7 @@ public class ScreeningControllerTest {
 	}
 
 	@Test
-	public void testUpdateScreeningExceptionNotFound () throws IOException {
+	void testUpdateScreeningExceptionNotFound () throws IOException {
 		// Setup
 		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
 			{ true, true, true, true, true }, { true, true, true, true, true } };
@@ -246,7 +246,7 @@ public class ScreeningControllerTest {
 	}
 
 	@Test
-	public void testUpdateScreeningHandleException () throws IOException {
+	void testUpdateScreeningHandleException () throws IOException {
 		// Setup
 		boolean[][] seats = { { false, false, false, false, false }, { false, false, true, true, true },
 			{ true, true, true, true, true }, { true, true, true, true, true } };
@@ -262,7 +262,7 @@ public class ScreeningControllerTest {
 	}
 
 	@Test
-	public void testDeleteScreening () throws IOException {
+	void testDeleteScreening () throws IOException {
 		// Setup
 		int screeningId = 101;
 		// when deleteScreening is called return true, simulating successful deletion
@@ -276,7 +276,7 @@ public class ScreeningControllerTest {
 	}
 
 	@Test
-	public void testDeleteScreeningNotFound () throws IOException {
+	void testDeleteScreeningNotFound () throws IOException {
 		// Setup
 		int screeningId = 101;
 		// when deleteScreening is called return false, simulating failed deletion
@@ -290,7 +290,7 @@ public class ScreeningControllerTest {
 	}
 
 	@Test
-	public void testDeleteScreeningHandleException () throws IOException {
+	void testDeleteScreeningHandleException () throws IOException {
 		// Setup
 		int screeningId = 101;
 		// When deleteScreening is called on the Mock Screening DAO, throw an IOException

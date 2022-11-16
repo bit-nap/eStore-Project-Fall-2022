@@ -13,22 +13,22 @@ public interface ScreeningDAO {
 	/**
 	 * Creates and saves a {@linkplain Screening Screening}.
 	 *
-	 * @param Screening {@linkplain Screening Screening} object to be created and saved<br>
+	 * @param screening {@linkplain Screening Screening} object to be created and saved<br>
 	 *                  The id of the Screening object is ignored and a new unique id is assigned
 	 * @return new {@link Screening Screening} if successful, false otherwise
 	 * @throws IOException if an issue with underlying storage
 	 */
-	Screening createScreening (Screening Screening) throws IOException;
+	Screening createScreening (Screening screening) throws IOException;
 
 	/**
 	 * Updates and saves a {@linkplain Screening Screening}.
 	 *
-	 * @param Screening {@link Screening Screening} object to be updated and saved
+	 * @param screening {@link Screening Screening} object to be updated and saved
 	 * @return updated {@link Screening Screening} if successful, null if
 	 * {@link Screening Screening} could not be found
 	 * @throws IOException if underlying storage cannot be accessed
 	 */
-	Screening updateScreening (Screening Screening) throws IOException;
+	Screening updateScreening (Screening screening) throws IOException;
 
 	/**
 	 * Deletes a {@linkplain Screening Screening} with the given id.

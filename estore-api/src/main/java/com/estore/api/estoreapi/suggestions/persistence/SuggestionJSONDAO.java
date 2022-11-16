@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Logger;
 
 /**
  * Implements the functionality for JSON file-based persistence for Suggestions.<p>
@@ -23,9 +22,6 @@ import java.util.logging.Logger;
 public class SuggestionJSONDAO implements SuggestionDAO {
 	/** A local cache of Suggestion objects, to avoid reading from file each time. */
 	Map<Integer, Suggestion> suggestions;
-
-	/** TODO: Add description of the purpose of Logger, once it's actually used. */
-	private static final Logger LOG = Logger.getLogger(SuggestionJSONDAO.class.getName());
 
 	/** The next id to assign to a new suggestion. */
 	private static int nextId;
@@ -53,7 +49,7 @@ public class SuggestionJSONDAO implements SuggestionDAO {
 	 *
 	 * @return The next suggestion id
 	 */
-	private synchronized static int nextId () {
+	private static synchronized int nextId () {
 		int id = nextId;
 		++nextId;
 		return id;

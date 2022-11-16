@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping("accounts")
 public class AccountController {
+	/* Logger is used to log to command line the HTTP request performed, or any internal server errors encountered. */
 	private static final Logger LOG = Logger.getLogger(AccountController.class.getName());
 
 	/** The Data Access Object for Account */

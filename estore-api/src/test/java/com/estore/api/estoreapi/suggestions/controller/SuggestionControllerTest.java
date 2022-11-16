@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
  * @author Group 3C, The Code Monkeys
  */
 @Tag("Controller-Tier")
-public class SuggestionControllerTest {
+class SuggestionControllerTest {
 	private SuggestionController suggestionController;
 	private SuggestionDAO mockSuggestionDao;
 
@@ -28,13 +28,13 @@ public class SuggestionControllerTest {
 	 * Before a test, create a new SuggestionController object and inject a mock Suggestion DAO.
 	 */
 	@BeforeEach
-	public void setupSuggestionController () {
+	void setupSuggestionController () {
 		mockSuggestionDao = mock(SuggestionDAO.class);
 		suggestionController = new SuggestionController(mockSuggestionDao);
 	}
 
 	@Test
-	public void testGetSuggestion () throws IOException {
+	void testGetSuggestion () throws IOException {
 		// setup
 		Suggestion suggestion = new Suggestion(104, "Star Wars: Episode IV – A New Hope", 77);
 		// when the same id is passed in, our mock suggestion DAO will return the Suggestion object
@@ -49,7 +49,7 @@ public class SuggestionControllerTest {
 	}
 
 	@Test
-	public void testGetSuggestionNotFound () throws Exception {
+	void testGetSuggestionNotFound () throws Exception {
 		// setup
 		int suggestionId = 99;
 		// when the same id is passed in, our mock suggestion DAO will return null, simulating no suggestion found
@@ -63,7 +63,7 @@ public class SuggestionControllerTest {
 	}
 
 	@Test
-	public void testGetSuggestionHandleException () throws Exception {
+	void testGetSuggestionHandleException () throws Exception {
 		// setup
 		int suggestionId = 99;
 		// when getSuggestion is called on the mock suggestion DAO, throw an IOException
@@ -82,7 +82,7 @@ public class SuggestionControllerTest {
 	 * @throws Exception if something goes wrong with the http request
 	 */
 	@Test
-	public void testGetSuggestions () throws Exception {
+	void testGetSuggestions () throws Exception {
 		// New list of suggestions
 		Suggestion[] suggestions = new Suggestion[3];
 		suggestions[0] = new Suggestion(104, "Star Wars: Episode IV – A New Hope", 77);
@@ -98,7 +98,7 @@ public class SuggestionControllerTest {
 	}
 
 	@Test
-	public void testGetEmptySuggestions () throws Exception {
+	void testGetEmptySuggestions () throws Exception {
 		// When getSuggestions is called, return null
 		when(mockSuggestionDao.getSuggestions()).thenReturn(null);
 		// Get NOT_FOUND response from SuggestionController
@@ -114,7 +114,7 @@ public class SuggestionControllerTest {
 	 * @throws Exception if something goes wrong with Http request
 	 */
 	@Test
-	public void testGetSuggestionsHandleException () throws Exception {
+	void testGetSuggestionsHandleException () throws Exception {
 		// Throw an exception when the get suggestions method is called
 		doThrow(new IOException()).when(mockSuggestionDao).getSuggestions();
 
@@ -124,7 +124,7 @@ public class SuggestionControllerTest {
 	}
 
 	@Test
-	public void testCreateSuggestion () throws IOException {
+	void testCreateSuggestion () throws IOException {
 		// setup
 		Suggestion suggestion = new Suggestion(104, "Star Wars: Episode IV – A New Hope", 77);
 		// when createSuggestion is called, return true simulating successful creation and save
@@ -139,7 +139,7 @@ public class SuggestionControllerTest {
 	}
 
 	@Test
-	public void testCreateSuggestionFailed () throws IOException {
+	void testCreateSuggestionFailed () throws IOException {
 		// setup
 		Suggestion suggestion = new Suggestion(104, "Star Wars: Episode IV – A New Hope", 77);
 		// when createSuggestion is called, return false simulating failed creation and save
@@ -153,7 +153,7 @@ public class SuggestionControllerTest {
 	}
 
 	@Test
-	public void testCreateSuggestionHandleException () throws IOException {
+	void testCreateSuggestionHandleException () throws IOException {
 		// setup
 		Suggestion suggestion = new Suggestion(104, "Star Wars: Episode IV – A New Hope", 77);
 
@@ -168,7 +168,7 @@ public class SuggestionControllerTest {
 	}
 
 	@Test
-	public void testUpdateSuggestion () throws IOException {
+	void testUpdateSuggestion () throws IOException {
 		// Setup
 		Suggestion suggestion = new Suggestion(104, "Star Wars: Episode IV – A New Hope", 77);
 		// when updateSuggestion is called, return true simulating successful update and save
@@ -183,7 +183,7 @@ public class SuggestionControllerTest {
 	}
 
 	@Test
-	public void testUpdateSuggestionExceptionNotFound () throws IOException {
+	void testUpdateSuggestionExceptionNotFound () throws IOException {
 		// Setup
 		Suggestion suggestion = new Suggestion(104, "Star Wars: Episode IV – A New Hope", 77);
 		// when updateSuggestion is called, return true simulating successful update and save
@@ -197,7 +197,7 @@ public class SuggestionControllerTest {
 	}
 
 	@Test
-	public void testUpdateSuggestionHandleException () throws IOException {
+	void testUpdateSuggestionHandleException () throws IOException {
 		// Setup
 		Suggestion suggestion = new Suggestion(104, "Star Wars: Episode IV – A New Hope", 77);
 		// When updateSuggestion is called on the Mock Suggestion DAO, throw an IOException
@@ -211,7 +211,7 @@ public class SuggestionControllerTest {
 	}
 
 	@Test
-	public void testDeleteSuggestion () throws IOException { // deleteSuggestion may throw IOException
+	void testDeleteSuggestion () throws IOException { // deleteSuggestion may throw IOException
 		// Setup
 		int suggestionId = 99;
 		// when deleteSuggestion is called return true, simulating successful deletion
@@ -225,7 +225,7 @@ public class SuggestionControllerTest {
 	}
 
 	@Test
-	public void testDeleteSuggestionNotFound () throws IOException { // deleteSuggestion may throw IOException
+	void testDeleteSuggestionNotFound () throws IOException { // deleteSuggestion may throw IOException
 		// Setup
 		int suggestionId = 99;
 		// when deleteSuggestion is called return false, simulating failed deletion
@@ -239,7 +239,7 @@ public class SuggestionControllerTest {
 	}
 
 	@Test
-	public void testDeleteSuggestionHandleException () throws IOException { // deleteSuggestion may throw IOException
+	void testDeleteSuggestionHandleException () throws IOException { // deleteSuggestion may throw IOException
 		// Setup
 		int suggestionId = 99;
 		// When deleteSuggestion is called on the Mock Suggestion DAO, throw an IOException

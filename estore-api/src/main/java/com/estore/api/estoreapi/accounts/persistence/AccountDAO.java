@@ -13,22 +13,22 @@ public interface AccountDAO {
 	/**
 	 * Creates and saves a {@linkplain Account Account}.
 	 *
-	 * @param Account {@linkplain Account Account} object to be created and saved<br>
+	 * @param account {@linkplain Account Account} object to be created and saved<br>
 	 *                The id of the Account object is ignored and a new unique id is assigned
 	 * @return new {@link Account Account} if successful, false otherwise
 	 * @throws IOException if an issue with underlying storage
 	 */
-	Account createAccount (Account Account) throws IOException;
+	Account createAccount (Account account) throws IOException;
 
 	/**
 	 * Updates and saves a {@linkplain Account Account}.
 	 *
-	 * @param Account {@link Account Account} object to be updated and saved
+	 * @param account {@link Account Account} object to be updated and saved
 	 * @return updated {@link Account Account} if successful, null if
 	 * {@link Account Account} could not be found
 	 * @throws IOException if underlying storage cannot be accessed
 	 */
-	Account updateAccount (Account Account) throws IOException;
+	Account updateAccount (Account account) throws IOException;
 
 	/**
 	 * Deletes a {@linkplain Account Account} with the given username.

@@ -13,22 +13,22 @@ public interface MovieDAO {
 	/**
 	 * Creates and saves a {@linkplain Movie Movie}.
 	 *
-	 * @param Movie {@linkplain Movie Movie} object to be created and saved<br>
+	 * @param movie {@linkplain Movie Movie} object to be created and saved<br>
 	 *              The id of the Movie object is ignored and a new unique id is assigned
 	 * @return new {@link Movie Movie} if successful, false otherwise
 	 * @throws IOException if an issue with underlying storage
 	 */
-	Movie createMovie (Movie Movie) throws IOException;
+	Movie createMovie (Movie movie) throws IOException;
 
 	/**
 	 * Updates and saves a {@linkplain Movie Movie}.
 	 *
-	 * @param Movie {@link Movie Movie} object to be updated and saved
+	 * @param movie {@link Movie Movie} object to be updated and saved
 	 * @return updated {@link Movie Movie} if successful, null if
 	 * {@link Movie Movie} could not be found
 	 * @throws IOException if underlying storage cannot be accessed
 	 */
-	Movie updateMovie (Movie Movie) throws IOException;
+	Movie updateMovie (Movie movie) throws IOException;
 
 	/**
 	 * Deletes a {@linkplain Movie Movie} with the given id.

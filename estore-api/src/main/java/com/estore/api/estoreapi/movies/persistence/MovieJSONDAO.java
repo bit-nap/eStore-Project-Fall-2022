@@ -49,7 +49,7 @@ public class MovieJSONDAO implements MovieDAO {
 	 *
 	 * @return The next movie id
 	 */
-	private synchronized static int nextId () {
+	private static synchronized int nextId () {
 		int id = nextId;
 		++nextId;
 		return id;

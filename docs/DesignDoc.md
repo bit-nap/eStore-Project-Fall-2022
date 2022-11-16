@@ -30,6 +30,7 @@ The admin can also create new screenings of the existing movies.
 |-----------|-------------------------------------------|
 | Movie     | A film                                    |
 | Screening | The showing of a movie at a movie theater |
+| Order     | A purchase made by a user for a Screening |
 
 ## Requirements
 
@@ -41,26 +42,26 @@ The website allows users to purchase tickets to the screening of a movie.
 
 ### MVP Features
 
-- Users can manage their cart, which includes the ability to add tickets, soda and popcorn for a screening.
+- Users can create an order of tickets to a movie screening, which may include soda and popcorn.
 - Users can make accounts to make purchases and view their order history.
 - Users can vote/suggest on new movies to be shown at a screening.
 
 ### Roadmap of Enhancements
 
+- Users can create/log in to/delete their account.
 - Users have the ability to select one of multiple movies to watch.
 - Users can select the screening of a movie to attend.
 - Users can select the number of tickets to purchase to a screening.
-- Users can complete their purchase.
-- Users can create/log in to/delete an account.
-- Users can select the number of sodas they want to purchase for a screening.
-- Users can select the number of popcorn they want to purchase for a screening.
+- Users can select an amount and size of popcorn and sodas they for a screening.
 - Users can select a specific seat in the theater for each ticket they will purchase.
+- Users can complete their purchase.
 - Users can view their purchase history, when logged in.
 
 
 - Admin can view all screenings of all movies.
 - Admin can modify existing screenings.
 - Admin can view what seats are already reserved for each screening.
+- Admin can add and modify the movies that are being voted on.
 
 ## Application Domain
 
@@ -69,16 +70,18 @@ This section describes the application domain.
 ![Domain Model](domain-model.jpg)
 
 In our design, a Screening would display a Movie, which has various attributes specific to that movie.
-A Screening has date and time fields for the user to choose based on.
-Screening also has a counter of tickets remaining so the product owner can prevent overbooking a Screening.
+A user can choose a Screening based on the date and time of the Screening.
+Each Screening has a counter of tickets remaining so the product owner can prevent overbooking a Screening.
 
-The shopping cart contains information about the tickets, soda and popcorn which a customer is buying to attend a Screening.
+The checkout screen contains information about the tickets, soda and popcorn which a customer is buying for a Screening.
 A customer cannot purchase tickets to multiple Screenings at once.
 
-There must be at least 1 ticket for the shopping cart to exist, and there is at most 20 seats in a theater so the number of tickets cannot exceed 20.
+There must be at least 1 ticket to make an order, and there is at most 20 seats in a theater so the number of tickets cannot exceed 20.
 Soda and popcorn is optional and a user can complete a checkout without purchasing any.
 
-The customer must either make an account, or sign in to an existing account to make a purchase. A customer can also delete theri account.
+The customer must either make an account, or sign in to an existing account to make a purchase. The admin cannot create an Order.
+A customer can also delete their account.
+Once the customer is signed in, they can see the details of their previous orders.
 
 ## Architecture and Design
 
@@ -102,20 +105,25 @@ supplied below.
 
 ### Overview of User Interface
 
-This section describes the web interface flow; this is how the user views and interacts
-with the e-store application.
+This section describes the web interface flow; this is how the user views and interacts with the e-store application.
 
-The landing page displays the all the movies a user can view at the theater.
-The user can enter text into the search bar to filter the movies they see based on their movie title.
-There is a navigation header at the top of the webpage that has a button that allows a user to log in to, create, or delete their account.
+The landing page displays all the movies a user can view at the theater.
+The user can enter text into the search bar to filter the movies they see based on the movie title.
 
 When logged in, a user can select a movie from the homepage which brings up a list of screenings for that movie.
 Upon selecting a screening, the user can select a seat (thereby selecting a ticket) to purchase for a screening.
 In the same page, a user can select the number of sodas and/or popcorn to purchase for the same screening.
-The user can then finalize their purchase and is displayed a page with information about the screening they have purchased tickets for.
-The user, when logged in, can vote or suggest on a new movie. If they click on a button for a movie, it will increase the number of votes 
-by one. They can click it as many times as they want. They can also suggest a new movie to be added that will have 1 vote added automatically. 
-The admin, when logged in, can add a new movie or change the movie name of a previous one, but they cannot vote themselves.
+The user can then finalize their purchase and is displayed a page with information about their order, the screening they have purchased tickets for.
+
+There is a navigation header at the top of the webpage that contains the website title, a welcome splash text with the username, and buttons based on the user logged in with the following functionality:
+- The Login button routes to a page that allows a user to create an account, and sign into their account.
+- When logged in, the Login button turns into a Logout button.
+- When logged in, a Home button to route to the landing page.
+- When logged in, an Order button to route to a page that contains the user's purchase history and details of each order.
+- When logged in, a Vote/Suggest button to route to the voting and suggesting page for future Screenings.
+	- A user can vote on a movie any amount of times they want and can suggest a movie.
+	-  The admin can add or change a movie but cannot vote.
+- When logged in, a Delete Account button to delete their account from the persistence.
 
 ### View Tier
 
@@ -127,15 +135,15 @@ The admin, when logged in, can add a new movie or change the movie name of a pre
 > _You must also provide sequence diagrams as is relevant to a particular aspects
 > of the design that you are describing. For example, in e-store you might create a
 > sequence diagram of a customer searching for an item and adding to their cart.
-> Be sure to include an relevant HTTP reuqests from the client-side to the server-side
+> Be sure to include an relevant HTTP requests from the client-side to the server-side
 > to help illustrate the end-to-end flow._
 
 There are several components needed to handle the user purchase of tickets to a screening.
 
 ![Sequence Diagram of User Purchase](complete-order-sequence-diagram.png)
 
-The landing page logic is located in the `Movies` component. This component retrieves all `Movie` objects using an HTTP GET request
-and displays them to the user. The search functionality on the landing page also uses an HTTP GET request (with a query string)
+The landing page logic is located in the `Movies` component. This component retrieves all `Movie` objects using an HTTP GET request and displays them to the user.
+The search functionality on the landing page also uses an HTTP GET request (with a query string)
 to retrieve all the movies with the given phrase in their title. When the user selects a movie, that `Movie` object is stored with the `MovieSelectorService`.
 The user is then routed to the `/screenings` page.
 
@@ -145,7 +153,7 @@ The user is then routed to the `/tickets`page.
 
 The `Tickets` component presents allows the user to select the seats for a screening, the number of sodas and popcorn to order for the screening.
 When the user finalizes their purchase using the button at the bottom of the page, the `Tickets` component sends
-an HTTP POST request to the orders endpoint, adding that order to the storage. The user is then routed to the `/thank` page.
+an HTTP POST request to the orders endpoint, adding that `Order` to the orders persistence. The user is then routed to the `/thank` page.
 
 The `CompletedPurchase` component then presents the user with a summary of their order. Specifically, it displays information about the
 selected movie and date and time of the screening using the `MovieSelectorService` and `ScreeningSelectorService`.

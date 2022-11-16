@@ -115,8 +115,9 @@ Upon selecting a screening, the user can select a seat (thereby selecting a tick
 In the same page, a user can select the number of sodas and/or popcorn to purchase for the same screening.
 The user can then finalize their purchase and is displayed a page with information about their order, the screening they have purchased tickets for.
 
-There is a navigation header at the top of the webpage that contains the website title, a welcome splash text with the username, and buttons based on the user logged in with the following functionality:
-- The Login button routes to a page that allows a user to create an account, and sign into their account.
+There is a navigation header at the top of the webpage that contains the website title, a welcome splash text with the username,
+and buttons based on the user logged in with the following functionality:
+- The Login button routes to a page that allows a user to create an account, and sign in to their account.
 - When logged in, the Login button turns into a Logout button.
 - When logged in, a Home button to route to the landing page.
 - When logged in, an Order button to route to a page that contains the user's purchase history and details of each order.
@@ -152,11 +153,15 @@ and an HTTP GET request with a query string. When the user selects a screening, 
 The user is then routed to the `/tickets`page.
 
 Once the user is on the landing page and is presented with the `Movie` objects, they may not select any `Screening` objects for purchase.
-First, the user must click the Login button which routes them to the `/login` page. The `Login` component presents the user with the ability to create an `Account` and sign in with the `Account` username.
-The `Login` component uses an HTTP GET request to get an `Account` with the username entered. If an `Account` with a matching username field exists, no `Account` will be created, if not, an HTTP POST request creates a new `Account` object with this username.
-The `Login` component accepts a username and an HTTP GET request to check if an `Account` with the username exists, then sets the `LoggedInAccountService` account field, then routes to the `/screenings` page.
+First, the user must click the Login button which routes them to the `/login` page.
+The `Login` component presents the user with the ability to create an `Account` and sign in with the `Account` username.
+The `Login` component uses an HTTP GET request to get an `Account` with the username entered.
+If an `Account` with a matching username field exists, no `Account` will be created, if not, an HTTP POST request creates a new `Account` object with this username.
+The `Login` component accepts a username and an HTTP GET request to check if an `Account` with the username exists,
+then sets the `LoggedInAccountService` account field, then routes to the `/screenings` page.
 
-Once the user has logged in using the `Login` sign in functionality, the `LoggedInAccountService` will keep track of this `Account` that is logged into. Other components use this component to check if the `Account` that has been logged in is a user or an admin. Then the logout functionality untracks the user's `Account` to log out. 
+Once the user has logged in using the `Login` sign in functionality, the `LoggedInAccountService` will keep track of this `Account` that is logged into.
+Other components use this component to check if the `Account` that has been logged in is a user or an admin. Then the logout functionality untracks the user's `Account` to log out. 
 
 The `Tickets` component presents allows the user to select the seats for a screening, the number of sodas and popcorn to order for the screening.
 When the user finalizes their purchase using the button at the bottom of the page, the `Tickets` component sends
@@ -165,7 +170,9 @@ an HTTP POST request to the orders endpoint, adding that `Order` to the orders p
 The `CompletedPurchase` component then presents the user with a summary of their order. Specifically, it displays information about the
 selected movie and date and time of the screening using the `MovieSelectorService` and `ScreeningSelectorService`.
 
-Once the user completes a purchase, the Orders button routes to `/purchase-history` page in which a detailed list of `Order` objects of that have the user's `Account` id field. This is done by an HTTP GET request to get `Order` objects based on the accountId passed in. For each `Order` a `Screening` is obtained by a similar HTTP GET request and is used to display the details of an `Order` object's `Screening`. 
+Once the user completes a purchase, the Orders button routes to `/purchase-history` page in which a detailed list of `Order` objects of that have the user's `Account` id field.
+This is done by an HTTP GET request to get `Order` objects based on the accountId passed in.
+For each `Order` a `Screening` is obtained by a similar HTTP GET request and is used to display the details of an `Order` object's `Screening`. 
 
 The `VoteSuggestion` component presents the user with a list of movies that they can vote on, or add a new movie. It will use an HTTP GET request to get the movie,
 and then use a PUT to add a vote to the movie.
@@ -176,14 +183,6 @@ The `AdminComponent` component presents the admin the ability to change inventor
 create a new screening, and a PUT method to change the screening, and DELETE method to delete the screening.
 
 ### ViewModel Tier
-
-> _Provide a summary of this tier of your architecture. This
-> section will follow the same instructions that are given for the View
-> Tier above._
-
-> _At appropriate places as part of this narrative provide one or more
-> static models (UML class diagrams) with some details such as critical attributes and methods._
-
 
 ![ScreeningController UML Diagram](uml-diagrams/screening-controller.png)
 
@@ -223,13 +222,6 @@ The searchOrdersByAccountId method GET an array of `Order` by matching the `acco
 
 ### Model Tier
 
-> _Provide a summary of this tier of your architecture. This
-> section will follow the same instructions that are given for the View
-> Tier above._
-
-> _At appropriate places as part of this narrative provide one or more
-> static models (UML class diagrams) with some details such as critical attributes and methods._
-
 ![Movie UML Diagram](uml-diagrams/movie-model.png)
 
 The `Movie` model has fields relating to a movie. The `poster` field is the relative path to the poster of the movie
@@ -254,7 +246,7 @@ The `Account` model has fields that identify the user, such as the `id` and `use
 A user's `id` is not known to them but is important for the model, to find accounts by id and each `Order` has this id as the `accountId`.
 The `username` field is also unique, and is determined by the user on creation. Many components use this field to identify a user and allow them to login.
 The user may also remove their account from persistence by entering `username` into the delete account functionality.
-The `password` field is a string of characters determined by the user to login with.
+The `password` field is a string of characters determined by the user to log in with.
 
 ![Order UML Diagram](uml-diagrams/order-model.png)
 
@@ -263,8 +255,10 @@ The `id` field is a unique integer that is used to determine a unique `Order`. T
 The `screeningId` field is used to identify the respective `Screening` of the `Order`. Screenings can be obtained by this id.
 The `accountId` field is used to identify the `Account` that created the order.
 The `tickets` field shows how many tickets a user has bought for a Screening, the `purchase-history` component displays this once the `Order` is gotten.
-The `popcorn` and `soda` arrays are filled on creation of an `Order` which show how much small, medium, and large; popcorn or soda, was purchased, respectively. This is also used by `purchase-history` to display this detail to the user.
-The `seats` array is filled by a String determining the seat number, on creation of an `Order`. This is displayed on the `tickets` component when ordering, and displayed in the `purchase-history` as the seats for each Screening order.
+The `popcorn` and `soda` arrays are filled on creation of an `Order` which show how much small, medium, and large; popcorn or soda, was purchased, respectively.
+This is also used by `purchase-history` to display this detail to the user.
+The `seats` array is filled by a String determining the seat number, on creation of an `Order`.
+This is displayed on the `tickets` component when ordering, and displayed in the `purchase-history` as the seats for each Screening order.
 
 
 ### Static Code Analysis/Design Improvements
@@ -275,10 +269,55 @@ The `seats` array is filled by a String determining the seat number, on creation
 > addressed with design changes, and describe those suggested design
 > improvements._
 
-> _With the results from the Static Code Analysis exercise,
-> discuss the resulting issues/metrics measurements along with your analysis
-> and recommendations for further improvements. Where relevant, include
-> screenshots from the tool and/or corresponding source code that was flagged._
+To perform a static analysis of our Java code, we used the Sonarqube tool. Our results are shown below.
+
+![Sonarqube Results](sonarqube-screenshots/overall-results.png)
+
+We have 51 code smells, although mostly duplicate code smells across multiple files. Despite these code smells,
+Sonarqube still gave our code an A across the four categories, indicating our code smells do not impact the quality of our code.
+A breakdown of the 51 code smells is shown below.
+
+![Sonarqube Code Smells](sonarqube-screenshots/code-smells.png)
+
+
+Our 15 critical code smells are all duplicates. Throughout our 5 persistence files, used to load and save Java objects to a JSON file,
+we have a method `load` to load the JSON objects. In this method, the static `id` field of the object being created is overwritten, so that the ids
+are in order. However, this static field is modified from a non-static method, which is why sonarqube marks this as a critical code smell.
+
+![Sonarqube Static nextId Code Smell](sonarqube-screenshots/static-nextId-code-smell.png)
+
+These 3 uses of the static `nextId` field are present in our 5 persistence files, thus 15 total repetitions of this critical code smell.
+We elected not to look into correcting this because we don't think that the modification of the static field in a non-static context will be a problem for our estore.
+If we were to expand on our project, then we would look into resolving this issue.
+
+Our 33 major code smells were 2 problems throughout multiple files.
+
+The first of which is our use of the `Logger` object, which accounted for 23/33 of the major code smells.
+
+![Sonarqube Logger Code Smell](sonarqube-screenshots/logger-code-smell.png)
+
+We decided not to address this issue because the `Logger` object is simply to display output about the requested HTTP command,
+and is not contributing anything significant to the functionality of the project. If we were to expand on our project and increase our use of the `Logger` object,
+then we would look into the proper way to log information to the command line.
+
+The other 10/33 major code smells were due to the formatting of our JUnit Assertions.
+
+![Sonarqube JUnit Assertions Code Smell](sonarqube-screenshots/junit-assertions-code-smell.png)
+
+We wrote our JUnit Assertions with arguments in the order `(actual, expected)` when the proper order is `(expected, actual)`.
+Because this is simply a problem of conventional order, we decided to ignore this code smell.
+Sonarqube only flagged the Assertions that had a straightforward actual value such as `assertEquals(expected, 3)`
+and not the other Assertions that have an expected value based on the returned object of a method call such as `assertEquals(expected, screening.getId())`.
+Therefore, this issue is likely present in all our unit tests. And considering our unit tests pass, going through and changing the order of the arguments
+for the sake of following conventional standards would be a waste of time.
+
+Our final 3 minor code smells are duplicates of the same issue.
+
+![Sonarqube Spring RequestMapping Code Smell](sonarqube-screenshots/spring-requestMapping-code-smell.png)
+
+Sonarqube recommends we replace our current use of the `@RequestMapping` annotation with an `@GetMapping` annotation,on the methods used to get objects with query parameters.
+We originally were using the `@GetMapping` annotation on these methods, but we moved over to the `@RequestMapping` annotation so that a Controller class
+could take multiple different query parameters. Because sonarqube marked this issue as a minor code smell, we will ignore these issues.
 
 ## Testing
 
@@ -290,9 +329,9 @@ At the time of writing, this is the 10% reserve seats feature that is in develop
 
 The only concern we have is that we have missed a requirement for a story when designing our acceptance criteria.
 For example, during the designing of our login user story, we did not explicitly state that a user must be logged in to delete their account.
-Therefore, during the implementation, the delete button was implemented such that any user could delete any account as long as they new the account's username.
+Therefore, during the implementation, the delete button was implemented such that any user could delete any account as long as they knew the account's username.
 We have since corrected this bug. However, we are now aware our acceptance criteria may have not been explicitly clear as to all that needed to be covered.
-Therefore it is possible current user stories pass all acceptance criteria but may still have bugs we did not consider during the design of the user story.
+Therefore, it is possible current user stories pass all acceptance criteria but may still have bugs we did not consider during the design of the user story.
 
 ### Unit Testing and Code Coverage
 

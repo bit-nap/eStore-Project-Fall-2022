@@ -8,7 +8,7 @@
     
     <h1>SCREEN</h1>
     <div class="cinema">
-      <div *ngFor="let i of selectSeats">
+      <div *ngFor="let i of this.selectSeats">
         <div class="row">
           <ng-container *ngFor="let j of i">
             <ng-container *ngIf="j; then btnDisabled; else btnEnabled">

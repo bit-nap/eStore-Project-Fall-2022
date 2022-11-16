@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -113,6 +114,14 @@ class ScreeningTest {
 		assertNotEquals(original, diffTime);
 		assertNotEquals(original, diffDate);
 		assertEquals(original, sameDateAndTime);
+	}
+
+	@Test
+	void testHashCode () {
+		boolean[][] seats = { { false, false, false, false }, { false, false, false, false } };
+		Screening screening = new Screening(101, 104, 6, "01/16/2023", "16:00", seats);
+
+		assertEquals(screening.hashCode(), Objects.hash(screening.getDate(), screening.getTime()));
 	}
 
 	@Test

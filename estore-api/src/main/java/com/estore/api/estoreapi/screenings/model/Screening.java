@@ -3,6 +3,8 @@ package com.estore.api.estoreapi.screenings.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Objects;
+
 /**
  * Represents a screening of a movie.
  *
@@ -153,6 +155,11 @@ public class Screening implements Comparable<Screening> {
 		if (other == null || getClass() != other.getClass()) return false;
 		Screening screening = (Screening) other;
 		return date.equals(screening.date) && time.equals(screening.time);
+	}
+
+	@Override
+	public int hashCode () {
+		return Objects.hash(date, time);
 	}
 
 	/**

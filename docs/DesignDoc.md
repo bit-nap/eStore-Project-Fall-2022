@@ -67,7 +67,7 @@ The website allows users to purchase tickets to the screening of a movie.
 
 This section describes the application domain.
 
-![Domain Model](domain-model.jpg)
+![Domain Model](domain-model.png)
 
 In our design, a Screening would display a Movie, which has various attributes specific to that movie.
 A user can choose a Screening based on the date and time of the Screening.

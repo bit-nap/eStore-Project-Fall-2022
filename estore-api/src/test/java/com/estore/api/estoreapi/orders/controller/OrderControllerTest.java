@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 
 /**
@@ -94,6 +95,17 @@ public class OrderControllerTest {
 
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(orders, response.getBody());
+	}
+
+	@Test
+	public void testGetEmptyOrders () throws Exception {
+		// When getOrders is called, return null
+		when(mockOrderDao.getOrders()).thenReturn(null);
+		// Get NOT_FOUND response from OrderController
+		ResponseEntity<Order[]> response = orderController.getOrders();
+
+		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+		assertNull(response.getBody());
 	}
 
 	/**

@@ -3,8 +3,6 @@ package com.estore.api.estoreapi.screenings.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Objects;
-
 /**
  * Represents a screening of a movie.
  *
@@ -34,8 +32,7 @@ public class Screening implements Comparable<Screening> {
 	@JsonProperty("seats") private boolean[][] seats;
 
 	/**
-	 * Create a Screening object with the given id and movie name. The {@linkplain #setMovieGetter} method should be called
-	 * immediately after this constructor call to set this object's movie field.
+	 * Create a Screening object with the given id and movie name.
 	 *
 	 * @param id               The id of this screening
 	 * @param movieId          The id of the Movie being shown at this screening
@@ -156,11 +153,6 @@ public class Screening implements Comparable<Screening> {
 		if (other == null || getClass() != other.getClass()) return false;
 		Screening screening = (Screening) other;
 		return date.equals(screening.date) && time.equals(screening.time);
-	}
-
-	@Override
-	public int hashCode () {
-		return Objects.hash(date, time);
 	}
 
 	/**

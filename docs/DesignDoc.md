@@ -196,6 +196,21 @@ This method is used in the View Tier, providing the functionality of the homepag
 The `SuggestionController` is used to respond to HTTP requests for `Suggestion` objects. There are methods that handle simple GET, POST, PUT, and DELETE requests.
 The POST and PUT requests require a `Suggestion` object as an argument, to insert into the storage of a `Suggestion` objects.
 
+![AccountController UML Diagram](uml-diagrams/account-controller.png)
+
+The `AccountController` is used to respond to HTTP requests for `Account` objects.
+This controller consists of methods that handle simple GET, POST, PUT, and DELETE requests.
+The POST and PUT requests require an `Account` object as a parameter, to create or update an `Account` in the persistence.
+The deleteAccount and getAccount methods require a String of the `Account` username field to DELETE or GET.
+
+![OrderController UML Diagram](uml-diagrams/order-controller.png)
+
+The `OrderController` is used to respond to HTTP requests for `Order` objects.
+This controller consists of methods that handle GET, POST, and DELETE requests.
+The POST request requires an `Order` object as a parameter, to create an `Order` in the persistence.
+The deleteOrder and getOrder methods require an integer from the `Order` field `id` in order to DELETE, or GET the `Order` object, respectively.
+The searchOrdersByScreeningId method GET an array of `Order` by matching the `screeningId` field of all `Order` objects with the `id` of a `Screening` object.
+The searchOrdersByAccountId method GET an array of `Order` by matching the `accountId` field of all `Order` objects with the `id` of an `Account` object.
 
 ### Model Tier
 
@@ -223,6 +238,25 @@ If a seat is already reserved by a user, it will have a value of `True` in the `
 The `Suggestion` model has fields relating to the number of votes for the movie and the movie name. 
 The `votes` field will be incremented by one everytime the user clicks on the button on the front end. 
 The `movieTitle` field can be changed by the admin, and added by the user.
+
+![Account UML Diagram](uml-diagrams/account-model.png)
+
+The `Account` model has fields that identify the user, such as the `id` and `username` fields.
+A user's `id` is not known to them but is important for the model, to find accounts by id and each `Order` has this id as the `accountId`.
+The `username` field is also unique, and is determined by the user on creation. Many components use this field to identify a user and allow them to login.
+The user may also remove their account from persistence by entering `username` into the delete account functionality.
+The `password` field is a string of characters determined by the user to login with.
+
+![Order UML Diagram](uml-diagrams/order-model.png)
+
+The `Order` model has fields that identify the `Account` that created the order and the `Screening` it points to, along with the rest of the fields that describe an `Order`.
+The `id` field is a unique integer that is used to determine a unique `Order`. This is used for getting orders.
+The `screeningId` field is used to identify the respective `Screening` of the `Order`. Screenings can be obtained by this id.
+The `accountId` field is used to identify the `Account` that created the order.
+The `tickets` field shows how many tickets a user has bought for a Screening, the `purchase-history` component displays this once the `Order` is gotten.
+The `popcorn` and `soda` arrays are filled on creation of an `Order` which show how much small, medium, and large; popcorn or soda, was purchased, respectively. This is also used by `purchase-history` to display this detail to the user.
+The `seats` array is filled by a String determining the seat number, on creation of an `Order`. This is displayed on the `tickets` component when ordering, and displayed in the `purchase-history` as the seats for each Screening order.
+
 
 ### Static Code Analysis/Design Improvements
 

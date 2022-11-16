@@ -183,7 +183,7 @@ The POST and PUT requests require a `Movie` object as an argument, to insert int
 The `searchMovies` method takes an argument of a String to find all movies with a title that contains that string.
 This method is used in the View Tier, providing the functionality of the homepage search bar.
 
-![SuggestionController UML Diagram](uml-diagram/suggestion-controller.png)
+![SuggestionController UML Diagram](uml-diagrams/suggestion-controller.png)
 
 The `SuggestionController` is used to respond to HTTP requests for `Suggestion` objects. There are methods that handle simple GET, POST, PUT, and DELETE requests.
 The POST and PUT requests require a `Suggestion` object as an argument, to insert into the storage of a `Suggestion` objects.
@@ -210,7 +210,7 @@ The `ticketsRemaining` field can never be higher than the `TOTAL_TICKETS` field 
 a user purchases tickets to a screening. The `seats` field is a 2D Array of booleans representing the 20 seats in the theater.
 If a seat is already reserved by a user, it will have a value of `True` in the `seats` field. If the seat is empty, it will be `False`.
 
-![Suggestion UML Diagram](uml-diagram/suggestion-model.png)
+![Suggestion UML Diagram](uml-diagrams/suggestion-model.png)
 
 The `Suggestion` model has fields relating to the number of votes for the movie and the movie name. 
 The `votes` field will be incremented by one everytime the user clicks on the button on the front end. 
@@ -231,21 +231,40 @@ The `movieTitle` field can be changed by the admin, and added by the user.
 
 ## Testing
 
-> _This section will provide information about the testing performed
-> and the results of the testing._
-
 ### Acceptance Testing
 
-> _Report on the number of user stories that have passed all their
-> acceptance criteria tests, the number that have some acceptance
-> criteria tests failing, and the number of user stories that
-> have not had any testing yet. Highlight the issues found during
-> acceptance testing and if there are any concerns._
+Currently, the majority of our user stories have passed all acceptance criteria.
+Only the stories that are still in development have not passed their acceptance criteria.
+At the time of writing, this is the 10% reserve seats feature that is in development and the track snacks user story that is still in the sprint backlog.
+
+The only concern we have is that we have missed a requirement for a story when designing our acceptance criteria.
+For example, during the designing of our login user story, we did not explicitly state that a user must be logged in to delete their account.
+Therefore, during the implementation, the delete button was implemented such that any user could delete any account as long as they new the account's username.
+We have since corrected this bug. However, we are now aware our acceptance criteria may have not been explicitly clear as to all that needed to be covered.
+Therefore it is possible current user stories pass all acceptance criteria but may still have bugs we did not consider during the design of the user story.
 
 ### Unit Testing and Code Coverage
 
-> _Discuss your unit testing strategy. Report on the code coverage
-> achieved from unit testing of the code base. Discuss the team's
-> coverage targets, why you selected those values, and how well your
-> code coverage met your targets. If there are any anomalies, discuss
-> those._
+We focused solely on writing unit tests for our Java RESTful API.
+We aimed to have 95% code coverage for our code. We aimed for this number because we believe it is important to ensure our code is stable by
+having high code coverage. It allows us to identify any bugs that arise and can inform of us of ways to improve our code.
+To analyze our code coverage, we used the Jacoco tool, imported with Maven. Our results are shown below.
+
+![Jacoco Code Coverage Results](jacoco-screenshots/overall-results.png)
+
+We have 99% code coverage. The missing 1% is from the entry point to the spring boot application.
+
+![Jacoco Spring Boot Main Method](jacoco-screenshots/missing-one-percent.png)
+
+The rest of our Java classes are at 100% code coverage. In terms of if statements, we are at 97% branch coverage.
+The missing 3% is likely the same branch in 3 of our persistence files, the MovieJSONDAO, OrderJSONDAO and SuggestionJSONDAO.
+
+![Jacoco MovieJSONDAO Missed Branch](jacoco-screenshots/movieJSONDAO-missed-branch.png)
+
+![Jacoco OrderJSONDAO Missed Branch](jacoco-screenshots/orderJSONDAO-missed-branch.png)
+
+![Jacoco SuggestionJSONDAO Missed Branch](jacoco-screenshots/suggestionJSONDAO-missed-branch.png)
+
+We are not sure why this is a problem only for these 3 persistence classes and not for the AccountJSONDAO or ScreeningJSONDAO.
+However, the missed branch will likely not cause any unexpected behaviors, and because it is likely the same missed branch in all 3 problematic
+persistence files, we elected to ignore the missed branch.

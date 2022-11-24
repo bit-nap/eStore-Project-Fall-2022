@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ApplicationRef } from '@angular/core';
 
 // Class interfaces
 import { Order } from '../order';
-import { Screening } from '../screening';
 
-// Service for logged in user
+// Service components
+import { ScreeningMovieService } from '../screening-movie.service';
 import { LoggedInAccountService } from '../logged-in-account.service';
 
 // HTTP calls
@@ -20,16 +19,13 @@ export class PurchaseHistoryComponent implements OnInit {
   // Array of Order objects to store objects from the JSON
   orders: Order[] = [];
 
-  // Array of Screening objects for screening details
-  screenings: Screening[] = [];
-
   /**
    * Required objects for deserializing the objects in the JSON based on user logged
    *
    * @param login LoggedInAccountService object to keep track of logged in user
    * @param http  HttpClient object for API calls
    */
-  constructor(private http: HttpClient, private login: LoggedInAccountService, private appRef: ApplicationRef) { }
+  constructor(private http: HttpClient, private login: LoggedInAccountService, protected SMService: ScreeningMovieService) { }
 
   ngOnInit(): void {
     this.checkAccount();
@@ -46,36 +42,36 @@ export class PurchaseHistoryComponent implements OnInit {
   }
 
   getAccountOrders(): void {
-    var that = this;
     this.http.get<[Order]>('http://127.0.0.1:8080/orders/?accountId=' + this.login.getId()).subscribe((orders_data: Order[]) => {
       if (orders_data != null && orders_data.length > 0) {
         // Reversing the list of orders to display from most recent to oldest (higher id is more recent)
-        that.orders = orders_data.reverse();
-        that.getScreeningsFromOrders(orders_data.reverse());
-        document.getElementById("getOrdersMessage")!.innerHTML = "Displaying " + that.orders.length + " orders";
+        this.orders = orders_data.reverse();
+        document.getElementById("getOrdersMessage")!.innerHTML = "Displaying " + this.orders.length + " orders";
       } else {
         document.getElementById("getOrdersMessage")!.innerHTML = "No orders found";
       }
-      this.appRef.tick();
     })
   }
 
-  getScreeningsFromOrders(orderArray: Order[]): void {
-    console.log("TEST");
-    console.log(orderArray);
-    for (var i = 0; i < orderArray.length; i++) {
-      var that = this;
-      this.http.get<Screening>('http://localhost:8080/screenings/' + orderArray[i].screeningId).subscribe((screening_data: Screening) => {
-        // console.log(screening_data);
-        that.screenings[i] = screening_data;
-        console.log(this.screenings[i]);
-        this.appRef.tick();
-      })
-    }
-    console.log("Screenings array");
-    console.log(this.screenings);
-    console.log("loop finished");
-  }
+
+
+  // getScreeningsFromOrders(orderArray: Order[]): void {
+  //   console.log(orderArray);
+  //   for (var i = 0; i < orderArray.length; i++) {
+  //     console.log("entering get screening loop");
+  //     this.http.get<Screening>('http://localhost:8080/screenings/' + orderArray[i].screeningId).subscribe((screening_data: Screening) => {
+  //       this.screenings[i] = screening_data;
+  //       // console.log(this.screenings[i]);
+  //     })
+  //   }
+  //   console.log("----Screenings array----");
+  //   console.log("screenings length: " + this.screenings.length);
+  //   console.log(this.screenings);
+  //   for (var screening in this.screenings) {
+  //     console.log("screening: " + screening);
+  //   }
+  //   console.log("----loop finished----");
+  // }
 
   // setArrays(): void {
   //   var i: number = 0;

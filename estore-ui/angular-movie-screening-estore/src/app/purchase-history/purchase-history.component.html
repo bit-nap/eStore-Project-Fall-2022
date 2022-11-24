@@ -5,11 +5,13 @@
 
     <ul class="orders">
       <li *ngFor="let order of orders; let i = index">
+        <span class = "id">TIME: {{SMService.getScreeningTime(order.screeningId)}}</span>
         <span class = "id">id: {{order.id}}</span>
         <span class = "item">screening id: {{order.screeningId}}</span>
         <div>
           <span class = "id"># tickets: {{order.tickets}}</span>
         </div>
+
         <!-- Print orders for popcorn if they exist -->
         <div *ngIf="order.popcorn[0] > 0">
           <span class = "item"># small popcorn: {{order.popcorn[0]}}</span>
@@ -20,6 +22,7 @@
         <div *ngIf="order.popcorn[2] > 0">
           <span class = "item"># large popcorn: {{order.popcorn[2]}}</span>
         </div>
+
         <!-- Print orders for soda if they exist -->
         <div *ngIf="order.soda[0] > 0">
           <span class = "item"># small soda: {{order.soda[0]}}</span>

@@ -5,11 +5,14 @@
 
     <ul class="orders">
       <li *ngFor="let order of orders; let i = index">
-        <span class = "id">TIME: {{SMService.getScreeningTime(order.screeningId)}}</span>
         <span class = "id">id: {{order.id}}</span>
-        <span class = "item">screening id: {{order.screeningId}}</span>
+        <span class = "id">screening id: {{order.screeningId}}</span>
+        <span class = "id"># tickets: {{order.tickets}}</span>
         <div>
-          <span class = "id"># tickets: {{order.tickets}}</span>
+          <span class = "detail">TITLE: {{SMService.getMovieTitle(order.screeningId)}}</span>
+          <span class = "detail">POSTER: {{SMService.getMoviePoster(order.screeningId)}}</span>
+          <span class = "detail">TIME: {{SMService.getScreeningTime(order.screeningId)}}</span>
+          <span class = "detail">DATE: {{SMService.getScreeningDate(order.screeningId)}}</span>
         </div>
 
         <!-- Print orders for popcorn if they exist -->

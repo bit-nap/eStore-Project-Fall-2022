@@ -30,8 +30,6 @@ export class PurchaseHistoryComponent implements OnInit {
   ngOnInit(): void {
     this.checkAccount();
     this.getAccountOrders();
-    // this.setArrays();
-    // this.printArrays();
   }
 
   checkAccount(): void {
@@ -52,8 +50,6 @@ export class PurchaseHistoryComponent implements OnInit {
       }
     })
   }
-
-
 
   // getScreeningsFromOrders(orderArray: Order[]): void {
   //   console.log(orderArray);

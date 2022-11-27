@@ -171,30 +171,42 @@ export class TicketsComponent implements OnInit {
   }
 
   seatCount(row: number, col: number): void {
-    if (this.selectSeats[row][col] == false || this.selectSeatsCopy[row][col] == false) {
+    if (this.selectSeats[row][col] == false && this.selectSeatsCopy[row][col] == false) {
       this.selectSeatsCopy[row][col] = true;
       this.numOfTickets += 1;
-    } else if (this.selectSeats[row][col] == false && this.selectSeatsCopy[row][col] != false) {
+
+    } else if (this.selectSeats[row][col] == false && this.selectSeatsCopy[row][col] == true) {
       this.selectSeatsCopy[row][col] = false;
       this.numOfTickets -= 1;
+
     }
-    var id: string = row.toString() + col.toString();
-    this.changeClass(id);
   }
 
   emptySeat(row: number, col: number): boolean {
+    var empty;
     if (this.selectSeats[row][col] == false) {
-      return true;
+      empty = true;
+    } else
+      empty = false;
+    var id: string = row.toString() + "," + col.toString();
+    var button = document.getElementById(id);
+    if (button != null) {
+      if (empty == true) {
+        button.className = 'seat-unavailable';
+      } else
+        button.className = 'seat';
     }
-    return false;
+    return empty;
   }
 
   changeClass(id: string): void {
     var button = document.getElementById(id);
-    if (button?.className == 'seat') {
-      button.className = 'seat-selected';
-    } else if (button?.className == 'seat-selected') {
-      button.className = 'seat-selected'
+    if (button != null) {
+      if (button.className == 'seat') {
+        button.className = 'seat-selected';
+      } else if (button.className == 'seat-selected') {
+        button.className = 'seat'
+      }
     }
   }
 }

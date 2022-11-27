@@ -9,62 +9,39 @@
     <h1>SCREEN</h1>
     <div class="cinema">
       <div class="row">
-        <div>
-          <ng-container *ngIf="emptySeat(0,0); then btnDisabled; else btnEnabled">
-          </ng-container>
-
-          <ng-template #btnEnabled>
-            <button (click)="seatCount(0,0)" class="seat" id="00">0,0</button>
-          </ng-template>
-
-          <ng-template #btnDisabled>
-            <button type="button" disabled class="seat-unavailable">0,0</button>
-          </ng-template>
-        </div>
-
-        <div>
-          <ng-container *ngIf="emptySeat(0,1); then btnDisabled; else btnEnabled">
-          </ng-container>
-
-          <ng-template #btnEnabled>
-            <button (click)="seatCount(0,1)" class="seat" id="01">0,1</button>
-          </ng-template>
-
-          <ng-template #btnDisabled>
-            <button type="button" disabled class="seat-unavailable">0,1</button>
-          </ng-template>
-        </div>
-
-        <div>
-          <ng-container *ngIf="emptySeat(0,2); then btnDisabled; else btnEnabled">
-          </ng-container>
-
-          <ng-template #btnEnabled>
-            <button (click)="seatCount(0,2)" class="seat" id="02">0,2</button>
-          </ng-template>
-
-          <ng-template #btnDisabled>
-            <button type="button" disabled class="seat-unavailable">0,2</button>
-          </ng-template>
-        </div>
-
-        <div>
-          <ng-container *ngIf="emptySeat(0,3); then btnDisabled; else btnEnabled">
-          </ng-container>
-
-          <ng-template #btnEnabled>
-            <button (click)="seatCount(0,3)" class="seat" id="03">0,3</button>
-          </ng-template>
-
-          <ng-template #btnDisabled>
-            <button type="button" disabled class="seat-unavailable">0,3</button>
-          </ng-template>
-        </div>
+        <button type="button" (click)="seatCount(0,0)" [disabled]="emptySeat(0,0)" class="seat" id="0,0">0,0</button>
+        <button type="button" (click)="seatCount(0,1)" [disabled]="emptySeat(0,1)" class="seat" id="0,1">0,1</button>
+        <button type="button" (click)="seatCount(0,2)" [disabled]="emptySeat(0,2)" class="seat" id="0,2">0,2</button>
+        <button type="button" (click)="seatCount(0,3)" [disabled]="emptySeat(0,3)" class="seat" id="0,3">0,3</button>
       </div>
-
-
+      <div class="row">
+        <button type="button" (click)="seatCount(1,0)" [disabled]="emptySeat(1,0)" class="seat" id="1,0">1,0</button>
+        <button type="button" (click)="seatCount(1,1)" [disabled]="emptySeat(1,1)" class="seat" id="1,1">1,1</button>
+        <button type="button" (click)="seatCount(1,2)" [disabled]="emptySeat(1,2)" class="seat" id="1,2">1,2</button>
+        <button type="button" (click)="seatCount(1,3)" [disabled]="emptySeat(1,3)" class="seat" id="1,3">1,3</button>
+      </div>
+      <div class="row">
+        <button type="button" (click)="seatCount(2,0)" [disabled]="emptySeat(2,0)" class="seat" id="2,0">2,0</button>
+        <button type="button" (click)="seatCount(2,1)" [disabled]="emptySeat(2,1)" class="seat" id="2,1">2,1</button>
+        <button type="button" (click)="seatCount(2,2)" [disabled]="emptySeat(2,2)" class="seat" id="2,2">2,2</button>
+        <button type="button" (click)="seatCount(2,3)" [disabled]="emptySeat(2,3)" class="seat" id="2,3">2,3</button>
+      </div>
+      <div class="row">
+        <button type="button" (click)="seatCount(3,0)" [disabled]="emptySeat(3,0)" class="seat" id="3,0">3,0</button>
+        <button type="button" (click)="seatCount(3,1)" [disabled]="emptySeat(3,1)" class="seat" id="3,1">3,1</button>
+        <button type="button" (click)="seatCount(3,2)" [disabled]="emptySeat(3,2)" class="seat" id="3,2">3,2</button>
+        <button type="button" (click)="seatCount(3,3)" [disabled]="emptySeat(3,3)" class="seat" id="3,3">3,3</button>
+      </div>
+      <div class="row">
+        <button type="button" (click)="seatCount(4,0)" [disabled]="emptySeat(4,0)" class="seat" id="4,0">4,0</button>
+        <button type="button" (click)="seatCount(4,1)" [disabled]="emptySeat(4,1)" class="seat" id="4,1">4,1</button>
+        <button type="button" (click)="seatCount(4,2)" [disabled]="emptySeat(4,2)" class="seat" id="4,2">4,2</button>
+        <button type="button" (click)="seatCount(4,3)" [disabled]="emptySeat(4,3)" class="seat" id="4,3">4,3</button>
+      </div>
     </div>
+  </div>
 
+  <div class="cinema">
     <div class="select-items-container">
       <!-- <p>Select Items to Purchase</p> -->
       <p id="movie-title">{{getMovieTitle()}}</p>

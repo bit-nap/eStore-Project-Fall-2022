@@ -14,7 +14,7 @@ import { Screening } from '../screening';
  * changing, and deleteing screenings.
  */
 export class AdminComponent implements OnInit {
-  newScreenings: Screening = {
+  newScreening: Screening = {
     id: 0,
     movieId: 0,
     ticketsRemaining: 0,
@@ -57,7 +57,7 @@ export class AdminComponent implements OnInit {
   enterNewScreening(screeningTicket:string, screeningDate:string, screeningTime:string, screeningMovie:string) {
     if (Number(screeningTime) > 20) {screeningTime=="20"};
     this.http.post<Screening>('http://127.0.0.1:8080/screenings', { id: 1, movieId: screeningMovie, ticketsRemaining: screeningTicket.replace(/\D/g, ''), date: screeningDate, time: screeningTime }).subscribe((data:Screening) => {
-      this.newScreenings = data;
+      this.newScreening = data;
     });
   }
 

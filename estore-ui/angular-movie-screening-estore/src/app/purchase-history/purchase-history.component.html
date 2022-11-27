@@ -3,38 +3,44 @@
     <h2>Order History:</h2>
     <br>
 
+    <div class="movies">
+      <button type="button" *ngFor="let order of orders" class="movie_card">
+        <img src="{{SMService.getMoviePoster(order.screeningId)}}" alt="Movie poster of "/>
+      </button>
+    </div>
+
     <ul class="orders">
-      <li *ngFor="let order of orders; let i = index">
-        <span class = "id">id: {{order.id}}</span>
-        <span class = "id">screening id: {{order.screeningId}}</span>
-        <span class = "id"># tickets: {{order.tickets}}</span>
+      <li *ngFor="let order of orders">
+        <span class="id">id: {{order.id}}</span>
+        <span class="id">screening id: {{order.screeningId}}</span>
+        <span class="id"># tickets: {{order.tickets}}</span>
         <div>
-          <span class = "detail">TITLE: {{SMService.getMovieTitle(order.screeningId)}}</span>
-          <span class = "detail">POSTER: {{SMService.getMoviePoster(order.screeningId)}}</span>
-          <span class = "detail">TIME: {{SMService.getScreeningTime(order.screeningId)}}</span>
-          <span class = "detail">DATE: {{SMService.getScreeningDate(order.screeningId)}}</span>
+          <span class="detail">TITLE: {{SMService.getMovieTitle(order.screeningId)}}</span>
+          <span class="detail">POSTER: {{SMService.getMoviePoster(order.screeningId)}}</span>
+          <span class="detail">TIME: {{SMService.getScreeningTime(order.screeningId)}}</span>
+          <span class="detail">DATE: {{SMService.getScreeningDate(order.screeningId)}}</span>
         </div>
 
         <!-- Print orders for popcorn if they exist -->
         <div *ngIf="order.popcorn[0] > 0">
-          <span class = "item"># small popcorn: {{order.popcorn[0]}}</span>
+          <span class="item"># small popcorn: {{order.popcorn[0]}}</span>
         </div>
         <div *ngIf="order.popcorn[1] > 0">
-          <span class = "item"># medium popcorn: {{order.popcorn[1]}}</span>
+          <span class="item"># medium popcorn: {{order.popcorn[1]}}</span>
         </div>
         <div *ngIf="order.popcorn[2] > 0">
-          <span class = "item"># large popcorn: {{order.popcorn[2]}}</span>
+          <span class="item"># large popcorn: {{order.popcorn[2]}}</span>
         </div>
 
         <!-- Print orders for soda if they exist -->
         <div *ngIf="order.soda[0] > 0">
-          <span class = "item"># small soda: {{order.soda[0]}}</span>
+          <span class="item"># small soda: {{order.soda[0]}}</span>
         </div>
         <div *ngIf="order.soda[1] > 0">
-          <span class = "item"># medium soda: {{order.soda[1]}}</span>
+          <span class="item"># medium soda: {{order.soda[1]}}</span>
         </div>
         <div *ngIf="order.soda[2] > 0">
-          <span class = "item"># large soda: {{order.soda[2]}}</span>
+          <span class="item"># large soda: {{order.soda[2]}}</span>
         </div>
       </li>
     </ul>

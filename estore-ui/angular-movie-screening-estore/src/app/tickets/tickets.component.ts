@@ -15,7 +15,7 @@ import { LoggedInAccountService } from "../logged-in-account.service";
 })
 export class TicketsComponent implements OnInit {
   /** The number of tickets selected. */
-  numOfTickets: number = 0;
+  @Input() numOfTickets = 0;
 
   /* URL for the orders */
   private orderUrl: string;
@@ -34,7 +34,8 @@ export class TicketsComponent implements OnInit {
 
   /** the seats and their availability*/
   selectSeats: boolean[][] = this.screeningSelector.getScreeningSeats(); // this is for storage
-  selectSeatsCopy: boolean[][] = this.screeningSelector.getScreeningSeats(); //this is for the user to use
+  selectSeatsCopy: boolean[][] = []; //this is for the user to use
+
 
   /**
    * Contains the URL for the orders (orderURL)
@@ -46,6 +47,12 @@ export class TicketsComponent implements OnInit {
    */
   constructor(private router: Router, private movieSelector: MovieSelectorService, private http: HttpClient, private screeningSelector: ScreeningSelectorService, private login: LoggedInAccountService) {
     this.orderUrl = 'http://localhost:8080/orders'
+    for (var i: number = 0; i < 5; i++) {
+      this.selectSeatsCopy[i] = [];
+      for (var j: number = 0; j < 4; j++) {
+        this.selectSeatsCopy[i][j] = this.selectSeats[i][j];
+      }
+    }
   }
 
   /**
@@ -171,36 +178,40 @@ export class TicketsComponent implements OnInit {
   }
 
   seatCount(row: number, col: number): void {
-    if (this.selectSeats[row][col] == false && this.selectSeatsCopy[row][col] == false) {
-      this.selectSeatsCopy[row][col] = true;
-      this.numOfTickets += 1;
-
-    } else if (this.selectSeats[row][col] == false && this.selectSeatsCopy[row][col] == true) {
-      this.selectSeatsCopy[row][col] = false;
-      this.numOfTickets -= 1;
-
+    if (this.selectSeats != null && this.selectSeatsCopy != null) {
+      if (this.selectSeatsCopy[row][col] == false) {
+        this.selectSeatsCopy[row][col] = true;
+        this.numOfTickets += 1;
+      } else {
+        this.selectSeatsCopy[row][col] = false;
+        this.numOfTickets -= 1;
+      }
+      var id: string = row.toString() + "," + col.toString();
+      alert(this.selectSeats.toString());
+      alert(this.selectSeatsCopy.toString());
+      this.changeClass(id);
     }
   }
 
   emptySeat(row: number, col: number): boolean {
     var empty;
     if (this.selectSeats[row][col] == false) {
-      empty = true;
-    } else
       empty = false;
+    } else
+      empty = true;
     var id: string = row.toString() + "," + col.toString();
     var button = document.getElementById(id);
     if (button != null) {
       if (empty == true) {
         button.className = 'seat-unavailable';
-      } else
-        button.className = 'seat';
+      }
     }
     return empty;
   }
 
   changeClass(id: string): void {
     var button = document.getElementById(id);
+
     if (button != null) {
       if (button.className == 'seat') {
         button.className = 'seat-selected';

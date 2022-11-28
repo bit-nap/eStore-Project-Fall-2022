@@ -31,11 +31,11 @@
     </div>
     <div class="flex jc-center">
       <button id="add-screening" (click)="enterNewScreening(addScreeningTickets.value, addScreeningDate.value, addScreeningTime.value, addScreeningMovie.value)">Add New Screening</button>
-      <br><br><br><br><br>
     </div>
   </div>
 
   <div>
+    <br><br>
     <h2>Select the name of the screening you want to edit</h2><br>
     <div class="flex jc-center">
       <select #addScreening id="movie-select" name="Movie" (change)="selectScreening(addScreening.value)">

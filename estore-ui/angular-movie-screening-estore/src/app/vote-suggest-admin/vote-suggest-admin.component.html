@@ -10,6 +10,7 @@
     <p id="adminAddVote"></p>
   </div>
   <br><br>
+  <h2>Select a screening to change</h2><br>
   <div class="flex jc-center">
     <button type="Button" *ngFor="let suggest of suggests" id="clear-button" (click)="changeSuggest(suggest)">
       <h3>Movie Name: {{suggest.movieTitle}}</h3>
@@ -22,7 +23,7 @@
     <br>
     <h2>Change Vote for: {{suggestSelectedToChange.movieTitle}}</h2><br>
     <div class="flex jc-center">
-      <input #updateName id="screening" placeholder="Enter new movie name" />
+      <input #updateName id="screening" placeholder="Enter votes" />
     </div>
     <div class="flex jc-center">
       <button type="button" id="add-movie" (click)="changeSuggestSubmit(updateName.value)">Change Vote</button>

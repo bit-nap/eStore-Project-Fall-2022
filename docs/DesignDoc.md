@@ -302,12 +302,14 @@ Sonarqube recommends we replace our current use of the `@RequestMapping` annotat
 We originally were using the `@GetMapping` annotation on these methods, but we moved over to the `@RequestMapping` annotation so that a Controller class
 could take multiple different query parameters. Because sonarqube marked this issue as a minor code smell, we will ignore these issues.
 
+We also used Sonarqube to analyze our front-end HTML, CSS and JS code.
+
 ![Sonarqube results](sonarqube-screenshots/overall-results-ui.png)
 
-Overall, we had 0 errors and 62 code smells. Sonarqube gave us an A in all 4 categories. Our code smells also do not affect the execution of 
+Overall, we had 0 errors and 62 code smells. Sonarqube gave us an A in all 4 categories. Our code smells also do not affect the execution of
 the code, so they are not ones that need to be changed immediately. A breakdown is shown below.
 
-![Sonarcube code smells](sonarqube-screenshots/code-smells-ui.png)
+![Sonarqube code smells](sonarqube-screenshots/code-smells-ui.png)
 
 Many of these code smells had to due with the fact that we were still learning angular and left in some 
 unnecessary function calls or extra comments or unused variables. Another duplicate was with leaving in unnecessary screen wrapper object.

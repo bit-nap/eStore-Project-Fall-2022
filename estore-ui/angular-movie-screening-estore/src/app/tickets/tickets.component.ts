@@ -187,8 +187,6 @@ export class TicketsComponent implements OnInit {
         this.numOfTickets -= 1;
       }
       var id: string = row.toString() + "," + col.toString();
-      alert(this.selectSeats.toString());
-      alert(this.selectSeatsCopy.toString());
       this.changeClass(id);
     }
   }

@@ -5,12 +5,17 @@
       <ul>
         <li *ngFor="let order of orders">
           <div id="order">
+            <!-- Movie poster image -->
             <img class = "movie_card" src="{{SMService.getMoviePoster(order.screeningId)}}" alt="Movie poster of {{SMService.getMovieTitle(order.screeningId)}}"/>
 
+            <!-- Print Movie Title -->
             <br><h1>{{SMService.getMovieTitle(order.screeningId)}}</h1><br>
 
+            <!-- Print number of tickets -->
             <p id="detail" *ngIf="order.tickets > 1; else oneTicket">{{order.tickets}} Tickets<p>
             <ng-template #oneTicket><p id="detail" >1 Ticket</p></ng-template>
+
+            <!-- Print details of screening -->
             <p id="detail">Screened on {{SMService.getScreeningDate(order.screeningId)}} at {{SMService.getScreeningTime(order.screeningId)}}</p>
 
             <!-- Print orders for snacks if they exist -->
@@ -29,6 +34,7 @@
       </ul>
     </div>
 
+    <!-- Display messages -->
     <div id="console">
       <p id="getUsernameMessage"></p>
       <p id="getOrdersMessage"></p>

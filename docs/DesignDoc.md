@@ -128,17 +128,6 @@ and buttons based on the user logged in with the following functionality:
 
 ### View Tier
 
-> _Provide a summary of the View Tier UI of your architecture.
-> Describe the types of components in the tier and describe their
-> responsibilities. This should be a narrative description, i.e. it has
-> a flow or "story line" that the reader can follow._
-
-> _You must also provide sequence diagrams as is relevant to a particular aspects
-> of the design that you are describing. For example, in e-store you might create a
-> sequence diagram of a customer searching for an item and adding to their cart.
-> Be sure to include an relevant HTTP requests from the client-side to the server-side
-> to help illustrate the end-to-end flow._
-
 There are several components needed to handle the user purchase of tickets to a screening.
 
 ![Sequence Diagram of User Purchase](complete-order-sequence-diagram.png)
@@ -312,6 +301,19 @@ Our final 3 minor code smells are duplicates of the same issue.
 Sonarqube recommends we replace our current use of the `@RequestMapping` annotation with an `@GetMapping` annotation,on the methods used to get objects with query parameters.
 We originally were using the `@GetMapping` annotation on these methods, but we moved over to the `@RequestMapping` annotation so that a Controller class
 could take multiple different query parameters. Because sonarqube marked this issue as a minor code smell, we will ignore these issues.
+
+We also used Sonarqube to analyze our front-end HTML, CSS and JS code.
+
+![Sonarqube results](sonarqube-screenshots/overall-results-ui.png)
+
+Overall, we had 0 errors and 62 code smells. Sonarqube gave us an A in all 4 categories. Our code smells also do not affect the execution of
+the code, so they are not ones that need to be changed immediately. A breakdown is shown below.
+
+![Sonarqube code smells](sonarqube-screenshots/code-smells-ui.png)
+
+Many of these code smells had to due with the fact that we were still learning angular and left in some 
+unnecessary function calls or extra comments or unused variables. Another duplicate was with leaving in unnecessary screen wrapper object.
+Nothing of which affects the execution of our code.
 
 ### Design Improvements
 

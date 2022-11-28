@@ -1,73 +1,87 @@
-<div class="inventory-options">
-  <h2>Add a new product:</h2>
-  <input #addScreeningTickets id="screening" placeholder="Enter tickers remaing" />
-  <input #addScreeningDate id="screening" placeholder="Enter date of screening" />
-  <input #addScreeningTime id="screening" placeholder="Enter time of screening" />
-  <select #addScreeningMovie id="movie-select" name="Movie" >
-    <option id="movie-select" value="1">The Terminator</option>
-    <option id="movie-select" value="2">Terminator 2: Judgment Day</option>
-    <option id="movie-select" value="3">Rambo: First Blood</option>
-    <option id="movie-select" value="4">Ghostbusters</option>
-    <option id="movie-select" value="5">Back to the Future</option>
-    <option id="movie-select" value="6">Back to the Future Part II</option>
-    <option id="movie-select" value="7">Back to the Future Part III</option>
-    <option id="movie-select" value="8">Rocky</option>
-    <option id="movie-select" value="9">Rocky II</option>
-    <option id="movie-select" value="10">Rocky III</option>
-    <option id="movie-select" value="11">Rocky IV</option>
-    <option id="movie-select" value="12">Die Hard</option>
-    <option id="movie-select" value="13">Rush Hour</option>
-    <option id="movie-select" value="14">Pulp Fiction</option>
-    <option id="movie-select" value="15">Batman</option>
-    <option id="movie-select" value="16">Batman Returns</option>
-    <option id="movie-select" value="17">Ferris Bueller's Day Off</option>
-    <option id="movie-select" value="18">The Godfather</option>
-    <option id="movie-select" value="19">The Godfather: Part II</option>
-    <option id="movie-select" value="20">Men in Black</option>
-    <option id="movie-select" value="21">The Matrix</option>
-  </select>
-  <button id="enter-screening" (click)="enterNewScreening(addScreeningTickets.value, addScreeningDate.value, addScreeningTime.value, addScreeningMovie.value)">Add New Screening</button>
-</div>
+<html>
+  <div>
+    <br><h2>Add a new product</h2><br>
+    <div id="new-product">
+      <input #addScreeningTickets id="screening" placeholder="Enter tickets remaining" />
+      <input #addScreeningDate id="screening" placeholder="Enter date of screening" />
+      <input #addScreeningTime id="screening" placeholder="Enter time of screening" />
+      <select #addScreeningMovie id="movie-select" name="Movie" >
+        <option id="movie-select" value="1">The Terminator</option>
+        <option id="movie-select" value="2">Terminator 2: Judgment Day</option>
+        <option id="movie-select" value="3">Rambo: First Blood</option>
+        <option id="movie-select" value="4">Ghostbusters</option>
+        <option id="movie-select" value="5">Back to the Future</option>
+        <option id="movie-select" value="6">Back to the Future Part II</option>
+        <option id="movie-select" value="7">Back to the Future Part III</option>
+        <option id="movie-select" value="8">Rocky</option>
+        <option id="movie-select" value="9">Rocky II</option>
+        <option id="movie-select" value="10">Rocky III</option>
+        <option id="movie-select" value="11">Rocky IV</option>
+        <option id="movie-select" value="12">Die Hard</option>
+        <option id="movie-select" value="13">Rush Hour</option>
+        <option id="movie-select" value="14">Pulp Fiction</option>
+        <option id="movie-select" value="15">Batman</option>
+        <option id="movie-select" value="16">Batman Returns</option>
+        <option id="movie-select" value="17">Ferris Bueller's Day Off</option>
+        <option id="movie-select" value="18">The Godfather</option>
+        <option id="movie-select" value="19">The Godfather: Part II</option>
+        <option id="movie-select" value="20">Men in Black</option>
+        <option id="movie-select" value="21">The Matrix</option>
+      </select>
+    </div>
+    <div class="flex jc-center">
+      <button id="add-screening" (click)="enterNewScreening(addScreeningTickets.value, addScreeningDate.value, addScreeningTime.value, addScreeningMovie.value)">Add New Screening</button>
+    </div>
+  </div>
 
-<div class="change-and-delete">
-  <h2>Select the name of the screening you want to edit:</h2>
-  <select #addScreening id="movie-select" name="Movie" (change)="selectScreening(addScreening.value)">
-    <option id="movie-select" value="1">The Terminator</option>
-    <option id="movie-select" value="2">Terminator 2: Judgment Day</option>
-    <option id="movie-select" value="3">Rambo: First Blood</option>
-    <option id="movie-select" value="4">Ghostbusters</option>
-    <option id="movie-select" value="5">Back to the Future</option>
-    <option id="movie-select" value="6">Back to the Future Part II</option>
-    <option id="movie-select" value="7">Back to the Future Part III</option>
-    <option id="movie-select" value="8">Rocky</option>
-    <option id="movie-select" value="9">Rocky II</option>
-    <option id="movie-select" value="10">Rocky III</option>
-    <option id="movie-select" value="11">Rocky IV</option>
-    <option id="movie-select" value="12">Die Hard</option>
-    <option id="movie-select" value="13">Rush Hour</option>
-    <option id="movie-select" value="14">Pulp Fiction</option>
-    <option id="movie-select" value="15">Batman</option>
-    <option id="movie-select" value="16">Batman Returns</option>
-    <option id="movie-select" value="17">Ferris Bueller's Day Off</option>
-    <option id="movie-select" value="18">The Godfather</option>
-    <option id="movie-select" value="19">The Godfather: Part II</option>
-    <option id="movie-select" value="20">Men in Black</option>
-    <option id="movie-select" value="21">The Matrix</option>
-  </select>
+  <div>
+    <br><br>
+    <h2>Select the name of the screening you want to edit</h2><br>
+    <div class="flex jc-center">
+      <select #addScreening id="movie-select" name="Movie" (change)="selectScreening(addScreening.value)">
+        <option id="movie-select" value="1">The Terminator</option>
+        <option id="movie-select" value="2">Terminator 2: Judgment Day</option>
+        <option id="movie-select" value="3">Rambo: First Blood</option>
+        <option id="movie-select" value="4">Ghostbusters</option>
+        <option id="movie-select" value="5">Back to the Future</option>
+        <option id="movie-select" value="6">Back to the Future Part II</option>
+        <option id="movie-select" value="7">Back to the Future Part III</option>
+        <option id="movie-select" value="8">Rocky</option>
+        <option id="movie-select" value="9">Rocky II</option>
+        <option id="movie-select" value="10">Rocky III</option>
+        <option id="movie-select" value="11">Rocky IV</option>
+        <option id="movie-select" value="12">Die Hard</option>
+        <option id="movie-select" value="13">Rush Hour</option>
+        <option id="movie-select" value="14">Pulp Fiction</option>
+        <option id="movie-select" value="15">Batman</option>
+        <option id="movie-select" value="16">Batman Returns</option>
+        <option id="movie-select" value="17">Ferris Bueller's Day Off</option>
+        <option id="movie-select" value="18">The Godfather</option>
+        <option id="movie-select" value="19">The Godfather: Part II</option>
+        <option id="movie-select" value="20">Men in Black</option>
+        <option id="movie-select" value="21">The Matrix</option>
+      </select><br>
+    </div>
+    <div class="flex jc-center">
+      <button type="button" *ngFor="let screening of screenings" id="clear-button" (click)="changeButton(screening)">
+        <h3 class="id">ID: {{screening.id}}</h3>
+        <span class="movieId"> Tickets: {{screening.ticketsRemaining}}</span>
+        <span class="date"> Date: {{screening.date}}</span>
+        <span class="time"> Time: {{screening.time}}</span>
+      </button>
+  </div>
+  </div>
 
-  <button type="button" *ngFor="let screening of screenings" id="enter-screening" (click)="changeButton(screening)">
-    <h3 class="id">ID: {{screening.id}}</h3>
-    <span class="movieId"> Tickets: {{screening.ticketsRemaining}}</span>
-    <span class="date"> Date: {{screening.date}}</span>
-    <span class="time"> Time: {{screening.time}}</span>
-  </button>
-</div>
-
-<div *ngIf="screeningSelected" class="change-accounts">
-  <h2>Movie Name: {{movieForSelectedScreening.title}}</h2>
-  <input #updateScreeningTickets id="screening" placeholder="Enter tickers remaing" />
-  <input #updateScreeningDate id="screening" placeholder="Enter date of screening" />
-  <input #updateScreeningTime id="screening" placeholder="Enter time of screening" />
-  <button type="button" id="enter-screening" (click)="changeAccount(updateScreeningTickets.value, updateScreeningDate.value, updateScreeningTime.value)">Update Screening</button>
-  <button type="button" id="enter-screening" (click)="deleteScreening()">Delete Screening</button>
-</div>
+  <div *ngIf="screeningSelected" class="change-accounts">
+    <br><br><h2>Movie Name: {{movieForSelectedScreening.title}}</h2><br>
+    <div class="flex jc-center">
+      <input #updateScreeningTickets id="screening" placeholder="Enter tickers remaing" />
+      <input #updateScreeningDate id="screening" placeholder="Enter date of screening" />
+      <input #updateScreeningTime id="screening" placeholder="Enter time of screening" />
+    </div>
+    <div class="flex jc-center">
+      <button type="button" id="add-screening" (click)="changeAccount(updateScreeningTickets.value, updateScreeningDate.value, updateScreeningTime.value)">Update Screening</button>
+      <button type="button" id="add-screening" (click)="deleteScreening()">Delete Screening</button>
+    </div>
+  </div>
+</html>

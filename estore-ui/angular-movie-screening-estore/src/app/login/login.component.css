@@ -1,6 +1,9 @@
-
 h1 {
   margin: 50px 0 0 75px;
+}
+
+h2 {
+  text-align: center;
 }
 
 .container {
@@ -14,7 +17,7 @@ h1 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 50px 50px;
-  grid-template-areas: 
+  grid-template-areas:
   'header header header'
   'input input button';
   width: 50%;
@@ -26,18 +29,17 @@ h1 {
   align-self: flex-end;
 }
 
-#enterUsername {
-  grid-area: input;
+.inputBox {
   width: 90%;
   border-bottom: rgba(255, 255, 255, 0.3) solid 2px;
   background-color: rgba(0, 0, 0, 0);
   transition: border .3s;
 }
-#enterUsername:focus {
+.inputBox:focus {
   border-bottom: rgba(255, 255, 255, 0.9)solid 2px;
   outline: none;
 }
-#enterUsername:focus::placeholder {
+.inputBox:focus::placeholder {
   transform: translateY(-15px);
 }
 
@@ -59,6 +61,7 @@ h1 {
   color: rgba(255, 255, 255, 0.7);
   background-color: rgba(0, 0, 0, 0);
 }
+
 #usernameButton:hover {
   background-color: rgba(255, 255, 255, 1);
   color: rgba(0, 0, 0, 1);

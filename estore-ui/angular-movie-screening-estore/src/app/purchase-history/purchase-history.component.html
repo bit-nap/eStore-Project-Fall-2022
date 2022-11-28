@@ -1,39 +1,44 @@
 <html>
   <div>
-    <h2>Order History:</h2>
-    <br>
+    <br><h2>Your order history</h2><br>
+    <div class="list">
+      <ul>
+        <li *ngFor="let order of orders">
+          <div id="order">
+            <!-- Movie poster image -->
+            <img class = "movie_card" src="{{SMService.getMoviePoster(order.screeningId)}}" alt="Movie poster of {{SMService.getMovieTitle(order.screeningId)}}"/>
 
-    <ul class="orders">
-      <li *ngFor="let order of orders; let i = index">
-        <span class = "id">id: {{order.id}}</span>
-        <span class = "item">screening id: {{order.screeningId}}</span>
-        <div>
-          <span class = "id"># tickets: {{order.tickets}}</span>
-        </div>
-        <!-- Print orders for popcorn if they exist -->
-        <div *ngIf="order.popcorn[0] > 0">
-          <span class = "item"># small popcorn: {{order.popcorn[0]}}</span>
-        </div>
-        <div *ngIf="order.popcorn[1] > 0">
-          <span class = "item"># medium popcorn: {{order.popcorn[1]}}</span>
-        </div>
-        <div *ngIf="order.popcorn[2] > 0">
-          <span class = "item"># large popcorn: {{order.popcorn[2]}}</span>
-        </div>
-        <!-- Print orders for soda if they exist -->
-        <div *ngIf="order.soda[0] > 0">
-          <span class = "item"># small soda: {{order.soda[0]}}</span>
-        </div>
-        <div *ngIf="order.soda[1] > 0">
-          <span class = "item"># medium soda: {{order.soda[1]}}</span>
-        </div>
-        <div *ngIf="order.soda[2] > 0">
-          <span class = "item"># large soda: {{order.soda[2]}}</span>
-        </div>
-      </li>
-    </ul>
+            <!-- Print Movie Title -->
+            <br><h1>{{SMService.getMovieTitle(order.screeningId)}}</h1><br>
 
-    <p id="getUsernameMessage"></p>
-    <p id="getOrdersMessage"></p>
+            <!-- Print number of tickets -->
+            <p id="detail" *ngIf="order.tickets > 1; else oneTicket">{{order.tickets}} Tickets<p>
+            <ng-template #oneTicket><p id="detail" >1 Ticket</p></ng-template>
+
+            <!-- Print details of screening -->
+            <p id="detail">Screened on {{SMService.getScreeningDate(order.screeningId)}} at {{SMService.getScreeningTime(order.screeningId)}}</p>
+
+            <!-- Print orders for snacks if they exist -->
+            <div *ngIf="Popcorns(order) || Sodas(order)">
+              <br><h2>Purchased snacks</h2><br>
+              <p id="detail" *ngIf="order.popcorn[0] > 0">{{order.popcorn[0]}} small popcorn</p>
+              <p id="detail" *ngIf="order.popcorn[1] > 0">{{order.popcorn[1]}} medium popcorn</p>
+              <p id="detail" *ngIf="order.popcorn[2] > 0">{{order.popcorn[2]}} large popcorn</p>
+              <br *ngIf="Popcorns(order)">
+              <p id="detail" *ngIf="order.soda[0] > 0">{{order.soda[0]}} small soda</p>
+              <p id="detail" *ngIf="order.soda[1] > 0">{{order.soda[1]}} medium soda</p>
+              <p id="detail" *ngIf="order.soda[2] > 0">{{order.soda[2]}} large soda</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Display messages -->
+    <div id="console">
+      <p id="getUsernameMessage"></p>
+      <p id="getOrdersMessage"></p>
+    </div>
+
   </div>
 </html>

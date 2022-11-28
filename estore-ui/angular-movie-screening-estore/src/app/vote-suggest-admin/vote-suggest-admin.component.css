@@ -1,12 +1,58 @@
-.inventory-options {
-  background-color: gray;
+h2 {
+  text-align: center;
 }
 
-#change-vote:hover {
-  scale: 1.05;
+#add-movie {
+  height: 60px;
+  width: 240px;
+  margin: 10 auto;
+
+  font-size: 20px;
+  text-align: center;
+  transition: all .2s;
+
+  border-radius: 10px;
+  border: rgba(255, 255, 255, 0.7) solid 1px;
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(0, 0, 0, 0);
 }
 
-#change-vote:active {
-  scale: .95;
-  background-color: #a54a22;
+#add-movie:hover {
+  background-color: rgba(255, 255, 255, 1);
+  color: rgba(0, 0, 0, 1);
+  text-decoration: none;
+}
+
+#clear-button {
+  margin: 10px;
+  margin-top: 10px;
+  padding: 5px;
+
+  font-size: 14px;
+  text-align: center;
+  transition: all .2s;
+
+  border-radius: 10px;
+  border: rgba(255, 255, 255, 0.5) solid 1px;
+  color: rgba(255, 255, 255, 0.5);
+
+  background-color: rgba(0, 0, 0, 0);
+}
+
+#clear-button:hover {
+  color: rgba(255, 255, 255, 1);
+  border:rgba(255, 255, 255, 1) solid 2px;
+}
+
+#screening {
+  height: 50px;
+  width: 300px;
+}
+
+.flex {
+  display: flex;
+}
+
+.jc-center {
+  justify-content: center;
 }

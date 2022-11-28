@@ -1,21 +1,32 @@
 <div>
-  <div class="inventory-options">
-    <h2>Add a new product:</h2>
-    <input #addMovieName id="vote" placeholder="Enter name of new movie" />
-    <button id="change-vote" (click)="enterNewMovie(addMovieName.value)">Add New Movie</button>
+  <div>
+    <br><h2>Add a new product</h2><br>
+    <div class="flex jc-center">
+      <input #addMovieName id="screening" placeholder="Enter name of new movie" />
+    </div>
+    <div class="flex jc-center">
+      <button id="add-movie" (click)="enterNewMovie(addMovieName.value)">Add New Movie</button>
+    </div>
     <p id="adminAddVote"></p>
   </div>
-
-  <button type="Button" *ngFor="let suggest of suggests" id="change-vote" (click)="changeSuggest(suggest)">
-    <h3>Movie Name: {{suggest.movieTitle}}</h3>
-    <span>Id: {{suggest.id}} </span>
-    <span>Number of Votes: {{suggest.votes}}</span>
-  </button>
+  <br><br>
+  <div class="flex jc-center">
+    <button type="Button" *ngFor="let suggest of suggests" id="clear-button" (click)="changeSuggest(suggest)">
+      <h3>Movie Name: {{suggest.movieTitle}}</h3>
+      <span>Id: {{suggest.id}} </span>
+      <span>Number of Votes: {{suggest.votes}}</span>
+    </button>
+  </div>
 
   <div *ngIf="suggestSelected">
-    <h2>Change Vote for: {{suggestSelectedToChange.movieTitle}}</h2>
-    <input #updateName id="votes" placeholder="Enter new movie name" />
-    <button type="button" id="change-vote" (click)="changeSuggestSubmit(updateName.value)">Change Vote</button>
-    <button type="button" id="change-vote" (click)="deleteSuggest()">Delete</button>
+    <br>
+    <h2>Change Vote for: {{suggestSelectedToChange.movieTitle}}</h2><br>
+    <div class="flex jc-center">
+      <input #updateName id="screening" placeholder="Enter new movie name" />
+    </div>
+    <div class="flex jc-center">
+      <button type="button" id="add-movie" (click)="changeSuggestSubmit(updateName.value)">Change Vote</button>
+      <button type="button" id="add-movie" (click)="deleteSuggest()">Delete</button>
+    </div>
   </div>
 </div>

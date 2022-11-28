@@ -5,16 +5,19 @@
     <div class="container">
       <div class="cards">
         <h3 class="subtitle">Create account</h3>
-        <input #enterNewUsername id="enterUsername" placeholder="Username" />
-        <button id="usernameButton" (click)="enterUsername(enterNewUsername.value)">Create Username</button>
+        <input #createUsername class="inputBox" id="user1" placeholder="Username"/>
+        <input #createPassword class="inputBox" type="pass1" placeholder="Password"/>
+        <button id="usernameButton" (click)="createAccount(createUsername.value, createPassword.value)">Create Username</button>
       </div>
       <div class="cards">
         <h3 class="subtitle">Sign In</h3>
-        <input #signIntoAccount id="enterUsername" placeholder="Username" />
-        <button id="usernameButton" (click)="signIn(signIntoAccount.value)" >Sign In</button>
+        <input #loginUsername class="inputBox" id="user2" placeholder="Username"/>
+        <input #loginPassword class="inputBox" id="pass2" type="password" placeholder="Password"/>
+        <button id="usernameButton" (click)="signIn(loginUsername.value, loginPassword.value)" >Sign In</button>
       </div>
-      <p id="newUsernameMessage"></p>
-      <p id="signinUsernameMessage"></p>
+      <br><br><br>
+      <p id="newAccountMessage"></p>
+      <p id="loginMessage"></p>
     </div>
   </div>
 </html>

@@ -34,35 +34,53 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * Method that will create functionality so the user can create a unique username in the server
+   * Method that will create functionality so the user can create a unique account in the server
    * @param username string of the username passed in from the webpage
+   * @param password string of the password passed in from the webpage
    */
-  enterUsername(username: string): void {
-    this.resetUsernameMessages();
+  createAccount(username: string, password: string): void {
+    if (username === "") {
+      this.resetUsernameMessages();
+      document.getElementById("newAccountMessage")!.innerHTML = "Please enter a username";
+      return;
+    } else {
+      this.resetUsernameMessages();
 
-    this.http.get<Accounts>('http://127.0.0.1:8080/accounts/'+username).subscribe((data: Accounts) => {
-      if (data.username === username) {
-        document.getElementById("newUsernameMessage")!.innerHTML = "Username already exists. Please choose another one.";
-      }
-    }, (response) => {
-      this.http.post<Accounts>('http://127.0.0.1:8080/accounts', {"username": username, "password": ""}, httpOptions).subscribe((data: Accounts) => { })
-        document.getElementById("newUsernameMessage")!.innerHTML = "Username created";
-    });
+      this.http.get<Accounts>('http://127.0.0.1:8080/accounts/'+username).subscribe((data: Accounts) => {
+        if (data.username === username) {
+          document.getElementById("newAccountMessage")!.innerHTML = "Username already exists. Please choose another one";
+        }
+      }, (response) => {
+        this.http.post<Accounts>('http://127.0.0.1:8080/accounts', {"username": username, "password": password}, httpOptions).subscribe((data: Accounts) => { })
+          document.getElementById("newAccountMessage")!.innerHTML = "Username created";
+      });
+    }
   }
 
   /**
    * Sign in the user with the given username.
    * @param username string of the username passed in from the webpage
    */
-  signIn(username: String): void {
-    this.resetUsernameMessages();
-
-    this.http.get<Accounts>('http://127.0.0.1:8080/accounts/'+username).subscribe((data: Accounts) => {
-      this.loggedInAccount.setAccount(data);
-        this.router.navigate(['']);
-    }, (response) => {
-      document.getElementById("signinUsernameMessage")!.innerHTML = "Username does not exist.";
-    });
+  signIn(username: string, password: string): void {
+    if (username === "") {
+      this.resetUsernameMessages();
+      document.getElementById("loginMessage")!.innerHTML = "Please enter a username";
+      return;
+    } else {
+      this.resetUsernameMessages();
+      this.http.get<Accounts>('http://127.0.0.1:8080/accounts/'+username).subscribe((data: Accounts) => {
+        if (data.password === password) {
+          this.loggedInAccount.setAccount(data);
+          this.router.navigate(['']);
+        } else if (password === "") {
+          document.getElementById("loginMessage")!.innerHTML = "Account requires a password";
+        } else {
+          document.getElementById("loginMessage")!.innerHTML = "Incorrect password";
+        }
+      }, (response) => {
+        document.getElementById("loginMessage")!.innerHTML = "Username does not exist";
+      });
+    }
   }
 
   /**
@@ -70,7 +88,7 @@ export class LoginComponent implements OnInit {
    * username methodss
    */
   resetUsernameMessages(): void {
-    document.getElementById("newUsernameMessage")!.innerHTML = "";
-    document.getElementById("signinUsernameMessage")!.innerHTML = "";
+    document.getElementById("newAccountMessage")!.innerHTML = "";
+    document.getElementById("loginMessage")!.innerHTML = "";
   }
 }

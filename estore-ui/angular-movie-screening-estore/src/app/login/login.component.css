@@ -3,6 +3,10 @@ h1 {
   margin: 50px 0 0 75px;
 }
 
+h2 {
+  text-align: center;
+}
+
 .container {
   height: 100vh;
   display: flex;
@@ -14,7 +18,7 @@ h1 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 50px 50px;
-  grid-template-areas: 
+  grid-template-areas:
   'header header header'
   'input input button';
   width: 50%;

@@ -51,79 +51,17 @@ export class PurchaseHistoryComponent implements OnInit {
     })
   }
 
-  // getScreeningsFromOrders(orderArray: Order[]): void {
-  //   console.log(orderArray);
-  //   for (var i = 0; i < orderArray.length; i++) {
-  //     console.log("entering get screening loop");
-  //     this.http.get<Screening>('http://localhost:8080/screenings/' + orderArray[i].screeningId).subscribe((screening_data: Screening) => {
-  //       this.screenings[i] = screening_data;
-  //       // console.log(this.screenings[i]);
-  //     })
-  //   }
-  //   console.log("----Screenings array----");
-  //   console.log("screenings length: " + this.screenings.length);
-  //   console.log(this.screenings);
-  //   for (var screening in this.screenings) {
-  //     console.log("screening: " + screening);
-  //   }
-  //   console.log("----loop finished----");
-  // }
+  Sodas(order: Order): Boolean {
+    if (order.soda.includes(1))
+      return true;
+    else
+      return false;
+  }
 
-  // setArrays(): void {
-  //   var i: number = 0;
-  //   for (var order of this.orders) {
-  //     this.http.get<Screening>('http://127.0.0.1:8080/screenings/' + order.screeningId).subscribe((screening_data: Screening) => {
-  //       this.screenings[i] = screening_data;
-  //       console.log("length of screenings array: " + this.screenings.length);
-  //       this.http.get<Movie>('http://127.0.0.1:8080/movies/' + screening_data.movieId).subscribe((movie_data: Movie) => {
-  //         this.movies[i] = movie_data;
-  //         console.log("length of movies array: " + this.movies.length);
-  //       })
-  //     })
-  //     i++;
-  //   }
-  // }
-
-  // printArrays(): void {
-  //   var i: number = 0;
-  //   for (var order of this.orders) {
-  //     console.log(i + ": " + this.orders[i].id);
-  //     console.log(i + ": " + this.screenings[i].id);
-  //     console.log(i + ": " + this.movies[i].id);
-  //     document.getElementById("getOrdersMessage")!.innerHTML = i + ": " + this.orders[i].id;
-  //     document.getElementById("getOrdersMessage")!.innerHTML = i + ": " + this.screenings[i].id;
-  //     document.getElementById("getOrdersMessage")!.innerHTML = i + ": " + this.movies[i].id;
-  //     i++;
-  //   }
-  // }
-
-  // setScreeningMovie(screeningId: number): void {
-  //   this.http.get<Screening>('http://localhost:8080/screenings/' + screeningId).subscribe((screening_data: Screening) => {
-  //     this.screening = screening_data;
-  //     this.setMovie(screening_data.movieId);
-  //   })
-  // }
-
-  // setMovie(movieId: number): void {
-  //   this.http.get<Movie>('http://localhost:8080/movies/' + movieId).subscribe((movie_data: Movie) => {
-  //     this.movie = movie_data;
-  //   })
-  // }
-
-  // getMovies(): void {
-  //   this.http.get<[Movie]>('http://localhost:8080/movies').subscribe((movie_data: [Movie]) => {
-  //     this.movies = movie_data;
-  //   })
-  // }
-
-  // setScreening(screeningId: number): void {
-  //   this.http.get<Screening>('http://localhost:8080/screenings/' + screeningId).subscribe((screening_data: Screening) => {
-  //     this.screening = screening_data;
-  //   })
-  // }
-
-  // getScreeningId(): number {
-  //   return <number> this.screening?.id;
-  // }
-
+  Popcorns(order: Order): Boolean {
+    if (order.popcorn.includes(1))
+      return true;
+    else
+      return false;
+  }
 }

@@ -1,59 +1,55 @@
-.orders .id {
-  display: inline-block;
-  font-size: large;
-  color: black;
-  padding: 0.8em;
-  background-color: #ba5a31;
-  position: relative;
-  min-width: 16px;
+h1 {
   text-align: center;
-  margin-bottom: .8em;
+  color:aliceblue;
 }
 
-.orders .item {
-  display: inline-block;
-  font-size: large;
-  color: black;
-  padding: 0.8em;
-  background-color: #919191;
-  position: relative;
-  min-width: 16px;
+h2 {
   text-align: center;
-  margin-bottom: .8em;
 }
 
-.orders .detail {
-  display: inline-block;
-  font-size: large;
-  color: black;
-  padding: 0.8em;
-  background-color: #2affb8;
-  position: relative;
-  min-width: 16px;
-  text-align: center;
-  margin-bottom: .8em;
+ul {
+  display:inline-block;
 }
 
-.movies {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+li {
+  list-style-type: none;
+}
 
-  justify-content: center;
-  margin: 0 75px 0 75px;
+.list {
+  text-align: center;
 }
 
 .movie_card {
   display: block;
-  overflow: hidden;
   position: relative;
-
-  width: 231px;
-  height: 390px;
-
-  margin: 10px;
+  float: left;
+  width: 330px;
+  height: 500px;
   background-color: rgba(0, 0, 0, 0);
-  border-radius: 10px;
+  border-radius: 15px;
+  margin-right: 10px;
+}
 
+#order {
+  background-color: rgba(0, 0, 0, 0);
+  color: rgba(255, 255, 255, 0.5);
+  width: 800px;
+  border:rgba(255, 255, 255, 0.5) solid 2px;
+  border-radius: 15px;
+  margin-bottom: 60px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+#order:hover {
+  color: rgba(255, 255, 255, 1);
+  border:rgba(255, 255, 255, 1) solid 2px;
+}
+
+#detail {
   text-align: center;
+}
+
+#console {
+  margin-left: 50px;
 }

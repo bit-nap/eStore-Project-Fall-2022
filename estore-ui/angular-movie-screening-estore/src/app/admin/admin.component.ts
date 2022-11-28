@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 import { Movie } from '../movie';
-import { Screenings } from '../Screenings';
+import { Screening } from '../screening';
 
 @Component({
   selector: 'app-admin',
@@ -14,21 +14,23 @@ import { Screenings } from '../Screenings';
  * changing, and deleteing screenings.
  */
 export class AdminComponent implements OnInit {
-  newScreenings: Screenings = {
+  newScreening: Screening = {
     id: 0,
     movieId: 0,
     ticketsRemaining: 0,
     date: '',
-    time: ''
+    time: '',
+    seats: []
   };
-  screenings: Screenings[] = [];
+  screenings: Screening[] = [];
   screeningSelected: boolean = false;
-  screeningToChange: Screenings = {
+  screeningToChange: Screening = {
     id: 0,
     movieId: 0,
     ticketsRemaining: 0,
     date: '',
-    time: ''
+    time: '',
+    seats: []
   };
   movieForSelectedScreening: Movie = {
     id: 0,
@@ -53,9 +55,9 @@ export class AdminComponent implements OnInit {
    * @param screeningMovie the movie associated to the screening
    */
   enterNewScreening(screeningTicket:string, screeningDate:string, screeningTime:string, screeningMovie:string) {
-    if (Number(screeningTime) > 20) {screeningTime="20"};
-    this.http.post<Screenings>('http://127.0.0.1:8080/screenings', { id: 1, movieId: screeningMovie, ticketsRemaining: screeningTicket.replace(/\D/g, ''), date: screeningDate, time: screeningTime }).subscribe((data:Screenings) => {
-      this.newScreenings = data;
+    if (Number(screeningTime) > 20) {screeningTime=="20"};
+    this.http.post<Screening>('http://127.0.0.1:8080/screenings', { id: 1, movieId: screeningMovie, ticketsRemaining: screeningTicket.replace(/\D/g, ''), date: screeningDate, time: screeningTime }).subscribe((data:Screening) => {
+      this.newScreening = data;
     });
   }
 
@@ -70,7 +72,8 @@ export class AdminComponent implements OnInit {
       movieId: 0,
       ticketsRemaining: 0,
       date: '',
-      time: ''
+      time: '',
+      seats: []
     };
     this.getScreeningListings(screening);
   }
@@ -79,7 +82,7 @@ export class AdminComponent implements OnInit {
    * This method will store the screening for the admin to change when it is selected
    * @param screening screening that will be changed
    */
-  changeButton(screening: Screenings): void {
+  changeButton(screening: Screening): void {
     this.screeningSelected = true;
     this.screeningToChange = screening;
 
@@ -116,7 +119,7 @@ export class AdminComponent implements OnInit {
       time = updateTime;
     }
 
-    this.http.put<Screenings>('http://127.0.0.1:8080/screenings', {id: this.screeningToChange.id, movieId: this.screeningToChange.movieId, ticketsRemaining: Number(tickets), date: date, time: time}).subscribe((data: Screenings) => {
+    this.http.put<Screening>('http://127.0.0.1:8080/screenings', {id: this.screeningToChange.id, movieId: this.screeningToChange.movieId, ticketsRemaining: Number(tickets), date: date, time: time}).subscribe((data: Screening) => {
       this.screeningToChange = data;
     });
 
@@ -127,7 +130,7 @@ export class AdminComponent implements OnInit {
    * Method that will allow the admin to delete the screening selected
    */
   deleteScreening(): void {
-    this.http.delete<[Screenings]>('http://127.0.0.1:8080/screenings/'+this.screeningToChange.id).subscribe((data: Screenings[]) => {
+    this.http.delete<[Screening]>('http://127.0.0.1:8080/screenings/'+this.screeningToChange.id).subscribe((data: Screening[]) => {
       this.getScreeningListings(this.screeningToChange.movieId.toString());
     });
 
@@ -139,9 +142,8 @@ export class AdminComponent implements OnInit {
    * @param movieId
    */
   getScreeningListings(movieId: string): void {
-    this.http.get<[Screenings]>('http://127.0.0.1:8080/screenings/?movieId='+movieId).subscribe((data: Screenings[]) => {
+    this.http.get<[Screening]>('http://127.0.0.1:8080/screenings/?movieId='+movieId).subscribe((data: Screening[]) => {
       this.screenings = data;
     });
   }
-
 }

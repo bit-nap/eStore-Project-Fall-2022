@@ -49,7 +49,7 @@
         <img id="movieImg" src="{{getMoviePoster()}}" alt="Movie poster for {{getMovieTitle()}}" />
       </div>
       <p id="info">Enter number of tickets:</p>
-      <input readonly type="tel" id="ticket-input" [(ngModel)]="numOfTickets" placeholder="#">
+      <p id="tickets-input">{{numOfTickets}}</p>
       <button id="snack-button" (click)="isModalOpen = !isModalOpen">Buy Snacks</button>
       <button id="completePurchase" (click)="completePurchase()">Complete purchase</button>
     </div>

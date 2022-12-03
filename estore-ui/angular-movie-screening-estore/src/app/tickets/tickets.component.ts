@@ -15,8 +15,8 @@ import { LoggedInAccountService } from "../logged-in-account.service";
 })
 export class TicketsComponent implements OnInit {
   /** The number of tickets selected. */
-  numOfTickets: number = 0;
-  
+  @Input() numOfTickets = 0;
+
   /* URL for the orders */
   private orderUrl: string;
 
@@ -30,14 +30,12 @@ export class TicketsComponent implements OnInit {
   pmedium_value = 0
   plarge_value = 0
 
-  isModalOpen:boolean = false
+  isModalOpen: boolean = false
 
   /** the seats and their availability*/
   selectSeats: boolean[][] = this.screeningSelector.getScreeningSeats(); // this is for storage
-  selectSeatsCopy: boolean[][] = this.screeningSelector.getScreeningSeats(); //this is for the user to use
+  selectSeatsCopy: boolean[][] = []; //this is for the user to use
 
-  row = 0
-  column = 0
 
   /**
    * Contains the URL for the orders (orderURL)
@@ -49,6 +47,12 @@ export class TicketsComponent implements OnInit {
    */
   constructor(private router: Router, private movieSelector: MovieSelectorService, private http: HttpClient, private screeningSelector: ScreeningSelectorService, private login: LoggedInAccountService) {
     this.orderUrl = 'http://localhost:8080/orders'
+    for (var i: number = 0; i < 5; i++) {
+      this.selectSeatsCopy[i] = [];
+      for (var j: number = 0; j < 4; j++) {
+        this.selectSeatsCopy[i][j] = this.selectSeats[i][j];
+      }
+    }
   }
 
   /**
@@ -83,10 +87,10 @@ export class TicketsComponent implements OnInit {
   completePurchase(): void {
     // save ticket information as Order class in Java or something
     if (this.numOfTickets > 0) {
-      this.saveOrder({id: 1, screeningId: this.screeningSelector.getScreeningId(), accountId: this.login.getId(), tickets: this.numOfTickets, popcorn: [this.psmall_value, this.pmedium_value, this.plarge_value], soda: [this.bsmall_value, this.bmedium_value, this.blarge_value]})
+      this.saveOrder({ id: 1, screeningId: this.screeningSelector.getScreeningId(), accountId: this.login.getId(), tickets: this.numOfTickets, popcorn: [this.psmall_value, this.pmedium_value, this.plarge_value], soda: [this.bsmall_value, this.bmedium_value, this.blarge_value] })
       this.router.navigate(['thank'])
     } else {
-      document.getElementById('error-message')!.innerText ="There's no ticket selected"
+      document.getElementById('error-message')!.innerText = "There's no ticket selected"
     }
   }
 
@@ -160,7 +164,7 @@ export class TicketsComponent implements OnInit {
     }
   }
 
-  cancelOrder() : void {
+  cancelOrder(): void {
     this.psmall_value = 0;
     this.pmedium_value = 0;
     this.plarge_value = 0;
@@ -173,31 +177,45 @@ export class TicketsComponent implements OnInit {
     document.getElementById("error-message")!.innerText = ""
   }
 
-  seatCount(row: number, col: number): boolean{
-    if (this.selectSeatsCopy[row][col] == false) {
-      this.selectSeatsCopy[row][col] = true;
-      this.numOfTickets++;
-      return true;
-    } 
-    if (this.selectSeats[row][col] != this.selectSeatsCopy[row][col]) {
-      this.numOfTickets--;
-      this.selectSeatsCopy[row][col] = false;
-      return false;
+  seatCount(row: number, col: number): void {
+    if (this.selectSeats != null && this.selectSeatsCopy != null) {
+      if (this.selectSeatsCopy[row][col] == false) {
+        this.selectSeatsCopy[row][col] = true;
+        this.numOfTickets += 1;
+      } else {
+        this.selectSeatsCopy[row][col] = false;
+        this.numOfTickets -= 1;
+      }
+      var id: string = row.toString() + "," + col.toString();
+      this.changeClass(id);
     }
-    return false;
   }
 
-  increaseRow(): number{
-    this.row++;
-    return this.row;
+  emptySeat(row: number, col: number): boolean {
+    var empty;
+    if (this.selectSeats[row][col] == false) {
+      empty = false;
+    } else
+      empty = true;
+    var id: string = row.toString() + "," + col.toString();
+    var button = document.getElementById(id);
+    if (button != null) {
+      if (empty == true) {
+        button.className = 'seat-unavailable';
+      }
+    }
+    return empty;
   }
 
-  increaseColumn(): number{
-    this.column++;
-    return this.column;
-  }
+  changeClass(id: string): void {
+    var button = document.getElementById(id);
 
-  setColumn(setting: number): void{
-    this.column = setting;
+    if (button != null) {
+      if (button.className == 'seat') {
+        button.className = 'seat-selected';
+      } else if (button.className == 'seat-selected') {
+        button.className = 'seat'
+      }
+    }
   }
 }

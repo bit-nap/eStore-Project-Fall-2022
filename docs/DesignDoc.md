@@ -132,9 +132,11 @@ There are several components needed to handle the user purchase of tickets to a 
 
 ![Sequence Diagram of User Purchase](complete-order-sequence-diagram.png)
 
-The landing page logic is located in the `Movies` component. This component retrieves all `Movie` objects using an HTTP GET request and displays them to the user.
+The landing page logic is located in the `Movies` component. This component retrieves all `Movie` objects using an HTTP GET request and displays 
+them to the user.
 The search functionality on the landing page also uses an HTTP GET request (with a query string)
-to retrieve all the movies with the given phrase in their title. When the user selects a movie, that `Movie` object is stored with the `MovieSelectorService`.
+to retrieve all the movies with the given phrase in their title. When the user selects a movie, that `Movie` object is stored with the 
+`MovieSelectorService`.
 The user is then routed to the `/screenings` page.
 
 Similarly, the `Screenings` component retrieves all screenings for the selected movie using the `MovieSelectorService`
@@ -145,12 +147,15 @@ Once the user is on the landing page and is presented with the `Movie` objects, 
 First, the user must click the Login button which routes them to the `/login` page.
 The `Login` component presents the user with the ability to create an `Account` and sign in with the `Account` username.
 The `Login` component uses an HTTP GET request to get an `Account` with the username entered.
-If an `Account` with a matching username field exists, no `Account` will be created, if not, an HTTP POST request creates a new `Account` object with this username.
+If an `Account` with a matching username field exists, no `Account` will be created, if not, an HTTP POST request creates a new `Account` object 
+with this username.
 The `Login` component accepts a username and an HTTP GET request to check if an `Account` with the username exists,
 then sets the `LoggedInAccountService` account field, then routes to the `/screenings` page.
 
-Once the user has logged in using the `Login` sign in functionality, the `LoggedInAccountService` will keep track of this `Account` that is logged into.
-Other components use this component to check if the `Account` that has been logged in is a user or an admin. Then the logout functionality untracks the user's `Account` to log out. 
+Once the user has logged in using the `Login` sign in functionality, the `LoggedInAccountService` will keep track of this `Account` that is logged 
+into.
+Other components use this component to check if the `Account` that has been logged in is a user or an admin. Then the logout functionality untracks 
+the user's `Account` to log out. 
 
 The `Tickets` component presents allows the user to select the seats for a screening, the number of sodas and popcorn to order for the screening.
 When the user finalizes their purchase using the button at the bottom of the page, the `Tickets` component sends
@@ -159,23 +164,28 @@ an HTTP POST request to the orders endpoint, adding that `Order` to the orders p
 The `CompletedPurchase` component then presents the user with a summary of their order. Specifically, it displays information about the
 selected movie and date and time of the screening using the `MovieSelectorService` and `ScreeningSelectorService`.
 
-Once the user completes a purchase, the Orders button routes to `/purchase-history` page in which a detailed list of `Order` objects of that have the user's `Account` id field.
+Once the user completes a purchase, the Orders button routes to `/purchase-history` page in which a detailed list of `Order` objects of that have 
+the user's `Account` id field.
 This is done by an HTTP GET request to get `Order` objects based on the accountId passed in.
 For each `Order` a `Screening` is obtained by a similar HTTP GET request and is used to display the details of an `Order` object's `Screening`. 
 
-The `VoteSuggestion` component presents the user with a list of movies that they can vote on, or add a new movie. It will use an HTTP GET request to get the movie,
+The `VoteSuggestion` component presents the user with a list of movies that they can vote on, or add a new movie. It will use an HTTP GET request 
+to get the movie,
 and then use a PUT to add a vote to the movie.
 
-The `VoteSuggestionAdmin` component presents the admin with a similar pge to the user. But, they will be able to use an HTTP PUT method to change the movie name.
+The `VoteSuggestionAdmin` component presents the admin with a similar pge to the user. But, they will be able to use an HTTP PUT method to change 
+the movie name.
 
-The `AdminComponent` component presents the admin the ability to change inventory and change the vote/suggestions. For the inventory, they will use POST methods to 
+The `AdminComponent` component presents the admin the ability to change inventory and change the vote/suggestions. For the inventory, they will use 
+POST methods to 
 create a new screening, and a PUT method to change the screening, and DELETE method to delete the screening.
 
 ### ViewModel Tier
 
 ![ScreeningController UML Diagram](uml-diagrams/screening-controller.png)
 
-The `ScreeningController` is used to respond to HTTP requests for `Screening` objects. There are methods that handle simple GET, POST, PUT, DELETE requests.
+The `ScreeningController` is used to respond to HTTP requests for `Screening` objects. There are methods that handle simple GET, POST, PUT, DELETE 
+requests.
 The POST and PUT requests require a `Screening` object as an argument, to insert into the storage of `Screening` objects.
 The method `getScreeningsByMovieId` is used to find all `Screenings` for a `Movie`.
 The `getScreeningsByMovieId` takes an argument representing a movie id to search for, and returns an array of all `Screenings` for that movie.
@@ -190,7 +200,8 @@ This method is used in the View Tier, providing the functionality of the homepag
 
 ![SuggestionController UML Diagram](uml-diagrams/suggestion-controller.png)
 
-The `SuggestionController` is used to respond to HTTP requests for `Suggestion` objects. There are methods that handle simple GET, POST, PUT, and DELETE requests.
+The `SuggestionController` is used to respond to HTTP requests for `Suggestion` objects. There are methods that handle simple GET, POST, PUT, and 
+DELETE requests.
 The POST and PUT requests require a `Suggestion` object as an argument, to insert into the storage of a `Suggestion` objects.
 
 ![AccountController UML Diagram](uml-diagrams/account-controller.png)
@@ -206,8 +217,10 @@ The `OrderController` is used to respond to HTTP requests for `Order` objects.
 This controller consists of methods that handle GET, POST, and DELETE requests.
 The POST request requires an `Order` object as a parameter, to create an `Order` in the persistence.
 The deleteOrder and getOrder methods require an integer from the `Order` field `id` in order to DELETE, or GET the `Order` object, respectively.
-The searchOrdersByScreeningId method GET an array of `Order` by matching the `screeningId` field of all `Order` objects with the `id` of a `Screening` object.
-The searchOrdersByAccountId method GET an array of `Order` by matching the `accountId` field of all `Order` objects with the `id` of an `Account` object.
+The searchOrdersByScreeningId method GET an array of `Order` by matching the `screeningId` field of all `Order` objects with the `id` of a 
+`Screening` object.
+The searchOrdersByAccountId method GET an array of `Order` by matching the `accountId` field of all `Order` objects with the `id` of an `Account` 
+object.
 
 ### Model Tier
 
@@ -233,18 +246,22 @@ The `movieTitle` field can be changed by the admin, and added by the user.
 
 The `Account` model has fields that identify the user, such as the `id` and `username` fields.
 A user's `id` is not known to them but is important for the model, to find accounts by id and each `Order` has this id as the `accountId`.
-The `username` field is also unique, and is determined by the user on creation. Many components use this field to identify a user and allow them to login.
+The `username` field is also unique, and is determined by the user on creation. Many components use this field to identify a user and allow them to 
+login.
 The user may also remove their account from persistence by entering `username` into the delete account functionality.
 The `password` field is a string of characters determined by the user to log in with.
 
 ![Order UML Diagram](uml-diagrams/order-model.png)
 
-The `Order` model has fields that identify the `Account` that created the order and the `Screening` it points to, along with the rest of the fields that describe an `Order`.
+The `Order` model has fields that identify the `Account` that created the order and the `Screening` it points to, along with the rest of the fields 
+that describe an `Order`.
 The `id` field is a unique integer that is used to determine a unique `Order`. This is used for getting orders.
 The `screeningId` field is used to identify the respective `Screening` of the `Order`. Screenings can be obtained by this id.
 The `accountId` field is used to identify the `Account` that created the order.
-The `tickets` field shows how many tickets a user has bought for a Screening, the `purchase-history` component displays this once the `Order` is gotten.
-The `popcorn` and `soda` arrays are filled on creation of an `Order` which show how much small, medium, and large; popcorn or soda, was purchased, respectively.
+The `tickets` field shows how many tickets a user has bought for a Screening, the `purchase-history` component displays this once the `Order` is 
+gotten.
+The `popcorn` and `soda` arrays are filled on creation of an `Order` which show how much small, medium, and large; popcorn or soda, was purchased, 
+respectively.
 This is also used by `purchase-history` to display this detail to the user.
 The `seats` array is filled by a String determining the seat number, on creation of an `Order`.
 This is displayed on the `tickets` component when ordering, and displayed in the `purchase-history` as the seats for each Screening order.
@@ -270,7 +287,8 @@ are in order. However, this static field is modified from a non-static method, w
 ![Sonarqube Static nextId Code Smell](sonarqube-screenshots/static-nextId-code-smell.png)
 
 These 3 uses of the static `nextId` field are present in our 5 persistence files, thus 15 total repetitions of this critical code smell.
-We elected not to look into correcting this because we don't think that the modification of the static field in a non-static context will be a problem for our estore.
+We elected not to look into correcting this because we don't think that the modification of the static field in a non-static context will be a 
+problem for our estore.
 If we were to expand on our project, then we would look into resolving this issue.
 
 Our 33 major code smells were 2 problems throughout multiple files.
@@ -280,7 +298,8 @@ The first of which is our use of the `Logger` object, which accounted for 23/33 
 ![Sonarqube Logger Code Smell](sonarqube-screenshots/logger-code-smell.png)
 
 We decided not to address this issue because the `Logger` object is simply to display output about the requested HTTP command,
-and is not contributing anything significant to the functionality of the project. If we were to expand on our project and increase our use of the `Logger` object,
+and is not contributing anything significant to the functionality of the project. If we were to expand on our project and increase our use of the 
+`Logger` object,
 then we would look into the proper way to log information to the command line.
 
 The other 10/33 major code smells were due to the formatting of our JUnit Assertions.
@@ -290,16 +309,20 @@ The other 10/33 major code smells were due to the formatting of our JUnit Assert
 We wrote our JUnit Assertions with arguments in the order `(actual, expected)` when the proper order is `(expected, actual)`.
 Because this is simply a problem of conventional order, we decided to ignore this code smell.
 Sonarqube only flagged the Assertions that had a straightforward actual value such as `assertEquals(expected, 3)`
-and not the other Assertions that have an expected value based on the returned object of a method call such as `assertEquals(expected, screening.getId())`.
-Therefore, this issue is likely present in all our unit tests. And considering our unit tests pass, going through and changing the order of the arguments
+and not the other Assertions that have an expected value based on the returned object of a method call such as `assertEquals(expected, screening.
+getId())`.
+Therefore, this issue is likely present in all our unit tests. And considering our unit tests pass, going through and changing the order of the 
+arguments
 for the sake of following conventional standards would be a waste of time.
 
 Our final 3 minor code smells are duplicates of the same issue.
 
 ![Sonarqube Spring RequestMapping Code Smell](sonarqube-screenshots/spring-requestMapping-code-smell.png)
 
-Sonarqube recommends we replace our current use of the `@RequestMapping` annotation with an `@GetMapping` annotation,on the methods used to get objects with query parameters.
-We originally were using the `@GetMapping` annotation on these methods, but we moved over to the `@RequestMapping` annotation so that a Controller class
+Sonarqube recommends we replace our current use of the `@RequestMapping` annotation with an `@GetMapping` annotation,on the methods used to get 
+objects with query parameters.
+We originally were using the `@GetMapping` annotation on these methods, but we moved over to the `@RequestMapping` annotation so that a Controller 
+class
 could take multiple different query parameters. Because sonarqube marked this issue as a minor code smell, we will ignore these issues.
 
 We also used Sonarqube to analyze our front-end HTML, CSS and JS code.
@@ -315,9 +338,31 @@ Many of these code smells had to due with the fact that we were still learning a
 unnecessary function calls or extra comments or unused variables. Another duplicate was with leaving in unnecessary screen wrapper object.
 Nothing of which affects the execution of our code.
 
+### Design Doc Principles
+
+The three different design principles that we felt as though we stuck with the most to the end of this project are single responbility, low 
+coupling, and open/closed.
+
+For single responsibility, we made sure that our MVC's would be dealing with only one type of object. To do this, we created 5 different ones. 
+Those classes are accounts, movies, orders, screenings, and suggestions. All of these accounts store their data differently and use different 
+methods. We separated them into their own classes so that they would not interfere with each other. This made debugging and doing JUnit easier 
+since it was much easier to find where the root of a possible bug was.
+
+For low coupling, we made sure that each of these classes would also be interacting with each other in enough ways to jsutify separating them. For 
+one example, the user can select a movie which will take them to a list of screenings. But the screenings takes you to a time selection and snack 
+selection if the user so chooses. By having these classes separate, it makes it much easier to switch between these on the front end without 
+cluttering the code too much on the back end.
+
+Finally, for open/closed, we made sure that we are open for extension and closed for modification. Modifying the underyling system as is, will 
+result in most of the code not working since it is sequential. It would be very difficult to fix the front and back end to cooperate with the 
+changes that were already made. However, we are open for future changes. As stated in the final presentation, we already had future plans on adding 
+functionality for the admin to track snacks purchased and for admins to create movies, rather than just screening times. This would be fairly easy 
+to implement with the system that we have now.
+
 ### Design Improvements
 
-If we were to continue our project, we would look to improve our Angular design. We believe the current state of our Java code is of very high quality,
+If we were to continue our project, we would look to improve our Angular design. We believe the current state of our Java code is of very high 
+quality,
 but our Angular structure could use improvement. None of us were familiar with Angular before we undertook this project,
 so we have been learning as we go along. Now that we all have a much stronger foundation in Angular, we would go back and redesign some Components
 and Services we created at the start of our project. We would also take the knowledge we now have of our design and use it
@@ -335,13 +380,17 @@ We may also look into adding unit testing of our Angular code, so we can identif
 
 Currently, the majority of our user stories have passed all acceptance criteria.
 Only the stories that are still in development have not passed their acceptance criteria.
-At the time of writing, this is the 10% reserve seats feature that is in development and the track snacks user story that is still in the sprint backlog.
+At the time of writing, this is the 10% reserve seats feature that is in development and the track snacks user story that is still in the sprint 
+backlog.
 
 The only concern we have is that we have missed a requirement for a story when designing our acceptance criteria.
 For example, during the designing of our login user story, we did not explicitly state that a user must be logged in to delete their account.
-Therefore, during the implementation, the delete button was implemented such that any user could delete any account as long as they knew the account's username.
-We have since corrected this bug. However, we are now aware our acceptance criteria may have not been explicitly clear as to all that needed to be covered.
-Therefore, it is possible current user stories pass all acceptance criteria but may still have bugs we did not consider during the design of the user story.
+Therefore, during the implementation, the delete button was implemented such that any user could delete any account as long as they knew the 
+account's username.
+We have since corrected this bug. However, we are now aware our acceptance criteria may have not been explicitly clear as to all that needed to be 
+covered.
+Therefore, it is possible current user stories pass all acceptance criteria but may still have bugs we did not consider during the design of the 
+user story.
 
 ### Unit Testing and Code Coverage
 
